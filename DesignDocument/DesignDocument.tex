@@ -36,6 +36,8 @@
 \usepackage{tikz}
 \usepackage{keycommand}
 \usetikzlibrary{shapes}
+\usepackage{amsmath}
+\usepackage{mathtools}
 
 % Margins
 \topmargin=-0.45in
@@ -197,49 +199,91 @@
 I decided to create the simulator with Python(https://www.python.org/). I will be using the newest version of Python, Python 3.4, because this allows me to make use the full potential of Python.  Python is a fairly easy programming language. The syntax allows me to write the program in fewer lines of code.  With Python I do not have to specify the type of variables and the memory space is automatically allocated and deallocated. Python is also supported by alot of different packages and frameworks which can be used to write the code in even fewer lines. For example I will be using the Qt framework for the GUI. Python will save me alot of time and I only have about six or seven weeks so that is why I have chones Python. The only problem with python I might run into is the performance of the simulator. Because Python automatically allocates the memory space it might be less efficient using Python when I need to use alot of memory space. During the six/seven weeks of programming I will need to pay good attention to this problem to make sure the simulator will not get to slow at executing the tasks.
 
 \section{2. The simulation model}
-The simulator can be divided into three major parts: the algorithm implementations (Back-end), the visualisation (results and graphs) and the GUI. The simulator can be seen as the following proces:
+The simulator can be divided into three major parts: the algorithm implementations and the giving game itself (Back-end), the visualisation (results and graphs) and the GUI. The simulator can be seen as the following proces:
 
 Picutre of the Proces here!
 
 
+The following Input must be given to the simulator in order to get all the results (output): 
+\\
 \textbf{Input}
 
 \begin{itemize}
-  \item Selection rules: random rule, balance rule, goodwill rule etc.
-  \item Parameters: Time, N people, M products, value of products etc. 
+  \item Selection rules for example the random rule, the balance rule or goodwill rule.
+  \item Parameters
+	\begin{itemize}
+ 		 \item Time, how many transactions should take place. Instead of this parameter I could also implement a start and stop button.
+  		\item N number of agents
+  		\item M number of goods, this parameter is not mandatory, the default number of goods will be 1.
+		\item The value of the goods and if the value decreases over time.
+		\item The community effect threshold with values in the range of [0, 1]. 0 meaning there is absolutely no community effect and 1 meaning that the transactions only take place in a subgroup. For example if the threshold would be 0.8 we can conclude that there is a community effect if 80/100 transactions takes place in a subgroep.
+		\item The above parameter introduces another parameter. We need to determine the size of a subgroup. The size of a subgroep should be in the range of [2, x]. The value of x should be determined during the literature study.
+	\end{itemize} 
 \end{itemize}
 
 \textbf{Output}
 
 \begin{itemize}
-  \item Results: Community effect, number of transactions etc.
-  \item Graphs, functions that show the results over time etc.
+  \item Results
+	\begin{itemize}
+ 		 \item Community effect, depending on the given threshold can the simulator conclude if there is a community effect with a simple yes or no answer.
+ 		 \item The total number of transactions, balance of every agent, transactions of every agent
+		 \item If a subgroup arose all the information about the agents in this subgroup should be given.
+	\end{itemize} Community effect, number of transactions etc.
+  \item Graphs
+	\begin{itemize}
+ 		 \item For the community effect there should be a graph that shows the community effect over time.
+ 		 \item For every agant pair and good a graph should be given if the user asks for it. This might be difficult to implement, because alot of information about the agents and goods must be stored into the memory. (Yield curve)
+		\item For every graph the corresponding function must be given.
+	\end{itemize} 
 \end{itemize}
 
-\subsection{Rules for the simulator}
-The simulator must be able to execute multiple selection rules with multiple parameters, be able to handle a large amount of agents (1000-10000) and be able to show results during the giving game.
+During the development of the simulator I must take the following into account:
+\begin{itemize}
+  \item Multiple selection rules must already be implemented and if a new selection rule or parameter is introduced it should not be difficult to add this to the existing simulator.
+ \item Every agent should keep track of all his transactions.
+  \item The simulator must be able to handle a large amount of agents ranging from 1000 to a maximum of 10000 agents. 
+  \item The results should be shown while the simulation is still running. If this will take too much time I could choose to only show the results if the user presses the stop/pause button.
+\end{itemize}
 
 
 \section{3. Back-end}
-\textit{Packages: Numpy, }
+\textit{Important packages: Numpy, }
 \\
-I made the following design choices for the course of the giving game.
+For every pair of agents (P, Q) we must keep track of the following things: The balance perceived by P and Q, How many times P and Q have given a good and recievced a good. For every single agent we must keep track of the following things: A list of all its transactions and the position of the agent (assuming an array of some sort will be used to store all the agents). For each good A and each par of agents (P, Q) we must keep track of the like factors  of each good A rangning from [-1, 0] and the value of each good A rangning from [0, $\infty$).
+To accomplish the above the following design decisions have been made:
 \begin{itemize}
-  \item The player will be a node in a peer-to-peer network where every node keeps track of its saldo with the other nodes. To accomplish this I will be using a object oriented structure to create this network.
-  \item For the calculations of the saldo and other variables I will make use of the numpy package.
+  \item For the balance of each pair of agents (P, Q) a NxN matrix, where N is the total number of agents, will be used globally to store all the balance values of each pair.
+  \item Each agent will have to store the following variables.
+	\begin{itemize}
+  		\item The position of the agent. For example this position is used in the NxN matrix explained above. This position will be an Integer ranging from [0, N] where N is the total number of agents.
+  		\item A list of all its previous transactions. The transactions will be stored in a Python \textit{list}.
+  		\item A list of the number of goods given and received for every other agent. A Numpy array will be used to store these variables.
+	\end{itemize}
+  \item Each good will have to store the following variables.
+	\begin{itemize}
+  		\item The value of the good. This value is in the range of [0, $\infty$).
+  		\item If the value of the good decreases over time or not. A simple True or False will be used to determine this.
+	\end{itemize}
+  \item For each good A a Python \textit{list} will be used globally to store each good. The size of this list will be determined by the total number of goods.
+  \item For each good A and each agent P a MxN matrix, where M is the total number of goods and N the total number of agents, will be used globally to store the like factor of every good precieved by every agent.
 \end{itemize}
+The pseudocode below shows the decisions made above. I will use an object oriented structure to accomplish the above decisions.
 
 \subsection{Code structure}
 
 
 \subsection{Memory management}
-A dictionary will be used by every node to store the information about other nodes. For example if we have a node P and a node Q the dictionary of P will look like \{'Q' : 'saldo'\}.
+A dictionary will be used by every node to store the information about other nodes. For example if we have a node P and a node Q the dictionary of P will look like \{'Q' : 'balance'\}.
 \section{4. Visualisation}
-\textit{Packages: Numpy, matplotlib, pychart}
+\textit{Important packages: Numpy, matplotlib, pychart}
 \\
 graphs used to plot the results. Results will be saved in a file.
 \section{5. GUI}
 For the GUI I will be using the Qt framework.
+
+Extra':
+Most traded products
 
 
 
