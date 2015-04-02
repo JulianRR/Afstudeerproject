@@ -292,11 +292,11 @@ class Agent:
 	def update_listoftransactions(self, new_transaction):
 		self.listoftransactions.append(new_transaction)
 
-	def give(self, receiving_agent):
+	def give(self, receiving_agent, good):
 		#The current agent gives to the receiving_agent.
 		pass
 	
-	def recieve(self, giving_agent):
+	def receive(self, giving_agent, good):
 		#The current agent receives from the giving_agent
 		pass
 	
@@ -316,6 +316,55 @@ class Goods():
 
 	def decrease(self, decreasing_factor):
 		self.value = self.value * decreasing_factor
+\end{lstlisting}
+\clearpage
+\textbf{Creating the Giving Game enviroment}
+\begin{lstlisting}
+import Agents
+import Goods
+# A different file should contain all the functions for the selectio rules.
+# Each selection rule will have one function, this function is called before
+# every transaction.
+import Selectionrules
+
+def create_agents(N):
+	# Create N agents by calling the __init__() from the Agents Class
+	pass
+
+def create_goods(M):
+	# Create M product by calling the __init_() from the Goods Class
+	pass
+
+def transaction(P, Q):
+	# Start a transaction between P and Q by calling give() and receive() 
+	# from the Agents Class 
+	# P give to Q
+	P.give(Q)
+	# Q reveives from P
+	Q.receive(P)
+
+def update_balancematrix(balancematrix):
+	# Update the balance matrix after every transaction
+	pass
+
+def select_agent(selectionrule):
+	# Call the right seletion rule to select the agent
+	pass
+
+def main():
+	create_agents(N)
+	create_goods(M)
+	# Start the game 
+	P = current_agent #Choose a random agent
+	While(Start):
+		Q = select_agent(selectionrule)
+		transaction(P, Q, good)
+		P = Q
+
+if __name__ == '__main__':
+    main()
+
+
 \end{lstlisting}
 
 \section{4. Visualisation}

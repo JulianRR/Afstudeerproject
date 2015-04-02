@@ -2,14 +2,15 @@
 \contentsline {subsection}{Monday 30th of March 2015}{3}
 \contentsline {subsection}{Tuesday 31th of March 2015}{3}
 \contentsline {subsection}{Wednesday 1st of April 2015}{3}
-\contentsline {section}{Week 2}{3}
-\contentsline {section}{Week 3}{3}
-\contentsline {section}{Week 4}{3}
-\contentsline {section}{Week 5}{3}
-\contentsline {section}{Week 6}{3}
-\contentsline {section}{Week 7}{3}
-\contentsline {section}{Week 8}{3}
-\contentsline {section}{Week 9}{3}
-\contentsline {section}{Week 10}{3}
-\contentsline {section}{Week 11}{3}
-\contentsline {section}{Week 12}{3}
+\contentsline {subsection}{Thursday 2nd of April 2015}{3}
+\contentsline {section}{Week 2}{4}
+\contentsline {section}{Week 3}{4}
+\contentsline {section}{Week 4}{4}
+\contentsline {section}{Week 5}{4}
+\contentsline {section}{Week 6}{4}
+\contentsline {section}{Week 7}{4}
+\contentsline {section}{Week 8}{4}
+\contentsline {section}{Week 9}{4}
+\contentsline {section}{Week 10}{4}
+\contentsline {section}{Week 11}{4}
+\contentsline {section}{Week 12}{4}
