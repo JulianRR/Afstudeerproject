@@ -216,8 +216,8 @@ The following Input must be given to the simulator in order to get all the resul
   		\item N number of agents
   		\item M number of goods, this parameter is not mandatory, the default number of goods will be 1.
 		\item The value of the goods and if the value decreases over time.
-		\item The community effect threshold with values in the range of [0, 1]. 0 meaning there is absolutely no community effect and 1 meaning that the transactions only take place in a subgroup. For example if the threshold would be 0.8 we can conclude that there is a community effect if 80/100 transactions takes place in a subgroep.
-		\item The above parameter introduces another parameter. We need to determine the size of a subgroup. The size of a subgroep should be in the range of [2, x]. The value of x should be determined during the literature study.
+		\item The community effect threshold with values in the range of [0, 1]. 0 meaning there is absolutely no community effect and 1 meaning that the transactions only take place in a subgroup. For example if the threshold would be 0.8 we can conclude that there is a community effect if 80/100 transactions takes place in a subgroup.
+		\item The above parameter introduces another parameter. We need to determine the size of a subgroup. The size of a subgroup should be in the range of [2, x]. The value of x should be determined during the literature study.
 	\end{itemize} 
 \end{itemize}
 
@@ -248,9 +248,9 @@ During the development of the simulator I must take the following into account:
 
 
 \section{3. Back-end}
-\textit{Important packages: Numpy, }
+\textit{Important packages: Numpy}
 \\
-For every pair of agents (P, Q) we must keep track of the following things: The balance perceived by P and Q, How many times P and Q have given a good and recievced a good. For every single agent we must keep track of the following things: A list of all its transactions and the position of the agent (assuming an array of some sort will be used to store all the agents). For each good A and each par of agents (P, Q) we must keep track of the like factors  of each good A rangning from [-1, 0] and the value of each good A rangning from [0, $\infty$).
+For every pair of agents (P, Q) we must keep track of the following things: The balance perceived by P and Q, How many times P and Q have given a good and received a good. For every single agent we must keep track of the following things: A list of all its transactions and the position of the agent (assuming an array of some sort will be used to store all the agents). For each good A and each par of agents (P, Q) we must keep track of the like factors  of each good A rangning from [-1, 0] and the value of each good A rangning from [0, $\infty$).
 To accomplish the above the following design decisions have been made:
 \begin{itemize}
   \item For the balance of each pair of agents (P, Q) a NxN matrix, where N is the total number of agents, will be used globally to store all the balance values of each pair.
@@ -258,7 +258,7 @@ To accomplish the above the following design decisions have been made:
 	\begin{itemize}
   		\item The position of the agent. For example this position is used in the NxN matrix explained above. This position will be an Integer ranging from [0, N] where N is the total number of agents.
   		\item A list of all its previous transactions. The transactions will be stored in a Python \textit{list}.
-  		\item A list of the number of goods given and received for every other agent. A Numpy array will be used to store these variables.
+  		\item A list of the number of goods given and received for every other agent. A Numpy array will be used to store these variables. The index of the array will be the indication for each agent.
 	\end{itemize}
   \item Each good will have to store the following variables.
 	\begin{itemize}
@@ -266,24 +266,70 @@ To accomplish the above the following design decisions have been made:
   		\item If the value of the good decreases over time or not. A simple True or False will be used to determine this.
 	\end{itemize}
   \item For each good A a Python \textit{list} will be used globally to store each good. The size of this list will be determined by the total number of goods.
-  \item For each good A and each agent P a MxN matrix, where M is the total number of goods and N the total number of agents, will be used globally to store the like factor of every good precieved by every agent.
+  \item For each good A and each agent P a MxN matrix, where M is the total number of goods and N the total number of agents, will be used globally to store the like factor of every good perceived by every agent.
 \end{itemize}
 The pseudocode below shows the decisions made above. I will use an object oriented structure to accomplish the above decisions.
-
-\subsection{Code structure}
-
-
-\subsection{Memory management}
-A dictionary will be used by every node to store the information about other nodes. For example if we have a node P and a node Q the dictionary of P will look like \{'Q' : 'balance'\}.
-\section{4. Visualisation}
-\textit{Important packages: Numpy, matplotlib, pychart}
 \\
-graphs used to plot the results. Results will be saved in a file.
+\textbf{Agents}
+\begin{lstlisting}
+from numpy import *
+
+class Agent:
+	def __init__(self, position, N):
+		self.position = position
+		# List of transactions, for example: [(Action, Agent, Good)] 
+		# Where Action is either given or received, Agent is the agent 
+		# on the other side of the transaction and Good is de good that
+		# has been transfered.
+		self.listoftransactions = []
+		# The number of goods given and goods received for each agent
+		# are stored in the variable below. For example: array([(given, received)])
+		# where given is the total number of goods given to the agent 
+		# with the position equal to the index and received the total number
+		# of goods received from the agent.
+		self.given_received = array([])
+	
+	def update_listoftransactions(self, new_transaction):
+		self.listoftransactions.append(new_transaction)
+
+	def give(self, receiving_agent):
+		#The current agent gives to the receiving_agent.
+		pass
+	
+	def recieve(self, giving_agent):
+		#The current agent receives from the giving_agent
+		pass
+	
+	def update_given_received(self, position, previous_transaction):
+		if previous_transaction == given:
+			self.given_received[position][0] += previous_transaction
+		elif previous_transaction == received:
+			self.given_received[position][1] += previous_transaction
+
+\end{lstlisting}
+\textbf{Goods}
+\begin{lstlisting}
+class Goods():
+	def __init__(self, value, decreasing)
+		self.value = value # The value of the good
+		self.decreasing = decrasing # Either True or False
+
+	def decrease(self, decreasing_factor):
+		self.value = self.value * decreasing_factor
+\end{lstlisting}
+
+\section{4. Visualisation}
+\textit{Important packages: Numpy, matplotlib, PyChart}
+\\
+With Either \textit{matplotlib} or \textit{PyChart} I can plot graphs. I will start with \textit{matplotlib}, because this package is better documented and can be used together with the Qt framework which I will be using for the GUI. Together with \textit{Numpy} I will be able to do all the necessary calculations and produce together with the Qt framework well formatted results.
 \section{5. GUI}
 For the GUI I will be using the Qt framework.
 
-Extra':
-Most traded products
+\section{6. Possible additions}
+\begin{itemize}
+  \item I could add a variable for the most traded goods and base the results more on the goods to see how different kind of goods affect the results. 
+\end{itemize}
+
 
 
 
