@@ -201,7 +201,7 @@ I decided to create the simulator with Python(https://www.python.org/). I will b
 \section{2. The simulation model}
 The simulator can be divided into three major parts: the algorithm implementations and the giving game itself (Back-end), the visualisation (results and graphs) and the GUI. The simulator can be seen as the following proces:
 
-Picutre of the Proces here!
+\includegraphics[scale=0.70]{Simulatorproces}
 
 
 The following Input must be given to the simulator in order to get all the results (output): 
@@ -372,7 +372,23 @@ if __name__ == '__main__':
 \\
 With Either \textit{matplotlib} or \textit{PyChart} I can plot graphs. I will start with \textit{matplotlib}, because this package is better documented and can be used together with the Qt framework which I will be using for the GUI. Together with \textit{Numpy} I will be able to do all the necessary calculations and produce together with the Qt framework well formatted results.
 \section{5. GUI}
-For the GUI I will be using the Qt framework.
+\textit{Important packages: VisPy}
+\textit{Important framwork: Qt}
+For the GUI I will be using the Qt framework. 
+\\
+The GUI for the input of a few parameters will look something like this:
+
+\includegraphics[scale=0.70]{Inputexample}
+
+The results will look something like this:
+
+\includegraphics[scale=0.70]{Resultsexample}
+
+The second tab will be used to show the following:
+
+\includegraphics[scale=0.70]{Progressexample}
+
+Here the user can see the progress of the giving game. The green dotted line shows a transaction. The color shows the subgroups. For example red could mean that the transactions take most of the time place in this subgroup and blue would mean the opposite. This visualisation of the progress will be implemented last. For this part of the visualisation I will be needing \textit{OpenGL}. To accomplish this I will be making use of the package \textit{VisPy}.
 
 \section{6. Possible additions}
 \begin{itemize}

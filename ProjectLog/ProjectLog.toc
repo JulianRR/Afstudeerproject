@@ -3,6 +3,7 @@
 \contentsline {subsection}{Tuesday 31th of March 2015}{3}
 \contentsline {subsection}{Wednesday 1st of April 2015}{3}
 \contentsline {subsection}{Thursday 2nd of April 2015}{3}
+\contentsline {subsection}{Sunday 5th of April 2015}{3}
 \contentsline {section}{Week 2}{4}
 \contentsline {section}{Week 3}{4}
 \contentsline {section}{Week 4}{4}
