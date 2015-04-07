@@ -3,6 +3,7 @@ from numpy import *
 class Agent:
 	def __init__(self, position, N):
 		self.position = position
+		self.N = N
 		# List of transactions, for example: [(Action, Agent, Good)] 
 		# Where Action is either given or received, Agent is the agent 
 		# on the other side of the transaction and Good is de good that
@@ -13,17 +14,22 @@ class Agent:
 		# where given is the total number of goods given to the agent 
 		# with the position equal to the index and received the total number
 		# of goods received from the agent.
-		self.given_received = array([])
+		self.given_received = array([(0.0, 0.0) for x in range(N)])
 	
-	def update_listoftransactions(self, new_transaction):
-		self.listoftransactions.append(new_transaction)
+	def update_listoftransactions(self, P, Q, good):
+		self.listoftransactions.append((P, Q, good))
 
 	def give(self, receiving_agent, good):
 		#The current agent gives to the receiving_agent.
+		self.given_received[receiving_agent][0] += 1
+		self.listoftransactions.append(("Given", receiving_agent, good.id))
+
 		pass
 	
 	def receive(self, giving_agent, good):
 		#The current agent receives from the giving_agent
+		self.given_received[giving_agent][1] += 1
+		self.listoftransactions.append(("Received", giving_agent, good.id))
 		pass
 	
 	def update_given_received(self, position, previous_transaction):
