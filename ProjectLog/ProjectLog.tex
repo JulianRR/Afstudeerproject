@@ -224,6 +224,9 @@ Today I me with my supervisor. We discussed the design document I created last w
 For the theoretical research I will compare the random rule and the balance rule with the goodwill rule, because these rules are special. During the research I will try to find more rules with the same properties.
 I also started working on the Python code for the simulator. I have created a simple simulation for the random rule with durable goods. This piece of code will be used as a foundation for the whole simulation.
 
+\subsection{Wednesday 8th of April 2015}
+Today I created a simple simulation for perishable goods. I had some trouble with the implementing the goods. Updating and changing the values of the goods was a bit difficult, because they existed in multiple locations. I decided to assign a few agents as default producers of goods which made creating new goods easy, problem solved. I now have a simple simulation for sustainable and perishable goods, both types can be used during the same simulation. For the perish factor I use a value between 0 and MAX\_INTEGER, this is alot easier and more logical than using a value between [0, 1]. The good perishes after \textit{n} times the good has been given. A new good is produced after \textit{m} transactions.
+Friday, Saturday and Sunday I will try to figure out how I should implement the calculation of the community effect and in how the balance should be implemented. I also want to try to create a visualisation of the simulation process. If i can see what is happening it will be much more easy to conclude that the simulation is working correctly.
 \section{Week 3}
 
 

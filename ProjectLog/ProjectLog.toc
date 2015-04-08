@@ -6,6 +6,7 @@
 \contentsline {subsection}{Sunday 5th of April 2015}{3}
 \contentsline {section}{Week 2}{3}
 \contentsline {subsection}{Tuesday 7th of April 2015}{3}
+\contentsline {subsection}{Wednesday 8th of April 2015}{4}
 \contentsline {section}{Week 3}{4}
 \contentsline {section}{Week 4}{4}
 \contentsline {section}{Week 5}{4}
