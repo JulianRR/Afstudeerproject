@@ -27,10 +27,14 @@ def create_agents(N):
 		agent = Agent(x, N)
 		agents_list.append(agent)
 
-def create_goods(M, value, perish_factor, production_time):
+def create_goods(M, M_perishable, value, perish_factor, production_time):
 	# Create M product by calling the __init_() from the Goods Class
-	for x in range(M):
-		good = Goods(x, value, perish_factor, production_time)
+	for x in range(M-M_perishable):
+		good = Goods(x, value, 0, 0)
+		goods_list.append(good)
+
+	for y in range(M-M_perishable, M):
+		good = Goods(y, value, perish_factor, production_time)
 		goods_list.append(good)
 	pass
 
@@ -84,7 +88,8 @@ def select_start_agents(N):
 	for good in goods_list:
 		agent = randint(0, N-1)
 		current_agents.append((agent, good))
-		producing_agents.append((agent, good))
+		if good.perish_factor > 0:
+			producing_agents.append((agent, good))
 	pass
 
 def simulate(nr_iterations, N, balance_matrix):
@@ -113,7 +118,7 @@ def simulate(nr_iterations, N, balance_matrix):
 			# Produce goods after every transaction, if it is time to produce.
 			produce_goods(sl.random_rule, N)
 
-		print(x)
+		#print(x)
 		
 	return balance_matrix
 
@@ -121,8 +126,12 @@ def simulate(nr_iterations, N, balance_matrix):
 def main():
 	# Variables which should be set by the user
 	N = 10
-	M = 2
-	perish_factor = 3
+	# Total goods
+	M = 4
+	# Number of goods that are perishable
+	M_perishable = 2
+	perish_factor = 2
+	# stable at prodcution_time = M * perish_factor
 	production_time = 6
 	value = 1
 
@@ -130,7 +139,7 @@ def main():
 	create_agents(N)
 
 	# Create the products
-	create_goods(M, value, perish_factor, production_time)
+	create_goods(M, M_perishable, value, perish_factor, production_time)
 
 	# Create the balance matrix
 	balance_matrix = np.zeros((N,N))
