@@ -35,44 +35,20 @@ def create_goods(M, value, perish_factor, production_time):
 	pass
 
 def produce_goods(selectionrule, N):
-	# This doesnt seem to work, because multiple agents will have the same product
-	# for agent in producing_agents:
-	# 	good = agent[1]
-	# 	# After every transaction the time until the production needs to be decreased by 1
-	# 	goods_list[good].time_until_production -= 1
-	# 	# if not alive, if it is time to produce and if good is perishable (last one is not needed if producing agents only consist of perishable goods)
-	# 	if goods_list[good].life == 0 and goods_list[good].time_until_production == 0 and goods_list[good].perish_factor > 0:
-	# 		# Reset the life and the time until the next production
-	# 		goods_list[good].life = goods_list[good].perish_factor
-	# 		goods_list[good].time_until_production = goods_list[good].production_time
-
-	# 		# Add the agent who produced the product to the list with agents holding a good.
-	# 		current_agents.append(agent)
-	# for good in goods_list[:]:
-	# 	good.time_until_production -= 1
-	# 	#print(good.time_until_production, good.life, good.perish_factor)
-	# 	if good.life == 0 and good.time_until_production == 0 and good.perish_factor > 0:
-	# 		# Create a new good with the same values as the perished one
-	# 		new_good = Goods(good.id, good.value, good.perish_factor, good.production_time)
-	# 		# Assign the good to an agent
-	# 		current_agents.append((selectionrule(N), new_good))
-	# 		# Remove perished good
-	# 		goods_list.remove(good)
-	# 		# Add new good
-	# 		goods_list.append(new_good)
-	# 	elif good.time_until_production == 0:
-	# 		new_good = Goods(good.id, good.value, good.perish_factor, good.production_time)
-	# 		current_agents.append((selectionrule(N), new_good))
-	# 		goods_list.append(new_good)
-	# 		good.time_until_production = good.production_time
 	for agent in producing_agents:
 		good = agent[1]
-		#print(good.time_until_production)
+		# A transaction has taken place, lower the time until the production
 		good.time_until_production -= 1
+
+		# Check if it is time to start a new production
 		if good.time_until_production == 0:
+			# Create a new good
 			new_good = Goods(good.id, good.value, good.perish_factor, good.production_time)
+			# Select a agent to hold the product, or use the producing agent
 			current_agents.append((selectionrule(N), new_good))
+			# Add the new good to the list
 			goods_list.append(new_good)
+			# Reset the time until the next production
 			good.time_until_production = good.production_time
 	pass
 
@@ -121,27 +97,22 @@ def simulate(nr_iterations, N, balance_matrix):
 			next_agent = select_agent(sl.random_rule, N, current_agent)
 
 			# Do the transaction
-			#print("first", good.life)
 			transaction(current_agent, next_agent, good)
-			#print("after", good.life)
+
 			# Update the balance matrix
 			update_balancematrix(balance_matrix, current_agent, next_agent)
 
 			# Set the selected agent as the current agent if the good is still alive.
-			#print(current_agents)
 			if good.perish_factor == 0 or good.life > 0:
 				current_agents[current_agents.index(agent)] = (next_agent, good)
 			else:
 				# Remove the perished product and the agent holding it from the list
 				current_agents.remove(agent)
 				goods_list.remove(good)
-				#print("REMOVED", goods_list)
 			
 			# Produce goods after every transaction, if it is time to produce.
 			produce_goods(sl.random_rule, N)
-			#print(agent, good.life, good.time_until_production)
-			#print(goods_list)
-			#print(producing_agents)
+
 		print(x)
 		
 	return balance_matrix
@@ -157,13 +128,9 @@ def main():
 
 	# Create the agents
 	create_agents(N)
-	# for agent in agents_list:
-	# 	print(agent.position, agent.given_received[1])
 
 	# Create the products
 	create_goods(M, value, perish_factor, production_time)
-	# for good in goods_list:
-	# 	print(good.id, good.value)
 
 	# Create the balance matrix
 	balance_matrix = np.zeros((N,N))
@@ -172,15 +139,14 @@ def main():
 
 	# Select random agents to start with
 	select_start_agents(N)
-	#producing_agents = current_agents
+
 	print(goods_list)
 	# Start the simulation
 	balance_matrix = simulate(100, N, balance_matrix)
 
-	# for agent in agents_list:
-	# 	print(agent.position, agent.given_received, agent.listoftransactions)
-	# print(balance_matrix)
-	# print(producing_agents)
+	for agent in agents_list:
+		print(agent.position, agent.given_received, agent.listoftransactions)
+	print(balance_matrix)
 	print(goods_list)
 
 if __name__ == '__main__':
