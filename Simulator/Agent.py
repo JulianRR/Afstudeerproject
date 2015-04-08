@@ -22,14 +22,14 @@ class Agent:
 	def give(self, receiving_agent, good):
 		#The current agent gives to the receiving_agent.
 		self.given_received[receiving_agent][0] += 1
-		self.listoftransactions.append(("Given", receiving_agent, good.id))
+		self.listoftransactions.append(("Given", receiving_agent, good))
 
 		pass
 	
 	def receive(self, giving_agent, good):
 		#The current agent receives from the giving_agent
 		self.given_received[giving_agent][1] += 1
-		self.listoftransactions.append(("Received", giving_agent, good.id))
+		self.listoftransactions.append(("Received", giving_agent, good))
 		pass
 	
 	def update_given_received(self, position, previous_transaction):
