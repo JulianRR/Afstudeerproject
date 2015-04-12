@@ -8,155 +8,106 @@ from random import randint
 # every transaction.
 #import Selectionrules
 
-# Agents and Goods
-agents_list = []
-goods_list = []
+class Enviroment:
+	def __init__(self, N, M, M_perishable, perish_factor, production_time, value):
 
-# Current agents with a good [(agent, good)]
-current_agents = []
+		# Total agents
+		self.N = N
+		# Total goods
+		self.M = M
+		# Number of goods that are perishable
+		self.M_perishable = M_perishable
+		self.perish_factor = perish_factor
+		# stable at prodcution_time = M * perish_factor
+		self.production_time = production_time
+		self.value = value
 
-# List of agents that produce specific product
-producing_agents = []
+		# Agents and Goods
+		self.agents_list = []
+		self.goods_list = []
 
-# Balance matrix
-#balance_matrix = np.zeros(0)
+		# Current agents with a good [(agent, good)]
+		self.current_agents = []
 
-def create_agents(N):
-	# Create N agents by calling the __init__() from the Agents Class
-	for x in range(N):
-		agent = Agent(x, N)
-		agents_list.append(agent)
+		# List of agents that produce specific product
+		self.producing_agents = []
 
-def create_goods(M, M_perishable, value, perish_factor, production_time):
-	# Create M product by calling the __init_() from the Goods Class
-	for x in range(M-M_perishable):
-		good = Goods(x, value, 0, 0)
-		goods_list.append(good)
+		# Balance matrix
+		self.balance_matrix = np.zeros((N,N))
 
-	for y in range(M-M_perishable, M):
-		good = Goods(y, value, perish_factor, production_time)
-		goods_list.append(good)
-	pass
+		# Transaction percentage list
+		self.transaction_percentages = []
 
-def produce_goods(selectionrule, N):
-	for agent in producing_agents:
-		good = agent[1]
-		# A transaction has taken place, lower the time until the production
-		good.time_until_production -= 1
+		# Comunnity percentage
+		self.comunnity_percentage = 0
 
-		# Check if it is time to start a new production
-		if good.time_until_production == 0:
-			# Create a new good
-			new_good = Goods(good.id, good.value, good.perish_factor, good.production_time)
-			# Select a agent to hold the product, or use the producing agent
-			current_agents.append((selectionrule(N), new_good))
-			# Add the new good to the list
-			goods_list.append(new_good)
-			# Reset the time until the next production
-			good.time_until_production = good.production_time
-	pass
+	def create_agents(self):
+		# Create N agents by calling the __init__() from the Agents Class
+		for x in range(self.N):
+			agent = Agent(x, self.N)
+			self.agents_list.append(agent)
 
-def transaction(P, Q, good):
-	# P gives good to Q
-	agents_list[P].give(Q, good)
-	# Q recieves good from P
-	agents_list[Q].receive(P, good)
+	def create_goods(self):
+		# Create M product by calling the __init_() from the Goods Class
+		for x in range(self.M-self.M_perishable):
+			good = Goods(x, self.value, 0, 0)
+			self.goods_list.append(good)
 
-	if good.perish_factor > 0:
-			good.life -= 1
+		for y in range(self.M-self.M_perishable, self.M):
+			good = Goods(y, self.value, self.perish_factor, self.production_time)
+			self.goods_list.append(good)
 
-def create_balancematrix(N):
-	return np.zeros((N,N))
+	def update_balancematrix(self, P, Q):
+		# Update the balance matrix after every transaction
+		self.balance_matrix[P][Q] -= 1.0
+		self.balance_matrix[Q][P] += 1.0
 
-def update_balancematrix(balance_matrix, P, Q):
-	# Update the balance matrix after every transaction
-	balance_matrix[P][Q] -= 1.0
-	balance_matrix[Q][P] += 1.0
-	
-	return balance_matrix
-
-def select_agent(selectionrule, N, current_agent):
-	# Call the right seletion rule to select the agent
-
-	next_agent = selectionrule(N)
-	while(current_agent == next_agent):
-		next_agent = selectionrule(N)
-
-	return next_agent
-
-def select_start_agents(N):
-	for good in goods_list:
-		agent = randint(0, N-1)
-		current_agents.append((agent, good))
-		if good.perish_factor > 0:
-			producing_agents.append((agent, good))
-	pass
-
-def simulate(nr_iterations, N, balance_matrix):
-	for x in range(nr_iterations):
-		for agent in current_agents[:]:
-			current_agent = agent[0]
+	def produce_goods(self, selectionrule):
+		for agent in self.producing_agents:
 			good = agent[1]
+			# A transaction has taken place, lower the time until the production
+			good.time_until_production -= 1
 
-			# Select next agent with selection rule
-			next_agent = select_agent(sl.random_rule, N, current_agent)
+			# Check if it is time to start a new production
+			if good.time_until_production == 0:
+				# Create a new good
+				new_good = Goods(good.id, good.value, good.perish_factor, good.production_time)
+				# Select a agent to hold the product, or use the producing agent
+				self.current_agents.append((selectionrule(self.N), new_good))
+				# Add the new good to the list
+				self.goods_list.append(new_good)
+				# Reset the time until the next production
+				good.time_until_production = good.production_time
 
-			# Do the transaction
-			transaction(current_agent, next_agent, good)
+	def transaction(self, P, Q, good):
+		# P gives good to Q
+		self.agents_list[P].give(Q, good)
+		# Q recieves good from P
+		self.agents_list[Q].receive(P, good)
 
-			# Update the balance matrix
-			update_balancematrix(balance_matrix, current_agent, next_agent)
+		if good.perish_factor > 0:
+				good.life -= 1
 
-			# Set the selected agent as the current agent if the good is still alive.
-			if good.perish_factor == 0 or good.life > 0:
-				current_agents[current_agents.index(agent)] = (next_agent, good)
-			else:
-				# Remove the perished product and the agent holding it from the list
-				current_agents.remove(agent)
-				goods_list.remove(good)
-			
-			# Produce goods after every transaction, if it is time to produce.
-			produce_goods(sl.random_rule, N)
+	def select_agent(self, selectionrule, current_agent):
+		# Call the right seletion rule to select the agent
 
-		#print(x)
-		
-	return balance_matrix
+		next_agent = selectionrule(self.N)
+		while(current_agent == next_agent):
+			next_agent = selectionrule(self.N)
 
+		return next_agent
 
-def main():
-	# Variables which should be set by the user
-	N = 10
-	# Total goods
-	M = 4
-	# Number of goods that are perishable
-	M_perishable = 2
-	perish_factor = 2
-	# stable at prodcution_time = M * perish_factor
-	production_time = 6
-	value = 1
+	def select_start_agents(self):
+		for good in self.goods_list:
+			agent = randint(0, self.N-1)
+			self.current_agents.append((agent, good))
+			if good.perish_factor > 0:
+				self.producing_agents.append((agent, good))
 
-	# Create the agents
-	create_agents(N)
-
-	# Create the products
-	create_goods(M, M_perishable, value, perish_factor, production_time)
-
-	# Create the balance matrix
-	balance_matrix = np.zeros((N,N))
-	#balance_matrix = create_balancematrix(N)
-	print(balance_matrix)
-
-	# Select random agents to start with
-	select_start_agents(N)
-
-	print(goods_list)
-	# Start the simulation
-	balance_matrix = simulate(100, N, balance_matrix)
-
-	for agent in agents_list:
-		print(agent.position, agent.given_received, agent.listoftransactions)
-	print(balance_matrix)
-	print(goods_list)
-
-if __name__ == '__main__':
-    main()
+	def calculate_comunnityeffect(self, total_transactions):
+		for agent in self.agents_list[:]:
+			received = 0
+			for x in agent.given_received:
+				received += x[1]
+			print(received)
+			self.transaction_percentages.append(received / total_transactions)

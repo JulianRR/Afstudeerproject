@@ -1,5 +1,6 @@
 import sys
 from PyQt4 import QtGui
+import Simulate as sim
 
 # N = 3
 # # Total goods
@@ -17,14 +18,14 @@ class Input(QtGui.QWidget):
         super(Input, self).__init__()
         
         # Total agents
-        self.N = 3
+        self.N = 10
         # Total goods
-        self.M = 1
+        self.M = 3
         # Number of goods that are perishable
-        self.M_perishable = 0
-        self.perish_factor = 0
+        self.M_perishable = 3
+        self.perish_factor = 2
         # stable at prodcution_time = M * perish_factor
-        self.production_time = 0
+        self.production_time = 6
         self.value = 1
 
         self.initUI()
@@ -133,14 +134,13 @@ class Input(QtGui.QWidget):
         print('Value of the goods: ', self.value)
 
     def startSimulation(self):
-        output = Output()
-        output.exec_()
-
+        self.output = Output()
+        sim.start_simulation(self.N, self.M, self.M_perishable, self.perish_factor, self.production_time, self.value, self.output)
 
 class Output(QtGui.QWidget):
     
     def __init__(self):
-        super(Output, self).__init__()
+        QtGui.QWidget.__init__(self)
         
         self.initUI()
         
@@ -151,13 +151,16 @@ class Output(QtGui.QWidget):
         layout = QtGui.QVBoxLayout(self)
         layout.addWidget(self.te)
         self.setLayout(layout)
-        for x in range(30):
-            self.te.append(str(x))
 
-        self.setGeometry(200, 200, 400, 300)
+        self.setGeometry(500, 200, 400, 375)
         self.setWindowTitle('The Giving Game - Output')
         self.show()
-      
+
+    def print_transaction(self, P, Q, good):
+        transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
+        self.te.append(transaction)
+
+     
         
 def main():
     
