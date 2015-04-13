@@ -8,13 +8,15 @@
 \contentsline {subsection}{Tuesday 7th of April 2015}{3}
 \contentsline {subsection}{Wednesday 8th of April 2015}{4}
 \contentsline {subsection}{Friday 10th of April 2015}{4}
-\contentsline {section}{Week 3}{4}
-\contentsline {section}{Week 4}{4}
-\contentsline {section}{Week 5}{4}
-\contentsline {section}{Week 6}{4}
-\contentsline {section}{Week 7}{4}
-\contentsline {section}{Week 8}{4}
-\contentsline {section}{Week 9}{4}
-\contentsline {section}{Week 10}{4}
-\contentsline {section}{Week 11}{4}
-\contentsline {section}{Week 12}{4}
+\contentsline {subsection}{Saturday 11th of April 2015}{4}
+\contentsline {subsection}{Sunday 12th of April 2015}{4}
+\contentsline {section}{Week 3}{5}
+\contentsline {section}{Week 4}{5}
+\contentsline {section}{Week 5}{5}
+\contentsline {section}{Week 6}{5}
+\contentsline {section}{Week 7}{5}
+\contentsline {section}{Week 8}{5}
+\contentsline {section}{Week 9}{5}
+\contentsline {section}{Week 10}{5}
+\contentsline {section}{Week 11}{5}
+\contentsline {section}{Week 12}{5}
