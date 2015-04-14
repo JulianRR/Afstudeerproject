@@ -4,3 +4,4 @@
 \contentsline {section}{4. Visualisation}{7}
 \contentsline {section}{5. GUI}{8}
 \contentsline {section}{6. Possible additions}{9}
+\contentsline {section}{7. Changes and Updates}{9}
