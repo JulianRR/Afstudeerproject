@@ -9,7 +9,7 @@ from random import randint
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_period, production_time, value):
+	def __init__(self, N, M, M_perishable, perish_period, production_delay, value):
 
 		# Total agents
 		self.N = N
@@ -19,7 +19,7 @@ class Enviroment:
 		self.M_perishable = M_perishable
 		self.perish_period = perish_period
 		# stable at prodcution_time = M * perish_period
-		self.production_time = production_time
+		self.production_delay = production_delay
 		self.value = value
 
 		# Agents and Goods
@@ -63,7 +63,7 @@ class Enviroment:
 				self.goods_list.append(good)
 
 			for y in range(self.M-self.M_perishable, self.M):
-				good = Goods(y, self.value, self.perish_period, self.production_time)
+				good = Goods(y, self.value, self.perish_period, self.production_delay)
 				self.goods_list.append(good)
 		
 
@@ -90,13 +90,13 @@ class Enviroment:
 			# Check if it is time to start a new production if the good has perished
 			if good.time_until_production == 0 and good.life == 0:
 				# Create a new good
-				new_good = Goods(good.id, good.value, good.perish_period, good.production_time)
+				new_good = Goods(good.id, good.value, good.perish_period, good.production_delay)
 				# Select a agent to hold the product, or use the producing agent
 				self.current_agents.append((agent, new_good))
 				# Add the new good to the list
 				self.goods_list.append(new_good)
 				# Reset the time until the next production
-				good.time_until_production = good.production_time
+				good.time_until_production = good.production_delay
 				good.life = good.perish_period
 
 			# Reduce the time untill the production if only the good has perished

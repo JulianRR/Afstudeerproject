@@ -10,9 +10,9 @@ from random import randint
 import sys
 from PyQt4 import QtGui
 
-def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_time, value):
+def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value):
 
-	enviroment = Enviroment(N, M, M_perishable, perish_period, production_time, value)
+	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value)
 
 	# Create the agents
 	enviroment.create_agents()
@@ -57,14 +57,14 @@ def simulate(nr_iterations, env, selectionrule, output):
 		env.produce_goods(selectionrule)
 
 	env.calculate_comunnityeffect(total_transactions)
-	output.te.append(str(env.transaction_percentages))
-	sum = 0
-	for x in env.transaction_percentages:
-		sum += x
-	output.te.append(str(sum))
-	output.te.append(str(total_transactions))
+	# output.te.append(str(env.transaction_percentages))
+	# sum = 0
+	# for x in env.transaction_percentages:
+	# 	sum += x
+	# output.te.append(str(sum))
+	# output.te.append(str(total_transactions))
 
-def start_simulation(N, M, goods_list, M_perishable, perish_period, production_time, value, output):
+def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output):
 	# Variables which should be set by the user
 	# N = 10
 	# # Total goods
@@ -73,14 +73,14 @@ def start_simulation(N, M, goods_list, M_perishable, perish_period, production_t
 	# M_perishable = 3
 	# perish_period = 2
 	# # stable at prodcution_time = M * perish_period
-	# production_time = 6
+	# production_delay = 6
 	# value = 1
 	#app = QtGui.QApplication(sys.argv)
 	#output = Output()
 	#output.show()
 	#output.exec_()
 	#output.te.append('dsgdsgfdgdfgdf')
-	env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_time, value)
+	env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
 	simulate(100, env, sl.random_rule, output)
 	
 	# for agent in env.agents_list:

@@ -1,6 +1,7 @@
 import sys
 from PyQt4 import QtGui
 import Simulate as sim
+from GUI_Output import Output
 
 # N = 3
 # # Total goods
@@ -27,7 +28,7 @@ class Input(QtGui.QWidget):
         self.M_perishable = 3
         self.perish_period = 2
         # stable at prodcution_time = M * perish_period
-        self.production_time = 1
+        self.production_delay = 0
         self.value = 1
 
         # [[perish_period, production_delay, nominal_value]]
@@ -150,8 +151,8 @@ class Input(QtGui.QWidget):
         print('Perisch factor: ', self.perish_period)
 
     def setProductionTime(self, value): 
-        self.production_time = self.p_time.value()
-        print('Production time: ', self.production_time)
+        self.production_delay = self.p_time.value()
+        print('Production time: ', self.production_delay)
 
     def setValue(self, value): 
         self.value = self.good_value.value()
@@ -197,30 +198,30 @@ class Input(QtGui.QWidget):
     def startSimulation(self):
         self.output = Output()
         self.setGoodsList()
-        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_time, self.value, self.output)
+        self.output.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output)
 
-class Output(QtGui.QWidget):
+# class Output(QtGui.QWidget):
     
-    def __init__(self):
-        QtGui.QWidget.__init__(self)
+#     def __init__(self):
+#         QtGui.QWidget.__init__(self)
         
-        self.initUI()
+#         self.initUI()
         
 
-    def initUI(self):
-        self.te = QtGui.QTextEdit()
-        self.te.setReadOnly(True)
-        layout = QtGui.QVBoxLayout(self)
-        layout.addWidget(self.te)
-        self.setLayout(layout)
+#     def initUI(self):
+#         self.te = QtGui.QTextEdit()
+#         self.te.setReadOnly(True)
+#         layout = QtGui.QVBoxLayout(self)
+#         layout.addWidget(self.te)
+#         self.setLayout(layout)
 
-        self.setGeometry(500, 200, 400, 375)
-        self.setWindowTitle('The Giving Game - Output')
-        self.show()
+#         self.setGeometry(500, 200, 400, 375)
+#         self.setWindowTitle('The Giving Game - Output')
+#         self.show()
 
-    def print_transaction(self, P, Q, good):
-        transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
-        self.te.append(transaction)
+#     def print_transaction(self, P, Q, good):
+#         transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
+#         self.te.append(transaction)
 
      
         
