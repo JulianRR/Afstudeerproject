@@ -9,7 +9,7 @@ from random import randint
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_factor, production_time, value):
+	def __init__(self, N, M, M_perishable, perish_period, production_time, value):
 
 		# Total agents
 		self.N = N
@@ -17,8 +17,8 @@ class Enviroment:
 		self.M = M
 		# Number of goods that are perishable
 		self.M_perishable = M_perishable
-		self.perish_factor = perish_factor
-		# stable at prodcution_time = M * perish_factor
+		self.perish_period = perish_period
+		# stable at prodcution_time = M * perish_period
 		self.production_time = production_time
 		self.value = value
 
@@ -47,37 +47,63 @@ class Enviroment:
 			agent = Agent(x, self.N)
 			self.agents_list.append(agent)
 
-	def create_goods(self):
+	def create_goods(self, goods):
 		# Create M product by calling the __init_() from the Goods Class
-		for x in range(self.M-self.M_perishable):
-			good = Goods(x, self.value, 0, 0)
-			self.goods_list.append(good)
+		if goods:
+			for x in range(self.M):
+				perish_period 	 = goods[x][0]
+				production_delay = goods[x][1]
+				nominal_value 	 = goods[x][2]
 
-		for y in range(self.M-self.M_perishable, self.M):
-			good = Goods(y, self.value, self.perish_factor, self.production_time)
-			self.goods_list.append(good)
+				good = Goods(x, nominal_value, perish_period, production_delay)
+				self.goods_list.append(good)
+		else:
+			for x in range(self.M-self.M_perishable):
+				good = Goods(x, self.value, 0, 0)
+				self.goods_list.append(good)
+
+			for y in range(self.M-self.M_perishable, self.M):
+				good = Goods(y, self.value, self.perish_period, self.production_time)
+				self.goods_list.append(good)
+		
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
 		self.balance_matrix[P][Q] -= 1.0
 		self.balance_matrix[Q][P] += 1.0
 
-	def produce_goods(self, selectionrule):
-		for agent in self.producing_agents:
-			good = agent[1]
-			# A transaction has taken place, lower the time until the production
-			good.time_until_production -= 1
+	def notify_producer(self, good):
+		for producer in self.producing_agents:
+			g = producer[1]
+			if g.id == good.id:
+				g.life = good.life
 
-			# Check if it is time to start a new production
-			if good.time_until_production == 0:
+	def produce_goods(self, selectionrule):
+		for producer in self.producing_agents:
+			agent = producer[0]
+			good = producer[1]
+			# A transaction has taken place, lower the time until the production
+			#good.time_until_production -= 1
+			# if g.id == good.id:
+			# 	good.life = g.life
+
+			# Check if it is time to start a new production if the good has perished
+			if good.time_until_production == 0 and good.life == 0:
 				# Create a new good
-				new_good = Goods(good.id, good.value, good.perish_factor, good.production_time)
+				new_good = Goods(good.id, good.value, good.perish_period, good.production_time)
 				# Select a agent to hold the product, or use the producing agent
-				self.current_agents.append((selectionrule(self.N), new_good))
+				self.current_agents.append((agent, new_good))
 				# Add the new good to the list
 				self.goods_list.append(new_good)
 				# Reset the time until the next production
 				good.time_until_production = good.production_time
+				good.life = good.perish_period
+
+			# Reduce the time untill the production if only the good has perished
+			elif good.life == 0:
+				good.time_until_production -= 1
+
+			
 
 	def transaction(self, P, Q, good):
 		# P gives good to Q
@@ -85,7 +111,7 @@ class Enviroment:
 		# Q recieves good from P
 		self.agents_list[Q].receive(P, good)
 
-		if good.perish_factor > 0:
+		if good.perish_period > 0:
 				good.life -= 1
 
 	def select_agent(self, selectionrule, current_agent):
@@ -101,7 +127,7 @@ class Enviroment:
 		for good in self.goods_list:
 			agent = randint(0, self.N-1)
 			self.current_agents.append((agent, good))
-			if good.perish_factor > 0:
+			if good.perish_period > 0:
 				self.producing_agents.append((agent, good))
 
 	def calculate_comunnityeffect(self, total_transactions):
@@ -109,5 +135,4 @@ class Enviroment:
 			received = 0
 			for x in agent.given_received:
 				received += x[1]
-			print(received)
 			self.transaction_percentages.append(received / total_transactions)
