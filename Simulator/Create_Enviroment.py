@@ -131,6 +131,7 @@ class Enviroment:
 				self.producing_agents.append((agent, good))
 
 	def calculate_comunnityeffect(self, total_transactions):
+		self.transaction_percentages = []
 		for agent in self.agents_list[:]:
 			received = 0
 			for x in agent.given_received:

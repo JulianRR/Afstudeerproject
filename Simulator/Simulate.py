@@ -7,8 +7,13 @@ import Selection_rules as sl
 import numpy as np
 from random import randint
 
-import sys
+import sys, time
 from PyQt4 import QtGui
+
+def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output):
+	env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
+	simulate(100, env, sl.random_rule, output)
+	print(env.agents_list[0].given_received)
 
 def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value):
 
@@ -27,19 +32,29 @@ def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_
 
 def simulate(nr_iterations, env, selectionrule, output):
 	total_transactions = 0
+	output.setEnviroment(env)
+
 	for x in range(nr_iterations):
 		for agent in env.current_agents[:]:
 			current_agent = agent[0]
 			good = agent[1]
 
+			output.getList(env.agents_list)
 			# Select next agent with selection rule
 			next_agent = env.select_agent(selectionrule, current_agent)
 
 			# Do the transaction
 			env.transaction(current_agent, next_agent, good)
-			#print(good.life)
 			total_transactions += 1
-			output.print_transaction(current_agent, next_agent, good)
+
+			env.calculate_comunnityeffect(total_transactions)
+			
+			output.showPlot()
+			output.plotTransactionPercentages()
+
+			exit = output.print_transaction(current_agent, next_agent, good)
+			if exit:
+				break
 
 			# Update the balance matrix
 			env.update_balancematrix(current_agent, next_agent)
@@ -53,38 +68,10 @@ def simulate(nr_iterations, env, selectionrule, output):
 				env.current_agents.remove(agent)
 				env.goods_list.remove(good)
 			
-			# Produce goods after every transaction, if it is time to produce.
+		# Produce goods after every transaction, if it is time to produce.
 		env.produce_goods(selectionrule)
-
+		if exit:
+			break
 	env.calculate_comunnityeffect(total_transactions)
-	# output.te.append(str(env.transaction_percentages))
-	# sum = 0
-	# for x in env.transaction_percentages:
-	# 	sum += x
-	# output.te.append(str(sum))
-	# output.te.append(str(total_transactions))
 
-def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output):
-	# Variables which should be set by the user
-	# N = 10
-	# # Total goods
-	# M = 3
-	# # Number of goods that are perishable
-	# M_perishable = 3
-	# perish_period = 2
-	# # stable at prodcution_time = M * perish_period
-	# production_delay = 6
-	# value = 1
-	#app = QtGui.QApplication(sys.argv)
-	#output = Output()
-	#output.show()
-	#output.exec_()
-	#output.te.append('dsgdsgfdgdfgdf')
-	env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
-	simulate(100, env, sl.random_rule, output)
-	
-	# for agent in env.agents_list:
-	# 	print(agent.position, agent.given_received, agent.listoftransactions)
-	# print(env.balance_matrix)
-	# print(env.goods_list)
-	#return output
+

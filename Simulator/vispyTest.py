@@ -1,12 +1,18 @@
 from vispy import gloo
 from vispy import app
 import numpy as np
+import time
 
 # Create vetices
-n = 10000
+n = 10
 v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
+#print(v_position)
 v_color = np.random.uniform(0, 1, (n, 3)).astype(np.float32)
+v_color = [[ 0.2, 1.0, 0.4] for i in range(n)]
+#print(v_color)
 v_size = np.random.uniform(2, 12, (n, 1)).astype(np.float32)
+v_size = [[10.0] for i in range(n)]
+#print(v_size)
 
 VERT_SHADER = """
 attribute vec3  a_position;
@@ -69,6 +75,7 @@ class Canvas(app.Canvas):
         self.program = gloo.Program(VERT_SHADER, FRAG_SHADER)
         # Set uniform and attribute
         self.program['a_color'] = gloo.VertexBuffer(v_color)
+        #self.program['u_color'] = 0.2, 1.0, 0.4, 1
         self.program['a_position'] = gloo.VertexBuffer(v_position)
         self.program['a_size'] = gloo.VertexBuffer(v_size)
         gloo.set_state(clear_color='white', blend=True,
@@ -79,7 +86,37 @@ class Canvas(app.Canvas):
 
     def on_draw(self, event):
         gloo.clear(color=True, depth=True)
+        #v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
+        #self.program['a_position'] = gloo.VertexBuffer(v_position)
         self.program.draw('points')
+
+    def on_mouse_move(self, event):
+        if event.is_dragging:
+            button = event.press_event.button
+
+            if button == 1:
+                self.update()
+
+    def updateVis(self):
+        #v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
+        print(v_position[0])
+        for i in range(5):
+            time.sleep(0.05)
+            v_position[0][0] = 1.0
+            v_position[0][1] = 1.0
+            v_position[0][2] = 1.0
+            v_color[0] = [0.0, 1.0, 0.0]
+            v_position[1][0] = 0
+            v_position[1][1] = 0
+            v_position[1][2] = 0
+            v_color[1] = [1.0, 0.0, 0.0]
+            v_position[2][0] = -1.0
+            v_position[2][1] = -1.0
+            v_position[2][2] = -1.0
+            v_color[2] = [0.0, 0.0, 1.0]
+            self.program['a_color'] = gloo.VertexBuffer(v_color)
+            self.program['a_position'] = gloo.VertexBuffer(v_position)
+            self.update()
 
 
 if __name__ == '__main__':

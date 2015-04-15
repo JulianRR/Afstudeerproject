@@ -1,4 +1,4 @@
-import sys
+import sys, time
 from PyQt4 import QtGui
 import Simulate as sim
 from GUI_Output import Output
@@ -59,46 +59,6 @@ class Input(QtGui.QWidget):
 
         self.nr_goods.valueChanged.connect(self.setGoods)
 
-        # Perishable Goods
-        # lbl_nr_perishable = QtGui.QLabel('Number of perishable goods', self)
-        # lbl_nr_perishable.move(15, 110)
-
-        # self.nr_perishable = QtGui.QSpinBox(self)
-        # self.nr_perishable.setGeometry(15, 130, 100, 25)
-        # self.nr_perishable.setMaximum(10000)
-
-        # self.nr_perishable.valueChanged.connect(self.setPerishable)
-
-        # # Perish factor
-        # lbl_perish_period = QtGui.QLabel('Perish period', self)
-        # lbl_perish_period.move(15, 160)
-
-        # self.perish = QtGui.QSpinBox(self)
-        # self.perish.setGeometry(15, 180, 100, 25)
-        # self.perish.setMaximum(10000)
-
-        # self.perish.valueChanged.connect(self.setPerishPeriod)
-
-        # # Production time
-        # lbl_production_time = QtGui.QLabel('Production time', self)
-        # lbl_production_time.move(15, 210)
-
-        # self.p_time = QtGui.QSpinBox(self)
-        # self.p_time.setGeometry(15, 230, 100, 25)
-        # self.p_time.setMaximum(10000)
-
-        # self.p_time.valueChanged.connect(self.setProductionTime)
-
-        # # Value of goods
-        # lbl_value = QtGui.QLabel('Value of the goods', self)
-        # lbl_value.move(15, 260)
-
-        # self.good_value = QtGui.QSpinBox(self)
-        # self.good_value.setGeometry(15, 280, 100, 25)
-        # self.good_value.setMaximum(10000)
-
-        # self.good_value.valueChanged.connect(self.setValue)
-
         # Table widget for the input of goods variables
         self.layout = QtGui.QGridLayout()
         self.lbl_input_table = QtGui.QLabel('Create goods', self)
@@ -119,7 +79,7 @@ class Input(QtGui.QWidget):
 
         self.setLayout(self.layout)
 
-        self.setGeometry(200, 200, 300, 475)
+        self.setGeometry(0, 50, 300, 475)
         self.setWindowTitle('The Giving Game - Input') 
         self.show()
 
@@ -198,7 +158,17 @@ class Input(QtGui.QWidget):
     def startSimulation(self):
         self.output = Output()
         self.setGoodsList()
-        self.output.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output)
+        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output)
+
+    def closeEvent(self,event):
+        result = QtGui.QMessageBox.question(self,
+                      "Confirm Exit...",
+                      "Are you sure you want to exit ?",
+                      QtGui.QMessageBox.Yes| QtGui.QMessageBox.No)
+        event.ignore()
+
+        if result == QtGui.QMessageBox.Yes:
+            event.accept()
 
 # class Output(QtGui.QWidget):
     
