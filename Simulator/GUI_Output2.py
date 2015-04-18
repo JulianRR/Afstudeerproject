@@ -9,9 +9,10 @@ from vispyTest import Canvas
 
 class Output(QtGui.QMainWindow):
     
-    def __init__(self):
+    def __init__(self, env):
         super(Output, self).__init__()
 
+        self.env = env
         self.initUI()
         
 
@@ -26,115 +27,34 @@ class Output(QtGui.QMainWindow):
         self.setMenuBar(self.menubar)
 
         # Frames
-        self.splitter_widget = GUI()
-        self.setCentralWidget(self.splitter_widget)
+        self.gui = GUI(self.env)
+        self.setCentralWidget(self.gui)
         
         self.setGeometry(300, 50, 1100, 800)
         self.setWindowTitle('Menubar')    
         self.show()
-        
 
-class Grid(QtGui.QWidget):
-    def __init__(self):
-        super(Grid, self).__init__()
-        grid = QtGui.QGridLayout(self)
+    def closeEvent(self,event):
+        result = QtGui.QMessageBox.question(self,
+                      "Confirm Exit...",
+                      "Are you sure you want to exit ?",
+                      QtGui.QMessageBox.Yes| QtGui.QMessageBox.No)
+        event.ignore()
 
-        subgrid = QtGui.QGridLayout()
-
-        test = QtGui.QVBoxLayout()
-
-        left = GeneralResults()
-        brush = QtGui.QBrush(QtGui.QColor(255, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        
-
-        sub_bottomleft = QtGui.QTextEdit()
- 
-        sub_bottomright = QtGui.QTextEdit()
-
-        sub_top = ControlPanel()
-
-        grid.addWidget(left, 0, 0, 1, 2)
-        grid.addLayout(subgrid, 0, 2)
-
-        #left.setBackground(brush)
-
-        subgrid.addWidget(sub_bottomleft, 2, 0)
-        subgrid.addWidget(sub_bottomright, 2, 1, 1, 2)
-        subgrid.addWidget(sub_top, 0, 0, 2, 3)
-
-        grid.setColumnMinimumWidth(0, 200)
-        subgrid.setRowMinimumHeight(0, 100)
-
-        #self.setStyleSheet("QWidget { background-color: Red }")
-
-
-class GeneralResults(QtGui.QWidget):
-    def __init__(self):
-        super(GeneralResults, self).__init__()
-
-        layout      = QtGui.QVBoxLayout(self)
-        #self.setStyleSheet("QWidget { background-color: Red }")
-
-        self.nr_agents   = QtGui.QLabel('None')
-        self.nr_goods    = QtGui.QLabel('None')
-        self.nr_goods1    = QtGui.QLabel('None')
-        self.nr_goods2    = QtGui.QLabel('None')
-        self.nr_goods3    = QtGui.QLabel('None')
-        self.nr_goods4    = QtGui.QLabel('None')
-        self.nr_goods5    = QtGui.QLabel('None')
-        self.nr_goods6    = QtGui.QLabel('None')
-        self.nr_goods7    = QtGui.QLabel('None')
-        self.textBox = QtGui.QTextEdit()
-
-        layout.addWidget(self.nr_agents)
-        layout.addWidget(self.nr_goods)
-        layout.addWidget(self.nr_goods1)
-        layout.addWidget(self.nr_goods2)
-        layout.addWidget(self.nr_goods3)
-        layout.addWidget(self.nr_goods4)
-        layout.addWidget(self.nr_goods5)
-        layout.addWidget(self.nr_goods6)
-        layout.addWidget(self.nr_goods7)
-        layout.addWidget(self.textBox)
-
-        #layout.addWidget(self.textBox)
-        #layout.setColumnMinimumWidth(0, 200)
-        layout.addStretch(1)
-
-    def setValues(env):
-
-        self.nr_agents.setText(str(env.N))
-        self.nr_goods.setText(str(env.M))
-
-class ControlPanel(QtGui.QWidget):
-    def __init__(self):
-        super(ControlPanel, self).__init__()
-
-        layout      = QtGui.QVBoxLayout(self)
-        #self.setStyleSheet("QWidget { background-color: Red }")
-
-        self.nr_agents   = QtGui.QLabel('None')
-        self.nr_goods    = QtGui.QLabel('None')
-
-        layout.addWidget(self.nr_agents)
-        layout.addWidget(self.nr_goods)
-
-        layout.addStretch(1)
+        if result == QtGui.QMessageBox.Yes:
+            self.env.stop = 1
+            self.exit = 1
+            event.accept()
 
 class GUI(QtGui.QWidget):
-    def __init__(self):
+    def __init__(self, env):
         super(GUI, self).__init__() 
 
-        self.groupBox = QtGui.QGroupBox(self)
-        self.groupBox2 = QtGui.QGroupBox(self)
-        self.groupBox3 = QtGui.QGroupBox(self)
-        self.groupBox4 = QtGui.QGroupBox(self)
-        
-        self.groupBox2.setMaximumWidth(200)
-        self.groupBox4.setMaximumHeight(200)
-        self.groupBox.setMaximumWidth(300)
+        self.env = env
+        self.initUI()
 
+    def initUI(self):
+        # Layouts
         main_layout = QtGui.QHBoxLayout(self)
         left_layout = QtGui.QVBoxLayout()
         right_layout = QtGui.QVBoxLayout()
@@ -145,9 +65,26 @@ class GUI(QtGui.QWidget):
         bottom_left_layout = QtGui.QVBoxLayout()
         bottom_right_layout = QtGui.QVBoxLayout()
 
-        self.nr_agents   = QtGui.QLabel('None')
-        self.nr_goods    = QtGui.QLabel('None')
+        # Groupboxes
+        self.groupBox_left = QtGui.QGroupBox(self)
+        self.groupBox_top = QtGui.QGroupBox(self)
+        self.groupBox_bottom_left = QtGui.QGroupBox(self)
+        self.groupBox_bottom_right = QtGui.QGroupBox(self)
 
+        self.groupBox_left.setMinimumWidth(200)
+        self.groupBox_top.setMinimumHeight(150)
+        #self.groupBox_top.setMaximumHeight(200)
+        self.groupBox_bottom_left.setMinimumWidth(600)
+        self.groupBox_bottom_right.setMinimumWidth(300)
+
+        # Widgets
+        self.tabs = Tabs(self.env)
+        self.general_results = GeneralResults()
+        self.general_results.setValues(self.env)
+        self.control_panel = ControlPanel()
+        self.results = Results(self.env)
+
+        # Add layouts
         main_layout.addLayout(left_layout)
         main_layout.addLayout(right_layout)
 
@@ -157,53 +94,268 @@ class GUI(QtGui.QWidget):
         bottom_layout.addLayout(bottom_left_layout)
         bottom_layout.addLayout(bottom_right_layout)
 
-        bottom_right_layout.addWidget(self.groupBox)
-        bottom_left_layout.addWidget(self.groupBox3)
-        top_layout.addWidget(self.groupBox4)
-        left_layout.addWidget(self.groupBox2)
+        # Add Widgets
+        left_layout.addWidget(self.groupBox_left)
+        top_layout.addWidget(self.groupBox_top)
 
-        hbox = QtGui.QHBoxLayout(self.groupBox)
-        hbox.addWidget(self.nr_agents)
-        self.nr_agents.setAlignment(QtCore.Qt.AlignTop)
+        bottom_left_layout.addWidget(self.groupBox_bottom_left)
+        bottom_right_layout.addWidget(self.groupBox_bottom_right)
+        
+        # Fill groupboxes
+        vbox_left = QtGui.QVBoxLayout(self.groupBox_left)
+        vbox_left.addWidget(self.general_results)
 
-class Window(QtGui.QWidget):
+        vbox_top = QtGui.QVBoxLayout(self.groupBox_top)
+        vbox_top.addWidget(self.control_panel)
+        # self.nr_agents.setAlignment(QtCore.Qt.AlignTop)
+
+        vbox_bottom_left = QtGui.QVBoxLayout(self.groupBox_bottom_left)
+        vbox_bottom_left.addWidget(self.tabs)
+
+        vbox_bottom_right = QtGui.QVBoxLayout(self.groupBox_bottom_right)
+        vbox_bottom_right.addWidget(self.results)
+
+class Tabs(QtGui.QTabWidget):
+    def __init__(self, env):
+        super(Tabs, self).__init__()
+
+        self.env = env
+        self.initUI()
+
+    def initUI(self):
+        self.tab1    = QtGui.QWidget()   
+        self.tab2    = QtGui.QWidget()
+        self.tab3    = QtGui.QWidget()
+
+        # Layout
+        self.layout_tab1 = QtGui.QVBoxLayout()
+        self.layout_tab2 = QtGui.QVBoxLayout()
+        self.layout_tab3 = QtGui.QVBoxLayout()
+
+        # Widgets
+        self.figure = plt.figure()
+        self.bar_plot = FigureCanvas(self.figure) 
+        self.plot(self.figure, self.bar_plot)
+
+        self.visualisation = Canvas()
+
+        self.textBox = QtGui.QTextEdit()
+        self.textBox.setReadOnly(True)
+
+        # Set layout
+        self.tab1.setLayout(self.layout_tab1)
+        self.tab2.setLayout(self.layout_tab2) 
+        self.tab3.setLayout(self.layout_tab3) 
+
+        # Add Widgets
+        self.layout_tab1.addWidget(self.visualisation.native)
+        self.layout_tab2.addWidget(self.bar_plot)
+        self.layout_tab3.addWidget(self.textBox)
+        
+        # Add tabs
+        self.addTab(self.tab1,"Visualisation")
+        self.addTab(self.tab2,"Comunnity percentage")
+        self.addTab(self.tab3,"Transctions")
+
+    def plot(self, figure, canvas):
+        data = [random.random() for i in range(10)]
+        ax = figure.add_subplot(111)
+        ax.hold(False)
+        ax.plot(data, '*-')
+        canvas.draw()
+
+    def showPlot(self):
+        given_received = self.env.agents_list[0].given_received
+        given = [given_received[i][0] for i in range(len(given_received))]
+        ax = self.figure.add_subplot(111)
+        ax.hold(False)
+        ax.plot(given, '*-')
+        self.bar_plot.draw()
+
+    def plotTransactionPercentages(self):
+        data = self.env.transaction_percentages
+        x = np.arange(self.env.N)
+        width = 0.35
+
+        ax = self.figure.add_subplot(111)
+        ax.hold(False)
+        ax.bar(x, data)
+
+        ax.set_ylabel('Percentage')
+        ax.set_title('transaction percentage for each agent')
+        #ax.set_xticks(x+width)
+        #ax.set_xticklabels( ('Agent' + x for x in range(self.env.N)) )
+
+        #ax.legend( (bars[0]), ('Agent') )
+        # ax.plot(bars)
+        self.bar_plot.draw()
+
+    def print_transaction(self, P, Q, good):
+        #time.sleep(0.005)
+        transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
+        self.textBox.append(transaction)
+        QtGui.qApp.processEvents()
+
+    def updateV(self):
+        self.visualisation.createGrid(self.env.agents_list, self.env.current_agents)
+
+class GeneralResults(QtGui.QWidget):
     def __init__(self):
-        QtGui.QWidget.__init__(self)
-        self.groupBox = QtGui.QGroupBox(self)
-        hbox = QtGui.QHBoxLayout(self.groupBox)
-        length = 3
-        for index in range(length):
-            hbox.addWidget(Widget(u'H\u2082O', self))
-            if index < length - 1:
-                hbox.addWidget(Label(u'+', self))
-            else:
-                hbox.addWidget(Label(u'\u2192', self))
-        hbox.addWidget(Widget(u'4 H\u2082O', self))
-        hbox.addWidget(Label(u'+', self))
-        hbox.addWidget(Widget(u'H\u2084O\u2082', self))
+        super(GeneralResults, self).__init__()
+        
+        self.initUI()
+
+    def initUI(self): 
+        layout              = QtGui.QVBoxLayout(self)
+        #self.setStyleSheet("QWidget { background-color: Red }")
+
+        self.lbl_nr_agents      = QtGui.QLabel('Number of agents')
+        self.lbl_nr_goods       = QtGui.QLabel('Number of goods')
+
+        self.nr_agents      = QtGui.QLabel('')
+        self.nr_goods       = QtGui.QLabel('')
+
+
+        layout.addWidget(self.lbl_nr_agents)
+        layout.addWidget(self.nr_agents)
+        layout.addWidget(self.lbl_nr_goods)
+        layout.addWidget(self.nr_goods)
+
+        layout.addStretch(1)
+
+
+    def setValues(self, env):
+
+        self.nr_agents.setText(str(env.N))
+        self.nr_goods.setText(str(env.M))
+
+class ControlPanel(QtGui.QWidget):
+    def __init__(self):
+        super(ControlPanel, self).__init__()
+        
+        self.initUI()
+
+    def initUI(self): 
+        # Layouts
+        vbox              = QtGui.QVBoxLayout(self)
+        hbox              = QtGui.QHBoxLayout()
+        hbox_controls     = QtGui.QHBoxLayout()
+
+        # Widgets
+        self.lbl_nr_transactions   = QtGui.QLabel('Nr transactions:')
+        self.lbl_status    = QtGui.QLabel('Status:')
+
+        self.nr_transactions = QtGui.QLineEdit()
+        self.nr_transactions.setReadOnly(True)
+
+        self.status = QtGui.QLabel('Running')
+
+        self.startButton = QtGui.QPushButton("Start")
+        self.pauseButton = QtGui.QPushButton("Pause")
+
+        lcd = QtGui.QLCDNumber(self)
+        slider_subgroup = QtGui.QSlider(QtCore.Qt.Horizontal, self)
+        slider_subgroup.valueChanged.connect(lcd.display)
+
+        # Add Widgets
+        hbox.addWidget(self.lbl_nr_transactions)
+        hbox.addWidget(self.nr_transactions)
+        hbox.addWidget(self.lbl_status)
+        hbox.addWidget(self.status)
+        hbox.setAlignment(QtCore.Qt.AlignTop)
+        hbox.addStretch(1)
+
+        hbox_controls.addWidget(self.startButton)
+        hbox_controls.addWidget(self.pauseButton)
+        hbox_controls.addWidget(slider_subgroup)
+        hbox_controls.addWidget(lcd)
+        hbox_controls.addStretch(1)
+        
+
+        # Add Layouts
+        vbox.addLayout(hbox)
+        vbox.addLayout(hbox_controls)
+        vbox.addStretch(1)
+
+    def setNrTransactions(self, nr):
+        self.nr_transactions.setText(str(nr))
+
+class Results(QtGui.QWidget):
+    def __init__(self, env):
+        super(Results, self).__init__()
+
+        self.env = env
+
+        self.initUI()
+
+    def initUI(self): 
+        # Layouts
+        vbox              = QtGui.QVBoxLayout(self)
+
+        self.lbl_agents = QtGui.QLabel("Agents:")
+        self.combo = QtGui.QComboBox() 
+        self.setComboValues()
+
+        self.combo.activated[str].connect(self.onSelected) 
+
+        vbox.addWidget(self.lbl_agents)
+        vbox.addWidget(self.combo)
+        vbox.addStretch(1)
+        vbox.setAlignment(QtCore.Qt.AlignTop)
+
+    def setComboValues(self):
+        for agent in self.env.agents_list:
+            name = 'Agent_' + str(agent.id)
+            self.combo.addItem(name)
+
+    def onSelected(self, text):
+        id = text.strip('Agent_')
+        for agent in self.env.agents_list:
+            if agent.id == int(id):
+                dialog = AgentInfo(agent)
+                print('found:', agent.id)
+
+class AgentInfo(QtGui.QDialog):
+    def __init__(self, agent):
+        super(AgentInfo, self).__init__()  
+        self.agent = agent
+
+        self.initUI()
+
+    def initUI(self):
         vbox = QtGui.QVBoxLayout(self)
-        vbox.addWidget(self.groupBox)
-        vbox.addStretch()
 
-class Label(QtGui.QLabel):
-    def __init__(self, label, parent=None):
-        QtGui.QLabel.__init__(self, label, parent)
-        self.setAlignment(QtCore.Qt.AlignCenter)
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure) 
+        self.plot()
 
-class Widget(QtGui.QWidget):
-    def __init__(self, label, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self.setMaximumWidth(100)
-        layout = QtGui.QGridLayout(self)
-        self.label = QtGui.QLabel(label, self)
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(self.label, 0, 0, 1, 2)
-        self.lineEdit = QtGui.QLineEdit(self)
-        layout.addWidget(self.lineEdit, 1, 0, 1, 2)
-        self.toolButton = QtGui.QToolButton(self)
-        layout.addWidget(self.toolButton, 2, 0, 1, 1)
-        self.comboBox = QtGui.QComboBox(self)
-        layout.addWidget(self.comboBox, 2, 1, 1, 1)
+        vbox.addWidget(self.canvas)
+        self.setLayout(vbox)
+
+
+        self.setGeometry(150, 150, 600, 600)
+        self.setWindowTitle('Agent_' + str(self.agent.id) + ' Info')
+        self.exec_()
+
+    def plot(self):
+        given_received = self.agent.given_received
+        given = [given_received[i][0] for i in range(len(given_received))]
+        x = np.arange(len(given_received))
+        width = 0.35
+
+        ax = self.figure.add_subplot(111)
+        #ax2 = self.figure.add_subplot(121)
+        ax.hold(False)
+        rects1 = ax.bar(x, given, width, color='blue')
+
+        ax.set_xlim(-width,len(x)+width)
+        ax.set_ylabel('# Given')
+        ax.set_title('Number of goods given to each agent')
+        xTickMarks = ['Agent'+str(i) for i in range(len(given_received))]
+        ax.set_xticklabels( xTickMarks )
+        ax.set_xticks(x+width)
+
+        self.canvas.draw()
 
 def main():
     

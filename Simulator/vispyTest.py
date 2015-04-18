@@ -2,13 +2,14 @@ from vispy import gloo
 from vispy import app
 import numpy as np
 import time
+from math import *
 
 # Create vetices
 n = 10
 v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
 #print(v_position)
 v_color = np.random.uniform(0, 1, (n, 3)).astype(np.float32)
-v_color = [[ 0.2, 1.0, 0.4] for i in range(n)]
+v_color = [[ 0.0, 0.0, 1.0] for i in range(n)]
 #print(v_color)
 v_size = np.random.uniform(2, 12, (n, 1)).astype(np.float32)
 v_size = [[10.0] for i in range(n)]
@@ -101,10 +102,9 @@ class Canvas(app.Canvas):
         #v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
         print(v_position[0])
         for i in range(5):
-            time.sleep(0.05)
-            v_position[0][0] = 1.0
-            v_position[0][1] = 1.0
-            v_position[0][2] = 1.0
+            v_position[0][0] += 0.001
+            v_position[0][1] += 0.001
+            v_position[0][2] += 0.001
             v_color[0] = [0.0, 1.0, 0.0]
             v_position[1][0] = 0
             v_position[1][1] = 0
@@ -118,6 +118,37 @@ class Canvas(app.Canvas):
             self.program['a_position'] = gloo.VertexBuffer(v_position)
             self.update()
 
+    def createGrid(self, agents, current_agents):
+        total_nodes = len(agents)
+        v_position = 0.25 * np.random.randn(total_nodes, 3).astype(np.float32)
+        root = sqrt(total_nodes)
+        height = floor(root)
+        width = ceil(root)
+        step_x = 2 / width
+        step_y = 2 / height
+        print(width, height, step_x, step_y)
+        count = 0
+        x = -1 + 0.5*step_x
+        y = -1 + 0.5*step_y
+        for p in range(total_nodes):
+            v_position[p][0] = x
+            v_position[p][1] = y
+            v_position[p][2] = 0.0
+            count += 1
+            if count < width:
+                x += step_x
+            if count == width:
+                x = -1 + 0.5 * step_x
+                y += step_y
+                count = 0
+            agents[p].grid_pos = v_position[0]
+            #print(x, y)
+
+            
+            print(count)
+        self.program['a_position'] = gloo.VertexBuffer(v_position)
+        print(v_position)
+        self.update()
 
 if __name__ == '__main__':
     c = Canvas()

@@ -1,8 +1,8 @@
 from numpy import *
 
 class Agent:
-	def __init__(self, position, N):
-		self.position = position
+	def __init__(self, id, N):
+		self.id = id
 		self.N = N
 		# List of transactions, for example: [(Action, Agent, Good)] 
 		# Where Action is either given or received, Agent is the agent 
@@ -15,6 +15,8 @@ class Agent:
 		# with the position equal to the index and received the total number
 		# of goods received from the agent.
 		self.given_received = array([(0.0, 0.0) for x in range(N)])
+
+		self.grid_pos = [0, 0, 0]
 	
 	def update_listoftransactions(self, P, Q, good):
 		self.listoftransactions.append((P, Q, good))

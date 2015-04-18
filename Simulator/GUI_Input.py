@@ -1,7 +1,8 @@
 import sys, time
 from PyQt4 import QtGui
 import Simulate as sim
-from GUI_Output import Output
+#from GUI_Output import Output
+from GUI_Output2 import Output
 
 # N = 3
 # # Total goods
@@ -156,9 +157,10 @@ class Input(QtGui.QWidget):
                 print(int(self.input_table.item(i, j).text()))
 
     def startSimulation(self):
-        self.output = Output()
+        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value)
+        self.output = Output(env)
         self.setGoodsList()
-        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output)
+        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env)
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,

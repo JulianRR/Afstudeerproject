@@ -10,8 +10,8 @@ from random import randint
 import sys, time
 from PyQt4 import QtGui
 
-def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output):
-	env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
+def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env):
+	#env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
 	simulate(100, env, sl.random_rule, output)
 	print(env.agents_list[0].given_received)
 
@@ -32,28 +32,35 @@ def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_
 
 def simulate(nr_iterations, env, selectionrule, output):
 	total_transactions = 0
-	output.setEnviroment(env)
-
+	#output.setEnviroment(env)
+	output.gui.tabs.updateV()
 	for x in range(nr_iterations):
 		for agent in env.current_agents[:]:
 			current_agent = agent[0]
 			good = agent[1]
 
-			output.getList(env.agents_list)
+			#output.getList(env.agents_list)
 			# Select next agent with selection rule
 			next_agent = env.select_agent(selectionrule, current_agent)
 
 			# Do the transaction
 			env.transaction(current_agent, next_agent, good)
 			total_transactions += 1
+			output.gui.control_panel.setNrTransactions(total_transactions)
 
 			env.calculate_comunnityeffect(total_transactions)
-			
-			output.showPlot()
-			output.plotTransactionPercentages()
 
-			exit = output.print_transaction(current_agent, next_agent, good)
-			if exit:
+			#output.showPlot()
+			#output.gui.tabs.showPlot()
+			#output.plotTransactionPercentages()
+			output.gui.tabs.plotTransactionPercentages()
+
+			# exit = output.print_transaction(current_agent, next_agent, good)
+			output.gui.tabs.print_transaction(current_agent, next_agent, good)
+			# output.gui.tabs.updateV()
+			# if exit:
+			# 	break
+			if env.stop:
 				break
 
 			# Update the balance matrix
@@ -70,8 +77,11 @@ def simulate(nr_iterations, env, selectionrule, output):
 			
 		# Produce goods after every transaction, if it is time to produce.
 		env.produce_goods(selectionrule)
-		if exit:
+		# if exit:
+		# 	break
+		if env.stop:
 			break
+	print(env.agents_list[0].grid_pos)
 	env.calculate_comunnityeffect(total_transactions)
 
 

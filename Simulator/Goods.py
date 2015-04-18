@@ -8,5 +8,7 @@ class Goods():
 		self.life = perish_period
 		self.time_until_production = production_delay
 
+		self.grid_pos = [0, 0, 0]
+
 	def decrease(self, perish_period):
 		self.value = self.value * perish_period
