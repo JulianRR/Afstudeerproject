@@ -41,7 +41,10 @@ class Enviroment:
 		# Comunnity percentage
 		self.comunnity_percentage = 0
 
-		self.stop = 0
+		# Control variables
+		self.stop = False
+		self.running = False
+		self.delay = 0
 
 	def create_agents(self):
 		# Create N agents by calling the __init__() from the Agents Class

@@ -42,8 +42,7 @@ class Output(QtGui.QMainWindow):
         event.ignore()
 
         if result == QtGui.QMessageBox.Yes:
-            self.env.stop = 1
-            self.exit = 1
+            self.env.stop = True
             event.accept()
 
 class GUI(QtGui.QWidget):
@@ -81,7 +80,7 @@ class GUI(QtGui.QWidget):
         self.tabs = Tabs(self.env)
         self.general_results = GeneralResults()
         self.general_results.setValues(self.env)
-        self.control_panel = ControlPanel()
+        self.control_panel = ControlPanel(self.env)
         self.results = Results(self.env)
 
         # Add layouts
@@ -173,6 +172,7 @@ class Tabs(QtGui.QTabWidget):
         self.bar_plot.draw()
 
     def plotTransactionPercentages(self):
+        time.sleep(self.env.delay)
         data = self.env.transaction_percentages
         x = np.arange(self.env.N)
         width = 0.35
@@ -191,7 +191,7 @@ class Tabs(QtGui.QTabWidget):
         self.bar_plot.draw()
 
     def print_transaction(self, P, Q, good):
-        #time.sleep(0.005)
+        time.sleep(self.env.delay)
         transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
         self.textBox.append(transaction)
         QtGui.qApp.processEvents()
@@ -230,9 +230,11 @@ class GeneralResults(QtGui.QWidget):
         self.nr_goods.setText(str(env.M))
 
 class ControlPanel(QtGui.QWidget):
-    def __init__(self):
+    def __init__(self, env):
         super(ControlPanel, self).__init__()
         
+        self.env = env
+
         self.initUI()
 
     def initUI(self): 
@@ -251,11 +253,13 @@ class ControlPanel(QtGui.QWidget):
         self.status = QtGui.QLabel('Running')
 
         self.startButton = QtGui.QPushButton("Start")
+        self.startButton.clicked.connect(self.start)
         self.pauseButton = QtGui.QPushButton("Pause")
+        self.pauseButton.clicked.connect(self.pause)
 
-        lcd = QtGui.QLCDNumber(self)
+        self.lcd = QtGui.QLCDNumber(self)
         slider_subgroup = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        slider_subgroup.valueChanged.connect(lcd.display)
+        slider_subgroup.valueChanged.connect(self.setDelay)
 
         # Add Widgets
         hbox.addWidget(self.lbl_nr_transactions)
@@ -268,7 +272,7 @@ class ControlPanel(QtGui.QWidget):
         hbox_controls.addWidget(self.startButton)
         hbox_controls.addWidget(self.pauseButton)
         hbox_controls.addWidget(slider_subgroup)
-        hbox_controls.addWidget(lcd)
+        hbox_controls.addWidget(self.lcd)
         hbox_controls.addStretch(1)
         
 
@@ -279,6 +283,19 @@ class ControlPanel(QtGui.QWidget):
 
     def setNrTransactions(self, nr):
         self.nr_transactions.setText(str(nr))
+
+    def pause(self):
+        self.status.setText('Pauses')
+        self.env.running = False
+
+    def start(self):
+        self.status.setText('Running')
+        self.env.running = True
+
+    def setDelay(self, value):
+        self.env.delay = value / 100
+        self.lcd.display(value)
+
 
 class Results(QtGui.QWidget):
     def __init__(self, env):
