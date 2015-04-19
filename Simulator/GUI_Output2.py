@@ -292,21 +292,38 @@ class Results(QtGui.QWidget):
         # Layouts
         vbox              = QtGui.QVBoxLayout(self)
 
+        # Given Received
         self.lbl_agents = QtGui.QLabel("Agents:")
         self.combo = QtGui.QComboBox() 
-        self.setComboValues()
+        self.setComboValues(self.combo)
 
         self.combo.activated[str].connect(self.onSelected) 
 
+        # Yield Curve
+        self.lbl_yield_curve = QtGui.QLabel("Yield Curve:")
+        self.combo_P = QtGui.QComboBox() 
+        self.setComboValues(self.combo_P)
+
+        self.combo_Q = QtGui.QComboBox() 
+        self.setComboValues(self.combo_Q)
+
+        self.plot_yield_curve = QtGui.QPushButton("Plot Yield Curve")
+        self.plot_yield_curve.clicked.connect(lambda: self.createYieldCurve(str(self.combo_P.currentText()), str(self.combo_Q.currentText())))
+
+        # Add Widgets
         vbox.addWidget(self.lbl_agents)
         vbox.addWidget(self.combo)
+        vbox.addWidget(self.lbl_yield_curve)
+        vbox.addWidget(self.combo_P)
+        vbox.addWidget(self.combo_Q)
+        vbox.addWidget(self.plot_yield_curve)
         vbox.addStretch(1)
         vbox.setAlignment(QtCore.Qt.AlignTop)
 
-    def setComboValues(self):
+    def setComboValues(self, combo):
         for agent in self.env.agents_list:
             name = 'Agent_' + str(agent.id)
-            self.combo.addItem(name)
+            combo.addItem(name)
 
     def onSelected(self, text):
         id = text.strip('Agent_')
@@ -314,6 +331,19 @@ class Results(QtGui.QWidget):
             if agent.id == int(id):
                 dialog = AgentInfo(agent)
                 print('found:', agent.id)
+
+    def createYieldCurve(self, P, Q):
+        P_id = P.strip('Agent_')
+        Q_id = Q.strip('Agent_')
+        for agent in self.env.agents_list:
+            if agent.id == int(P_id):
+                agent_P = agent
+            elif agent.id == int(Q_id):
+                agent_Q = agent
+        
+        if agent_Q != agent_P:
+            YieldCurve(agent_P, agent_Q, self.env)
+
 
 class AgentInfo(QtGui.QDialog):
     def __init__(self, agent):
@@ -327,7 +357,7 @@ class AgentInfo(QtGui.QDialog):
 
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure) 
-        self.plot()
+        self.plotGiven()
 
         vbox.addWidget(self.canvas)
         self.setLayout(vbox)
@@ -337,7 +367,7 @@ class AgentInfo(QtGui.QDialog):
         self.setWindowTitle('Agent_' + str(self.agent.id) + ' Info')
         self.exec_()
 
-    def plot(self):
+    def plotGiven(self):
         given_received = self.agent.given_received
         given = [given_received[i][0] for i in range(len(given_received))]
         x = np.arange(len(given_received))
@@ -356,6 +386,72 @@ class AgentInfo(QtGui.QDialog):
         ax.set_xticks(x+width)
 
         self.canvas.draw()
+
+class YieldCurve(QtGui.QDialog):
+    def __init__(self, P, Q, env):
+        super(YieldCurve, self).__init__()
+
+        self.P = P
+        self.Q = Q 
+        self.env = env 
+
+        self.initUI()
+
+    def initUI(self): 
+        vbox = QtGui.QVBoxLayout(self)
+
+        self.lbl_goods = QtGui.QLabel("Choose a good:")
+        self.combo_goods = QtGui.QComboBox() 
+        self.setGoods()
+
+        self.combo_goods.activated[str].connect(self.onSelected) 
+
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure) 
+        self.plotYieldCurve(-0.1, 3)
+
+        vbox.addWidget(self.lbl_goods)
+        vbox.addWidget(self.combo_goods)
+        vbox.addWidget(self.canvas)
+        self.setLayout(vbox)
+
+        self.setGeometry(150, 150, 600, 600)
+        self.setWindowTitle('Yield Curve')
+        self.exec_()
+
+    def plotYieldCurve(self, like_factor, nominal_value):
+        min_x = nominal_value / like_factor
+        max_x = nominal_value / -like_factor
+        x = np.arange(-50, 50, 0.01)
+        y = like_factor * x + nominal_value
+        z = -0.3 * x + 2
+        ax = self.figure.add_subplot(111)
+        ax.hold(False)
+        ax.plot(x, y)
+
+        ax.spines['left'].set_position('center')
+        ax.spines['right'].set_color('none')
+        ax.spines['top'].set_color('none')
+        ax.yaxis.set_ticks_position('left')
+        xTickMarks = ['Low Balance', 'High Balance']
+        ax.set_xticklabels( xTickMarks )
+        ax.set_xticks([-50, 50])
+        ax.set_ylim(ymin=0)
+
+        self.canvas.draw()
+
+    def setGoods(self):
+        for good in self.env.goods_list:
+            name = 'Good_' + str(good.id)    
+            self.combo_goods.addItem(name)
+
+    def onSelected(self, text):
+        id = text.strip('Good_')
+        for good in self.env.goods_list:
+            if good.id == int(id):
+                #dialog = AgentInfo(agent)
+                print('found:', good.id)
+
 
 def main():
     
