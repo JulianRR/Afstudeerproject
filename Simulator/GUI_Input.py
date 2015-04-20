@@ -32,6 +32,11 @@ class Input(QtGui.QWidget):
         self.production_delay = 0
         self.value = 1
 
+        # 0 = random rule
+        # 1 = balance rule
+        # 2 = goodwill rule
+        self.selection_rule = 0
+
         # [[perish_period, production_delay, nominal_value]]
         self.goods_list = []
 
@@ -66,6 +71,15 @@ class Input(QtGui.QWidget):
         self.input_table = QtGui.QTableWidget()
         #self.input_table.cellChanged.connect(self.cellItemChanged)
 
+        # Selection rules
+        self.lbl_selection_rule = QtGui.QLabel('Choose selection rule', self)
+        self.selection_rules = QtGui.QComboBox() 
+        self.selection_rules.addItem('Random rule')
+        self.selection_rules.addItem('Balance rule')
+
+        self.selection_rules.activated[str].connect(self.setSelectionrule) 
+
+        # Start button
         self.start = QtGui.QPushButton('Simulate', self)
         self.start.setGeometry(100, 320, 100, 50)
         self.start.clicked.connect(self.startSimulation)
@@ -76,7 +90,9 @@ class Input(QtGui.QWidget):
         self.layout.addWidget(self.nr_goods, 3, 0)
         self.layout.addWidget(self.lbl_input_table, 4, 0) 
         self.layout.addWidget(self.input_table, 5, 0) 
-        self.layout.addWidget(self.start, 6, 0)
+        self.layout.addWidget(self.lbl_selection_rule, 6, 0)
+        self.layout.addWidget(self.selection_rules, 7, 0)
+        self.layout.addWidget(self.start, 8, 0)
 
         self.setLayout(self.layout)
 
@@ -144,6 +160,11 @@ class Input(QtGui.QWidget):
         # Set row headers
         self.input_table.setVerticalHeaderLabels(goods_labels)
 
+    def setSelectionrule(self, text):
+        if text == 'Random rule':
+            self.selection_rule = 0
+        elif text == 'Balance rule':
+            self.selection_rule = 1
     # @cellItemChanged(int, int)
     # def cellItemChanged(self, row, column):
     #     print(self.input_table.item(row, column))
@@ -160,7 +181,7 @@ class Input(QtGui.QWidget):
         env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value)
         self.output = Output(env)
         self.setGoodsList()
-        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env)
+        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,

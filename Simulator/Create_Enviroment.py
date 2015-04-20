@@ -3,6 +3,7 @@ from Goods import Goods
 import Selection_rules as sl
 import numpy as np
 from random import randint
+import Selection_rules as sl
 # A different file should contain all the functions for the selectio rules.
 # Each selection rule will have one function, this function is called before
 # every transaction.
@@ -122,10 +123,12 @@ class Enviroment:
 	def select_agent(self, selectionrule, current_agent):
 		# Call the right seletion rule to select the agent
 
-		next_agent = selectionrule(self.N)
+		next_agent = current_agent
 		while(current_agent == next_agent):
-			next_agent = selectionrule(self.N)
-
+			if selectionrule == 0:
+				next_agent = sl.random_rule(self.N)
+			elif selectionrule == 1:
+				next_agent = sl.balance_rule(self.balance_matrix, current_agent, self.N)
 		return next_agent
 
 	def select_start_agents(self):

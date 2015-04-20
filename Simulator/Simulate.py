@@ -11,9 +11,9 @@ import time
 import sys, time
 from PyQt4 import QtGui
 
-def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env):
+def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env, selectionrule):
 	#env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
-	simulate(100, env, sl.random_rule, output)
+	simulate(100, env, selectionrule, output)
 	print(env.agents_list[0].given_received)
 
 def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value):
