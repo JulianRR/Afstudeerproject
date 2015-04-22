@@ -477,7 +477,7 @@ class YieldCurve(QtGui.QDialog):
 
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure) 
-        self.plotYieldCurve(-0.1, 3)
+        #self.plotYieldCurve(-0.1, 3)
 
         vbox.addWidget(self.lbl_goods)
         vbox.addWidget(self.combo_goods)
@@ -491,21 +491,57 @@ class YieldCurve(QtGui.QDialog):
     def plotYieldCurve(self, like_factor, nominal_value):
         min_x = nominal_value / like_factor
         max_x = nominal_value / -like_factor
-        x = np.arange(-50, 50, 0.01)
+        min_x2 = 4 / -0.23
+        max_x2 = 4 / 0.23
+        x = np.arange(min(min_x, min_x2), max(max_x, max_x2), 0.01)
         y = like_factor * x + nominal_value
+        y2 = 0.23 * x + 4
         z = -0.3 * x + 2
         ax = self.figure.add_subplot(111)
-        ax.hold(False)
+        ax.hold(True)
         ax.plot(x, y)
+        ax.plot(x, y2, color='red')
 
         ax.spines['left'].set_position('center')
         ax.spines['right'].set_color('none')
         ax.spines['top'].set_color('none')
         ax.yaxis.set_ticks_position('left')
-        xTickMarks = ['Low Balance', 'High Balance']
+        xTickMarks = ['Low Balance P/High Balance Q', 'Low Balance Q/High Balance P']
         ax.set_xticklabels( xTickMarks )
-        ax.set_xticks([-50, 50])
+        ax.set_xticks([min_x, max_x])
         ax.set_ylim(ymin=0)
+
+        self.canvas.draw()
+
+    def plotYieldCurve2(self, good):
+        self.figure.clf()
+        # P
+        P_likefactor = self.P.like_factor[self.Q.id]
+        P_min_x = good.value / P_likefactor
+        P_max_x = good.value / -P_likefactor
+        # Q
+        Q_likefactor = self.Q.like_factor[self.P.id]
+        Q_min_x = good.value / Q_likefactor
+        Q_max_x = good.value / -Q_likefactor
+        print(P_likefactor, Q_likefactor)
+        x = np.arange(min(P_min_x, Q_min_x), max(P_max_x, Q_max_x), 0.01)
+        P_y = P_likefactor * x + good.value
+        Q_y = -Q_likefactor * x + good.value
+
+        ax = self.figure.add_subplot(111)
+        
+        ax.plot(x, P_y, color='blue')
+        ax.plot(x, Q_y, color='red')
+
+        ax.spines['left'].set_position('center')
+        ax.spines['right'].set_color('none')
+        ax.spines['top'].set_color('none')
+        ax.yaxis.set_ticks_position('left')
+        xTickMarks = ['Low Balance P/High Balance Q', 'Low Balance Q/High Balance P']
+        ax.set_xticklabels( xTickMarks )
+        ax.set_xticks([min(P_min_x, Q_min_x), max(P_max_x, Q_max_x)])
+        ax.set_ylim(ymin=0)
+        ax.hold(True)
 
         self.canvas.draw()
 
@@ -518,8 +554,8 @@ class YieldCurve(QtGui.QDialog):
         id = text.strip('Good_')
         for good in self.env.goods_list:
             if good.id == int(id):
-                #dialog = AgentInfo(agent)
-                print('found:', good.id)
+                good.value += 1
+                self.plotYieldCurve2(good)
 
 
 def main():

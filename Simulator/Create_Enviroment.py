@@ -195,8 +195,8 @@ class Enviroment:
 			sum = 0
 			for y in range(sub_group):
 				sum += x[::-1][y]
-			print(x[::-1])
-			print(sum)
+			#print(x[::-1])
+			#print(sum)
 
 
 

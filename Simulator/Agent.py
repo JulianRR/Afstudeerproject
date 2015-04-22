@@ -1,4 +1,5 @@
 from numpy import *
+import random
 
 class Agent:
 	def __init__(self, id, N):
@@ -18,6 +19,8 @@ class Agent:
 		self.nr_transactions = 0
 		# [[good, number_transactionss]]
 		self.goods_transactions = []
+
+		self.like_factor = [random.uniform(-1.0, 0.0) for i in range(N)]
 
 		self.grid_pos = [0, 0, 0]
 	
