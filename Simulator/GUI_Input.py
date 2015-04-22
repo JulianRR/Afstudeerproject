@@ -47,20 +47,14 @@ class Input(QtGui.QWidget):
 
         # Agents
         self.lbl_nr_agents = QtGui.QLabel('Number of Agents', self)
-        #lbl_nr_agents.move(15, 10)
-
         self.nr_agents = QtGui.QSpinBox(self)
-        #self.nr_agents.setGeometry(15, 30, 100, 25)
         self.nr_agents.setMaximum(10000)
 
         self.nr_agents.valueChanged.connect(self.setAgents)
 
         # Goods
         self.lbl_nr_goods = QtGui.QLabel('Number of Goods', self)
-        #lbl_nr_goods.move(15, 60)
-
         self.nr_goods = QtGui.QSpinBox(self)
-        #self.nr_goods.setGeometry(15, 80, 100, 25)
         self.nr_goods.setMaximum(10000)
 
         self.nr_goods.valueChanged.connect(self.setGoods)
@@ -192,30 +186,6 @@ class Input(QtGui.QWidget):
 
         if result == QtGui.QMessageBox.Yes:
             event.accept()
-
-# class Output(QtGui.QWidget):
-    
-#     def __init__(self):
-#         QtGui.QWidget.__init__(self)
-        
-#         self.initUI()
-        
-
-#     def initUI(self):
-#         self.te = QtGui.QTextEdit()
-#         self.te.setReadOnly(True)
-#         layout = QtGui.QVBoxLayout(self)
-#         layout.addWidget(self.te)
-#         self.setLayout(layout)
-
-#         self.setGeometry(500, 200, 400, 375)
-#         self.setWindowTitle('The Giving Game - Output')
-#         self.show()
-
-#     def print_transaction(self, P, Q, good):
-#         transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
-#         self.te.append(transaction)
-
      
         
 def main():

@@ -15,7 +15,6 @@ def balance_rule(balance_matrix, current_agent, N):
 				highest_balance = balance_matrix[current_agent][x]
 			elif balance_matrix[current_agent][x] == highest_balance:
 				next_agents.append(x)
-
 	if len(next_agents) > 1:
 		return next_agents[randint(0, len(next_agents)-1)]
 	return next_agents[0]

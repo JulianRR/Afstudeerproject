@@ -15,6 +15,9 @@ class Agent:
 		# with the position equal to the index and received the total number
 		# of goods received from the agent.
 		self.given_received = array([(0.0, 0.0) for x in range(N)])
+		self.nr_transactions = 0
+		# [[good, number_transactionss]]
+		self.goods_transactions = []
 
 		self.grid_pos = [0, 0, 0]
 	
@@ -25,6 +28,8 @@ class Agent:
 		#The current agent gives to the receiving_agent.
 		self.given_received[receiving_agent][0] += 1
 		self.listoftransactions.append(("Given", receiving_agent, good))
+		self.nr_transactions += 1
+		self.goods_transactions[good.id][1] += 1
 
 		pass
 	
@@ -32,6 +37,8 @@ class Agent:
 		#The current agent receives from the giving_agent
 		self.given_received[giving_agent][1] += 1
 		self.listoftransactions.append(("Received", giving_agent, good))
+		self.nr_transactions += 1
+		self.goods_transactions[good.id][1] += 1
 		pass
 	
 	def update_given_received(self, position, previous_transaction):

@@ -37,7 +37,12 @@ class Enviroment:
 		self.balance_matrix = np.zeros((N,N))
 
 		# Transaction percentage list
+		# [[percentage], [percentage]]
 		self.transaction_percentages = []
+		#[[good1 percentage, good2 percentage], [good1 percentage, good2 percentage]]
+		self.goods_transaction_percentages = []
+		self.nr_transactions = 0
+		self.nr_good_transactions = [0 for i in range(M)]
 
 		# Comunnity percentage
 		self.comunnity_percentage = 0
@@ -71,6 +76,13 @@ class Enviroment:
 			for y in range(self.M-self.M_perishable, self.M):
 				good = Goods(y, self.value, self.perish_period, self.production_delay)
 				self.goods_list.append(good)
+
+		self.notify_agents()
+
+	def notify_agents(self):
+		for agent in self.agents_list:
+			for good in self.goods_list:
+				agent.goods_transactions.append([good, 0])
 		
 
 	def update_balancematrix(self, P, Q):
@@ -138,10 +150,54 @@ class Enviroment:
 			if good.perish_period > 0:
 				self.producing_agents.append((agent, good))
 
-	def calculate_comunnityeffect(self, total_transactions):
+	def calculate_transaction_percentages(self, total_transactions):
 		self.transaction_percentages = []
 		for agent in self.agents_list[:]:
-			received = 0
-			for x in agent.given_received:
-				received += x[1]
-			self.transaction_percentages.append(received / total_transactions)
+			# received = 0
+			# for x in agent.given_received:
+			# 	received += x[1]
+			# self.transaction_percentages.append(received / total_transactions)
+			#total_transactions * 2 because given and received are both used. Producer gives so that
+			#needs to be taken into account, and perished good cannot be given, but are received.
+			self.transaction_percentages.append(agent.nr_transactions / (total_transactions*2))
+
+	def calculate_good_transaction_percentages(self, total_transactions):
+		self.goods_transaction_percentages = []
+		for agent in self.agents_list:
+			percentages = []
+			for goods in agent.goods_transactions:
+				percentages.append(goods[1] / (total_transactions*2))
+			self.goods_transaction_percentages.append(percentages)
+
+	def calculate_communityeffect(self, goods_transactions):
+		sub_group = 4
+		threshold = 0.8
+		community_effect = []
+		for agent in self.agents_list:
+			percentages = []
+			count = 0
+			for goods in agent.goods_transactions:
+				percentages.append(goods[1] / (goods_transactions[count]*2))
+				count += 1
+			community_effect.append(percentages)
+		sum = 0
+		for x in community_effect:
+			for y in x:
+				sum += y
+		#print(community_effect)
+		#print(sum)
+
+		np_community_effect = np.array(community_effect)
+		np_community_effect = np_community_effect.T
+		#print(np.sort(np_community_effect))
+		np_community_effect = np.sort(np_community_effect)
+		for x in np_community_effect:
+			sum = 0
+			for y in range(sub_group):
+				sum += x[::-1][y]
+			print(x[::-1])
+			print(sum)
+
+
+
+			

@@ -141,6 +141,10 @@ class Tabs(QtGui.QTabWidget):
         self.textBox = QtGui.QTextEdit()
         self.textBox.setReadOnly(True)
 
+        # Reset button
+        self.reset = QtGui.QPushButton('Reset')
+        self.reset.clicked.connect(self.resetTransactions)
+
         # Set layout
         self.tab1.setLayout(self.layout_tab1)
         self.tab2.setLayout(self.layout_tab2) 
@@ -148,8 +152,10 @@ class Tabs(QtGui.QTabWidget):
 
         # Add Widgets
         self.layout_tab1.addWidget(self.visualisation.native)
+        self.layout_tab2.addWidget(self.reset)
         self.layout_tab2.addWidget(self.bar_plot)
         self.layout_tab3.addWidget(self.textBox)
+
         
         # Add tabs
         self.addTab(self.tab1,"Visualisation")
@@ -178,7 +184,7 @@ class Tabs(QtGui.QTabWidget):
         width = 0.35
 
         ax = self.figure.add_subplot(111)
-        ax.hold(False)
+        #ax.hold(False)
         ax.bar(x, data)
 
         ax.set_ylabel('Percentage')
@@ -190,6 +196,42 @@ class Tabs(QtGui.QTabWidget):
         # ax.plot(bars)
         self.bar_plot.draw()
 
+    def plotGoodTransactionPercentages(self):
+        time.sleep(self.env.delay)
+        #loop through transpose
+        x = np.arange(self.env.N)
+        width = 0.25
+        count = 0
+        #plt.cla()
+        self.figure.clf()
+
+        self.ax = self.figure.add_subplot(111)
+
+        # y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        # y2 = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+        # self.ax.bar(x, y1, width, color='blue')
+        # self.ax.bar(x+width, y2, width, color='red')
+
+        goods_transaction_percentages = np.array(self.env.goods_transaction_percentages)
+        for goods in goods_transaction_percentages.T:
+
+            data = []
+            for percentage in goods:
+                data.append(percentage)
+            self.ax.bar(x+(width * count), data, width, color=(0, 1.0/(count+1), 1.0/(count+1)))
+            count += 1
+        self.ax.set_ylabel('Percentage')
+        self.ax.set_title('transaction percentage of each good for each agent')
+
+        #self.ax.set_xlim(-width,len(x)+width)
+        xTickMarks = ['Agent'+str(i) for i in range(len(x))]
+        self.ax.set_xticks(x+width)
+        xtickNames = self.ax.set_xticklabels( xTickMarks )
+        plt.setp(xtickNames, rotation=45, fontsize=10)
+        self.ax.hold(True)
+
+        self.bar_plot.draw()
+
     def print_transaction(self, P, Q, good):
         time.sleep(self.env.delay)
         transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
@@ -198,6 +240,11 @@ class Tabs(QtGui.QTabWidget):
 
     def updateV(self):
         self.visualisation.createGrid(self.env.agents_list, self.env.current_agents)
+
+    def resetTransactions(self):
+        for agent in self.env.agents_list:
+            agent.nr_transactions = 0
+        self.env.nr_transactions = 0
 
 class GeneralResults(QtGui.QWidget):
     def __init__(self):
@@ -387,21 +434,26 @@ class AgentInfo(QtGui.QDialog):
     def plotGiven(self):
         given_received = self.agent.given_received
         given = [given_received[i][0] for i in range(len(given_received))]
+        received = [given_received[i][1] for i in range(len(given_received))]
         x = np.arange(len(given_received))
         width = 0.35
 
-        ax = self.figure.add_subplot(111)
+        self.ax = self.figure.add_subplot(111)
         #ax2 = self.figure.add_subplot(121)
-        ax.hold(False)
-        rects1 = ax.bar(x, given, width, color='blue')
+        self.ax.hold(True)
+        rects1 = self.ax.bar(x, given, width, color='blue')
+        rects2 = self.ax.bar(x+width, received, width, color='red')
 
-        ax.set_xlim(-width,len(x)+width)
-        ax.set_ylabel('# Given')
-        ax.set_title('Number of goods given to each agent')
+        self.ax.set_xlim(-width,len(x)+width)
+        self.ax.set_ylabel('# Given/Received')
+        self.ax.set_title('Number of goods given and received to each agent')
         xTickMarks = ['Agent'+str(i) for i in range(len(given_received))]
-        ax.set_xticklabels( xTickMarks )
-        ax.set_xticks(x+width)
+        self.ax.set_xticks(x+width)
+        xtickNames = self.ax.set_xticklabels( xTickMarks )
+        plt.setp(xtickNames, rotation=45, fontsize=10)
 
+        self.ax.legend( (rects1[0], rects2[0]), ('Given', 'Received') )
+        #self.ax.hold(False)
         self.canvas.draw()
 
 class YieldCurve(QtGui.QDialog):

@@ -51,17 +51,22 @@ def simulate(nr_iterations, env, selectionrule, output):
 				# Do the transaction
 				env.transaction(current_agent, next_agent, good)
 				total_transactions += 1
+				env.nr_transactions += 1
+				env.nr_good_transactions[good.id] += 1
 				output.gui.control_panel.setNrTransactions(total_transactions)
 
-				env.calculate_comunnityeffect(total_transactions)
+				#env.calculate_transaction_percentages(env.nr_transactions)
+				env.calculate_good_transaction_percentages(env.nr_transactions)
 
 				#output.showPlot()
 				#output.gui.tabs.showPlot()
 				#output.plotTransactionPercentages()
-				output.gui.tabs.plotTransactionPercentages()
+				#output.gui.tabs.plotTransactionPercentages()
+				output.gui.tabs.plotGoodTransactionPercentages()
 
 				# exit = output.print_transaction(current_agent, next_agent, good)
-				output.gui.tabs.print_transaction(current_agent, next_agent, good)
+				#output.gui.tabs.print_transaction(current_agent, next_agent, good)
+				QtGui.qApp.processEvents()
 				# output.gui.tabs.updateV()
 				# if exit:
 				# 	break
@@ -84,11 +89,14 @@ def simulate(nr_iterations, env, selectionrule, output):
 		# Produce goods after every transaction, if it is time to produce.
 		if env.running:
 			env.produce_goods(selectionrule)
+		env.calculate_communityeffect(env.nr_good_transactions)
+		print(env.nr_good_transactions)
 		# if exit:
 		# 	break
 		# if env.stop:
 		# 	break
-	print(env.agents_list[0].grid_pos)
-	env.calculate_comunnityeffect(total_transactions)
+	# print(env.agents_list[0].grid_pos)
+	# env.calculate_transaction_percentages(total_transactions)
+
 
 
