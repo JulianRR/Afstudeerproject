@@ -38,59 +38,60 @@ def simulate(nr_iterations, env, selectionrule, output):
 	output.gui.tabs.updateV()
 	#for x in range(nr_iterations):
 	while not env.stop:
-		for agent in env.current_agents[:]:
-			if env.running:
-				#time.sleep(env.delay)
-				current_agent = agent[0]
-				good = agent[1]
+		total_transactions = parallel(env, selectionrule, output, total_transactions)
+		# for agent in env.current_agents[:]:
+		# 	if env.running:
+		# 		#time.sleep(env.delay)
+		# 		current_agent = agent[0]
+		# 		good = agent[1]
 
-				#output.getList(env.agents_list)
-				# Select next agent with selection rule
-				next_agent = env.select_agent(selectionrule, current_agent)
+		# 		#output.getList(env.agents_list)
+		# 		# Select next agent with selection rule
+		# 		next_agent = env.select_agent(selectionrule, current_agent)
 
-				# Do the transaction
-				env.transaction(current_agent, next_agent, good)
-				total_transactions += 1
-				env.nr_transactions += 1
-				env.nr_good_transactions[good.id] += 1
-				output.gui.control_panel.setNrTransactions(total_transactions)
+		# 		# Do the transaction
+		# 		env.transaction(current_agent, next_agent, good)
+		# 		total_transactions += 1
+		# 		env.nr_transactions += 1
+		# 		env.nr_good_transactions[good.id] += 1
+		# 		output.gui.control_panel.setNrTransactions(total_transactions)
 
-				#env.calculate_transaction_percentages(env.nr_transactions)
-				env.calculate_good_transaction_percentages(env.nr_transactions)
+		# 		#env.calculate_transaction_percentages(env.nr_transactions)
+		# 		env.calculate_good_transaction_percentages(env.nr_transactions)
 
-				#output.showPlot()
-				#output.gui.tabs.showPlot()
-				#output.plotTransactionPercentages()
-				#output.gui.tabs.plotTransactionPercentages()
-				output.gui.tabs.plotGoodTransactionPercentages()
+		# 		#output.showPlot()
+		# 		#output.gui.tabs.showPlot()
+		# 		#output.plotTransactionPercentages()
+		# 		#output.gui.tabs.plotTransactionPercentages()
+		# 		output.gui.tabs.plotGoodTransactionPercentages()
 
-				# exit = output.print_transaction(current_agent, next_agent, good)
-				#output.gui.tabs.print_transaction(current_agent, next_agent, good)
-				QtGui.qApp.processEvents()
-				# output.gui.tabs.updateV()
-				# if exit:
-				# 	break
-				if env.stop:
-					break
+		# 		# exit = output.print_transaction(current_agent, next_agent, good)
+		# 		#output.gui.tabs.print_transaction(current_agent, next_agent, good)
+		# 		QtGui.qApp.processEvents()
+		# 		# output.gui.tabs.updateV()
+		# 		# if exit:
+		# 		# 	break
+		# 		if env.stop:
+		# 			break
 
-				# Update the balance matrix
-				env.update_balancematrix(current_agent, next_agent)
+		# 		# Update the balance matrix
+		# 		env.update_balancematrix(current_agent, next_agent)
 
-				# Set the selected agent as the current agent if the good is still alive.
-				if good.perish_period == 0 or good.life > 0:
-					env.current_agents[env.current_agents.index(agent)] = (next_agent, good)
-				else:
-					# Remove the perished product and the agent holding it from the list
-					env.notify_producer(good)
-					env.current_agents.remove(agent)
-					env.goods_list.remove(good)
-			else:
-				time.sleep(0.1)
-		# Produce goods after every transaction, if it is time to produce.
-		if env.running:
-			env.produce_goods(selectionrule)
-		env.calculate_communityeffect(env.nr_good_transactions)
-		print(env.nr_good_transactions)
+		# 		# Set the selected agent as the current agent if the good is still alive.
+		# 		if good.perish_period == 0 or good.life > 0:
+		# 			env.current_agents[env.current_agents.index(agent)] = (next_agent, good)
+		# 		else:
+		# 			# Remove the perished product and the agent holding it from the list
+		# 			env.notify_producer(good)
+		# 			env.current_agents.remove(agent)
+		# 			env.goods_list.remove(good)
+		# 	else:
+		# 		time.sleep(0.1)
+		# # Produce goods after every transaction, if it is time to produce.
+		# if env.running:
+		# 	env.produce_goods(selectionrule)
+		# env.calculate_communityeffect(env.nr_good_transactions)
+		# print(env.nr_good_transactions)
 		# if exit:
 		# 	break
 		# if env.stop:
@@ -99,4 +100,61 @@ def simulate(nr_iterations, env, selectionrule, output):
 	# env.calculate_transaction_percentages(total_transactions)
 
 
+def parallel(env, selectionrule, output, total_transactions):
+	transactions = []
+	if env.running:
+		for agent in env.current_agents[:]:
+				
+			current_agent = agent[0]
+			good = agent[1]
+
+			# Select next agent with selection rule
+			next_agent = env.select_agent(selectionrule, current_agent)
+			transactions.append((current_agent, next_agent, good))
+
+			total_transactions += 1
+			env.nr_transactions += 1
+			env.nr_good_transactions[good.id] += 1
+
+				
+		env.current_agents = []
+
+		for t in transactions[:]:
+			current_agent 	= t[0]
+			next_agent 		= t[1]
+			good 			= t[2]
+			# Do the transaction
+			env.transaction(current_agent, next_agent, good)
+
+
+			output.gui.control_panel.setNrTransactions(total_transactions)
+
+			env.calculate_good_transaction_percentages(env.nr_transactions)
+
+			output.gui.tabs.plotGoodTransactionPercentages()
+
+			#output.gui.tabs.print_transaction(current_agent, next_agent, good)
+			QtGui.qApp.processEvents()
+
+			if env.stop:
+				break
+
+			# Update the balance matrix
+			env.update_balancematrix(current_agent, next_agent)
+
+			# Set the selected agent as the current agent if the good is still alive.
+			if good.perish_period == 0 or good.life > 0:
+				#env.current_agents[env.current_agents.index(agent)] = (next_agent, good)
+				env.current_agents.append((next_agent, good))
+			else:
+				# Remove the perished product and the agent holding it from the list
+				env.notify_producer(good)
+				#env.current_agents.remove(agent)
+				env.goods_list.remove(good)
+
+		env.produce_goods(selectionrule)
+	
+	else:
+		time.sleep(0.1)
+	return total_transactions
 
