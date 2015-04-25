@@ -26,8 +26,8 @@ class Input(QtGui.QWidget):
         # Total goods
         self.M = 3
         # Number of goods that are perishable
-        self.M_perishable = 3
-        self.perish_period = 2
+        self.M_perishable = 0
+        self.perish_period = 0
         # stable at prodcution_time = M * perish_period
         self.production_delay = 0
         self.value = 1
@@ -37,6 +37,8 @@ class Input(QtGui.QWidget):
         # 2 = goodwill rule
         self.selection_rule = 0
 
+        self.parallel = False
+
         # [[perish_period, production_delay, nominal_value]]
         self.goods_list = []
 
@@ -44,6 +46,8 @@ class Input(QtGui.QWidget):
         
 
     def initUI(self):
+
+        hbox = QtGui.QHBoxLayout()
 
         # Agents
         self.lbl_nr_agents = QtGui.QLabel('Number of Agents', self)
@@ -73,6 +77,19 @@ class Input(QtGui.QWidget):
 
         self.selection_rules.activated[str].connect(self.setSelectionrule) 
 
+        # Simulation type
+        self.lbl_simulation_type = QtGui.QLabel('Simulation type')
+
+        self.parallel = QtGui.QRadioButton('Parallel')
+        self.onebyone = QtGui.QRadioButton('One by one')
+
+        self.parallel.toggled.connect(self.setParallel)
+        self.onebyone.toggled.connect(self.setOnebyOne)
+
+
+        hbox.addWidget(self.parallel)
+        hbox.addWidget(self.onebyone)
+
         # Start button
         self.start = QtGui.QPushButton('Simulate', self)
         self.start.setGeometry(100, 320, 100, 50)
@@ -86,7 +103,9 @@ class Input(QtGui.QWidget):
         self.layout.addWidget(self.input_table, 5, 0) 
         self.layout.addWidget(self.lbl_selection_rule, 6, 0)
         self.layout.addWidget(self.selection_rules, 7, 0)
-        self.layout.addWidget(self.start, 8, 0)
+        self.layout.addWidget(self.lbl_simulation_type, 8, 0)
+        self.layout.addLayout(hbox, 9, 0)
+        self.layout.addWidget(self.start, 10, 0)
 
         self.setLayout(self.layout)
 
@@ -159,6 +178,12 @@ class Input(QtGui.QWidget):
             self.selection_rule = 0
         elif text == 'Balance rule':
             self.selection_rule = 1
+
+    def setParallel(self):
+        self.parallel = True
+
+    def setOnebyOne(self):
+        self.parallel = False
     # @cellItemChanged(int, int)
     # def cellItemChanged(self, row, column):
     #     print(self.input_table.item(row, column))
@@ -172,7 +197,7 @@ class Input(QtGui.QWidget):
                 print(int(self.input_table.item(i, j).text()))
 
     def startSimulation(self):
-        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value)
+        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel)
         self.output = Output(env)
         self.setGoodsList()
         sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)

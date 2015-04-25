@@ -7,12 +7,23 @@ from math import *
 # Create vetices
 n = 10
 v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
+good_positions = np.array([[0.1, 0.1, 0.1],[0.3, 0.3, 0.3],[0.5, 0.5, 0.5]])
+v_position = np.vstack((v_position, good_positions))
+print(v_position)
 #print(v_position)
 v_color = np.random.uniform(0, 1, (n, 3)).astype(np.float32)
 v_color = [[ 0.0, 0.0, 1.0] for i in range(n)]
+good_color = [[ 1.0, 0.0, 0.0], [ 1.0, 0.0, 0.0], [ 1.0, 0.0, 0.0]]
+for j in good_color:
+    v_color.append(j)
+print(v_color)
 #print(v_color)
 v_size = np.random.uniform(2, 12, (n, 1)).astype(np.float32)
 v_size = [[10.0] for i in range(n)]
+good_size = [[10.0],[10.0],[10.0]]
+for k in good_size:
+    v_size.append(k)
+print(v_size)
 #print(v_size)
 
 VERT_SHADER = """
@@ -121,6 +132,8 @@ class Canvas(app.Canvas):
     def createGrid(self, agents, current_agents):
         total_nodes = len(agents)
         v_position = 0.25 * np.random.randn(total_nodes, 3).astype(np.float32)
+        good_positions = np.array([[0.1, 0.1, 0.1],[0.3, 0.3, 0.3],[0.5, 0.5, 0.5]]).astype(np.float32)
+        v_position = np.vstack((v_position, good_positions))
         root = sqrt(total_nodes)
         height = floor(root)
         width = ceil(root)
@@ -147,7 +160,12 @@ class Canvas(app.Canvas):
             
             print(count)
         self.program['a_position'] = gloo.VertexBuffer(v_position)
-        print(v_position)
+        self.program['a_color'] = gloo.VertexBuffer(v_color)
+        self.program['a_size'] = gloo.VertexBuffer(v_size)
+        gloo.set_state(clear_color='white', blend=True,
+               blend_func=('src_alpha', 'one_minus_src_alpha'))
+
+        print(v_position, v_color, v_size)
         self.update()
 
 if __name__ == '__main__':

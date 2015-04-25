@@ -16,9 +16,9 @@ def start_simulation(N, M, goods_list, M_perishable, perish_period, production_d
 	simulate(100, env, selectionrule, output)
 	print(env.agents_list[0].given_received)
 
-def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value):
+def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel):
 
-	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value)
+	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value, parallel)
 
 	# Create the agents
 	enviroment.create_agents()
@@ -38,8 +38,10 @@ def simulate(nr_iterations, env, selectionrule, output):
 	output.gui.tabs.updateV()
 	#for x in range(nr_iterations):
 	while not env.stop:
-		#total_transactions = parallel(env, selectionrule, output, total_transactions)
-		total_transactions = onebyone(env, selectionrule, output, total_transactions)
+		if env.parallel:
+			total_transactions = parallel(env, selectionrule, output, total_transactions)
+		else:
+			total_transactions = onebyone(env, selectionrule, output, total_transactions)
 		# for agent in env.current_agents[:]:
 		# 	if env.running:
 		# 		#time.sleep(env.delay)
@@ -113,6 +115,9 @@ def onebyone(env, selectionrule, output, total_transactions):
 
 			# Do the transaction
 			env.transaction(current_agent, next_agent, good)
+
+			output.gui.tabs.moveV(next_agent, good)
+
 			total_transactions += 1
 			env.nr_transactions += 1
 			env.nr_good_transactions[good.id] += 1
@@ -139,6 +144,7 @@ def onebyone(env, selectionrule, output, total_transactions):
 			# Update the balance matrix
 			env.update_balancematrix(current_agent, next_agent)
 
+
 			# Set the selected agent as the current agent if the good is still alive.
 			if good.perish_period == 0 or good.life > 0:
 				env.current_agents[env.current_agents.index(agent)] = (next_agent, good)
@@ -152,7 +158,8 @@ def onebyone(env, selectionrule, output, total_transactions):
 # Produce goods after every transaction, if it is time to produce.
 	if env.running:
 		env.produce_goods(selectionrule)
-	env.calculate_communityeffect(env.nr_good_transactions)
+	sum = env.calculate_communityeffect(env.nr_good_transactions)
+	output.gui.results.setPercentage(sum)
 	return total_transactions
 
 def parallel(env, selectionrule, output, total_transactions):
@@ -208,7 +215,7 @@ def parallel(env, selectionrule, output, total_transactions):
 				env.goods_list.remove(good)
 
 		env.produce_goods(selectionrule)
-	
+		sum = env.calculate_communityeffect(env.nr_good_transactions)
 	else:
 		time.sleep(0.1)
 	return total_transactions

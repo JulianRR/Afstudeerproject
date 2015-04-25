@@ -5,7 +5,8 @@ import numpy as np
 
 from PyQt4 import QtGui, QtCore
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from vispyTest import Canvas
+#from vispyTest import Canvas
+from Visualisation import Canvas
 
 class Output(QtGui.QMainWindow):
     
@@ -136,7 +137,7 @@ class Tabs(QtGui.QTabWidget):
         self.bar_plot = FigureCanvas(self.figure) 
         self.plot(self.figure, self.bar_plot)
 
-        self.visualisation = Canvas()
+        self.visualisation = Canvas(self.env)
 
         self.textBox = QtGui.QTextEdit()
         self.textBox.setReadOnly(True)
@@ -239,11 +240,19 @@ class Tabs(QtGui.QTabWidget):
         QtGui.qApp.processEvents()
 
     def updateV(self):
-        self.visualisation.createGrid(self.env.agents_list, self.env.current_agents)
+        self.visualisation.createGrid()
+
+    def moveV(self, Q, good):
+        self.visualisation.move(Q, good)
 
     def resetTransactions(self):
         for agent in self.env.agents_list:
             agent.nr_transactions = 0
+            count = 0
+            for good in agent.goods_transactions:
+                good[1] = 0
+                self.env.nr_good_transactions[count] = 0
+
         self.env.nr_transactions = 0
 
 class GeneralResults(QtGui.QWidget):
@@ -305,8 +314,8 @@ class ControlPanel(QtGui.QWidget):
         self.pauseButton.clicked.connect(self.pause)
 
         self.lcd = QtGui.QLCDNumber(self)
-        slider_subgroup = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        slider_subgroup.valueChanged.connect(self.setDelay)
+        slider_delay = QtGui.QSlider(QtCore.Qt.Horizontal, self)
+        slider_delay.valueChanged.connect(self.setDelay)
 
         # Add Widgets
         hbox.addWidget(self.lbl_nr_transactions)
@@ -318,7 +327,7 @@ class ControlPanel(QtGui.QWidget):
 
         hbox_controls.addWidget(self.startButton)
         hbox_controls.addWidget(self.pauseButton)
-        hbox_controls.addWidget(slider_subgroup)
+        hbox_controls.addWidget(slider_delay)
         hbox_controls.addWidget(self.lcd)
         hbox_controls.addStretch(1)
         
@@ -355,6 +364,8 @@ class Results(QtGui.QWidget):
     def initUI(self): 
         # Layouts
         vbox              = QtGui.QVBoxLayout(self)
+        hbox              = QtGui.QHBoxLayout()
+        hbox2             = QtGui.QHBoxLayout()
 
         # Given Received
         self.lbl_agents = QtGui.QLabel("Agents:")
@@ -374,6 +385,28 @@ class Results(QtGui.QWidget):
         self.plot_yield_curve = QtGui.QPushButton("Plot Yield Curve")
         self.plot_yield_curve.clicked.connect(lambda: self.createYieldCurve(str(self.combo_P.currentText()), str(self.combo_Q.currentText())))
 
+        # Community effect
+        self.lbl_communityeffect = QtGui.QLabel('Community effect')
+
+        self.lbl_subgroup = QtGui.QLabel('Subgroup size:')
+
+        self.lcd = QtGui.QLCDNumber(self)
+        self.lcd.display(2)
+        self.slider_subgroup = QtGui.QSlider(QtCore.Qt.Horizontal, self)
+        self.slider_subgroup.setMinimum(2)
+        self.slider_subgroup.setMaximum(self.env.N)
+        self.slider_subgroup.valueChanged.connect(self.setSubgroup)
+
+        self.goods_combo = QtGui.QComboBox()
+        self.setGoodComboValues(self.goods_combo)
+        self.goods_combo.activated[str].connect(self.setIndex) 
+
+        self.lbl_percentage = QtGui.QLabel('Transaction percentage:')
+        self.percentage = QtGui.QLineEdit()
+        # Read only
+        self.percentage.setEnabled(False)
+
+
         # Add Widgets
         vbox.addWidget(self.lbl_agents)
         vbox.addWidget(self.combo)
@@ -381,12 +414,30 @@ class Results(QtGui.QWidget):
         vbox.addWidget(self.combo_P)
         vbox.addWidget(self.combo_Q)
         vbox.addWidget(self.plot_yield_curve)
+        vbox.addWidget(self.lbl_communityeffect)
+        vbox.addWidget(self.lbl_subgroup)
+        vbox.addLayout(hbox)
+
+        hbox.addWidget(self.slider_subgroup)
+        hbox.addWidget(self.lcd)
+
+        vbox.addWidget(self.goods_combo)
+        vbox.addLayout(hbox2)
+
+        hbox2.addWidget(self.lbl_percentage)
+        hbox2.addWidget(self.percentage)
+
         vbox.addStretch(1)
         vbox.setAlignment(QtCore.Qt.AlignTop)
 
     def setComboValues(self, combo):
         for agent in self.env.agents_list:
             name = 'Agent_' + str(agent.id)
+            combo.addItem(name)
+
+    def setGoodComboValues(self, combo):
+        for good in self.env.goods_list:
+            name = 'Good_' + str(good.id)
             combo.addItem(name)
 
     def onSelected(self, text):
@@ -407,6 +458,18 @@ class Results(QtGui.QWidget):
         
         if agent_Q != agent_P:
             YieldCurve(agent_P, agent_Q, self.env)
+
+    def setSubgroup(self, value):
+        self.env.subgroup_size = value
+        self.lcd.display(value)
+
+    def setIndex(self, text):
+        good_id = int(text.strip('Good_'))
+        self.env.index = good_id
+        #self.percentage.setText(text)
+
+    def setPercentage(self, value):
+        self.percentage.setText(str(round(value,2)))
 
 
 class AgentInfo(QtGui.QDialog):
@@ -554,7 +617,7 @@ class YieldCurve(QtGui.QDialog):
         id = text.strip('Good_')
         for good in self.env.goods_list:
             if good.id == int(id):
-                good.value += 1
+                #good.value += 1
                 self.plotYieldCurve2(good)
 
 

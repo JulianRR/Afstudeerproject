@@ -10,7 +10,7 @@ import Selection_rules as sl
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_period, production_delay, value):
+	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel):
 
 		# Total agents
 		self.N = N
@@ -45,12 +45,15 @@ class Enviroment:
 		self.nr_good_transactions = [0 for i in range(M)]
 
 		# Comunnity percentage
+		self.subgroup_size = 2
+		self.index = 0
 		self.comunnity_percentage = 0
 
 		# Control variables
 		self.stop = False
 		self.running = False
 		self.delay = 0
+		self.parallel = parallel
 
 	def create_agents(self):
 		# Create N agents by calling the __init__() from the Agents Class
@@ -77,6 +80,8 @@ class Enviroment:
 				good = Goods(y, self.value, self.perish_period, self.production_delay)
 				self.goods_list.append(good)
 
+		# Notify the agents of the starting goods. This is needed for the calculations of the 
+		# comunnity effect.
 		self.notify_agents()
 
 	def notify_agents(self):
@@ -109,6 +114,7 @@ class Enviroment:
 			if good.time_until_production == 0 and good.life == 0:
 				# Create a new good
 				new_good = Goods(good.id, good.value, good.perish_period, good.production_delay)
+				#new_good.grid_pos = self.agents_list[agent].grid_pos
 				# Select a agent to hold the product, or use the producing agent
 				self.current_agents.append((agent, new_good))
 				# Add the new good to the list
@@ -170,33 +176,38 @@ class Enviroment:
 			self.goods_transaction_percentages.append(percentages)
 
 	def calculate_communityeffect(self, goods_transactions):
-		sub_group = 4
 		threshold = 0.8
 		community_effect = []
 		for agent in self.agents_list:
 			percentages = []
 			count = 0
 			for goods in agent.goods_transactions:
-				percentages.append(goods[1] / (goods_transactions[count]*2))
+				if goods_transactions[count] != 0:
+					percentages.append(goods[1] / (goods_transactions[count]*2))
+				else:
+					percentages.append(0)
 				count += 1
 			community_effect.append(percentages)
-		sum = 0
-		for x in community_effect:
-			for y in x:
-				sum += y
+		# sum = 0
+		# for x in community_effect:
+		# 	for y in x:
+		# 		sum += y
 		#print(community_effect)
 		#print(sum)
 
 		np_community_effect = np.array(community_effect)
-		np_community_effect = np_community_effect.T
-		#print(np.sort(np_community_effect))
-		np_community_effect = np.sort(np_community_effect)
-		for x in np_community_effect:
-			sum = 0
-			for y in range(sub_group):
-				sum += x[::-1][y]
+		np_community_effect = np.sort(np_community_effect.T)
+		# for good in np_community_effect:
+		# 	sum = 0
+		# 	for y in range(self.subgroup_size):
+		# 		sum += good[::-1][y]
+		sum = 0
+		for x in range(self.subgroup_size):
+			sum += np_community_effect[self.index][::-1][x]
+
 			#print(x[::-1])
 			#print(sum)
+		return sum
 
 
 
