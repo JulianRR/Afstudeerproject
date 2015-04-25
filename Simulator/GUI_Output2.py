@@ -245,6 +245,9 @@ class Tabs(QtGui.QTabWidget):
     def moveV(self, Q, good):
         self.visualisation.move(Q, good)
 
+    def colorV(self, P, Q):
+        self.visualisation.updateColor(P, Q)
+
     def resetTransactions(self):
         for agent in self.env.agents_list:
             agent.nr_transactions = 0

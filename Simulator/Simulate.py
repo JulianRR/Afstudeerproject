@@ -123,6 +123,8 @@ def onebyone(env, selectionrule, output, total_transactions):
 			env.nr_good_transactions[good.id] += 1
 			output.gui.control_panel.setNrTransactions(total_transactions)
 
+			output.gui.tabs.colorV(current_agent, next_agent)
+
 			#env.calculate_transaction_percentages(env.nr_transactions)
 			env.calculate_good_transaction_percentages(env.nr_transactions)
 
@@ -174,9 +176,13 @@ def parallel(env, selectionrule, output, total_transactions):
 			next_agent = env.select_agent(selectionrule, current_agent)
 			transactions.append((current_agent, next_agent, good))
 
+			output.gui.tabs.moveV(next_agent, good)
+
 			total_transactions += 1
 			env.nr_transactions += 1
 			env.nr_good_transactions[good.id] += 1
+
+			output.gui.tabs.colorV(current_agent, next_agent)
 
 				
 		env.current_agents = []

@@ -3,6 +3,7 @@ from vispy import app
 import numpy as np
 import time
 from math import *
+import random
 
 
 VERT_SHADER = """
@@ -51,10 +52,10 @@ class Canvas(app.Canvas):
         self.goods = self.nodes[:self.M]
 
         self.agents['position'][:] = np.random.uniform(-0.25, +0.25, (self.N, 3))
-        self.agents['size'] = 10
+        self.agents['size'] = 30
         self.agents['color'][:] = 0, 0, 1, 1
 
-        self.goods['size'] = 20
+        self.goods['size'] = 50
         self.goods['color'][:] = 0, 1, 0, 1
         self.goods['position'][:] = np.random.uniform(-0.25, +0.25, (self.M, 3))
 
@@ -105,13 +106,17 @@ class Canvas(app.Canvas):
                 count = 0
             self.env.agents_list[p].grid_pos = self.agents['position'][p]
             #agents[p].grid_pos = v_position[0]
+        count = 1
         for agent in self.env.current_agents:
             current_agent = agent[0]
             good = agent[1]
 
             good.grid_pos = self.env.agents_list[current_agent].grid_pos
             self.goods['position'][good.id] = good.grid_pos
+            self.goods['color'][good.id] = random.uniform(0, 1), random.uniform(0, 1), 0, 1
+            count += 1
         self.vbo_position.set_data(self.nodes['position'].copy())
+        self.vbo_color.set_data(self.nodes['color'].copy())
 
     def move(self, Q, good):
         distance_x = abs(good.grid_pos[0] - self.env.agents_list[Q].grid_pos[0])
@@ -126,6 +131,14 @@ class Canvas(app.Canvas):
         #     self.update()
         self.goods['position'][good.id] = good.grid_pos
         self.vbo_position.set_data(self.nodes['position'].copy())
+        self.update()
+
+    def updateColor(self, P, Q):
+        P_percentage = self.env.agents_list[P].nr_transactions / self.env.nr_transactions
+        Q_percentage = self.env.agents_list[Q].nr_transactions / self.env.nr_transactions
+        self.agents['color'][P] = P_percentage, 0, 1 - P_percentage, 1
+        self.agents['color'][Q] = Q_percentage, 0, 1 - Q_percentage, 1
+        self.vbo_color.set_data(self.nodes['color'].copy())
         self.update()
 
 if __name__ == '__main__':
