@@ -23,7 +23,7 @@ class Output(QtGui.QMainWindow):
         self.menubar = QtGui.QMenuBar()
         
         fileMenu = self.menubar.addMenu('&File')
-        fileMenu.addAction('test')
+        fileMenu.addAction('Save', lambda: self.saveData())
 
         self.setMenuBar(self.menubar)
 
@@ -34,6 +34,14 @@ class Output(QtGui.QMainWindow):
         self.setGeometry(300, 50, 1100, 800)
         self.setWindowTitle('Menubar')    
         self.show()
+
+    def saveData(self):
+        f = open('simulation_data.txt', 'w')
+        f.write('Number of agents: ' + str(self.env.N) + '\n')
+        f.write('Number of goods: ' + str(self.env.M) + '\n')
+        f.write('Balance matrix: ' + str(self.env.balance_matrix) + '\n')
+
+        f.close()
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,
@@ -266,15 +274,32 @@ class GeneralResults(QtGui.QWidget):
 
     def initUI(self): 
         layout              = QtGui.QVBoxLayout(self)
+
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setPointSize(14)
         #self.setStyleSheet("QWidget { background-color: Red }")
+        self.lbl_selection_rule = QtGui.QLabel('Selection rule:')
+        self.lbl_simulation_type = QtGui.QLabel('Simulation type:')
+        self.lbl_nr_agents      = QtGui.QLabel('Number of agents:')
+        self.lbl_nr_goods       = QtGui.QLabel('Number of goods:')
 
-        self.lbl_nr_agents      = QtGui.QLabel('Number of agents')
-        self.lbl_nr_goods       = QtGui.QLabel('Number of goods')
+        self.lbl_selection_rule.setFont(font)
+        self.lbl_simulation_type.setFont(font)
+        self.lbl_nr_agents.setFont(font)
+        self.lbl_nr_goods.setFont(font)
 
+
+
+        self.selection_rule = QtGui.QLabel('')
+        self.simulation_type = QtGui.QLabel('')
         self.nr_agents      = QtGui.QLabel('')
         self.nr_goods       = QtGui.QLabel('')
 
-
+        layout.addWidget(self.lbl_selection_rule)
+        layout.addWidget(self.selection_rule)
+        layout.addWidget(self.lbl_simulation_type)
+        layout.addWidget(self.simulation_type)
         layout.addWidget(self.lbl_nr_agents)
         layout.addWidget(self.nr_agents)
         layout.addWidget(self.lbl_nr_goods)
@@ -284,6 +309,17 @@ class GeneralResults(QtGui.QWidget):
 
 
     def setValues(self, env):
+        if env.selection_rule == 0:
+            self.selection_rule.setText('Random rule')
+        elif env.selection_rule == 1:
+            self.selection_rule.setText('Balance rule')
+        elif env.selection_rule == 2:
+            self.selection_rule.setText('Goodwill rule')
+
+        if env.parallel:
+            self.simulation_type.setText('Parallel')
+        else:
+            self.simulation_type.setText('One by one')
 
         self.nr_agents.setText(str(env.N))
         self.nr_goods.setText(str(env.M))

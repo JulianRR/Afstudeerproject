@@ -48,14 +48,14 @@ class Canvas(app.Canvas):
                              ('color', 'f4', 4),
                              ('size', 'f4', 1)])
 
-        self.agents = self.nodes[self.M:]
-        self.goods = self.nodes[:self.M]
+        self.agents = self.nodes[:self.N]
+        self.goods = self.nodes[self.N:]
 
         self.agents['position'][:] = np.random.uniform(-0.25, +0.25, (self.N, 3))
         self.agents['size'] = 30
         self.agents['color'][:] = 0, 0, 1, 1
 
-        self.goods['size'] = 50
+        self.goods['size'] = 20
         self.goods['color'][:] = 0, 1, 0, 1
         self.goods['position'][:] = np.random.uniform(-0.25, +0.25, (self.M, 3))
 
@@ -69,7 +69,7 @@ class Canvas(app.Canvas):
         self.program['size'] = self.vbo_size
         self.program['position'] = self.vbo_position
 
-        gloo.set_state(clear_color='white', blend=True,
+        gloo.set_state(clear_color='white', blend=False,
                blend_func=('src_alpha', 'one_minus_src_alpha'))
 
     def on_resize(self, event):
@@ -113,7 +113,8 @@ class Canvas(app.Canvas):
 
             good.grid_pos = self.env.agents_list[current_agent].grid_pos
             self.goods['position'][good.id] = good.grid_pos
-            self.goods['color'][good.id] = random.uniform(0, 1), random.uniform(0, 1), 0, 1
+            #self.goods['color'][good.id] = random.uniform(0, 1), random.uniform(0, 1), 0, 1
+            self.goods['color'][good.id] = 0, 1, 0, 1
             count += 1
         self.vbo_position.set_data(self.nodes['position'].copy())
         self.vbo_color.set_data(self.nodes['color'].copy())

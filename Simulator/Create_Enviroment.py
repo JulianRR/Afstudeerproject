@@ -10,7 +10,7 @@ import Selection_rules as sl
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel):
+	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule):
 
 		# Total agents
 		self.N = N
@@ -35,6 +35,9 @@ class Enviroment:
 
 		# Balance matrix
 		self.balance_matrix = np.zeros((N,N))
+
+		# Selection rule
+		self.selection_rule = selectionrule
 
 		# Transaction percentage list
 		# [[percentage], [percentage]]
