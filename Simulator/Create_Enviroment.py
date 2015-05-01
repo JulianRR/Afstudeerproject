@@ -47,12 +47,15 @@ class Enviroment:
 		self.nr_transactions = 0
 		self.nr_good_transactions = [0 for i in range(M)]
 
+		self.total_transactions = 0
+
 		# Comunnity percentage
 		self.subgroup_size = 2
 		self.index = 0
 		self.comunnity_percentage = 0
 
 		# Control variables
+		self.output = None
 		self.stop = False
 		self.running = False
 		self.delay = 0
@@ -191,19 +194,10 @@ class Enviroment:
 					percentages.append(0)
 				count += 1
 			community_effect.append(percentages)
-		# sum = 0
-		# for x in community_effect:
-		# 	for y in x:
-		# 		sum += y
-		#print(community_effect)
-		#print(sum)
 
 		np_community_effect = np.array(community_effect)
 		np_community_effect = np.sort(np_community_effect.T)
-		# for good in np_community_effect:
-		# 	sum = 0
-		# 	for y in range(self.subgroup_size):
-		# 		sum += good[::-1][y]
+
 		sum = 0
 		for x in range(self.subgroup_size):
 			sum += np_community_effect[self.index][::-1][x]

@@ -7,6 +7,7 @@ from PyQt4 import QtGui, QtCore
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 #from vispyTest import Canvas
 from Visualisation import Canvas
+import Simulate as sim
 
 class Output(QtGui.QMainWindow):
     
@@ -49,13 +50,8 @@ class Output(QtGui.QMainWindow):
         fname = QtGui.QFileDialog.getSaveFileName(self, 'Save file', 
                 '/home')
         
-        # f = open(fname, 'r')
-        
-        # with f:        
-        #     data = f.read()
-        #     print(data) 
-        self.saveData(fname)
-        #print(fname)
+        if fname != '':
+            self.saveData(fname)
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,
@@ -95,7 +91,6 @@ class GUI(QtGui.QWidget):
 
         self.groupBox_left.setMinimumWidth(200)
         self.groupBox_top.setMinimumHeight(150)
-        #self.groupBox_top.setMaximumHeight(200)
         self.groupBox_bottom_left.setMinimumWidth(600)
         self.groupBox_bottom_right.setMinimumWidth(300)
 
@@ -129,7 +124,6 @@ class GUI(QtGui.QWidget):
 
         vbox_top = QtGui.QVBoxLayout(self.groupBox_top)
         vbox_top.addWidget(self.control_panel)
-        # self.nr_agents.setAlignment(QtCore.Qt.AlignTop)
 
         vbox_bottom_left = QtGui.QVBoxLayout(self.groupBox_bottom_left)
         vbox_bottom_left.addWidget(self.tabs)
@@ -229,11 +223,6 @@ class Tabs(QtGui.QTabWidget):
         self.figure.clf()
 
         self.ax = self.figure.add_subplot(111)
-
-        # y1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        # y2 = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-        # self.ax.bar(x, y1, width, color='blue')
-        # self.ax.bar(x+width, y2, width, color='red')
 
         goods_transaction_percentages = np.array(self.env.goods_transaction_percentages)
         for goods in goods_transaction_percentages.T:
@@ -400,6 +389,7 @@ class ControlPanel(QtGui.QWidget):
     def start(self):
         self.status.setText('Running')
         self.env.running = True
+        sim.continue_simulation(self.env, self.env.selection_rule, self.env.output, self.env.total_transactions)
 
     def setDelay(self, value):
         self.env.delay = value / 100
@@ -599,7 +589,6 @@ class YieldCurve(QtGui.QDialog):
 
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure) 
-        #self.plotYieldCurve(-0.1, 3)
 
         vbox.addWidget(self.lbl_goods)
         vbox.addWidget(self.combo_goods)
@@ -700,7 +689,6 @@ class SaveAs(QtGui.QDialog):
         
         self.setGeometry(300, 300, 350, 300)
         self.setWindowTitle('File dialog')
-        #self.show()
 
         self.exec_()
 

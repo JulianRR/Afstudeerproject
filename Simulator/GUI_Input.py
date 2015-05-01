@@ -199,6 +199,7 @@ class Input(QtGui.QWidget):
     def startSimulation(self):
         env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule)
         self.output = Output(env)
+        env.output = self.output
         self.setGoodsList()
         sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)
 
