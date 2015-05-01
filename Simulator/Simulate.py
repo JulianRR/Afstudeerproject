@@ -9,7 +9,7 @@ from random import randint
 import time
 
 import sys, time
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 
 def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env, selectionrule):
 	#env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
@@ -37,6 +37,14 @@ def simulate(nr_iterations, env, selectionrule, output):
 	#output.setEnviroment(env)
 	output.gui.tabs.updateV()
 	#for x in range(nr_iterations):
+	#
+	# call this function when user pressed start
+	# when user presses pause, exit the while, so function ends
+	# when user presses start again, call this function again
+	#
+	#
+	#
+
 	while not env.stop:
 		if env.parallel:
 			total_transactions = parallel(env, selectionrule, output, total_transactions)
@@ -156,7 +164,7 @@ def onebyone(env, selectionrule, output, total_transactions):
 				env.current_agents.remove(agent)
 				env.goods_list.remove(good)
 		else:
-			time.sleep(0.1)
+			time.sleep(1)
 # Produce goods after every transaction, if it is time to produce.
 	if env.running:
 		env.produce_goods(selectionrule)
@@ -223,6 +231,11 @@ def parallel(env, selectionrule, output, total_transactions):
 		env.produce_goods(selectionrule)
 		sum = env.calculate_communityeffect(env.nr_good_transactions)
 	else:
-		time.sleep(0.1)
+		time.sleep(1)
+		#QtCore.QTimer.singleShot(2000)
+		#output.gui.control_panel.testSleep()
+		#time.sleep(10)
+		#env.running = True
+		#print('paused')
 	return total_transactions
 

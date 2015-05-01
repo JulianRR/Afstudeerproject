@@ -23,7 +23,8 @@ class Output(QtGui.QMainWindow):
         self.menubar = QtGui.QMenuBar()
         
         fileMenu = self.menubar.addMenu('&File')
-        fileMenu.addAction('Save', lambda: self.saveData())
+        fileMenu.addAction('Save', lambda: self.saveData('untitled.txt'))
+        fileMenu.addAction('Save As', lambda: self.showDialog())
 
         self.setMenuBar(self.menubar)
 
@@ -35,13 +36,26 @@ class Output(QtGui.QMainWindow):
         self.setWindowTitle('Menubar')    
         self.show()
 
-    def saveData(self):
-        f = open('simulation_data.txt', 'w')
+    def saveData(self, fname):
+        f = open(fname, 'w')
         f.write('Number of agents: ' + str(self.env.N) + '\n')
         f.write('Number of goods: ' + str(self.env.M) + '\n')
         f.write('Balance matrix: ' + str(self.env.balance_matrix) + '\n')
 
         f.close()
+
+    def showDialog(self):
+
+        fname = QtGui.QFileDialog.getSaveFileName(self, 'Save file', 
+                '/home')
+        
+        # f = open(fname, 'r')
+        
+        # with f:        
+        #     data = f.read()
+        #     print(data) 
+        self.saveData(fname)
+        #print(fname)
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,
@@ -380,7 +394,7 @@ class ControlPanel(QtGui.QWidget):
         self.nr_transactions.setText(str(nr))
 
     def pause(self):
-        self.status.setText('Pauses')
+        self.status.setText('Paused')
         self.env.running = False
 
     def start(self):
@@ -390,6 +404,12 @@ class ControlPanel(QtGui.QWidget):
     def setDelay(self, value):
         self.env.delay = value / 100
         self.lcd.display(value)
+
+    def testSleep(self):
+        #self.env.running = False
+        self.status.setText('Paused')
+        QtCore.QTimer.singleShot(2000, lambda: self.status.setText('Running'))
+        self.env.running = True
 
 
 class Results(QtGui.QWidget):
@@ -659,6 +679,30 @@ class YieldCurve(QtGui.QDialog):
                 #good.value += 1
                 self.plotYieldCurve2(good)
 
+class SaveAs(QtGui.QDialog):
+    def __init__(self, env):
+        super(SaveAs, self).__init__()
+
+        self.env = env 
+
+        self.initUI()
+
+    def initUI(self): 
+
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
+                '/home')
+        
+        f = open(fname, 'r')
+        
+        with f:        
+            data = f.read()
+            print(data)
+        
+        self.setGeometry(300, 300, 350, 300)
+        self.setWindowTitle('File dialog')
+        #self.show()
+
+        self.exec_()
 
 def main():
     
