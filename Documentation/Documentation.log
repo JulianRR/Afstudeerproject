@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  5 MAY 2015 16:06
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  5 MAY 2015 15:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**ProjectLog.tex
-(./ProjectLog.tex
+**Documentation.tex
+(./Documentation.tex
 LaTeX2e <2011/06/27>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (c:/texlive/2013/texmf-dist/tex/latex/base/article.cls
@@ -494,8 +494,9 @@ File: pgflibraryshapes.multipart.code.tex 2010/01/07 v3.0.0 (rcs-revision 1.2)
 File: lstlang1.sty 2014/03/04 1.5c listings language file
 )
 \c@homeworkProblemCounter=\count119
- (./ProjectLog.aux)
-\openout1 = `ProjectLog.aux'.
+
+(./Documentation.aux)
+\openout1 = `Documentation.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 176.
 LaTeX Font Info:    ... okay on input line 176.
@@ -516,6 +517,7 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             http://www.ctan.org/tex-archive/ 
 (lastpage)             install/macros/latex/contrib/pageslts.tds.zip
 (lastpage)             ! on input line 176.
+
 (c:/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count120
@@ -574,53 +576,140 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 178.
  [1
 
-{c:/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./ProjectLog.t
-oc
+{c:/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Documentatio
+n.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 2.
+(Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 2.
+(Font)              <5> on input line 3.
 )
 \tf@toc=\write4
-\openout4 = `ProjectLog.toc'.
+\openout4 = `Documentation.toc'.
 
  [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 219.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 222.
 
 
 (c:/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 219.
- [3] [4] [5]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 222.
+
+(c:/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/03/04 1.5c listings language file
+)
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 226.
+
+
+(c:/texlive/2013/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+
+Package xcolor Warning: Incompatible color definition on input line 227.
+
+[3]
+
+Package xcolor Warning: Incompatible color definition on input line 249.
+
+
+Package xcolor Warning: Incompatible color definition on input line 253.
+
+
+Package xcolor Warning: Incompatible color definition on input line 257.
+
+
+Package xcolor Warning: Incompatible color definition on input line 261.
+
+
+Package xcolor Warning: Incompatible color definition on input line 276.
+
+
+Package xcolor Warning: Incompatible color definition on input line 289.
+
+
+Package xcolor Warning: Incompatible color definition on input line 290.
+
+
+Package xcolor Warning: Incompatible color definition on input line 294.
+
+
+Package xcolor Warning: Incompatible color definition on input line 296.
+
+
+Package xcolor Warning: Incompatible color definition on input line 297.
+
+
+Package xcolor Warning: Incompatible color definition on input line 297.
+
+
+Package xcolor Warning: Incompatible color definition on input line 297.
+
+
+Package xcolor Warning: Incompatible color definition on input line 298.
+
+
+Package xcolor Warning: Incompatible color definition on input line 298.
+
+
+Package xcolor Warning: Incompatible color definition on input line 299.
+
+
+Package xcolor Warning: Incompatible color definition on input line 302.
+
+
+Package xcolor Warning: Incompatible color definition on input line 303.
+
+
+Package xcolor Warning: Incompatible color definition on input line 304.
+
+
+Package xcolor Warning: Incompatible color definition on input line 304.
+
+
+Package xcolor Warning: Incompatible color definition on input line 305.
+
+
+Package xcolor Warning: Incompatible color definition on input line 305.
+
+
+Package xcolor Warning: Incompatible color definition on input line 306.
+
+
+Package xcolor Warning: Incompatible color definition on input line 310.
+
+[4]
+
+Package xcolor Warning: Incompatible color definition on input line 327.
+
+
+Package xcolor Warning: Incompatible color definition on input line 340.
+
 
 AED: lastpage setting LastPage
-[6] [7] (./ProjectLog.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[5] (./Documentation.aux) ) 
 Here is how much of TeX's memory you used:
- 15628 strings out of 493308
- 318920 string characters out of 6141368
- 505913 words of memory out of 5000000
- 18779 multiletter control sequences out of 15000+600000
- 9194 words of font info for 32 fonts, out of 8000000 for 9000
+ 15838 strings out of 493308
+ 321397 string characters out of 6141368
+ 527501 words of memory out of 5000000
+ 18982 multiletter control sequences out of 15000+600000
+ 9671 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 55i,11n,72p,895b,235s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
-live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2013
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2013/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2013/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmti10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12
-.pfb>
-Output written on ProjectLog.pdf (7 pages, 105527 bytes).
+ 55i,12n,72p,898b,1662s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.
+enc}<c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/20
+13/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2013/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2013/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2013/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr5.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr9.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/t
+exlive/2013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on Documentation.pdf (5 pages, 120691 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 64 PDF objects out of 1000 (max. 8388607)
+ 46 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

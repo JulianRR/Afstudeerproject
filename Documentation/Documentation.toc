@@ -1,0 +1,19 @@
+\contentsline {section}{1. Introduction}{3}
+\contentsline {section}{2. Instructions}{3}
+\contentsline {subsection}{Installation}{3}
+\contentsline {subsubsection}{requirements}{3}
+\contentsline {subsection}{Usage}{3}
+\contentsline {section}{3. Code}{3}
+\contentsline {subsection}{Back-end}{3}
+\contentsline {subsubsection}{Agent.py}{3}
+\contentsline {subsubsection}{Goods.py}{3}
+\contentsline {subsubsection}{Enviroment.py}{3}
+\contentsline {subsubsection}{Simulate.py}{4}
+\contentsline {subsubsection}{Selection\_rules.py}{4}
+\contentsline {subsection}{Front-end}{5}
+\contentsline {subsubsection}{GUI\_Input.py}{5}
+\contentsline {subsubsection}{GUI\_Output.py}{5}
+\contentsline {subsubsection}{Visualisation.py}{5}
+\contentsline {section}{4. Releases}{5}
+\contentsline {section}{5. Further research}{5}
+\contentsline {subsection}{Requirements}{5}

@@ -1,0 +1,411 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{tikz}
+\usepackage{keycommand}
+\usetikzlibrary{shapes}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass : \hmwkTitle} % Top center head
+\rhead{\hmwkClassInstructor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Documentation} % Assignment title
+\newcommand{\hmwkDueDate}{f} % Due date
+\newcommand{\hmwkClass}{The Giving Game} % Course/class
+\newcommand{\hmwkClassTime}{f} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{University of Amsterdam} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Julian Ruger} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\textmd{The Giving Game}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\section{1. Introduction}
+In this document the usage of the simulator for the giving game will explained and the code will be documented. The usage of most variables will be explained inside the code itself. This document will focus on how each function is used and specific algorithms will be explained.
+
+\section{2. Instructions}
+
+\subsection{Installation}
+
+\subsubsection{requirements}
+
+\subsection{Usage}
+Images to explain each button and graph etc.
+Python 3.4+
+
+\section{3. Code}
+This program is written with python. The code consists mostly of object oriented python code.
+
+\subsection{Back-end}
+The back end consists of the following files:
+
+The usage of each function in each file and the most important variables will be explained.
+
+\subsubsection{Agent.py}
+The Agent class consists of multiple functions to update information about each agent. Each agent knows only about the things the agent is part of. For example each agent only knows about its own transactions. Each agent has an unique id which can be used as a index for some lists. The index of these lists is the same as the id to make navigating through these lists easy.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+def receive(self, P, Q):
+\end{lstlisting}
+
+\subsubsection{Goods.py}
+The Good class consists of variables that determine what kind of good it is. Each good has an unique id, which can be used as the index of some lists. The index of these lists is the same as the id to make navigating through these lists easy.
+
+For this class no special packages are used.
+
+\begin{lstlisting}[language=Python]
+
+\end{lstlisting}
+
+\subsubsection{Enviroment.py}
+The Enviroment class consists of multiple functions to create the enviroment of the giving game, to update variables after each transaction and to calculate the community effect. Most of the variables are stored in this class.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+def create_agents(self):
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def create_goods(self, goods):
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def notify_agents(self):
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def update_balancematrix(self, P, Q):
+\end{lstlisting}
+
+
+
+\subsubsection{Simulate.py}
+This file does  not use any object oriented code. This file consists of multiple functions that call the necessary functions from other files like Enviroment.py. This file can be seen as the engine for the simulation. The creation of the enviroment, transactions and updating the UI take place in this file.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+def create_enviroment(N, M, goods_list, M_perishable, perish_period,
+			       production_delay, value, parallel, selectionrule):
+\end{lstlisting}
+
+\subsubsection{Selection\_rules.py}
+This file does not use any object oriented code. This file consists of the function used to select the next agent. The different algorithms for each selection rule will be explained below.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+def random_rule(N):
+	return randint(0, N-1)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def balance_rule(balance_matrix, current_agent, N):
+	next_agents = []
+	highest_balance = balance_matrix[current_agent].min()
+	for x in range(N):
+		if x != current_agent:
+			if balance_matrix[current_agent][x] > highest_balance:
+				next_agents = [x]
+				highest_balance = balance_matrix[current_agent][x]
+			elif balance_matrix[current_agent][x] == highest_balance:
+				next_agents.append(x)
+	if len(next_agents) > 1:
+		return next_agents[randint(0, len(next_agents)-1)]
+	return next_agents[0]
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def goowill_rule():
+\end{lstlisting}
+
+\subsection{Front-end}
+The front end consists of the following files:
+
+The usage of each function/class in each file will be explained.
+\subsubsection{GUI\_Input.py}
+The Input class is consists of multiple functions to handle the user input so that the parameters can be used to create the enviroment and start the simulation.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+  \item Qt
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+def setAgents(self, value):
+\end{lstlisting}
+
+\subsubsection{GUI\_Output.py}
+This file consists of multiple classes. Each class is used to create a part of the UI. The main class is the Output class.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+  \item Qt
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+class GUI(QtGui.QWidget):
+\end{lstlisting}
+
+
+\subsubsection{Visualisation.py}
+This Canvas class consists of multiple function to create and animate the transaction during the simulation.
+
+The following python packages are used:
+\begin{itemize}
+  \item Numpy
+  \item VisPy which uses OpenGl
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+VERT_SHADER = """
+#version 120
+attribute vec3 position;
+attribute vec4 color;
+attribute float size;
+
+varying vec4 v_color;
+void main (void) {
+    gl_Position = vec4(position, 1.0);
+    v_color = color;
+    gl_PointSize = size;
+}
+"""
+
+FRAG_SHADER = """
+#version 120
+varying vec4 v_color;
+void main()
+{
+    float x = 2.0*gl_PointCoord.x - 1.0;
+    float y = 2.0*gl_PointCoord.y - 1.0;
+    float a = 1.0 - (x*x + y*y);
+    gl_FragColor = vec4(v_color.rgb, a*v_color.a);
+}
+
+"""
+\end{lstlisting}
+These shaders are needed for the visualisation of the agents and goods. More information about how shaders work can be found at:
+
+\begin{lstlisting}[language=Python]
+def on_initialize(self, event):
+\end{lstlisting}
+
+
+\section{4. Releases}
+
+
+\section{5. Further research}
+
+\subsection{Requirements}
+The following Python packages/frameworks are mandatory.
+
+\begin{itemize}
+  \item Qt Framework
+  \item MatplotLib
+  \item Numpy
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
