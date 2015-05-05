@@ -2,6 +2,9 @@ import sys, time
 import matplotlib.pyplot as plt
 import random
 import numpy as np
+from prettyplotlib import brewer2mpl
+import prettyplotlib as ppl
+import string
 
 from PyQt4 import QtGui, QtCore
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
@@ -142,16 +145,23 @@ class Tabs(QtGui.QTabWidget):
         self.tab1    = QtGui.QWidget()   
         self.tab2    = QtGui.QWidget()
         self.tab3    = QtGui.QWidget()
+        self.tab4   = QtGui.QWidget()
 
         # Layout
         self.layout_tab1 = QtGui.QVBoxLayout()
         self.layout_tab2 = QtGui.QVBoxLayout()
         self.layout_tab3 = QtGui.QVBoxLayout()
+        self.layout_tab4 = QtGui.QVBoxLayout()
 
         # Widgets
         self.figure = plt.figure()
         self.bar_plot = FigureCanvas(self.figure) 
         self.plot(self.figure, self.bar_plot)
+
+        self.figure2 = plt.figure()
+        self.balance_plot = FigureCanvas(self.figure2) 
+        #self.plot(self.figure, self.bar_plot)
+        self.plot_balance()
 
         self.visualisation = Canvas(self.env)
 
@@ -165,19 +175,23 @@ class Tabs(QtGui.QTabWidget):
         # Set layout
         self.tab1.setLayout(self.layout_tab1)
         self.tab2.setLayout(self.layout_tab2) 
-        self.tab3.setLayout(self.layout_tab3) 
+        self.tab3.setLayout(self.layout_tab3)
+        self.tab4.setLayout(self.layout_tab4)  
 
         # Add Widgets
         self.layout_tab1.addWidget(self.visualisation.native)
         self.layout_tab2.addWidget(self.reset)
         self.layout_tab2.addWidget(self.bar_plot)
         self.layout_tab3.addWidget(self.textBox)
+        self.layout_tab4.addWidget(self.balance_plot)
+
 
         
         # Add tabs
         self.addTab(self.tab1,"Visualisation")
         self.addTab(self.tab2,"Comunnity percentage")
         self.addTab(self.tab3,"Transctions")
+        self.addTab(self.tab4,"Balance")
 
     def plot(self, figure, canvas):
         data = [random.random() for i in range(10)]
@@ -242,12 +256,48 @@ class Tabs(QtGui.QTabWidget):
         plt.setp(xtickNames, rotation=45, fontsize=10)
         self.ax.hold(True)
 
+        # Design
+        #self.figure.tight_layout()
+        self.figure.set_facecolor('white')
+
         self.bar_plot.draw()
+
+    def plot_balance(self):
+        time.sleep(self.env.delay)
+        x = np.arange(10)
+        ax = self.figure2.add_subplot(111)
+        #fig = self.figure2.add_subplot(111)
+        np.random.seed(10)
+
+        ppl.pcolormesh(self.figure2, ax, np.random.randn(10,10))
+
+        ax.set_title('transaction percentage of each good for each agent')
+        xTickMarks = ['Agent'+str(i) for i in range(len(x))]
+        ax.set_xticks(x+0.5)
+        ax.set_yticks(x+0.5)
+        xtickNames = ax.set_xticklabels( xTickMarks )
+        ax.set_yticklabels( xTickMarks )
+        plt.setp(xtickNames, rotation=90, fontsize=10)
+
+        self.figure2.tight_layout()
+        self.balance_plot.draw()
 
     def print_transaction(self, P, Q, good):
         time.sleep(self.env.delay)
-        transaction = 'Agent_' + str(P) + ' --> ' + 'Agent_' + str(Q) + ' good: ' + str(good.id)
+        transaction = 'Agent_' + str(P.id) + ' --> ' + 'Agent_' + str(Q.id) + ' good: ' + str(good.id)
         self.textBox.append(transaction)
+        QtGui.qApp.processEvents()
+
+    def print_time_until_production(self, good):
+        time.sleep(self.env.delay)
+        time_until_production = 'Good_' + str(good.id) + ' --> Time until production: ' + str(good.time_until_production)
+        self.textBox.append(time_until_production)
+        QtGui.qApp.processEvents()
+
+    def print_production(self, good):
+        time.sleep(self.env.delay)
+        production = 'Good_' + str(good.id) + ' is being produced.'
+        self.textBox.append(production)
         QtGui.qApp.processEvents()
 
     def updateV(self):
@@ -286,11 +336,13 @@ class GeneralResults(QtGui.QWidget):
         self.lbl_simulation_type = QtGui.QLabel('Simulation type:')
         self.lbl_nr_agents      = QtGui.QLabel('Number of agents:')
         self.lbl_nr_goods       = QtGui.QLabel('Number of goods:')
+        self.lbl_goods = QtGui.QLabel('Goods information')
 
         self.lbl_selection_rule.setFont(font)
         self.lbl_simulation_type.setFont(font)
         self.lbl_nr_agents.setFont(font)
         self.lbl_nr_goods.setFont(font)
+        self.lbl_goods.setFont(font)
 
 
 
@@ -298,6 +350,8 @@ class GeneralResults(QtGui.QWidget):
         self.simulation_type = QtGui.QLabel('')
         self.nr_agents      = QtGui.QLabel('')
         self.nr_goods       = QtGui.QLabel('')
+        self.goods = QtGui.QTextEdit()
+        self.goods.setReadOnly(True)
 
         layout.addWidget(self.lbl_selection_rule)
         layout.addWidget(self.selection_rule)
@@ -307,6 +361,8 @@ class GeneralResults(QtGui.QWidget):
         layout.addWidget(self.nr_agents)
         layout.addWidget(self.lbl_nr_goods)
         layout.addWidget(self.nr_goods)
+        layout.addWidget(self.lbl_goods)
+        layout.addWidget(self.goods)
 
         layout.addStretch(1)
 
@@ -326,6 +382,11 @@ class GeneralResults(QtGui.QWidget):
 
         self.nr_agents.setText(str(env.N))
         self.nr_goods.setText(str(env.M))
+        count = 0
+        for good in env.goods_parameters:
+            text = 'Good_' + str(count) + '\n Perish time: ' + str(good[0]) + ',\n Production delay: ' + str(good[1]) + ',\n Nominal value: ' + str(good[2])
+            self.goods.append(text)
+            count += 1
 
 class ControlPanel(QtGui.QWidget):
     def __init__(self, env):
@@ -566,6 +627,10 @@ class AgentInfo(QtGui.QDialog):
 
         self.ax.legend( (rects1[0], rects2[0]), ('Given', 'Received') )
         #self.ax.hold(False)
+
+        # Design
+        self.figure.set_facecolor('white')
+
         self.canvas.draw()
 
 class YieldCurve(QtGui.QDialog):
@@ -653,6 +718,9 @@ class YieldCurve(QtGui.QDialog):
         ax.set_xticks([min(P_min_x, Q_min_x), max(P_max_x, Q_max_x)])
         ax.set_ylim(ymin=0)
         ax.hold(True)
+
+        self.figure.tight_layout()
+        self.figure.set_facecolor('white')
 
         self.canvas.draw()
 

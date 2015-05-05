@@ -111,7 +111,7 @@ class Canvas(app.Canvas):
             current_agent = agent[0]
             good = agent[1]
 
-            good.grid_pos = self.env.agents_list[current_agent].grid_pos
+            good.grid_pos = self.env.agents_list[current_agent.id].grid_pos
             self.goods['position'][good.id] = good.grid_pos
             #self.goods['color'][good.id] = random.uniform(0, 1), random.uniform(0, 1), 0, 1
             self.goods['color'][good.id] = 0, 1, 0, 1
@@ -120,11 +120,11 @@ class Canvas(app.Canvas):
         self.vbo_color.set_data(self.nodes['color'].copy())
 
     def move(self, Q, good):
-        distance_x = abs(good.grid_pos[0] - self.env.agents_list[Q].grid_pos[0])
-        distance_y = abs(good.grid_pos[1] - self.env.agents_list[Q].grid_pos[1])
+        distance_x = abs(good.grid_pos[0] - self.env.agents_list[Q.id].grid_pos[0])
+        distance_y = abs(good.grid_pos[1] - self.env.agents_list[Q.id].grid_pos[1])
         step_x = distance_x / 20
         step_y = distance_y / 20
-        good.grid_pos = self.env.agents_list[Q].grid_pos
+        good.grid_pos = self.env.agents_list[Q.id].grid_pos
         # for x in range(20):
         #     self.goods['position'][good.id][0] += step_x
         #     self.goods['position'][good.id][1] += step_y
@@ -135,10 +135,10 @@ class Canvas(app.Canvas):
         self.update()
 
     def updateColor(self, P, Q):
-        P_percentage = self.env.agents_list[P].nr_transactions / self.env.nr_transactions
-        Q_percentage = self.env.agents_list[Q].nr_transactions / self.env.nr_transactions
-        self.agents['color'][P] = P_percentage, 0, 1 - P_percentage, 1
-        self.agents['color'][Q] = Q_percentage, 0, 1 - Q_percentage, 1
+        P_percentage = self.env.agents_list[P.id].nr_transactions / self.env.nr_transactions
+        Q_percentage = self.env.agents_list[Q.id].nr_transactions / self.env.nr_transactions
+        self.agents['color'][P.id] = P_percentage, 0, 1 - P_percentage, 1
+        self.agents['color'][Q.id] = Q_percentage, 0, 1 - Q_percentage, 1
         self.vbo_color.set_data(self.nodes['color'].copy())
         self.update()
 

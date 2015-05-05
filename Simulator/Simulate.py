@@ -36,14 +36,6 @@ def simulate(nr_iterations, env, selectionrule, output):
 	env.running = True
 	#output.setEnviroment(env)
 	output.gui.tabs.updateV()
-	#for x in range(nr_iterations):
-	#
-	# call this function when user pressed start
-	# when user presses pause, exit the while, so function ends
-	# when user presses start again, call this function again
-	#
-	#
-	#
 
 	while not env.stop:
 		if env.parallel:
@@ -52,6 +44,7 @@ def simulate(nr_iterations, env, selectionrule, output):
 			total_transactions = onebyone(env, selectionrule, output, total_transactions)
 		if not env.running:
 			break
+		#print(env.current_agents)
 
 
 def onebyone(env, selectionrule, output, total_transactions):
@@ -106,13 +99,14 @@ def onebyone(env, selectionrule, output, total_transactions):
 				# Remove the perished product and the agent holding it from the list
 				env.notify_producer(good)
 				env.current_agents.remove(agent)
-				env.goods_list.remove(good)
+				#env.goods_list.remove(good)
+
 		else:
 			time.sleep(1)
 			break
 # Produce goods after every transaction, if it is time to produce.
 	if env.running:
-		env.produce_goods(selectionrule)
+		env.produce_goods(selectionrule, output)
 	sum = env.calculate_communityeffect(env.nr_good_transactions)
 	output.gui.results.setPercentage(sum)
 	return total_transactions
@@ -171,10 +165,11 @@ def parallel(env, selectionrule, output, total_transactions):
 				# Remove the perished product and the agent holding it from the list
 				env.notify_producer(good)
 				#env.current_agents.remove(agent)
-				env.goods_list.remove(good)
+				#env.goods_list.remove(good)
 
-		env.produce_goods(selectionrule)
+		env.produce_goods(selectionrule, output)
 		sum = env.calculate_communityeffect(env.nr_good_transactions)
+		output.gui.results.setPercentage(sum)
 	else:
 		time.sleep(1)
 

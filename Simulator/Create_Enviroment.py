@@ -22,7 +22,7 @@ class Enviroment:
 		# stable at prodcution_time = M * perish_period
 		self.production_delay = production_delay
 		self.value = value
-
+		self.goods_parameters = []
 		# Agents and Goods
 		self.agents_list = []
 		self.goods_list = []
@@ -70,6 +70,8 @@ class Enviroment:
 	def create_goods(self, goods):
 		# Create M product by calling the __init_() from the Goods Class
 		if goods:
+			print(goods)
+			self.goods_parameters = goods
 			for x in range(self.M):
 				perish_period 	 = goods[x][0]
 				production_delay = goods[x][1]
@@ -98,8 +100,10 @@ class Enviroment:
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
-		self.balance_matrix[P][Q] -= 1.0
-		self.balance_matrix[Q][P] += 1.0
+		# self.balance_matrix[P.id][Q.id] -= 1.0
+		# self.balance_matrix[Q.id][P.id] += 1.0
+		self.balance_matrix[P.id][Q.id] = P.given_received[Q.id][1] - P.given_received[Q.id][0]
+		self.balance_matrix[Q.id][P.id] = Q.given_received[P.id][1] - Q.given_received[P.id][0]
 
 	def notify_producer(self, good):
 		for producer in self.producing_agents:
@@ -107,7 +111,7 @@ class Enviroment:
 			if g.id == good.id:
 				g.life = good.life
 
-	def produce_goods(self, selectionrule):
+	def produce_goods(self, selectionrule, output):
 		for producer in self.producing_agents:
 			agent = producer[0]
 			good = producer[1]
@@ -119,27 +123,32 @@ class Enviroment:
 			# Check if it is time to start a new production if the good has perished
 			if good.time_until_production == 0 and good.life == 0:
 				# Create a new good
-				new_good = Goods(good.id, good.value, good.perish_period, good.production_delay)
+				#new_good = Goods(good.id, good.value, good.perish_period, good.production_delay)
 				#new_good.grid_pos = self.agents_list[agent].grid_pos
 				# Select a agent to hold the product, or use the producing agent
-				self.current_agents.append((agent, new_good))
+				self.goods_list[good.id].life = good.perish_period
+				self.current_agents.append((agent, self.goods_list[good.id]))
 				# Add the new good to the list
-				self.goods_list.append(new_good)
+				#self.goods_list.append(new_good)
+				
 				# Reset the time until the next production
 				good.time_until_production = good.production_delay
 				good.life = good.perish_period
+				output.gui.tabs.print_production(good)
+				
 
 			# Reduce the time untill the production if only the good has perished
 			elif good.life == 0:
 				good.time_until_production -= 1
+				output.gui.tabs.print_time_until_production(good)
 
 			
 
 	def transaction(self, P, Q, good):
 		# P gives good to Q
-		self.agents_list[P].give(Q, good)
+		self.agents_list[P.id].give(Q, good)
 		# Q recieves good from P
-		self.agents_list[Q].receive(P, good)
+		self.agents_list[Q.id].receive(P, good)
 
 		if good.perish_period > 0:
 				good.life -= 1
@@ -147,20 +156,20 @@ class Enviroment:
 	def select_agent(self, selectionrule, current_agent):
 		# Call the right seletion rule to select the agent
 
-		next_agent = current_agent
-		while(current_agent == next_agent):
+		next_agent_id = current_agent.id
+		while(current_agent.id == next_agent_id):
 			if selectionrule == 0:
-				next_agent = sl.random_rule(self.N)
+				next_agent_id = sl.random_rule(self.N)
 			elif selectionrule == 1:
-				next_agent = sl.balance_rule(self.balance_matrix, current_agent, self.N)
-		return next_agent
+				next_agent_id = sl.balance_rule(self.balance_matrix, current_agent.id, self.N)
+		return self.agents_list[next_agent_id]
 
 	def select_start_agents(self):
 		for good in self.goods_list:
-			agent = randint(0, self.N-1)
-			self.current_agents.append((agent, good))
+			index = randint(0, self.N-1)
+			self.current_agents.append((self.agents_list[index], good))
 			if good.perish_period > 0:
-				self.producing_agents.append((agent, good))
+				self.producing_agents.append((self.agents_list[index], good))
 
 	def calculate_transaction_percentages(self, total_transactions):
 		self.transaction_percentages = []
@@ -178,7 +187,10 @@ class Enviroment:
 		for agent in self.agents_list:
 			percentages = []
 			for goods in agent.goods_transactions:
-				percentages.append(goods[1] / (total_transactions*2))
+				if total_transactions != 0:
+					percentages.append(goods[1] / (total_transactions*2))
+				else:
+					percentages.append(0)
 			self.goods_transaction_percentages.append(percentages)
 
 	def calculate_communityeffect(self, goods_transactions):
