@@ -1,13 +1,15 @@
-import sys, time
+import sys, time, os
 import matplotlib.pyplot as plt
 import random
 import numpy as np
 from prettyplotlib import brewer2mpl
 import prettyplotlib as ppl
 import string
+import csv
 
 from PyQt4 import QtGui, QtCore
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 #from vispyTest import Canvas
 from Visualisation import Canvas
 import Simulate as sim
@@ -29,6 +31,8 @@ class Output(QtGui.QMainWindow):
         fileMenu = self.menubar.addMenu('&File')
         fileMenu.addAction('Save', lambda: self.saveData('untitled.txt'))
         fileMenu.addAction('Save As', lambda: self.showDialog())
+        fileMenu.addAction('CSV test', lambda: self.save_data())
+        fileMenu.addAction('Load', lambda: self.load_data())
 
         self.setMenuBar(self.menubar)
 
@@ -47,6 +51,42 @@ class Output(QtGui.QMainWindow):
         f.write('Balance matrix: ' + str(self.env.balance_matrix) + '\n')
 
         f.close()
+    def save_data(self):
+        path = 'results/' + time.strftime("%d-%m-%Y") + '_' + time.strftime("%H:%M:%S")
+
+        if not os.path.exists(path):
+            os.makedirs(path)
+            self.save_input(path)
+            self.save_balance(path)
+
+    def save_input(self, path):
+        fname = 'input.csv'
+        with open(os.path.join(path, fname), 'w', newline='') as f:
+            writer = csv.writer(f, delimiter=',')
+            data = [[str(self.env.N)],
+                    [str(self.env.M)],
+                    [str(self.env.parallel)],
+                    [str(self.env.selection_rule)]]
+
+            writer.writerows(data)
+            if self.env.goods_parameters:
+                writer.writerows(self.env.goods_parameters)
+
+    def save_balance(self, path):
+        fname = 'balance.csv'
+        with open(os.path.join(path, fname), 'w', newline='') as f:
+            writer = csv.writer(f, delimiter=',')
+            data = [['balance_matrix']]
+            writer.writerows(data)
+            writer.writerows(self.env.balance_matrix)
+
+    def load_data(self):
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Save file', 
+        '/home')
+        
+        if fname != '':
+            #self.saveData(fname)
+            print(fname)
 
     def showDialog(self):
 
@@ -100,6 +140,7 @@ class GUI(QtGui.QWidget):
         # Widgets
         self.tabs = Tabs(self.env)
         self.general_results = GeneralResults()
+        #self.general_results = Browser()
         self.general_results.setValues(self.env)
         self.control_panel = ControlPanel(self.env)
         self.results = Results(self.env)
@@ -116,6 +157,8 @@ class GUI(QtGui.QWidget):
 
         # Add Widgets
         left_layout.addWidget(self.groupBox_left)
+        # left_layout.addWidget(self.general_results)
+        # self.general_results.setMinimumWidth(200)
         top_layout.addWidget(self.groupBox_top)
 
         bottom_left_layout.addWidget(self.groupBox_bottom_left)
@@ -160,6 +203,7 @@ class Tabs(QtGui.QTabWidget):
 
         self.figure2 = plt.figure()
         self.balance_plot = FigureCanvas(self.figure2) 
+        self.toolbar = NavigationToolbar(self.bar_plot, self)
         #self.plot(self.figure, self.bar_plot)
         self.plot_balance()
 
@@ -182,6 +226,7 @@ class Tabs(QtGui.QTabWidget):
         self.layout_tab1.addWidget(self.visualisation.native)
         self.layout_tab2.addWidget(self.reset)
         self.layout_tab2.addWidget(self.bar_plot)
+        self.layout_tab2.addWidget(self.toolbar)
         self.layout_tab3.addWidget(self.textBox)
         self.layout_tab4.addWidget(self.balance_plot)
 
@@ -507,6 +552,7 @@ class Results(QtGui.QWidget):
         self.slider_subgroup.setMaximum(self.env.N)
         self.slider_subgroup.valueChanged.connect(self.setSubgroup)
 
+
         self.goods_combo = QtGui.QComboBox()
         self.setGoodComboValues(self.goods_combo)
         self.goods_combo.activated[str].connect(self.setIndex) 
@@ -596,7 +642,10 @@ class AgentInfo(QtGui.QDialog):
         self.canvas = FigureCanvas(self.figure) 
         self.plotGiven()
 
+        self.toolbar = NavigationToolbar(self.canvas, self)
+
         vbox.addWidget(self.canvas)
+        vbox.addWidget(self.toolbar)
         self.setLayout(vbox)
 
 
@@ -654,10 +703,12 @@ class YieldCurve(QtGui.QDialog):
 
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure) 
+        self.toolbar = NavigationToolbar(self.canvas, self)
 
         vbox.addWidget(self.lbl_goods)
         vbox.addWidget(self.combo_goods)
         vbox.addWidget(self.canvas)
+        vbox.addWidget(self.toolbar)
         self.setLayout(vbox)
 
         self.setGeometry(150, 150, 600, 600)
@@ -735,6 +786,27 @@ class YieldCurve(QtGui.QDialog):
             if good.id == int(id):
                 #good.value += 1
                 self.plotYieldCurve2(good)
+
+class Browser(QtGui.QWidget):
+    def __init__(self):
+        super(Browser, self).__init__()
+
+        self.initUI()
+
+    def initUI(self): 
+
+        self.resize(700, 500)
+        self.treeView = QtGui.QTreeView()
+        self.fileSystemModel = QtGui.QFileSystemModel(self.treeView)
+        self.fileSystemModel.setReadOnly(False)
+        self.fileSystemModel.setRootPath( QtCore.QDir.currentPath() )
+        root = self.fileSystemModel.setRootPath("/")
+        self.treeView.setModel(self.fileSystemModel)
+        self.treeView.setRootIndex(root)
+
+        Layout = QtGui.QVBoxLayout(self)
+        Layout.addWidget(self.treeView)
+    
 
 class SaveAs(QtGui.QDialog):
     def __init__(self, env):

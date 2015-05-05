@@ -33,8 +33,6 @@ class Agent:
 		self.listoftransactions.append(("Given", receiving_agent, good))
 		self.nr_transactions += 1
 		self.goods_transactions[good.id][1] += 1
-
-		pass
 	
 	def receive(self, giving_agent, good):
 		#The current agent receives from the giving_agent
@@ -42,11 +40,3 @@ class Agent:
 		self.listoftransactions.append(("Received", giving_agent, good))
 		self.nr_transactions += 1
 		self.goods_transactions[good.id][1] += 1
-		pass
-	
-	def update_given_received(self, position, previous_transaction):
-		# if previous_transaction == given:
-		# 	self.given_received[position][0] += previous_transaction
-		# elif previous_transaction == received:
-		# 	self.given_received[position][1] += previous_transaction
-		pass

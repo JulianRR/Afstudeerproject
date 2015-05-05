@@ -100,8 +100,6 @@ class Enviroment:
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
-		# self.balance_matrix[P.id][Q.id] -= 1.0
-		# self.balance_matrix[Q.id][P.id] += 1.0
 		self.balance_matrix[P.id][Q.id] = P.given_received[Q.id][1] - P.given_received[Q.id][0]
 		self.balance_matrix[Q.id][P.id] = Q.given_received[P.id][1] - Q.given_received[P.id][0]
 
@@ -115,11 +113,7 @@ class Enviroment:
 		for producer in self.producing_agents:
 			agent = producer[0]
 			good = producer[1]
-			# A transaction has taken place, lower the time until the production
-			#good.time_until_production -= 1
-			# if g.id == good.id:
-			# 	good.life = g.life
-
+			
 			# Check if it is time to start a new production if the good has perished
 			if good.time_until_production == 0 and good.life == 0:
 				# Create a new good
