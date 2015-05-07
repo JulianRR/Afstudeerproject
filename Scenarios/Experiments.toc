@@ -1,0 +1,30 @@
+\contentsline {section}{1. Norm scenarios}{3}
+\contentsline {subsection}{Norm 1}{3}
+\contentsline {subsection}{Norm 2}{3}
+\contentsline {section}{2. Random rule}{3}
+\contentsline {subsection}{Norm 1}{3}
+\contentsline {subsection}{Results}{3}
+\contentsline {subsection}{Norm 2}{4}
+\contentsline {subsection}{Results}{4}
+\contentsline {subsection}{Scenario 1}{4}
+\contentsline {subsection}{Results}{5}
+\contentsline {subsection}{Scenario 2}{5}
+\contentsline {subsection}{Results}{5}
+\contentsline {section}{3. Balance rule}{6}
+\contentsline {subsection}{Norm 1}{6}
+\contentsline {subsection}{Results}{6}
+\contentsline {subsection}{Norm 2}{6}
+\contentsline {subsection}{Results}{7}
+\contentsline {subsection}{Scenario 1}{7}
+\contentsline {subsection}{Results}{7}
+\contentsline {subsection}{Scenario 2}{8}
+\contentsline {subsection}{Results}{8}
+\contentsline {section}{4. Goodwill rule}{8}
+\contentsline {subsection}{Norm 1}{8}
+\contentsline {subsection}{Results}{9}
+\contentsline {subsection}{Norm 2}{9}
+\contentsline {subsection}{Results}{9}
+\contentsline {subsection}{Scenario 1}{10}
+\contentsline {subsection}{Results}{10}
+\contentsline {subsection}{Scenario 2}{10}
+\contentsline {subsection}{Results}{11}
