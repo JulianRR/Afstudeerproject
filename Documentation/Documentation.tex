@@ -25,6 +25,8 @@
 
 \documentclass{article}
 
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -217,20 +219,45 @@ The usage of each function in each file and the most important variables will be
 \subsubsection{Agent.py}
 The Agent class consists of multiple functions to update information about each agent. Each agent knows only about the things the agent is part of. For example each agent only knows about its own transactions. Each agent has an unique id which can be used as a index for some lists. The index of these lists is the same as the id to make navigating through these lists easy.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
+  \item random
 \end{itemize}
 
 
 \begin{lstlisting}[language=Python]
-def receive(self, P, Q):
+def give(self, receiving_agent, good):
 \end{lstlisting}
+Updates the transaction information of a certain agent after a good has been given.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[receiving\_agent:] An \textit{Agent} object that is receiving the good
+  		\item[good:] A \textit{Good} object that has been received by the receiving\_agent
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def receive(self, giving_agent, good):
+\end{lstlisting}
+Updates the transaction information of a certain agent after a good has been received.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[giving\_agent:] An \textit{Agent} object that is giving the good
+  		\item[good:] A \textit{Good} object that has been given by the giving\_agent
+	\end{description}
+
+\end{description}
 
 \subsubsection{Goods.py}
 The Good class consists of variables that determine what kind of good it is. Each good has an unique id, which can be used as the index of some lists. The index of these lists is the same as the id to make navigating through these lists easy.
 
-For this class no special packages are used.
+For this class no modules are used.
 
 \begin{lstlisting}[language=Python]
 
@@ -239,34 +266,150 @@ For this class no special packages are used.
 \subsubsection{Enviroment.py}
 The Enviroment class consists of multiple functions to create the enviroment of the giving game, to update variables after each transaction and to calculate the community effect. Most of the variables are stored in this class.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
 \end{itemize}
 
 
 \begin{lstlisting}[language=Python]
-def create_agents(self):
+def create_agents(self, N):
 \end{lstlisting}
+Creates N number of agents.
+The agents are stored in a list, \textit{agents\_list}.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[N:] An integer that defines the number of agents.
+	\end{description}
+
+\end{description}
 
 \begin{lstlisting}[language=Python]
-def create_goods(self, goods):
+def create_goods(self, M, goods):
 \end{lstlisting}
+Creates M number of goods.
+The goods are stored in a list, \textit{goods\_list}.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[M:] An integer that defines the number of goods.
+		\item[goods:] A 2-dimensional list. Each entry consists of three integer values that define the type of the good.
+	\end{description}
+
+\end{description}
 
 \begin{lstlisting}[language=Python]
 def notify_agents(self):
 \end{lstlisting}
+Notifies the agents of the created goods.
 
 \begin{lstlisting}[language=Python]
 def update_balancematrix(self, P, Q):
 \end{lstlisting}
+Updates the balance between P and Q in the balance matrix.
 
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[P:] An \textit{Agent} object that is giving.
+		\item[Q:] An \textit{Agent} object that is receiving.
+	\end{description}
 
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def notify_producer(self, good):
+\end{lstlisting}
+Notifies each producer of the life of the good.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[good:] An \textit{Good} object.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+produce_goods(self, output):
+\end{lstlisting}
+Goods are produced if the time until production reached zero, else it decreases the time until production by one.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object used to update the GUI after a production.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def transaction(self, P, Q, good):
+\end{lstlisting}
+P gives a good to Q.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[P:] An \textit{Agent} object that is giving.
+		\item[Q:] An \textit{Agent} object that is receiving.
+		\item[good:] A \textit{Good} object that is being given.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def select_agent(self, selectionrule, current_agent):
+\end{lstlisting}
+Select an agent using the selectionrule to receive a good.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[selectionrule:] An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule.
+		\item[current\_agent:] An \textit{Agent} object that is currently holding a good.
+	\end{description}
+  \item[Returns:] An \textit{Agent} object
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def select_start_agents(self)
+\end{lstlisting}
+Select randomly the agents to receive the goods at the start of the simulation. These agents also will be the producers if the goods are perishable.
+
+\begin{lstlisting}[language=Python]
+def calculate_good_transaction_percentages(self, total_transactions):
+\end{lstlisting}
+Calculates the percentage of how many times each agent has given and received a specific good.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[total\_transactions:] An integer, the total number of transactions that have taken place.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def calculate_communityeffect(self, goods_transactions, subgroup_size):
+\end{lstlisting}
+Calculates the percentage of transactions that take place in a subgroup with a specific size.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[goods\_transactions:] A list that contains the transaction percentage of each good.
+		\item[subgroup\_size:] An integer that defines the size of a subgroup.
+	\end{description}
+\end{description}
 
 \subsubsection{Simulate.py}
 This file does  not use any object oriented code. This file consists of multiple functions that call the necessary functions from other files like Enviroment.py. This file can be seen as the engine for the simulation. The creation of the enviroment, transactions and updating the UI take place in this file.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
 \end{itemize}
@@ -274,37 +417,118 @@ The following python packages are used:
 
 \begin{lstlisting}[language=Python]
 def create_enviroment(N, M, goods_list, M_perishable, perish_period,
-			       production_delay, value, parallel, selectionrule):
+			       production_delay, nominal_value, parallel, selectionrule):
 \end{lstlisting}
+Creates the enviroment with all the agents and goods.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[N:] An integer that defines the number of agents
+		\item[M:] An integer that defines the numer of goods
+		\item[goods\_list:] An 2-dimensianal list. Each entry consists of three integer values that define the type of the good.
+		\item[M\_perishable:] An integer that defines the number goods that are perishable.
+		\item[perish\_period:] An integer that defines the time before a good perishes.
+		\item[production\_delay:] An integer that defines the time before a good is produced after it has perished.
+		\item[nominal\_value:] An integer that defines the nominal value of the goods
+		\item[parallel:] An boolean that defines if the transaction should be executed parallel or one by one. True is parallel, False is one by one.
+		\item[selectionrule:] An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def start_simulation(output, env, selectionrule): def simulate(nr_iterations, env, selectionrule, output):
+\end{lstlisting}
+Starts the simulation.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def continue_simulation(env, selectionrule, output, total_transactions):
+\end{lstlisting}
+Continue the simulation after the simulation has been paused.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+		\item[total\_transactions:] An integer. The total transactions after the simulation has been paused.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def onebyone(env, selectionrule, output, total_transactions):
+\end{lstlisting}
+Executes the transactions one by one.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+		\item[total\_transactions:] An integer.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def parallel(env, selectionrule, output, total_transactions):
+\end{lstlisting}
+Executes the transactions parallel.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+		\item[total\_transactions:] An integer.
+	\end{description}
+\end{description}
 
 \subsubsection{Selection\_rules.py}
 This file does not use any object oriented code. This file consists of the function used to select the next agent. The different algorithms for each selection rule will be explained below.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
 \end{itemize}
 
 \begin{lstlisting}[language=Python]
 def random_rule(N):
-	return randint(0, N-1)
 \end{lstlisting}
+The random rule chooses an agent randombly
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[N:] An integer that defines the number of agents.
+	\end{description}
+  \item[Returns:] An \textit{Agent} object
+\end{description}
 
 \begin{lstlisting}[language=Python]
 def balance_rule(balance_matrix, current_agent, N):
-	next_agents = []
-	highest_balance = balance_matrix[current_agent].min()
-	for x in range(N):
-		if x != current_agent:
-			if balance_matrix[current_agent][x] > highest_balance:
-				next_agents = [x]
-				highest_balance = balance_matrix[current_agent][x]
-			elif balance_matrix[current_agent][x] == highest_balance:
-				next_agents.append(x)
-	if len(next_agents) > 1:
-		return next_agents[randint(0, len(next_agents)-1)]
-	return next_agents[0]
 \end{lstlisting}
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[balance\_matrix:] An 2-dimensional numpy array
+		\item[current\_agent:] An \textit{Agent} object.
+		\item[N:] An integer that defines the number of agents.
+	\end{description}
+  \item[Returns:] An \textit{Agent} object
+\end{description}
 
 \begin{lstlisting}[language=Python]
 def goowill_rule():
@@ -317,7 +541,7 @@ The usage of each function/class in each file will be explained.
 \subsubsection{GUI\_Input.py}
 The Input class is consists of multiple functions to handle the user input so that the parameters can be used to create the enviroment and start the simulation.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
   \item Qt
@@ -330,21 +554,51 @@ def setAgents(self, value):
 \subsubsection{GUI\_Output.py}
 This file consists of multiple classes. Each class is used to create a part of the UI. The main class is the Output class.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
   \item Qt
 \end{itemize}
 
 \begin{lstlisting}[language=Python]
+class Output(QtGui.QMainWindow):
+\end{lstlisting}
+The Output class is the main class. This class creates the main window with options for the user to save data as an csv file.
+
+\begin{lstlisting}[language=Python]
 class GUI(QtGui.QWidget):
 \end{lstlisting}
+The GUI class is the main layout class. This class creates all the different Qt layouts which can be filled with QWidgets.
 
+\begin{lstlisting}[language=Python]
+class Tabs(QtGui.QTabWidget):
+\end{lstlisting}
+The Tabs class contains the layouts and widgets for the visualisation of the simulation. It contains the animated visualisation, a list of transactions and a graph containing the transaction percentages.
+
+\begin{lstlisting}[language=Python]
+class ControlPanel(QtGui.QWidget):
+\end{lstlisting}
+The ControlPanel class contains all the controls to pause, start and delay the simulation.
+
+\begin{lstlisting}[language=Python]
+class Results(QtGui.QWidget):
+\end{lstlisting}
+The Results class contains all controls to get to the most important data, the yield curve, the number of goods given and received by each agent and the community effect.
+
+\begin{lstlisting}[language=Python]
+class AgentInfo(QtGui.QDialog):
+\end{lstlisting}
+The AgentInfo class contains functions to plot information about each agent. 
+
+\begin{lstlisting}[language=Python]
+class YieldCurve(QtGui.QDialog):
+\end{lstlisting}
+The YieldCurve class contains funtion to plot the yield curve for each pair of agents and each good.
 
 \subsubsection{Visualisation.py}
 This Canvas class consists of multiple function to create and animate the transaction during the simulation.
 
-The following python packages are used:
+The following python modules are used:
 \begin{itemize}
   \item Numpy
   \item VisPy which uses OpenGl
@@ -391,7 +645,7 @@ def on_initialize(self, event):
 \section{5. Further research}
 
 \subsection{Requirements}
-The following Python packages/frameworks are mandatory.
+The following Python modules/frameworks are mandatory.
 
 \begin{itemize}
   \item Qt Framework
