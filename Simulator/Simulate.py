@@ -68,7 +68,7 @@ def onebyone(env, selectionrule, output, total_transactions):
 			env.nr_good_transactions[good.id] += 1
 			output.gui.control_panel.setNrTransactions(env.total_transactions)
 
-			output.gui.tabs.colorV(current_agent, next_agent)
+			output.gui.tabs.colorV()
 
 			#env.calculate_transaction_percentages(env.nr_transactions)
 			env.calculate_good_transaction_percentages(env.nr_transactions)
@@ -77,10 +77,11 @@ def onebyone(env, selectionrule, output, total_transactions):
 			#output.gui.tabs.showPlot()
 			#output.plotTransactionPercentages()
 			#output.gui.tabs.plotTransactionPercentages()
-			output.gui.tabs.plotGoodTransactionPercentages()
+			# output.gui.tabs.plotGoodTransactionPercentages()
 
 			# exit = output.print_transaction(current_agent, next_agent, good)
-			output.gui.tabs.print_transaction(current_agent, next_agent, good)
+			#output.gui.tabs.print_transaction(current_agent, next_agent, good)
+			output.gui.results.print_transaction(current_agent, next_agent, good)
 			QtGui.qApp.processEvents()
 			# output.gui.tabs.updateV()
 			# if exit:
@@ -104,9 +105,11 @@ def onebyone(env, selectionrule, output, total_transactions):
 		else:
 			time.sleep(1)
 			break
+	output.gui.tabs.plotGoodTransactionPercentages()
 # Produce goods after every transaction, if it is time to produce.
 	if env.running:
 		env.produce_goods(selectionrule, output)
+		QtGui.qApp.processEvents()
 	sum = env.calculate_communityeffect(env.nr_good_transactions)
 	output.gui.results.setPercentage(sum)
 	return total_transactions
@@ -129,7 +132,7 @@ def parallel(env, selectionrule, output, total_transactions):
 			env.nr_transactions += 1
 			env.nr_good_transactions[good.id] += 1
 
-			output.gui.tabs.colorV(current_agent, next_agent)
+			output.gui.tabs.colorV()
 
 				
 		env.current_agents = []
@@ -146,10 +149,11 @@ def parallel(env, selectionrule, output, total_transactions):
 
 			env.calculate_good_transaction_percentages(env.nr_transactions)
 
-			output.gui.tabs.plotGoodTransactionPercentages()
+			#output.gui.tabs.plotGoodTransactionPercentages()
 
-			output.gui.tabs.print_transaction(current_agent, next_agent, good)
-			QtGui.qApp.processEvents()
+			#output.gui.tabs.print_transaction(current_agent, next_agent, good)
+			output.gui.results.print_transaction(current_agent, next_agent, good)
+			
 
 			if env.stop:
 				break
@@ -167,9 +171,11 @@ def parallel(env, selectionrule, output, total_transactions):
 				#env.current_agents.remove(agent)
 				#env.goods_list.remove(good)
 
+		output.gui.tabs.plotGoodTransactionPercentages()
 		env.produce_goods(selectionrule, output)
 		sum = env.calculate_communityeffect(env.nr_good_transactions)
 		output.gui.results.setPercentage(sum)
+		QtGui.qApp.processEvents()
 	else:
 		time.sleep(1)
 

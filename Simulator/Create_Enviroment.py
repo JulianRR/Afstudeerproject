@@ -113,7 +113,7 @@ class Enviroment:
 		for producer in self.producing_agents:
 			agent = producer[0]
 			good = producer[1]
-			
+
 			# Check if it is time to start a new production if the good has perished
 			if good.time_until_production == 0 and good.life == 0:
 				# Create a new good
@@ -128,13 +128,20 @@ class Enviroment:
 				# Reset the time until the next production
 				good.time_until_production = good.production_delay
 				good.life = good.perish_period
-				output.gui.tabs.print_production(good)
+				# output.gui.tabs.print_production(good)
+				output.gui.results.print_production(good)
+				output.gui.tabs.colorV()
+				output.gui.tabs.moveV(agent, self.goods_list[good.id])
+				print(agent.grid_pos)
+				
 				
 
 			# Reduce the time untill the production if only the good has perished
 			elif good.life == 0:
 				good.time_until_production -= 1
-				output.gui.tabs.print_time_until_production(good)
+				#output.gui.tabs.print_time_until_production(good)
+				output.gui.results.print_time_until_production(good)
+				#output.gui.tabs.colorV()
 
 			
 

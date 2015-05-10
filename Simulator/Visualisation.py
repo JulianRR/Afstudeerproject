@@ -1,4 +1,4 @@
-from vispy import gloo
+from vispy import gloo, visuals
 from vispy import app
 import numpy as np
 import time
@@ -13,22 +13,49 @@ attribute vec4 color;
 attribute float size;
 
 varying vec4 v_color;
+varying float v_radius;
+varying float v_linewidth;
+varying float v_antialias;
 void main (void) {
+    v_radius = size;
+    v_linewidth = 1.0;
+    v_antialias = 1.0;
+    
     gl_Position = vec4(position, 1.0);
     v_color = color;
-    gl_PointSize = size;
+    gl_PointSize = (v_radius + v_linewidth + 1.5*v_antialias);
 }
 """
 
 FRAG_SHADER = """
 #version 120
 varying vec4 v_color;
+varying float v_radius;
+varying float v_linewidth;
+varying float v_antialias;
 void main()
 {
+    float s = 2.0*(v_radius + v_linewidth + 1.5*v_antialias);
+    float t = v_linewidth/2.0-v_antialias;
+    float r = length((gl_PointCoord.xy - vec2(0.5,0.5))*s);
+    float d = abs(r - v_radius) - t;
+
     float x = 2.0*gl_PointCoord.x - 1.0;
     float y = 2.0*gl_PointCoord.y - 1.0;
     float a = 1.0 - (x*x + y*y);
-    gl_FragColor = vec4(v_color.rgb, a*v_color.a);
+
+    if( d < 0.0 )
+        gl_FragColor = v_color;
+    else
+    {
+        float alpha = d/v_antialias;
+        alpha = exp(-alpha*alpha);
+        if (r > v_radius)
+            gl_FragColor = vec4(v_color.rgb, alpha*v_color.a);
+        else
+            gl_FragColor = v_color;
+    }
+    
 }
 
 """
@@ -59,6 +86,11 @@ class Canvas(app.Canvas):
         self.goods['color'][:] = 0, 1, 0, 1
         self.goods['position'][:] = np.random.uniform(-0.25, +0.25, (self.M, 3))
 
+        #Text
+        self.font_size = 12.
+        self.text = [visuals.TextVisual(str(x), bold=True) for x in range(self.N)]
+        self.tr_sys = visuals.transforms.TransformSystem(self)
+
         self.program = gloo.Program(VERT_SHADER, FRAG_SHADER)
         # Set uniform and attribute
         self.vbo_position = gloo.VertexBuffer(self.nodes['position'].copy())
@@ -69,7 +101,7 @@ class Canvas(app.Canvas):
         self.program['size'] = self.vbo_size
         self.program['position'] = self.vbo_position
 
-        gloo.set_state(clear_color='white', blend=False,
+        gloo.set_state(clear_color='white', blend=True,
                blend_func=('src_alpha', 'one_minus_src_alpha'))
 
     def on_resize(self, event):
@@ -78,10 +110,22 @@ class Canvas(app.Canvas):
     def on_draw(self, event):
         gloo.clear()
         self.program.draw('points')
+        for t in self.text:
+            t.draw(self.tr_sys)
 
     def on_mouse_press(self, event):
         #self.createGrid()
         pass
+
+    def apply_zoom(self):
+        #self.text.text = '%s pt' % round(self.font_size, 1)
+        count = 0
+        for t in self.text:
+            t.font_size = self.font_size + count
+            t.pos = abs(self.agents['position'][count][0] * 100), abs(self.agents['position'][count][1] * 100)
+            #t.pos = (count / 10) // 2, (count / 10) // 2
+            count += 1
+        self.update()
 
     def createGrid(self):
         root = sqrt(self.N)
@@ -113,11 +157,12 @@ class Canvas(app.Canvas):
 
             good.grid_pos = self.env.agents_list[current_agent.id].grid_pos
             self.goods['position'][good.id] = good.grid_pos
-            #self.goods['color'][good.id] = random.uniform(0, 1), random.uniform(0, 1), 0, 1
             self.goods['color'][good.id] = 0, 1, 0, 1
+            #self.goods['color'][good.id] = 0, 1, 0, 1
             count += 1
         self.vbo_position.set_data(self.nodes['position'].copy())
         self.vbo_color.set_data(self.nodes['color'].copy())
+        self.apply_zoom()
 
     def move(self, Q, good):
         distance_x = abs(good.grid_pos[0] - self.env.agents_list[Q.id].grid_pos[0])
@@ -134,13 +179,26 @@ class Canvas(app.Canvas):
         self.vbo_position.set_data(self.nodes['position'].copy())
         self.update()
 
-    def updateColor(self, P, Q):
-        P_percentage = self.env.agents_list[P.id].nr_transactions / self.env.nr_transactions
-        Q_percentage = self.env.agents_list[Q.id].nr_transactions / self.env.nr_transactions
-        self.agents['color'][P.id] = P_percentage, 0, 1 - P_percentage, 1
-        self.agents['color'][Q.id] = Q_percentage, 0, 1 - Q_percentage, 1
+    def updateColor(self):
+        for x in range(self.N):
+            P_percentage = self.env.agents_list[x].nr_transactions / self.env.nr_transactions
+            #Q_percentage = self.env.agents_list[Q.id].nr_transactions / self.env.nr_transactions
+            self.agents['color'][x] = P_percentage, 0, 1 - P_percentage, 1
+            #self.agents['color'][Q.id] = Q_percentage, 0, 1 - Q_percentage, 1
+            #self.vbo_color.set_data(self.nodes['color'].copy())
+        for y in range(self.M):
+            if self.env.goods_list[y].life == 0:
+                self.goods['color'][y][3] = 0.5
+            else:
+                self.goods['color'][y][3] = 1
         self.vbo_color.set_data(self.nodes['color'].copy())
         self.update()
+        # P_percentage = self.env.agents_list[P.id].nr_transactions / self.env.nr_transactions
+        # Q_percentage = self.env.agents_list[Q.id].nr_transactions / self.env.nr_transactions
+        # self.agents['color'][P.id] = P_percentage, 0, 1 - P_percentage, 1
+        # self.agents['color'][Q.id] = Q_percentage, 0, 1 - Q_percentage, 1
+        # self.vbo_color.set_data(self.nodes['color'].copy())
+        # self.update()
 
 if __name__ == '__main__':
     c = Canvas(10, 3)

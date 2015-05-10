@@ -1,59 +1,62 @@
-import time
-
-import numpy as np
-from scipy.spatial import cKDTree
-
-from vispy import gloo
+from vispy import gloo, visuals
 from vispy import app
+import numpy as np
 
-# Create boids
-n = 1000
-particles = np.zeros(2 + n, [('position', 'f4', 3),
-                             ('position_1', 'f4', 3),
-                             ('position_2', 'f4', 3),
-                             ('velocity', 'f4', 3),
-                             ('color', 'f4', 4),
-                             ('size', 'f4', 1)])
-boids = particles[2:]
-target = particles[0]
-predator = particles[1]
-
-boids['position'] = np.random.uniform(-0.25, +0.25, (n, 3))
-boids['velocity'] = np.random.uniform(-0.00, +0.00, (n, 3))
-boids['size'] = 4
-boids['color'] = 1, 1, 1, 1
-
-target['size'] = 16
-target['color'][:] = 1, 1, 0, 1
-predator['size'] = 16
-predator['color'][:] = 1, 0, 0, 1
-target['position'][:] = 0.25, 0.0, 0
+# Create vetices
+n = 10000
+v_position = 0.25 * np.random.randn(n, 3).astype(np.float32)
+v_color = np.random.uniform(0, 1, (n, 3)).astype(np.float32)
+v_size = np.random.uniform(2, 12, (n, 1)).astype(np.float32)
 
 VERT_SHADER = """
-#version 120
-attribute vec3 position;
-attribute vec4 color;
-attribute float size;
+attribute vec3  a_position;
+attribute vec3  a_color;
+attribute float a_size;
 
-varying vec4 v_color;
+varying vec4 v_fg_color;
+varying vec4 v_bg_color;
+varying float v_radius;
+varying float v_linewidth;
+varying float v_antialias;
+
 void main (void) {
-    gl_Position = vec4(position, 1.0);
-    v_color = color;
-    gl_PointSize = size;
+    v_radius = a_size;
+    v_linewidth = 1.0;
+    v_antialias = 1.0;
+    v_fg_color  = vec4(0.0,0.0,0.0,0.5);
+    v_bg_color  = vec4(a_color,    1.0);
+
+    gl_Position = vec4(a_position, 1.0);
+    gl_PointSize = 2.0*(v_radius + v_linewidth + 1.5*v_antialias);
 }
 """
 
 FRAG_SHADER = """
 #version 120
-varying vec4 v_color;
+
+varying vec4 v_fg_color;
+varying vec4 v_bg_color;
+varying float v_radius;
+varying float v_linewidth;
+varying float v_antialias;
 void main()
 {
-    float x = 2.0*gl_PointCoord.x - 1.0;
-    float y = 2.0*gl_PointCoord.y - 1.0;
-    float a = 1.0 - (x*x + y*y);
-    gl_FragColor = vec4(v_color.rgb, a*v_color.a);
+    float size = 2.0*(v_radius + v_linewidth + 1.5*v_antialias);
+    float t = v_linewidth/2.0-v_antialias;
+    float r = length((gl_PointCoord.xy - vec2(0.5,0.5))*size);
+    float d = abs(r - v_radius) - t;
+    if( d < 0.0 )
+        gl_FragColor = v_fg_color;
+    else
+    {
+        float alpha = d/v_antialias;
+        alpha = exp(-alpha*alpha);
+        if (r > v_radius)
+            gl_FragColor = vec4(v_fg_color.rgb, alpha*v_fg_color.a);
+        else
+            gl_FragColor = mix(v_bg_color, v_fg_color, alpha);
+    }
 }
-
 """
 
 
@@ -62,71 +65,36 @@ class Canvas(app.Canvas):
     def __init__(self):
         app.Canvas.__init__(self, keys='interactive')
 
-        # Time
-        self._t = time.time()
-        self._pos = 0.0, 0.0
-        self._button = None
-
-        # Create program
+    def on_initialize(self, event):
         self.program = gloo.Program(VERT_SHADER, FRAG_SHADER)
 
-        # Create vertex buffers
-        self.vbo_position = gloo.VertexBuffer(particles['position'].copy())
-        self.vbo_color = gloo.VertexBuffer(particles['color'].copy())
-        self.vbo_size = gloo.VertexBuffer(particles['size'].copy())
-
-        # Bind vertex buffers
-        self.program['color'] = self.vbo_color
-        self.program['size'] = self.vbo_size
-        self.program['position'] = self.vbo_position
-
-        
-
-    def on_initialize(self, event):
-        gloo.set_state(clear_color=(0, 0, 0, 1), blend=True,
-                       blend_func=('src_alpha', 'one'))
+        self.font_size = 48.
+        self.text = [visuals.TextVisual(str(1), bold=True), visuals.TextVisual(str(2), bold=True), visuals.TextVisual(str(3), bold=True)]
+        self.tr_sys = visuals.transforms.TransformSystem(self)
+        self.apply_zoom()
+        # Set uniform and attribute
+        self.program['a_color'] = gloo.VertexBuffer(v_color)
+        self.program['a_position'] = gloo.VertexBuffer(v_position)
+        self.program['a_size'] = gloo.VertexBuffer(v_size)
+        gloo.set_state(clear_color='white', blend=True,
+                       blend_func=('src_alpha', 'one_minus_src_alpha'))
 
     def on_resize(self, event):
-        width, height = event.size
-        gloo.set_viewport(0, 0, width, height)
-
-    def on_mouse_press(self, event):
-        self._button = event.button
-        self._timer = app.Timer('auto', connect=self.update, start=True)
-        self.on_mouse_move(event)
-
-    def on_mouse_release(self, event):
-        self._button = None
-        self.on_mouse_move(event)
-
-    def on_mouse_move(self, event):
-        if not self._button:
-            return
-        w, h = self.size
-        x, y = event.pos
-        sx = 2 * x / float(w) - 1.0
-        sy = - (2 * y / float(h) - 1.0)
-
-        if self._button == 1:
-            target['position'][:] = sx, sy, 0
-        elif self._button == 2:
-            predator['position'][:] = sx, sy, 0
+        gloo.set_viewport(0, 0, *event.size)
 
     def on_draw(self, event):
-        gloo.clear()
-        # Draw
-        self.program.draw('points')
-        # Next iteration
-        self._t = self.iteration(time.time() - self._t)
+        gloo.clear(color=True, depth=True)
+        #self.program.draw('points')
+        for tex in self.text:
+            tex.draw(self.tr_sys)
 
-    def iteration(self, dt):
-
-        boids['velocity'] += 0.0005 
-        boids['position'] += boids['velocity']
-
-        self.vbo_position.set_data(particles['position'].copy())
-
-        return dt
+    def apply_zoom(self):
+        #self.text.text = '%s pt' % round(self.font_size, 1)
+        for t in self.text:
+            t.font_size = self.font_size
+            t.pos = self.size[0] // 2 + 100, self.size[1] // 2
+            print(t.pos)
+        self.update()
 
 
 if __name__ == '__main__':

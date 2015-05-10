@@ -5,7 +5,11 @@ class Goods():
 		self.value = value # The value of the good
 		self.perish_period = perish_period 
 		self.production_delay = production_delay
-		self.life = perish_period
+		if perish_period == 0:
+			self.life = 1
+		else:
+			self.life = perish_period
+		#self.life = perish_period
 		self.time_until_production = production_delay
 
 		self.grid_pos = [0, 0, 0]

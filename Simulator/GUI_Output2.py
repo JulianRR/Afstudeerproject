@@ -1,5 +1,6 @@
 import sys, time, os
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import random
 import numpy as np
 from prettyplotlib import brewer2mpl
@@ -40,7 +41,7 @@ class Output(QtGui.QMainWindow):
         self.gui = GUI(self.env)
         self.setCentralWidget(self.gui)
         
-        self.setGeometry(300, 50, 1100, 800)
+        self.setGeometry(300, 50, 1100, 900)
         self.setWindowTitle('Menubar')    
         self.show()
 
@@ -129,13 +130,15 @@ class GUI(QtGui.QWidget):
         # Groupboxes
         self.groupBox_left = QtGui.QGroupBox(self)
         self.groupBox_top = QtGui.QGroupBox(self)
-        self.groupBox_bottom_left = QtGui.QGroupBox(self)
-        self.groupBox_bottom_right = QtGui.QGroupBox(self)
+        # self.groupBox_bottom_left = QtGui.QGroupBox(self)
+        # self.groupBox_bottom_right = QtGui.QGroupBox(self)
+        self.groupBox_bottom = QtGui.QGroupBox(self)
 
-        self.groupBox_left.setMinimumWidth(200)
+        self.groupBox_left.setMinimumWidth(250)
         self.groupBox_top.setMinimumHeight(150)
-        self.groupBox_bottom_left.setMinimumWidth(600)
-        self.groupBox_bottom_right.setMinimumWidth(300)
+        # self.groupBox_bottom_left.setMinimumWidth(600)
+        # self.groupBox_bottom_right.setMinimumWidth(300)
+        self.groupBox_bottom.setMinimumWidth(800)
 
         # Widgets
         self.tabs = Tabs(self.env)
@@ -152,8 +155,8 @@ class GUI(QtGui.QWidget):
         right_layout.addLayout(top_layout)
         right_layout.addLayout(bottom_layout)
 
-        bottom_layout.addLayout(bottom_left_layout)
-        bottom_layout.addLayout(bottom_right_layout)
+        # bottom_layout.addLayout(bottom_left_layout)
+        # bottom_layout.addLayout(bottom_right_layout)
 
         # Add Widgets
         left_layout.addWidget(self.groupBox_left)
@@ -161,21 +164,25 @@ class GUI(QtGui.QWidget):
         # self.general_results.setMinimumWidth(200)
         top_layout.addWidget(self.groupBox_top)
 
-        bottom_left_layout.addWidget(self.groupBox_bottom_left)
-        bottom_right_layout.addWidget(self.groupBox_bottom_right)
+        # bottom_left_layout.addWidget(self.groupBox_bottom_left)
+        # bottom_right_layout.addWidget(self.groupBox_bottom_right)
+        bottom_layout.addWidget(self.groupBox_bottom)
         
         # Fill groupboxes
         vbox_left = QtGui.QVBoxLayout(self.groupBox_left)
-        vbox_left.addWidget(self.general_results)
+        #vbox_left.addWidget(self.general_results)
+        vbox_left.addWidget(self.results)
 
         vbox_top = QtGui.QVBoxLayout(self.groupBox_top)
         vbox_top.addWidget(self.control_panel)
 
-        vbox_bottom_left = QtGui.QVBoxLayout(self.groupBox_bottom_left)
-        vbox_bottom_left.addWidget(self.tabs)
+        # vbox_bottom_left = QtGui.QVBoxLayout(self.groupBox_bottom_left)
+        # vbox_bottom_left.addWidget(self.tabs)
+        vbox_bottom = QtGui.QVBoxLayout(self.groupBox_bottom)
+        vbox_bottom.addWidget(self.tabs)
 
-        vbox_bottom_right = QtGui.QVBoxLayout(self.groupBox_bottom_right)
-        vbox_bottom_right.addWidget(self.results)
+        #vbox_bottom_right = QtGui.QVBoxLayout(self.groupBox_bottom_right)
+        #vbox_bottom_right.addWidget(self.results)
 
 class Tabs(QtGui.QTabWidget):
     def __init__(self, env):
@@ -191,7 +198,7 @@ class Tabs(QtGui.QTabWidget):
         self.tab4   = QtGui.QWidget()
 
         # Layout
-        self.layout_tab1 = QtGui.QVBoxLayout()
+        self.layout_tab1 = QtGui.QHBoxLayout()
         self.layout_tab2 = QtGui.QVBoxLayout()
         self.layout_tab3 = QtGui.QVBoxLayout()
         self.layout_tab4 = QtGui.QVBoxLayout()
@@ -207,10 +214,16 @@ class Tabs(QtGui.QTabWidget):
         #self.plot(self.figure, self.bar_plot)
         self.plot_balance()
 
+        self.figure3 = plt.figure(figsize=(3,8))
+        self.color_bar = FigureCanvas(self.figure3)
+        #self.color_bar.setMaximumWidth(100)
+        self.plot_color_bar()
+
         self.visualisation = Canvas(self.env)
 
         self.textBox = QtGui.QTextEdit()
         self.textBox.setReadOnly(True)
+        self.textBox.insertHtml("<FONT color=green >"+'fsdfdsfsdfdsfsdfsd'+"</FONT>")
 
         # Reset button
         self.reset = QtGui.QPushButton('Reset')
@@ -224,6 +237,7 @@ class Tabs(QtGui.QTabWidget):
 
         # Add Widgets
         self.layout_tab1.addWidget(self.visualisation.native)
+        self.layout_tab1.addWidget(self.color_bar)
         self.layout_tab2.addWidget(self.reset)
         self.layout_tab2.addWidget(self.bar_plot)
         self.layout_tab2.addWidget(self.toolbar)
@@ -237,6 +251,42 @@ class Tabs(QtGui.QTabWidget):
         self.addTab(self.tab2,"Comunnity percentage")
         self.addTab(self.tab3,"Transctions")
         self.addTab(self.tab4,"Balance")
+
+    def plot_color_bar(self):
+        ax1 = self.figure3.add_axes([0.05, 0.05, 0.2, 0.9])
+        # Set the colormap and norm to correspond to the data for which
+        # the colorbar will be used.
+        # cmap = mpl.cm.coolwarm
+        # norm = mpl.colors.Normalize(vmin=0, vmax=1)
+
+        # ColorbarBase derives from ScalarMappable and puts a colorbar
+        # in a specified axes, so it has everything needed for a
+        # standalone colorbar.  There are many more kwargs, but the
+        # following gives a basic continuous colorbar with ticks
+        # and labels.
+        cmap = mpl.colors.ListedColormap([[0.0, 0.0, 1.], [0.1, 0., 0.9], [0.2, 0.0, 0.8], [0.3, 0.0, 0.7], [0.4, 0.0, 0.6], [0.5, 0.0, 0.5], [0.6, 0.0, 0.4], [0.7, 0.0, 0.3], [0.8, 0.0, 0.2], [0.9, 0.0, 0.1]])
+        bounds = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+
+
+        # The second example illustrates the use of a ListedColormap, a
+        # BoundaryNorm, and extended ends to show the "over" and "under"
+        # value colors.
+        # cmap = mpl.colors.ListedColormap(['r', 'g', 'b', 'c'])
+        # cmap.set_over((1.0, 0.0, 0.0))
+        # cmap.set_under((0.0, 0.0, 1.0))
+
+
+        cb1 = mpl.colorbar.ColorbarBase(ax1, cmap=cmap,
+                                    norm=norm,
+                                    spacing='proportional',
+                                    ticks=bounds,
+                                   orientation='vertical')
+
+        cb1.set_label('Transaction percentage')
+
+        self.figure3.set_facecolor('white')
+        self.color_bar.draw()
 
     def plot(self, figure, canvas):
         data = [random.random() for i in range(10)]
@@ -351,8 +401,8 @@ class Tabs(QtGui.QTabWidget):
     def moveV(self, Q, good):
         self.visualisation.move(Q, good)
 
-    def colorV(self, P, Q):
-        self.visualisation.updateColor(P, Q)
+    def colorV(self):
+        self.visualisation.updateColor()
 
     def resetTransactions(self):
         for agent in self.env.agents_list:
@@ -522,8 +572,20 @@ class Results(QtGui.QWidget):
         hbox              = QtGui.QHBoxLayout()
         hbox2             = QtGui.QHBoxLayout()
 
+        fontHeader = QtGui.QFont()
+        fontHeader.setBold(True)
+        fontHeader.setPointSize(16)
+
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setPointSize(14)
+
+        self.lbl_data = QtGui.QLabel("Enviroment data")
+        self.lbl_data.setFont(fontHeader)
+
         # Given Received
         self.lbl_agents = QtGui.QLabel("Agents:")
+        self.lbl_agents.setFont(font)
         self.combo = QtGui.QComboBox() 
         self.setComboValues(self.combo)
 
@@ -531,6 +593,7 @@ class Results(QtGui.QWidget):
 
         # Yield Curve
         self.lbl_yield_curve = QtGui.QLabel("Yield Curve:")
+        self.lbl_yield_curve.setFont(font)
         self.combo_P = QtGui.QComboBox() 
         self.setComboValues(self.combo_P)
 
@@ -542,8 +605,10 @@ class Results(QtGui.QWidget):
 
         # Community effect
         self.lbl_communityeffect = QtGui.QLabel('Community effect')
+        self.lbl_communityeffect.setFont(fontHeader)
 
         self.lbl_subgroup = QtGui.QLabel('Subgroup size:')
+        self.lbl_subgroup.setFont(font)
 
         self.lcd = QtGui.QLCDNumber(self)
         self.lcd.display(2)
@@ -562,8 +627,16 @@ class Results(QtGui.QWidget):
         # Read only
         self.percentage.setEnabled(False)
 
+        self.lbl_transactions = QtGui.QLabel('Transactions')
+        self.lbl_transactions.setFont(fontHeader)
+        self.textBox = QtGui.QTextEdit()
+        self.textBox.setReadOnly(True)
+        #self.textBox.setText('Agent_0 -> Agent_1, Good_0')
+
+
 
         # Add Widgets
+        vbox.addWidget(self.lbl_data)
         vbox.addWidget(self.lbl_agents)
         vbox.addWidget(self.combo)
         vbox.addWidget(self.lbl_yield_curve)
@@ -583,8 +656,12 @@ class Results(QtGui.QWidget):
         hbox2.addWidget(self.lbl_percentage)
         hbox2.addWidget(self.percentage)
 
+        vbox.addWidget(self.lbl_transactions)
+        vbox.addWidget(self.textBox, 10)
+
         vbox.addStretch(1)
         vbox.setAlignment(QtCore.Qt.AlignTop)
+
 
     def setComboValues(self, combo):
         for agent in self.env.agents_list:
@@ -626,6 +703,34 @@ class Results(QtGui.QWidget):
 
     def setPercentage(self, value):
         self.percentage.setText(str(round(value,2)))
+
+    def print_transaction(self, P, Q, good):
+        time.sleep(self.env.delay)
+        transaction = 'Agent_' + str(P.id) + ' --> ' + 'Agent_' + str(Q.id) + ', Good: ' + str(good.id)
+        #self.textBox.append(transaction)
+        self.textBox.insertHtml("<FONT color=black >"+transaction+"</FONT><br>")
+        self.textBox.verticalScrollBar().setValue(self.textBox.verticalScrollBar().maximum())
+        QtGui.qApp.processEvents()
+
+    def print_time_until_production(self, good):
+        time.sleep(self.env.delay)
+
+        format = QtGui.QTextCharFormat()
+        format.setBackground(QtGui.QBrush(QtGui.QColor("red")))
+
+        time_until_production = 'Good_' + str(good.id) + ' --> Time until production: ' + str(good.time_until_production)
+        #self.textBox.append(time_until_production)
+        self.textBox.insertHtml("<FONT color=red >"+time_until_production+"</FONT><br>")
+        self.textBox.verticalScrollBar().setValue(self.textBox.verticalScrollBar().maximum())
+        QtGui.qApp.processEvents()
+
+    def print_production(self, good):
+        time.sleep(self.env.delay)
+        production = 'Good_' + str(good.id) + ' is being produced.'
+        #self.textBox.append(production)
+        self.textBox.insertHtml("<FONT color=green >"+production+"</FONT><br>")
+        self.textBox.verticalScrollBar().setValue(self.textBox.verticalScrollBar().maximum())
+        QtGui.qApp.processEvents()
 
 
 class AgentInfo(QtGui.QDialog):
