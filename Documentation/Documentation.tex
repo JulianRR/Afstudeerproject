@@ -1,0 +1,665 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{tikz}
+\usepackage{keycommand}
+\usetikzlibrary{shapes}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass : \hmwkTitle} % Top center head
+\rhead{\hmwkClassInstructor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Documentation} % Assignment title
+\newcommand{\hmwkDueDate}{f} % Due date
+\newcommand{\hmwkClass}{The Giving Game} % Course/class
+\newcommand{\hmwkClassTime}{f} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{University of Amsterdam} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Julian Ruger} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\textmd{The Giving Game}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\section{1. Introduction}
+In this document the usage of the simulator for the giving game will explained and the code will be documented. The usage of most variables will be explained inside the code itself. This document will focus on how each function is used and specific algorithms will be explained.
+
+\section{2. Instructions}
+
+\subsection{Installation}
+
+\subsubsection{requirements}
+
+\subsection{Usage}
+Images to explain each button and graph etc.
+Python 3.4+
+
+\section{3. Code}
+This program is written with python. The code consists mostly of object oriented python code.
+
+\subsection{Back-end}
+The back end consists of the following files:
+
+The usage of each function in each file and the most important variables will be explained.
+
+\subsubsection{Agent.py}
+The Agent class consists of multiple functions to update information about each agent. Each agent knows only about the things the agent is part of. For example each agent only knows about its own transactions. Each agent has an unique id which can be used as a index for some lists. The index of these lists is the same as the id to make navigating through these lists easy.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+  \item random
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+def give(self, receiving_agent, good):
+\end{lstlisting}
+Updates the transaction information of a certain agent after a good has been given.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[receiving\_agent:] An \textit{Agent} object that is receiving the good
+  		\item[good:] A \textit{Good} object that has been received by the receiving\_agent
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def receive(self, giving_agent, good):
+\end{lstlisting}
+Updates the transaction information of a certain agent after a good has been received.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[giving\_agent:] An \textit{Agent} object that is giving the good
+  		\item[good:] A \textit{Good} object that has been given by the giving\_agent
+	\end{description}
+
+\end{description}
+
+\subsubsection{Goods.py}
+The Good class consists of variables that determine what kind of good it is. Each good has an unique id, which can be used as the index of some lists. The index of these lists is the same as the id to make navigating through these lists easy.
+
+For this class no modules are used.
+
+\begin{lstlisting}[language=Python]
+
+\end{lstlisting}
+
+\subsubsection{Enviroment.py}
+The Enviroment class consists of multiple functions to create the enviroment of the giving game, to update variables after each transaction and to calculate the community effect. Most of the variables are stored in this class.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+def create_agents(self, N):
+\end{lstlisting}
+Creates N number of agents.
+The agents are stored in a list, \textit{agents\_list}.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[N:] An integer that defines the number of agents.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def create_goods(self, M, goods):
+\end{lstlisting}
+Creates M number of goods.
+The goods are stored in a list, \textit{goods\_list}.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[M:] An integer that defines the number of goods.
+		\item[goods:] A 2-dimensional list. Each entry consists of three integer values that define the type of the good.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def notify_agents(self):
+\end{lstlisting}
+Notifies the agents of the created goods.
+
+\begin{lstlisting}[language=Python]
+def update_balancematrix(self, P, Q):
+\end{lstlisting}
+Updates the balance between P and Q in the balance matrix.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[P:] An \textit{Agent} object that is giving.
+		\item[Q:] An \textit{Agent} object that is receiving.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def notify_producer(self, good):
+\end{lstlisting}
+Notifies each producer of the life of the good.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[good:] An \textit{Good} object.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+produce_goods(self, output):
+\end{lstlisting}
+Goods are produced if the time until production reached zero, else it decreases the time until production by one.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object used to update the GUI after a production.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def transaction(self, P, Q, good):
+\end{lstlisting}
+P gives a good to Q.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[P:] An \textit{Agent} object that is giving.
+		\item[Q:] An \textit{Agent} object that is receiving.
+		\item[good:] A \textit{Good} object that is being given.
+	\end{description}
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def select_agent(self, selectionrule, current_agent):
+\end{lstlisting}
+Select an agent using the selectionrule to receive a good.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[selectionrule:] An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule.
+		\item[current\_agent:] An \textit{Agent} object that is currently holding a good.
+	\end{description}
+  \item[Returns:] An \textit{Agent} object
+
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def select_start_agents(self)
+\end{lstlisting}
+Select randomly the agents to receive the goods at the start of the simulation. These agents also will be the producers if the goods are perishable.
+
+\begin{lstlisting}[language=Python]
+def calculate_good_transaction_percentages(self, total_transactions):
+\end{lstlisting}
+Calculates the percentage of how many times each agent has given and received a specific good.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[total\_transactions:] An integer, the total number of transactions that have taken place.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def calculate_communityeffect(self, goods_transactions, subgroup_size):
+\end{lstlisting}
+Calculates the percentage of transactions that take place in a subgroup with a specific size.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[goods\_transactions:] A list that contains the transaction percentage of each good.
+		\item[subgroup\_size:] An integer that defines the size of a subgroup.
+	\end{description}
+\end{description}
+
+\subsubsection{Simulate.py}
+This file does  not use any object oriented code. This file consists of multiple functions that call the necessary functions from other files like Enviroment.py. This file can be seen as the engine for the simulation. The creation of the enviroment, transactions and updating the UI take place in this file.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+def create_enviroment(N, M, goods_list, M_perishable, perish_period,
+			       production_delay, nominal_value, parallel, selectionrule):
+\end{lstlisting}
+Creates the enviroment with all the agents and goods.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[N:] An integer that defines the number of agents
+		\item[M:] An integer that defines the numer of goods
+		\item[goods\_list:] An 2-dimensianal list. Each entry consists of three integer values that define the type of the good.
+		\item[M\_perishable:] An integer that defines the number goods that are perishable.
+		\item[perish\_period:] An integer that defines the time before a good perishes.
+		\item[production\_delay:] An integer that defines the time before a good is produced after it has perished.
+		\item[nominal\_value:] An integer that defines the nominal value of the goods
+		\item[parallel:] An boolean that defines if the transaction should be executed parallel or one by one. True is parallel, False is one by one.
+		\item[selectionrule:] An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def start_simulation(output, env, selectionrule): def simulate(nr_iterations, env, selectionrule, output):
+\end{lstlisting}
+Starts the simulation.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def continue_simulation(env, selectionrule, output, total_transactions):
+\end{lstlisting}
+Continue the simulation after the simulation has been paused.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+		\item[total\_transactions:] An integer. The total transactions after the simulation has been paused.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def onebyone(env, selectionrule, output, total_transactions):
+\end{lstlisting}
+Executes the transactions one by one.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+		\item[total\_transactions:] An integer.
+	\end{description}
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def parallel(env, selectionrule, output, total_transactions):
+\end{lstlisting}
+Executes the transactions parallel.
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[output:] An \textit{Output} object that is used to update the GUI.
+		\item[env:] An textit{Enviroment} object.
+		\item[selectionrule:]  An integer that defines which selection rule needs to be used. 0 is the random rule, 1 is the balance rule, 2 is the goodwill rule. ??????
+		\item[total\_transactions:] An integer.
+	\end{description}
+\end{description}
+
+\subsubsection{Selection\_rules.py}
+This file does not use any object oriented code. This file consists of the function used to select the next agent. The different algorithms for each selection rule will be explained below.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+def random_rule(N):
+\end{lstlisting}
+The random rule chooses an agent randombly
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[N:] An integer that defines the number of agents.
+	\end{description}
+  \item[Returns:] An \textit{Agent} object
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def balance_rule(balance_matrix, current_agent, N):
+\end{lstlisting}
+
+\begin{description}
+  \item[Parameters:] \hfill
+	\begin{description}
+  		\item[balance\_matrix:] An 2-dimensional numpy array
+		\item[current\_agent:] An \textit{Agent} object.
+		\item[N:] An integer that defines the number of agents.
+	\end{description}
+  \item[Returns:] An \textit{Agent} object
+\end{description}
+
+\begin{lstlisting}[language=Python]
+def goowill_rule():
+\end{lstlisting}
+
+\subsection{Front-end}
+The front end consists of the following files:
+
+The usage of each function/class in each file will be explained.
+\subsubsection{GUI\_Input.py}
+The Input class is consists of multiple functions to handle the user input so that the parameters can be used to create the enviroment and start the simulation.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+  \item Qt
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+def setAgents(self, value):
+\end{lstlisting}
+
+\subsubsection{GUI\_Output.py}
+This file consists of multiple classes. Each class is used to create a part of the UI. The main class is the Output class.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+  \item Qt
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+class Output(QtGui.QMainWindow):
+\end{lstlisting}
+The Output class is the main class. This class creates the main window with options for the user to save data as an csv file.
+
+\begin{lstlisting}[language=Python]
+class GUI(QtGui.QWidget):
+\end{lstlisting}
+The GUI class is the main layout class. This class creates all the different Qt layouts which can be filled with QWidgets.
+
+\begin{lstlisting}[language=Python]
+class Tabs(QtGui.QTabWidget):
+\end{lstlisting}
+The Tabs class contains the layouts and widgets for the visualisation of the simulation. It contains the animated visualisation, a list of transactions and a graph containing the transaction percentages.
+
+\begin{lstlisting}[language=Python]
+class ControlPanel(QtGui.QWidget):
+\end{lstlisting}
+The ControlPanel class contains all the controls to pause, start and delay the simulation.
+
+\begin{lstlisting}[language=Python]
+class Results(QtGui.QWidget):
+\end{lstlisting}
+The Results class contains all controls to get to the most important data, the yield curve, the number of goods given and received by each agent and the community effect.
+
+\begin{lstlisting}[language=Python]
+class AgentInfo(QtGui.QDialog):
+\end{lstlisting}
+The AgentInfo class contains functions to plot information about each agent. 
+
+\begin{lstlisting}[language=Python]
+class YieldCurve(QtGui.QDialog):
+\end{lstlisting}
+The YieldCurve class contains funtion to plot the yield curve for each pair of agents and each good.
+
+\subsubsection{Visualisation.py}
+This Canvas class consists of multiple function to create and animate the transaction during the simulation.
+
+The following python modules are used:
+\begin{itemize}
+  \item Numpy
+  \item VisPy which uses OpenGl
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+VERT_SHADER = """
+#version 120
+attribute vec3 position;
+attribute vec4 color;
+attribute float size;
+
+varying vec4 v_color;
+void main (void) {
+    gl_Position = vec4(position, 1.0);
+    v_color = color;
+    gl_PointSize = size;
+}
+"""
+
+FRAG_SHADER = """
+#version 120
+varying vec4 v_color;
+void main()
+{
+    float x = 2.0*gl_PointCoord.x - 1.0;
+    float y = 2.0*gl_PointCoord.y - 1.0;
+    float a = 1.0 - (x*x + y*y);
+    gl_FragColor = vec4(v_color.rgb, a*v_color.a);
+}
+
+"""
+\end{lstlisting}
+These shaders are needed for the visualisation of the agents and goods. More information about how shaders work can be found at:
+
+\begin{lstlisting}[language=Python]
+def on_initialize(self, event):
+\end{lstlisting}
+
+
+\section{4. Releases}
+
+
+\section{5. Further research}
+
+\subsection{Requirements}
+The following Python modules/frameworks are mandatory.
+
+\begin{itemize}
+  \item Qt Framework
+  \item MatplotLib
+  \item Numpy
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
