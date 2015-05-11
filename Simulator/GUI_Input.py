@@ -3,6 +3,7 @@ from PyQt4 import QtGui
 import Simulate as sim
 #from GUI_Output import Output
 from GUI_Output2 import Output
+import ast
 
 # N = 3
 # # Total goods
@@ -16,10 +17,65 @@ from GUI_Output2 import Output
 
 labels = ['Perish Period', 'Production Delay', 'Nominal Value']
 
-class Input(QtGui.QWidget):
+class Input(QtGui.QMainWindow):
     
     def __init__(self):
         super(Input, self).__init__()
+
+        self.initUI()
+
+    def initUI(self):
+        # Menu bar
+        self.menubar = QtGui.QMenuBar()
+        
+        fileMenu = self.menubar.addMenu('&File')
+        fileMenu.addAction('Load', lambda: self.load_data())
+
+        self.setMenuBar(self.menubar)
+
+        # Frames
+        self.gui = GUI()
+        self.setCentralWidget(self.gui)
+        
+        # Window size
+
+        self.setGeometry(0, 50, 300, 475)
+        self.setWindowTitle('The Giving Game - Input')     
+        self.show()
+
+    def load_data(self):
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
+        
+        # if fname == 'input.csv':
+        #     #self.saveData(fname)
+        #     print(fname)
+        with open(fname) as f:
+            content = f.readlines()
+            N = int(content[0])
+            M = int(content[1])
+            if content[2].strip() == 'False':
+                parallel = False
+            else:
+                parallel = True
+            selectionrule = int(content[3])
+            print(content[4])
+            s = str(content[4].strip())
+            print(s[1:-1])
+            goods_list = ast.literal_eval(s[1:-1])
+            #goods_list = [n.strip() for n in goods_list]
+            print(goods_list[1][1])
+            #print(goods_list[1][1])
+            for x in goods_list:
+                for y in x:
+                    y = int(y)
+            self.gui.load_simulation(N, M, goods_list, 0, 0, 0, 1, parallel, selectionrule)
+
+
+class GUI(QtGui.QWidget):
+    
+    def __init__(self):
+        super(GUI, self).__init__()
         
         # Total agents
         self.N = 10
@@ -49,28 +105,30 @@ class Input(QtGui.QWidget):
 
         hbox = QtGui.QHBoxLayout()
 
+        screen = QtGui.QDesktopWidget().availableGeometry()
+        print('window size:', screen)
         # Agents
-        self.lbl_nr_agents = QtGui.QLabel('Number of Agents', self)
-        self.nr_agents = QtGui.QSpinBox(self)
+        self.lbl_nr_agents = QtGui.QLabel('Number of Agents')
+        self.nr_agents = QtGui.QSpinBox()
         self.nr_agents.setMaximum(10000)
 
         self.nr_agents.valueChanged.connect(self.setAgents)
 
         # Goods
-        self.lbl_nr_goods = QtGui.QLabel('Number of Goods', self)
-        self.nr_goods = QtGui.QSpinBox(self)
+        self.lbl_nr_goods = QtGui.QLabel('Number of Goods')
+        self.nr_goods = QtGui.QSpinBox()
         self.nr_goods.setMaximum(10000)
 
         self.nr_goods.valueChanged.connect(self.setGoods)
 
         # Table widget for the input of goods variables
         self.layout = QtGui.QGridLayout()
-        self.lbl_input_table = QtGui.QLabel('Create goods', self)
+        self.lbl_input_table = QtGui.QLabel('Create goods')
         self.input_table = QtGui.QTableWidget()
         #self.input_table.cellChanged.connect(self.cellItemChanged)
 
         # Selection rules
-        self.lbl_selection_rule = QtGui.QLabel('Choose selection rule', self)
+        self.lbl_selection_rule = QtGui.QLabel('Choose selection rule')
         self.selection_rules = QtGui.QComboBox() 
         self.selection_rules.addItem('Random rule')
         self.selection_rules.addItem('Balance rule')
@@ -91,7 +149,7 @@ class Input(QtGui.QWidget):
         hbox.addWidget(self.onebyone)
 
         # Start button
-        self.start = QtGui.QPushButton('Simulate', self)
+        self.start = QtGui.QPushButton('Simulate')
         self.start.setGeometry(100, 320, 100, 50)
         self.start.clicked.connect(self.startSimulation)
 
@@ -109,9 +167,9 @@ class Input(QtGui.QWidget):
 
         self.setLayout(self.layout)
 
-        self.setGeometry(0, 50, 300, 475)
-        self.setWindowTitle('The Giving Game - Input') 
-        self.show()
+        # self.setGeometry(0, 50, 300, 475)
+        # self.setWindowTitle('The Giving Game - Input') 
+        # self.show()
 
     def setAgents(self, value): 
         self.N = self.nr_agents.value()
@@ -201,6 +259,12 @@ class Input(QtGui.QWidget):
         self.output = Output(env)
         env.output = self.output
         sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)
+
+    def load_simulation(self, N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selection_rule):
+        env = sim.create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selection_rule)
+        output = Output(env)
+        env.output = output
+        sim.start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env, selection_rule)
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,

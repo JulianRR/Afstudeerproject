@@ -41,8 +41,16 @@ class Output(QtGui.QMainWindow):
         self.gui = GUI(self.env)
         self.setCentralWidget(self.gui)
         
-        self.setGeometry(300, 50, 1100, 900)
-        self.setWindowTitle('Menubar')    
+        # Window size
+        screen = QtGui.QDesktopWidget().availableGeometry()
+        width = screen.width() - 300
+        height = screen.height()
+        print('width:', width)
+        print('height:', height)
+
+
+        self.setGeometry(300, 50, width, height)
+        self.setWindowTitle('The Giving Game - Simulation')    
         self.show()
 
     def saveData(self, fname):
@@ -67,11 +75,12 @@ class Output(QtGui.QMainWindow):
             data = [[str(self.env.N)],
                     [str(self.env.M)],
                     [str(self.env.parallel)],
-                    [str(self.env.selection_rule)]]
+                    [str(self.env.selection_rule)],
+                    [str(self.env.goods_parameters)]]
 
             writer.writerows(data)
-            if self.env.goods_parameters:
-                writer.writerows(self.env.goods_parameters)
+            # if self.env.goods_parameters:
+            #     writer.writerows(self.env.goods_parameters)
 
     def save_balance(self, path):
         fname = 'balance.csv'
@@ -134,7 +143,7 @@ class GUI(QtGui.QWidget):
         # self.groupBox_bottom_right = QtGui.QGroupBox(self)
         self.groupBox_bottom = QtGui.QGroupBox(self)
 
-        self.groupBox_left.setMinimumWidth(250)
+        self.groupBox_left.setMinimumWidth(300)
         self.groupBox_top.setMinimumHeight(150)
         # self.groupBox_bottom_left.setMinimumWidth(600)
         # self.groupBox_bottom_right.setMinimumWidth(300)
@@ -249,8 +258,8 @@ class Tabs(QtGui.QTabWidget):
         # Add tabs
         self.addTab(self.tab1,"Visualisation")
         self.addTab(self.tab2,"Comunnity percentage")
-        self.addTab(self.tab3,"Transctions")
-        self.addTab(self.tab4,"Balance")
+        #self.addTab(self.tab3,"Transctions")
+        #self.addTab(self.tab4,"Balance")
 
     def plot_color_bar(self):
         ax1 = self.figure3.add_axes([0.05, 0.05, 0.2, 0.9])
