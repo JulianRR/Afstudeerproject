@@ -1,0 +1,37 @@
+\contentsline {section}{1. Introduction}{3}
+\contentsline {section}{2. Definitions}{3}
+\contentsline {subsection}{Parameters}{3}
+\contentsline {subsection}{Selection rules}{3}
+\contentsline {subsection}{Simulation types}{4}
+\contentsline {section}{3. Norm scenarios}{4}
+\contentsline {subsection}{Norm 1}{4}
+\contentsline {subsection}{Norm 2}{4}
+\contentsline {section}{4. Random rule}{4}
+\contentsline {subsection}{Scenario 1: RR1}{4}
+\contentsline {subsubsection}{Parameters:}{4}
+\contentsline {subsection}{Scenario 2: RR2}{4}
+\contentsline {subsubsection}{Parameters:}{4}
+\contentsline {subsection}{Scenario 3: RR3}{4}
+\contentsline {subsubsection}{Parameters:}{4}
+\contentsline {subsection}{Hypothesis}{5}
+\contentsline {section}{5. Balance rule}{5}
+\contentsline {subsection}{Scenario 1: BR1}{5}
+\contentsline {subsubsection}{Parameters:}{5}
+\contentsline {subsubsection}{Hypothesis}{5}
+\contentsline {subsection}{Scenario 2: BR2}{5}
+\contentsline {subsubsection}{Parameters:}{5}
+\contentsline {subsubsection}{Hypothesis}{6}
+\contentsline {subsection}{Scenario 3: BR3}{6}
+\contentsline {subsubsection}{Parameters:}{6}
+\contentsline {subsubsection}{Hypothesis}{6}
+\contentsline {section}{6. Goodwill rule}{6}
+\contentsline {subsection}{Scenario 1: GR1}{6}
+\contentsline {subsubsection}{Parameters:}{6}
+\contentsline {subsubsection}{Hypothesis}{6}
+\contentsline {subsection}{Scenario 2: GR2}{7}
+\contentsline {subsubsection}{Parameters:}{7}
+\contentsline {subsubsection}{Hypothesis}{7}
+\contentsline {subsection}{Scenario 3: GR3}{7}
+\contentsline {subsubsection}{Parameters:}{7}
+\contentsline {subsubsection}{Hypothesis}{7}
+\contentsline {section}{General overview}{8}
