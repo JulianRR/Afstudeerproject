@@ -70,7 +70,7 @@ class Enviroment:
 	def create_goods(self, goods):
 		# Create M product by calling the __init_() from the Goods Class
 		if goods:
-			print(goods)
+			#print(goods)
 			self.goods_parameters = goods
 			for x in range(self.M):
 				perish_period 	 = goods[x][0]
@@ -96,7 +96,10 @@ class Enviroment:
 		for agent in self.agents_list:
 			for good in self.goods_list:
 				agent.goods_transactions.append([good, 0])
-		
+				agent.yield_values.append([good.value for x in range(self.N)])
+				agent.balance.append([0.0 for x in range(self.N)])
+			print('yield values:', agent.yield_values)
+			print('balance:', agent.balance)
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
@@ -132,7 +135,7 @@ class Enviroment:
 				output.gui.results.print_production(good)
 				output.gui.tabs.colorV()
 				output.gui.tabs.moveV(agent, self.goods_list[good.id])
-				print(agent.grid_pos)
+				#print(agent.grid_pos)
 				
 				
 
@@ -154,7 +157,7 @@ class Enviroment:
 		if good.perish_period > 0:
 				good.life -= 1
 
-	def select_agent(self, selectionrule, current_agent):
+	def select_agent(self, selectionrule, current_agent, good):
 		# Call the right seletion rule to select the agent
 
 		next_agent_id = current_agent.id
@@ -163,6 +166,8 @@ class Enviroment:
 				next_agent_id = sl.random_rule(self.N)
 			elif selectionrule == 1:
 				next_agent_id = sl.balance_rule(self.balance_matrix, current_agent.id, self.N)
+			elif selectionrule == 2:
+				next_agent_id = sl.goodwill_rule(current_agent, good, self.N)
 		return self.agents_list[next_agent_id]
 
 	def select_start_agents(self):

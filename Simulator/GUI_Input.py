@@ -106,7 +106,7 @@ class GUI(QtGui.QWidget):
         hbox = QtGui.QHBoxLayout()
 
         screen = QtGui.QDesktopWidget().availableGeometry()
-        print('window size:', screen)
+        #print('window size:', screen)
         # Agents
         self.lbl_nr_agents = QtGui.QLabel('Number of Agents')
         self.nr_agents = QtGui.QSpinBox()
@@ -132,6 +132,8 @@ class GUI(QtGui.QWidget):
         self.selection_rules = QtGui.QComboBox() 
         self.selection_rules.addItem('Random rule')
         self.selection_rules.addItem('Balance rule')
+        self.selection_rules.addItem('Goodwill rule')
+
 
         self.selection_rules.activated[str].connect(self.setSelectionrule) 
 
@@ -236,6 +238,8 @@ class GUI(QtGui.QWidget):
             self.selection_rule = 0
         elif text == 'Balance rule':
             self.selection_rule = 1
+        elif text == 'Goodwill rule':
+            self.selection_rule = 2
 
     def setParallel(self):
         self.parallel = True

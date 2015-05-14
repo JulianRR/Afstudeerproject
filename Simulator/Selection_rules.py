@@ -19,5 +19,16 @@ def balance_rule(balance_matrix, current_agent, N):
 		return next_agents[randint(0, len(next_agents)-1)]
 	return next_agents[0]
 
-def goodwill_rule(balance_matrix, current_agent, N):
-	pass
+def goodwill_rule(current_agent, good, N):
+	highest_yield = min(current_agent.yield_values[good.id])
+	next_agents = []
+	for x in range(N):
+		if x != current_agent.id:
+			if current_agent.yield_values[good.id][x] > highest_yield:
+				next_agents = [x]
+				highest_yield = current_agent.yield_values[good.id][x]
+			elif current_agent.yield_values[good.id][x] == highest_yield:
+				next_agents.append(x)
+	if len(next_agents) > 1:
+		return next_agents[randint(0, len(next_agents)-1)]
+	return next_agents[0]

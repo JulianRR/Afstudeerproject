@@ -14,7 +14,7 @@ from PyQt4 import QtGui, QtCore
 def start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env, selectionrule):
 	#env = create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value)
 	simulate(100, env, selectionrule, output)
-	print(env.agents_list[0].given_received)
+	#print(env.agents_list[0].given_received)
 
 def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selectionrule):
 
@@ -53,10 +53,10 @@ def onebyone(env, selectionrule, output, total_transactions):
 			#time.sleep(env.delay)
 			current_agent = agent[0]
 			good = agent[1]
-
+			print(current_agent)
 			#output.getList(env.agents_list)
 			# Select next agent with selection rule
-			next_agent = env.select_agent(selectionrule, current_agent)
+			next_agent = env.select_agent(selectionrule, current_agent, good)
 
 			# Do the transaction
 			env.transaction(current_agent, next_agent, good)

@@ -20,7 +20,13 @@ class Agent:
 		# [[good, number_transactionss]]
 		self.goods_transactions = []
 
+		# Yield curve variables
 		self.like_factor = [random.uniform(-1.0, 0.0) for i in range(N)]
+		# The value of the next transaction, different for every agent pair and every good
+		self.yield_values = []
+		# The balance between this agent and all the other agents, different for every good.
+		self.balance = []
+		
 
 		self.grid_pos = [0, 0, 0]
 	
@@ -33,6 +39,14 @@ class Agent:
 		self.listoftransactions.append(("Given", receiving_agent, good))
 		self.nr_transactions += 1
 		self.goods_transactions[good.id][1] += 1
+
+		# Yield calculations
+		self.balance[good.id][receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
+		receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
+		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + good.value
+
+		print('given yield:', self.yield_values[good.id][receiving_agent.id])
+
 	
 	def receive(self, giving_agent, good):
 		#The current agent receives from the giving_agent
@@ -40,3 +54,9 @@ class Agent:
 		self.listoftransactions.append(("Received", giving_agent, good))
 		self.nr_transactions += 1
 		self.goods_transactions[good.id][1] += 1
+
+		# Yield calculations
+		#self.balance[good.id][giving_agent.id] -= self.yield_values[good.id][giving_agent.id]
+		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + good.value
+
+		print('receive yield:', self.yield_values[good.id][giving_agent.id])

@@ -45,8 +45,8 @@ class Output(QtGui.QMainWindow):
         screen = QtGui.QDesktopWidget().availableGeometry()
         width = screen.width() - 300
         height = screen.height()
-        print('width:', width)
-        print('height:', height)
+        #print('width:', width)
+        #print('height:', height)
 
 
         self.setGeometry(300, 50, width, height)
