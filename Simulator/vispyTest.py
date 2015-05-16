@@ -92,7 +92,7 @@ class Canvas(app.Canvas):
         #self.text.text = '%s pt' % round(self.font_size, 1)
         for t in self.text:
             t.font_size = self.font_size
-            t.pos = self.size[0] // 2 + 100, self.size[1] // 2
+            t.pos = self.size[0] , self.size[1] 
             print(t.pos)
         self.update()
 

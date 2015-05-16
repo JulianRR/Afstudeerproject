@@ -45,7 +45,7 @@ class Agent:
 		receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
 		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + good.value
 
-		print('given yield:', self.yield_values[good.id][receiving_agent.id])
+		#print('given yield:', self.yield_values[good.id][receiving_agent.id])
 
 	
 	def receive(self, giving_agent, good):
@@ -59,4 +59,4 @@ class Agent:
 		#self.balance[good.id][giving_agent.id] -= self.yield_values[good.id][giving_agent.id]
 		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + good.value
 
-		print('receive yield:', self.yield_values[good.id][giving_agent.id])
+		#print('receive yield:', self.yield_values[good.id][giving_agent.id])

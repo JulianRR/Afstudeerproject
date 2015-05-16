@@ -53,7 +53,7 @@ def onebyone(env, selectionrule, output, total_transactions):
 			#time.sleep(env.delay)
 			current_agent = agent[0]
 			good = agent[1]
-			print(current_agent)
+			#print(current_agent)
 			#output.getList(env.agents_list)
 			# Select next agent with selection rule
 			next_agent = env.select_agent(selectionrule, current_agent, good)
@@ -123,7 +123,7 @@ def parallel(env, selectionrule, output, total_transactions):
 			good = agent[1]
 
 			# Select next agent with selection rule
-			next_agent = env.select_agent(selectionrule, current_agent)
+			next_agent = env.select_agent(selectionrule, current_agent, good)
 			transactions.append((current_agent, next_agent, good))
 
 			output.gui.tabs.moveV(next_agent, good)

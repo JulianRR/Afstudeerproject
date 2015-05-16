@@ -807,7 +807,9 @@ class YieldCurve(QtGui.QDialog):
         self.initUI()
 
     def initUI(self): 
-        vbox = QtGui.QVBoxLayout(self)
+        hbox = QtGui.QHBoxLayout()
+        vbox = QtGui.QVBoxLayout()
+        vbox2 = QtGui.QVBoxLayout()
 
         self.lbl_goods = QtGui.QLabel("Choose a good:")
         self.combo_goods = QtGui.QComboBox() 
@@ -819,13 +821,44 @@ class YieldCurve(QtGui.QDialog):
         self.canvas = FigureCanvas(self.figure) 
         self.toolbar = NavigationToolbar(self.canvas, self)
 
+        self.lbl_yield_value = QtGui.QLabel('Yield values')
+        self.lbl_P_Q = QtGui.QLabel('P -> Q')
+        self.yield_value_PQ = QtGui.QLineEdit()
+        self.lbl_Q_P = QtGui.QLabel('Q -> P')
+        self.yield_value_QP = QtGui.QLineEdit()
+
+
+        self.lbl_like_factor = QtGui.QLabel('Like factors')
+        self.lbl_like_factor_P_Q = QtGui.QLabel('P -> Q')
+        self.like_factor_PQ = QtGui.QLineEdit()
+        self.lbl_like_factor_Q_P = QtGui.QLabel('Q -> P')
+        self.like_factor_QP = QtGui.QLineEdit()
+
         vbox.addWidget(self.lbl_goods)
         vbox.addWidget(self.combo_goods)
         vbox.addWidget(self.canvas)
         vbox.addWidget(self.toolbar)
-        self.setLayout(vbox)
 
-        self.setGeometry(150, 150, 600, 600)
+        vbox2.addWidget(self.lbl_yield_value)
+        vbox2.addWidget(self.lbl_P_Q)
+        vbox2.addWidget(self.yield_value_PQ)
+        vbox2.addWidget(self.lbl_Q_P)
+        vbox2.addWidget(self.yield_value_QP)
+
+        vbox2.addWidget(self.lbl_like_factor)
+        vbox2.addWidget(self.lbl_like_factor_P_Q)
+        vbox2.addWidget(self.like_factor_PQ)
+        vbox2.addWidget(self.lbl_like_factor_Q_P)
+        vbox2.addWidget(self.like_factor_QP)
+        self.setValues()
+        vbox2.addStretch(1)
+
+        hbox.addLayout(vbox)
+        hbox.addLayout(vbox2)
+
+        self.setLayout(hbox)
+
+        self.setGeometry(150, 150, 800, 600)
         self.setWindowTitle('Yield Curve')
         self.exec_()
 
@@ -893,6 +926,12 @@ class YieldCurve(QtGui.QDialog):
         for good in self.env.goods_list:
             name = 'Good_' + str(good.id)    
             self.combo_goods.addItem(name)
+
+    def setValues(self):
+        self.yield_value_QP.setText('')
+        self.yield_value_PQ.setText('')
+        self.like_factor_PQ.setText(str(self.P.like_factor[self.Q.id]))
+        self.like_factor_QP.setText(str(self.Q.like_factor[self.P.id]))
 
     def onSelected(self, text):
         id = text.strip('Good_')

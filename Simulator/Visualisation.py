@@ -87,8 +87,10 @@ class Canvas(app.Canvas):
         self.goods['position'][:] = np.random.uniform(-0.25, +0.25, (self.M, 3))
 
         #Text
+        self.width = self.size[0]
+        self.height = self.size[1]
         self.font_size = 12.
-        self.text = [visuals.TextVisual(str(x), bold=True) for x in range(self.N)]
+        self.text = [visuals.TextVisual(str(x), bold=True, color='white') for x in range(self.N)]
         self.tr_sys = visuals.transforms.TransformSystem(self)
 
         self.program = gloo.Program(VERT_SHADER, FRAG_SHADER)
@@ -118,12 +120,10 @@ class Canvas(app.Canvas):
         pass
 
     def apply_zoom(self):
-        #self.text.text = '%s pt' % round(self.font_size, 1)
         count = 0
         for t in self.text:
-            t.font_size = self.font_size + count
-            t.pos = abs(self.agents['position'][count][0] * 100), abs(self.agents['position'][count][1] * 100)
-            #t.pos = (count / 10) // 2, (count / 10) // 2
+            t.font_size = self.font_size
+            t.pos = (1 + self.agents['position'][count][0]) * (self.width / 2), (1 + -self.agents['position'][count][1]) * (self.height / 2)
             count += 1
         self.update()
 

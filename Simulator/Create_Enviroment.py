@@ -98,8 +98,8 @@ class Enviroment:
 				agent.goods_transactions.append([good, 0])
 				agent.yield_values.append([good.value for x in range(self.N)])
 				agent.balance.append([0.0 for x in range(self.N)])
-			print('yield values:', agent.yield_values)
-			print('balance:', agent.balance)
+			#print('yield values:', agent.yield_values)
+			#print('balance:', agent.balance)
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
