@@ -6,9 +6,9 @@
 \contentsline {section}{\numberline {3.1}Random rule}{9}
 \contentsline {subsection}{\numberline {3.1.1}Hypothesis}{9}
 \contentsline {section}{\numberline {3.2}Balance rule}{9}
-\contentsline {subsection}{\numberline {3.2.1}Hypothesis}{9}
-\contentsline {section}{\numberline {3.3}Goodwill rule}{9}
-\contentsline {subsection}{\numberline {3.3.1}Hypothesis}{9}
+\contentsline {subsection}{\numberline {3.2.1}Hypothesis}{10}
+\contentsline {section}{\numberline {3.3}Goodwill rule}{10}
+\contentsline {subsection}{\numberline {3.3.1}Hypothesis}{10}
 \contentsline {chapter}{\numberline {4}Implementation}{11}
 \contentsline {section}{\numberline {4.1}Back-end}{11}
 \contentsline {section}{\numberline {4.2}Front-end}{11}
