@@ -235,8 +235,10 @@ class Tabs(QtGui.QTabWidget):
         self.textBox.insertHtml("<FONT color=green >"+'fsdfdsfsdfdsfsdfsd'+"</FONT>")
 
         # Reset button
-        self.reset = QtGui.QPushButton('Reset')
-        self.reset.clicked.connect(self.resetTransactions)
+        self.reset = QtGui.QPushButton('Plot transaction percentages')
+        # self.reset.clicked.connect(self.resetTransactions)
+        self.reset.clicked.connect(self.plotGoodTransactionPercentages)
+        
 
         # Set layout
         self.tab1.setLayout(self.layout_tab1)
@@ -423,6 +425,7 @@ class Tabs(QtGui.QTabWidget):
 
         self.env.nr_transactions = 0
 
+
 class GeneralResults(QtGui.QWidget):
     def __init__(self):
         super(GeneralResults, self).__init__()
@@ -572,6 +575,7 @@ class Results(QtGui.QWidget):
         super(Results, self).__init__()
 
         self.env = env
+        self.count = 0
 
         self.initUI()
 
@@ -642,6 +646,10 @@ class Results(QtGui.QWidget):
         self.textBox.setReadOnly(True)
         #self.textBox.setText('Agent_0 -> Agent_1, Good_0')
 
+        # Reset 
+        self.reset = QtGui.QPushButton('Reset percentage')
+        self.reset.clicked.connect(self.resetTransactions)
+
 
 
         # Add Widgets
@@ -665,6 +673,7 @@ class Results(QtGui.QWidget):
         hbox2.addWidget(self.lbl_percentage)
         hbox2.addWidget(self.percentage)
 
+        vbox.addWidget(self.reset)
         vbox.addWidget(self.lbl_transactions)
         vbox.addWidget(self.textBox, 10)
 
@@ -715,10 +724,14 @@ class Results(QtGui.QWidget):
 
     def print_transaction(self, P, Q, good):
         time.sleep(self.env.delay)
+        if self.count == 100:
+            self.textBox.clear()
+            self.count = 0
         transaction = 'Agent_' + str(P.id) + ' --> ' + 'Agent_' + str(Q.id) + ', Good: ' + str(good.id)
         #self.textBox.append(transaction)
         self.textBox.insertHtml("<FONT color=black >"+transaction+"</FONT><br>")
         self.textBox.verticalScrollBar().setValue(self.textBox.verticalScrollBar().maximum())
+        self.count += 1
         QtGui.qApp.processEvents()
 
     def print_time_until_production(self, good):
@@ -740,6 +753,16 @@ class Results(QtGui.QWidget):
         self.textBox.insertHtml("<FONT color=green >"+production+"</FONT><br>")
         self.textBox.verticalScrollBar().setValue(self.textBox.verticalScrollBar().maximum())
         QtGui.qApp.processEvents()
+
+    def resetTransactions(self):
+        for agent in self.env.agents_list:
+            agent.nr_transactions = 0
+            count = 0
+            for good in agent.goods_transactions:
+                good[1] = 0
+                self.env.nr_good_transactions[count] = 0
+
+        self.env.nr_transactions = 0
 
 
 class AgentInfo(QtGui.QDialog):
@@ -796,12 +819,14 @@ class AgentInfo(QtGui.QDialog):
 
         self.canvas.draw()
 
+
 class YieldCurve(QtGui.QDialog):
     def __init__(self, P, Q, env):
         super(YieldCurve, self).__init__()
 
         self.P = P
-        self.Q = Q 
+        self.Q = Q
+        self.good_id = 0 
         self.env = env 
 
         self.initUI()
@@ -822,16 +847,16 @@ class YieldCurve(QtGui.QDialog):
         self.toolbar = NavigationToolbar(self.canvas, self)
 
         self.lbl_yield_value = QtGui.QLabel('Yield values')
-        self.lbl_P_Q = QtGui.QLabel('P -> Q')
+        self.lbl_P_Q = QtGui.QLabel('Agent_' + str(self.P.id) + ' --> ' + 'Agent_' + str(self.Q.id))
         self.yield_value_PQ = QtGui.QLineEdit()
-        self.lbl_Q_P = QtGui.QLabel('Q -> P')
+        self.lbl_Q_P = QtGui.QLabel('Agent_' + str(self.Q.id) + ' --> ' + 'Agent_' + str(self.P.id))
         self.yield_value_QP = QtGui.QLineEdit()
 
 
         self.lbl_like_factor = QtGui.QLabel('Like factors')
-        self.lbl_like_factor_P_Q = QtGui.QLabel('P -> Q')
+        self.lbl_like_factor_P_Q = QtGui.QLabel('Agent_' + str(self.P.id) + ' --> ' + 'Agent_' + str(self.Q.id))
         self.like_factor_PQ = QtGui.QLineEdit()
-        self.lbl_like_factor_Q_P = QtGui.QLabel('Q -> P')
+        self.lbl_like_factor_Q_P = QtGui.QLabel('Agent_' + str(self.Q.id) + ' --> ' + 'Agent_' + str(self.P.id))
         self.like_factor_QP = QtGui.QLineEdit()
 
         vbox.addWidget(self.lbl_goods)
@@ -928,10 +953,10 @@ class YieldCurve(QtGui.QDialog):
             self.combo_goods.addItem(name)
 
     def setValues(self):
-        self.yield_value_QP.setText('')
-        self.yield_value_PQ.setText('')
-        self.like_factor_PQ.setText(str(self.P.like_factor[self.Q.id]))
-        self.like_factor_QP.setText(str(self.Q.like_factor[self.P.id]))
+        self.yield_value_PQ.setText("%.4f" % self.P.yield_values[self.good_id][self.Q.id])
+        self.yield_value_QP.setText("%.4f" % self.Q.yield_values[self.good_id][self.P.id])
+        self.like_factor_PQ.setText("%.4f" % self.P.like_factor[self.Q.id])
+        self.like_factor_QP.setText("%.4f" % self.Q.like_factor[self.P.id])
 
     def onSelected(self, text):
         id = text.strip('Good_')
@@ -939,6 +964,7 @@ class YieldCurve(QtGui.QDialog):
             if good.id == int(id):
                 #good.value += 1
                 self.plotYieldCurve2(good)
+                self.good_id = good.id
 
 class Browser(QtGui.QWidget):
     def __init__(self):

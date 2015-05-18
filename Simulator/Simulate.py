@@ -105,7 +105,7 @@ def onebyone(env, selectionrule, output, total_transactions):
 		else:
 			time.sleep(1)
 			break
-	output.gui.tabs.plotGoodTransactionPercentages()
+	#output.gui.tabs.plotGoodTransactionPercentages()
 # Produce goods after every transaction, if it is time to produce.
 	if env.running:
 		env.produce_goods(selectionrule, output)
@@ -171,7 +171,7 @@ def parallel(env, selectionrule, output, total_transactions):
 				#env.current_agents.remove(agent)
 				#env.goods_list.remove(good)
 
-		output.gui.tabs.plotGoodTransactionPercentages()
+		#output.gui.tabs.plotGoodTransactionPercentages()
 		env.produce_goods(selectionrule, output)
 		sum = env.calculate_communityeffect(env.nr_good_transactions)
 		output.gui.results.setPercentage(sum)

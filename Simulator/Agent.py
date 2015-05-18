@@ -36,7 +36,7 @@ class Agent:
 	def give(self, receiving_agent, good):
 		#The current agent gives to the receiving_agent.
 		self.given_received[receiving_agent.id][0] += 1
-		self.listoftransactions.append(("Given", receiving_agent, good))
+		#self.listoftransactions.append(("Given", receiving_agent, good))
 		self.nr_transactions += 1
 		self.goods_transactions[good.id][1] += 1
 
@@ -51,7 +51,7 @@ class Agent:
 	def receive(self, giving_agent, good):
 		#The current agent receives from the giving_agent
 		self.given_received[giving_agent.id][1] += 1
-		self.listoftransactions.append(("Received", giving_agent, good))
+		#self.listoftransactions.append(("Received", giving_agent, good))
 		self.nr_transactions += 1
 		self.goods_transactions[good.id][1] += 1
 
