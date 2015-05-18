@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  17 MAY 2015 16:11
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  18 MAY 2015 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -420,11 +420,11 @@ Chapter 4.
 
 ]
 Chapter 5.
-[13] [14
-
-]
+[13] [14]
 Chapter 6.
-[15] [16
+[15
+
+] [16
 
 ]
 Chapter 7.
@@ -434,13 +434,13 @@ Chapter 7.
 Chapter 8.
 [19] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
- 4307 strings out of 493308
- 59613 string characters out of 6141368
- 148512 words of memory out of 5000000
- 7689 multiletter control sequences out of 15000+600000
+ 4313 strings out of 493308
+ 59729 string characters out of 6141368
+ 149512 words of memory out of 5000000
+ 7695 multiletter control sequences out of 15000+600000
  7468 words of font info for 27 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,5n,39p,898b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,5n,39p,1233b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mcsc10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
@@ -449,11 +449,12 @@ ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2013/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2013/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmti10.pfb>
-Output written on TheGivingGame.pdf (21 pages, 136890 bytes).
+blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmti10.pfb>
+Output written on TheGivingGame.pdf (21 pages, 153625 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
