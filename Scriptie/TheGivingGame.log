@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  24 APR 2015 10:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  18 MAY 2015 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -154,35 +154,125 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 (c:/texlive/2013/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (./TheGivingGame.aux)
+)
+(c:/texlive/2013/texmf-dist/tex/latex/mh/mathtools.sty
+Package: mathtools 2013/02/12 v1.13 mathematical typesetting tools
+
+(c:/texlive/2013/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count93
+\calc@Bcount=\count94
+\calc@Adimen=\dimen126
+\calc@Bdimen=\dimen127
+\calc@Askip=\skip47
+\calc@Bskip=\skip48
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count95
+\calc@Cskip=\skip49
+)
+(c:/texlive/2013/texmf-dist/tex/latex/mh/mhsetup.sty
+Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
+)
+(c:/texlive/2013/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(c:/texlive/2013/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(c:/texlive/2013/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks19
+\ex@=\dimen128
+))
+(c:/texlive/2013/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen129
+)
+(c:/texlive/2013/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count96
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count97
+\leftroot@=\count98
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count99
+\DOTSCASE@=\count100
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box30
+\strutbox@=\box31
+\big@size=\dimen130
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count101
+\c@MaxMatrixCols=\count102
+\dotsspace@=\muskip11
+\c@parentequation=\count103
+\dspbrk@lvl=\count104
+\tag@help=\toks20
+\row@=\count105
+\column@=\count106
+\maxfields@=\count107
+\andhelp@=\toks21
+\eqnshift@=\dimen131
+\alignsep@=\dimen132
+\tagshift@=\dimen133
+\tagwidth@=\dimen134
+\totwidth@=\dimen135
+\lineht@=\dimen136
+\@envbody=\toks22
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count108
+\l_MT_multwidth_dim=\dimen137
+\origjot=\skip53
+\l_MT_shortvdotswithinadjustabove_dim=\dimen138
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen139
+\l_MT_above_intertext_sep=\dimen140
+\l_MT_below_intertext_sep=\dimen141
+\l_MT_above_shortintertext_sep=\dimen142
+\l_MT_below_shortintertext_sep=\dimen143
+)
+(./TheGivingGame.aux)
 \openout1 = `TheGivingGame.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 
 (c:/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count93
-\scratchdimen=\dimen126
-\scratchbox=\box30
-\nofMPsegments=\count94
-\nofMParguments=\count95
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count96
-\MPscratchDim=\dimen127
-\MPnumerator=\count97
-\makeMPintoPDFobject=\count98
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count109
+\scratchdimen=\dimen144
+\scratchbox=\box32
+\nofMPsegments=\count110
+\nofMParguments=\count111
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count112
+\MPscratchDim=\dimen145
+\MPnumerator=\count113
+\makeMPintoPDFobject=\count114
+\everyMPtoPDFconversion=\toks25
 ) (c:/texlive/2013/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -266,7 +356,7 @@ ABD: EveryShipout initializing macros
 Package textpos Warning: environment textblock* not in vertical mode. 
 (textpos)                Environment textblock* should not have any text
 (textpos)                or printable material appearing before it.
-(textpos)                Alignment may work out wrongly. on input line 16.
+(textpos)                Alignment may work out wrongly. on input line 18.
 
 Package epstopdf Info: Source file: <acroniemregel.eps>
 (epstopdf)                    date: 2007-06-04 22:04:56
@@ -276,14 +366,14 @@ Package epstopdf Info: Source file: <acroniemregel.eps>
 (epstopdf)                    size: 14499 bytes
 (epstopdf)             Command: <repstopdf --outfile=acroniemregel-eps-converte
 d-to.pdf acroniemregel.eps>
-(epstopdf)             \includegraphics on input line 16.
+(epstopdf)             \includegraphics on input line 18.
 Package epstopdf Info: Output file is already uptodate.
 <acroniemregel-eps-converted-to.pdf, id=1, 1401.235pt x 151.56625pt>
 File: acroniemregel-eps-converted-to.pdf Graphic file (type pdf)
 
 <use acroniemregel-eps-converted-to.pdf>
 Package pdftex.def Info: acroniemregel-eps-converted-to.pdf used on input line 
-16.
+18.
 (pdftex.def)             Requested size: 263.03026pt x 28.45274pt.
  [1
 
@@ -293,12 +383,7 @@ Package pdftex.def Info: acroniemregel-eps-converted-to.pdf used on input line
 ] [1]
 [2
 
-] (./TheGivingGame.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 3.
-)
+] (./TheGivingGame.toc)
 \tf@toc=\write3
 \openout3 = `TheGivingGame.toc'.
 
@@ -314,19 +399,32 @@ Chapter 2.
 
 ]
 Chapter 3.
-[9] [10
+Missing character: There is no â in font cmti10!
+Missing character: There is no € in font cmti10!
+Missing character: There is no “ in font cmti10!
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 63--70
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 63--70
+
+ []
+
+[9] [10]
 Chapter 4.
-[11] [12
+[11
+
+] [12
 
 ]
 Chapter 5.
-[13] [14
-
-]
+[13] [14]
 Chapter 6.
-[15] [16
+[15
+
+] [16
 
 ]
 Chapter 7.
@@ -336,24 +434,27 @@ Chapter 7.
 Chapter 8.
 [19] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
- 3162 strings out of 493308
- 43526 string characters out of 6141368
- 126900 words of memory out of 5000000
- 6573 multiletter control sequences out of 15000+600000
- 6668 words of font info for 24 fonts, out of 8000000 for 9000
+ 4313 strings out of 493308
+ 59729 string characters out of 6141368
+ 149512 words of memory out of 5000000
+ 7695 multiletter control sequences out of 15000+600000
+ 7468 words of font info for 27 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,5n,37p,239b,199s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,5n,39p,1233b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mcsc10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texl
-ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2013/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on TheGivingGame.pdf (21 pages, 107809 bytes).
+mcsc10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
+b><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2013/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2013/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmti10.pfb>
+Output written on TheGivingGame.pdf (21 pages, 153625 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

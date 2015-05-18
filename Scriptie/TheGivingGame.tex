@@ -3,6 +3,8 @@
 %\usepackage[dutch]{babel}  % uncomment if you write in dutch
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{mathtools}
+\usepackage{amsmath}
 
 
 % Title Page
@@ -33,18 +35,55 @@ The giving game can be used as a game theory so the rules of the game will be ex
 \section{Paramaters}
 Alot of factors/paramets play a part in the model of the giving game. This section and 'The rules of the game' might form one section together.
 
+\begin{description}
+  \item[N:] The number of agents used in the simulation
+  \item[M:] The number of goods used in the simulation
+  \item[Perish period:] The perish period is the amount of transactions it takes before a good perishes. For sustainable goods the perish period is 0, because sustainable goods exist forever. For perishable goods the perish period is greater than 0. For example, when a good has a perish period of 3 then this good can be given away 3 times before it perishes.
+  \item[Production delay:] The production delay is the time between the perish of a good and its reproduction. The time until the production is decreased by one after every iteration over all agents who are currently holding a good.
+  \item[Nominal value:] The nominal value is an indication of how much a good is worth. The nominal value does not change during the simulation.
+  \item[Like factor:] The like factor is a number between -1 and 0 which defines how much agent P likes agent Q. The higer the number the more P likes Q the more likely it is that P will give to Q if the like factor is used in the selection rule.
+  \item[Selection rule:] The selection rule is an algorithm that decides/calculates the next agent who should receive a good.
+
+\end{description}
+
 \chapter{Selection rules}
+For every transaction the selection rule decides which agent will receive a good. This decision is based on different parameters of the giving game. These selection rules simulate  multiple real world scenarios for example: choosing the agent based on maximizing the profit (goodwill rule).
+
 \section{Random rule}
+The random rule is the most basic rule for the giving game. The agent who should receive the good during the transaction is chosen randomly. The random rule simulates an environment where the agents do not care about the value of the goods and do not care about who will receive the goods. The \textit{like factor} is therefore 0 for every agent pair. This leads to the following yield curve.
+\\
+\textbf{Yield curve of y = a * x + b where a = 0 and b $>$ 0}
+\\
+This rule is mostly used to see if the giving game enviroment behaves as it should.
 
 \subsection{Hypothesis}
+It is expected that there will be no community effect and that there will not be any visible stabilisation of the transactions even though a machine is pseudorandom. The transactions will eventually be more or less equally distributed over all the agents. It will be just like throwing a dice, the next transactions will not be predictable. 
 
 \section{Balance rule}
+A more advanced selection rule is the balance rule. The agent who should receive the good during the transaction is chosen based on the balance between the giving agent P and the receiving agent Q. Agent P chooses agent Q if P has the highest balance with Q. If P has the same highest balance with multiple agents then the receiving agent is chosen randomly between these agents. The balance rule simulates an environment where each agent only gives to the agent from who they have received the most. Agent P tries to maximize the number of goods he receives. The balance in this case can be calculated as follows: 
+\\
+\\
+\textit{Balance of P with Q = Number of goods received from Q – Number of goods given to Q} \\
+The following rule applies:\\
+\textit{Balance of P with Q = - (balance of Q with P)}\\
+This calculations of the balance is different from the calculation of the balance for the yield curve.\\
+
+
+
 
 \subsection{Hypothesis}
+The expectations are that a community effect will arise with a subgroup consisting of a few agents. The size of this subgroup is based on the type of goods and the amount of goods. All sustainable goods will eventually be traded only between two agents, because these two agents have the highest balance with each other. Every perishable good has a producer, these producers will also be part of a subgroup. If these producers only give each other their goods then the subgroup size will be as large as the amount of producers. If the producers each give to another agent then multiple subgroups will arise with a size of two. It is expected that the maximum size of a subgroup will be the number of producers plus one non-producer who trades with the producers. It will be interesting to see how these subgroups will behave, if they will merge together or operate individually.
 
 \section{Goodwill rule}
+The goodwill rule is a more realistic rule. The agent is chosen based on the value of the transaction (the yield) between P and Q perceived by P. Only the agent where the yield is the highest is chosen as the receiving agent. If multiple agent pairs have the same yield the receiving agent is chosen randomly between these agents. Every time P gives good G to Q the value of the transaction of good G (the yield) decreases. As long as Q does not give good G to P, P loses interest in giving good G to Q. Eventually P will stop giving to Q, because P does not expect that Q will ever pay of his debt. The like factor as explained earlier defines how many transactions P can tolerate without getting anything in return from Q. For the goodwill rule the like factor can be set by the user or can be created randomly. The goodwill rule simulates an environment where every agent tries to maximize its profit. Agents who are in debt will less likely receive a good, they are not worth investing in.
+This leads to yield curves that look like this: \\
+\textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis}\\
+The steeper the slope for YP the less tolerant P is. In this case the balance is calculated as explained before.
+
 
 \subsection{Hypothesis}
+The expectations are that a community effect will arise. The size of the subgroup will depend on the like factors. The higher the like factor of an agent pair the more likely it is that this pair will join the subgroup. For example if every agent pair has a like factor of 0 then the yield value for every agent pair does not change and is the same for everyone so the receiving agents are chosen randomly. This would lead to a subgroup with a size equal to the number of agents, the same situation as the random rule. If every agent pair has a like factor of -1 then the yield for every agent pair will decrease rapidly. A subgroup with a size of two will most likely arise, because the yield between these two agents will shift between the same values after each transaction. An equilibrium will arise within the yield curve as pictured below. \\
+\textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis. two dots are shown where the equilibrium is positioned}
 
 \chapter{Implementation}
 
@@ -53,18 +92,46 @@ Alot of factors/paramets play a part in the model of the giving game. This secti
 \section{Front-end}
 
 \chapter{Experiments}
-
+\textbf{For now every results is from simulation type: one by one. Also these results assume that at the start of the simulation no agent start with more than 1 good.}
 \section{Random rule}
 
 \subsection{Results}
+
+\subsubsection{RR\_N1}
+No community effect arose and the transaction also did not stabilize. The transactions are still completly random. After 100000 transactions the distribution of the transactions was between 0.9 and 1.1 percent for each agent. More transactions will lead to more equally distributed transactions.
+
+\subsubsection{RR\_N2}
+The producer participated in 50 percent of the transactions, because after each time the producer give away its product it perishes. The other agents only received the good during this scenario. The producer kept choosing the receiving agents at random. The other 50 percent of the transactions (the receiving part) is distributed oer the other 99 agents. Each agent participated in approximately 0.5 percent of the transactions. No community effect arose and the transacitons did not stabilize.
+
+\subsubsection{RR\_3S}
+The results are similar to the results from RR\_N1. No community arose, neither did the transactions stabilize. All the transactions of each good were distributed over all agents. Each agent participated between 0.3 and 0.35 percent of the transaction of each good.
+
+\subsubsection{RR\_3P}
+The results are similar to the results from RR\_N2. No community arose, neither did the transactions stabilize. Good\_1 is the good with the lowest perish period and the lowest production time. This good was therefore participated the producer of this good in approximately 16.7-16.8 percent of the transactions of this good. The producer of Good\_2 particiated in approximately 8.4 percent of the transactions of Good\_2, which is half of 16.8 percent. This makes sense, because the perish period and production delay of Good\_2 is twice the amount of the perish period and production delay of Good\_1. The producer of Good\_3 particiated in approximately 5.7 percent of the transactions of Good\_3, which is almost a third of 16.8 percent. This makes sense, because the perish period and production delay of Good\_3 is three times the amount of the perish period and production delay of Good\_1. 
+These numbers are the results after 20000 transactions.
 
 \section{Balance rule}
 
 \subsection{Results}
 
+\subsubsection{BR\_N1}
+Every time an agent receives the good the receiving agent gives the good back to the giving agent during the next transaction. The moment P gives Q the good Q has the highest balance with P, because Q has received more from P then Q has given to P. This means that Q will give the good to P during the next transaction and all agents have now the same balance with P again. Now P has to choose randomly who should receive the good next. No community arises, but the simulation is partially stabilized. \textbf{percentages}
+
+\subsubsection{BR\_N2}
+The results of this scenario are similar to the results of RR\_N2. The producer participated in 50 percent of the transactions, because after each time the producer give away its product it perishes. Each other agent participated in approximately 0.5 percent of the transactions. The moment the producer gives the good to let's say agent Q the balance of the producer with Q is now lower then the balance of the producer with all other agents. This means that the next transaction the producer will not give to Q but has to choose randomly between all the other 98 agents, because the balance of the producer with the other agents is equal to each other. The same happens after the next transactions, now the producer has to choose randomly between 97 agents. This goes on untill 1 agent is left to choose from, at this point the choice is not random anymore, because only 1 agent is left. After this agent has received a good from the producer everyone is equal again and the whole process starts from the beginning. This leads to the conclusion that after every 98 transactions the next transaction can be predicted.  No community effect arisis, but the transactions are partially stabilized.
+
+\subsubsection{BR\_3S}
+The results are quite remarkable. As expected after seeing the results from BR\_N1 the goods are returned to the giving agent after each transaction, but the only difference is is that the agents who start with the goods at the start of the simulation give in proportion more to each other than to the other agents. \textbf{WHY?}
+
 \section{Goodwill rule}
 
 \subsection{results}
+
+\subsubsection{GR\_N1}
+Immidiatly at the start of the simulation a community effect arises with a subgroup of size two. The moment agent P gives to agent Q, Q is in debt with P. This means that Q values the next transaction more with P. So Q will give to P during the next transaction. Now P values the transaction with Q more then with any other agent, so P gives back to Q. This goes on in eternity where eventully the yield of the transaction for P with Q an Q with P will switch between the same values. The following yield curve shows what happens. 
+
+\subsubsection{GR\_N2}
+The results are equal to the results from BR\_N2. The value of the transactions will approach zero, but it will never reach zero, because of the way the yield is calculated. No community effect arisis, but the transactions are partially stabilized.
 
 \chapter{Conclusions and Discussions}
 
