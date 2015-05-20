@@ -16,9 +16,9 @@ def start_simulation(N, M, goods_list, M_perishable, perish_period, production_d
 	simulate(100, env, selectionrule, output)
 	#print(env.agents_list[0].given_received)
 
-def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selectionrule):
+def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance):
 
-	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule)
+	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance)
 
 	# Create the agents
 	enviroment.create_agents()

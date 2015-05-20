@@ -327,12 +327,6 @@ class GUI(QtGui.QWidget):
         self.lbl_likefactors.setText('')
         self.like_factors = []
 
-    def removeBalance(self):
-        self.lbl_balance.setText('')
-        self.balance = []
-
-
-
     def setBalance(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
         '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
@@ -361,7 +355,13 @@ class GUI(QtGui.QWidget):
                 for j in range(len(self.balance[1])):
                     if i != j:
                         self.balance[j][i] = -self.balance[i][j]
+                    if i == j:
+                        self.balance[i][j] = 0
             print(self.balance)
+
+    def removeBalance(self):
+        self.lbl_balance.setText('')
+        self.balance = []
 
 
     def setNominalValues(self):
@@ -370,7 +370,7 @@ class GUI(QtGui.QWidget):
 
     def startSimulation(self):
         self.setGoodsList()
-        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule)
+        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance)
         self.output = Output(env)
         env.output = self.output
         sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)

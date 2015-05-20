@@ -10,7 +10,7 @@ import Selection_rules as sl
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule):
+	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance):
 
 		# Total agents
 		self.N = N
@@ -33,11 +33,15 @@ class Enviroment:
 		# List of agents that produce specific product
 		self.producing_agents = []
 
-		# Balance matrix
+		# Balance matrix balance rule
 		self.balance_matrix = np.zeros((N,N))
 
 		# Selection rule
 		self.selection_rule = selectionrule
+
+		# Excel input
+		self.balance = balance
+		self.like_factors = like_factors
 
 		# Transaction percentage list
 		# [[percentage], [percentage]]
@@ -96,10 +100,28 @@ class Enviroment:
 		for agent in self.agents_list:
 			for good in self.goods_list:
 				agent.goods_transactions.append([good, 0])
-				agent.yield_values.append([good.value for x in range(self.N)])
-				agent.balance.append([0.0 for x in range(self.N)])
+				#agent.yield_values.append([good.value for x in range(self.N)])
+				if self.balance:
+					agent.balance.append(self.balance[agent.id])
+				else:
+					agent.balance.append([0.0 for x in range(self.N)])
 			#print('yield values:', agent.yield_values)
 			#print('balance:', agent.balance)
+			if self.like_factors:
+				agent.like_factor = self.like_factors[agent.id]
+		self.setYieldValues()
+
+	def setLikeFactors(self):
+		pass
+
+	def setBalance(self):
+		pass
+
+	def setYieldValues(self):
+		for agent in self.agents_list:
+			for good in self.goods_list:
+				agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + good.value for x in range(self.N)])
+
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
