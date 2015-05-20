@@ -5,6 +5,8 @@ import Simulate as sim
 from GUI_Output2 import Output
 import ast
 
+from openpyxl import load_workbook
+
 # N = 3
 # # Total goods
 # M = 1
@@ -98,6 +100,10 @@ class GUI(QtGui.QWidget):
         # [[perish_period, production_delay, nominal_value]]
         self.goods_list = []
 
+        # xlsx variables
+        self.like_factors = []
+        self.balance = []
+
         self.initUI()
         
 
@@ -126,6 +132,37 @@ class GUI(QtGui.QWidget):
         self.lbl_input_table = QtGui.QLabel('Create goods')
         self.input_table = QtGui.QTableWidget()
         #self.input_table.cellChanged.connect(self.cellItemChanged)
+
+        # Like factor
+        self.load_likefactors = QtGui.QPushButton('Add like factors')
+        self.load_likefactors.clicked.connect(self.setLikeFactors)
+        self.lbl_likefactors = QtGui.QLabel('')
+
+        self.remove_likefactors = QtGui.QPushButton('X')
+        self.remove_likefactors.clicked.connect(self.removeLikeFactors)
+        self.remove_likefactors.setFixedSize(25,25)
+
+        hbox_likefactors = QtGui.QHBoxLayout()
+        hbox_likefactors.addWidget(self.lbl_likefactors)
+        hbox_likefactors.addWidget(self.remove_likefactors)
+        #hbox_likefactors.addStretch(10)
+
+        # Balance
+        self.load_balance = QtGui.QPushButton('Add balance')
+        self.load_balance.clicked.connect(self.setBalance)
+        self.lbl_balance = QtGui.QLabel('')
+
+        self.remove_balance = QtGui.QPushButton('X')
+        self.remove_balance.clicked.connect(self.removeBalance)
+        self.remove_balance.setFixedSize(25,25)
+
+        hbox_balance = QtGui.QHBoxLayout()
+        hbox_balance.addWidget(self.lbl_balance)
+        hbox_balance.addWidget(self.remove_balance)
+
+        # Nominal values
+        self.load_nominalvalues = QtGui.QPushButton('Load nominal values')
+        self.load_nominalvalues.clicked.connect(self.setNominalValues)
 
         # Selection rules
         self.lbl_selection_rule = QtGui.QLabel('Choose selection rule')
@@ -160,12 +197,17 @@ class GUI(QtGui.QWidget):
         self.layout.addWidget(self.lbl_nr_goods, 2, 0)
         self.layout.addWidget(self.nr_goods, 3, 0)
         self.layout.addWidget(self.lbl_input_table, 4, 0) 
-        self.layout.addWidget(self.input_table, 5, 0) 
-        self.layout.addWidget(self.lbl_selection_rule, 6, 0)
-        self.layout.addWidget(self.selection_rules, 7, 0)
-        self.layout.addWidget(self.lbl_simulation_type, 8, 0)
-        self.layout.addLayout(hbox, 9, 0)
-        self.layout.addWidget(self.start, 10, 0)
+        self.layout.addWidget(self.input_table, 5, 0)
+        self.layout.addWidget(self.load_likefactors, 6, 0) 
+        self.layout.addLayout(hbox_likefactors, 7, 0) 
+        self.layout.addWidget(self.load_balance, 8, 0) 
+        self.layout.addLayout(hbox_balance, 9, 0) 
+        self.layout.addWidget(self.load_nominalvalues, 10, 0)  
+        self.layout.addWidget(self.lbl_selection_rule, 11, 0)
+        self.layout.addWidget(self.selection_rules, 12, 0)
+        self.layout.addWidget(self.lbl_simulation_type, 13, 0)
+        self.layout.addLayout(hbox, 14, 0)
+        self.layout.addWidget(self.start, 15, 0)
 
         self.setLayout(self.layout)
 
@@ -256,6 +298,75 @@ class GUI(QtGui.QWidget):
         for i in range(rows):
             for j in range(columns):
                 self.goods_list[i][j] = int(self.input_table.item(i, j).text())
+
+    def setLikeFactors(self):
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
+
+        self.like_factors = []
+        if fname != '':
+            name = fname.split('/')
+            self.lbl_likefactors.setText(name[len(name) - 1])
+
+            wb2 = load_workbook(fname)
+            first_sheet = wb2.get_sheet_names()[0]
+            worksheet = wb2.get_sheet_by_name(first_sheet)
+            for row in worksheet.iter_rows():
+                print(row)
+                cells = []
+                for cell in row:
+                    print(cell.value)
+                    if cell.value:
+                        cells.append(float(cell.value))
+                    else:
+                        cells.append(-1.0)
+                self.like_factors.append(cells)
+            print(self.like_factors)
+
+    def removeLikeFactors(self):
+        self.lbl_likefactors.setText('')
+        self.like_factors = []
+
+    def removeBalance(self):
+        self.lbl_balance.setText('')
+        self.balance = []
+
+
+
+    def setBalance(self):
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
+
+        self.balance = []
+        if fname != '':
+            name = fname.split('/')
+            self.lbl_balance.setText(name[len(name) - 1])
+
+            wb2 = load_workbook(fname)
+            first_sheet = wb2.get_sheet_names()[0]
+            worksheet = wb2.get_sheet_by_name(first_sheet)
+            for row in worksheet.iter_rows():
+                print(row)
+                cells = []
+                for cell in row:
+                    print(cell.value)
+                    if cell.value:
+                        cells.append(float(cell.value))
+                    else:
+                        cells.append(None)
+                self.balance.append(cells)
+            print(self.balance)
+
+            for i in range(len(self.balance)):
+                for j in range(len(self.balance[1])):
+                    if i != j:
+                        self.balance[j][i] = -self.balance[i][j]
+            print(self.balance)
+
+
+    def setNominalValues(self):
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
 
     def startSimulation(self):
         self.setGoodsList()

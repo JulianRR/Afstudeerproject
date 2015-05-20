@@ -859,6 +859,12 @@ class YieldCurve(QtGui.QDialog):
         self.lbl_like_factor_Q_P = QtGui.QLabel('Agent_' + str(self.Q.id) + ' --> ' + 'Agent_' + str(self.P.id))
         self.like_factor_QP = QtGui.QLineEdit()
 
+        self.lbl_balance = QtGui.QLabel('Balance')
+        self.lbl_balance_PQ = QtGui.QLabel('Agent_' + str(self.P.id) + ' with ' + 'Agent_' + str(self.Q.id))
+        self.balance_PQ = QtGui.QLineEdit()
+        self.lbl_balance_QP = QtGui.QLabel('Agent_' + str(self.Q.id) + ' with ' + 'Agent_' + str(self.P.id))
+        self.balance_QP = QtGui.QLineEdit()
+
         vbox.addWidget(self.lbl_goods)
         vbox.addWidget(self.combo_goods)
         vbox.addWidget(self.canvas)
@@ -875,6 +881,12 @@ class YieldCurve(QtGui.QDialog):
         vbox2.addWidget(self.like_factor_PQ)
         vbox2.addWidget(self.lbl_like_factor_Q_P)
         vbox2.addWidget(self.like_factor_QP)
+
+        vbox2.addWidget(self.lbl_balance)
+        vbox2.addWidget(self.lbl_balance_PQ)
+        vbox2.addWidget(self.balance_PQ)
+        vbox2.addWidget(self.lbl_balance_QP)
+        vbox2.addWidget(self.balance_QP)
         self.setValues()
         vbox2.addStretch(1)
 
@@ -955,8 +967,13 @@ class YieldCurve(QtGui.QDialog):
     def setValues(self):
         self.yield_value_PQ.setText("%.4f" % self.P.yield_values[self.good_id][self.Q.id])
         self.yield_value_QP.setText("%.4f" % self.Q.yield_values[self.good_id][self.P.id])
+        
         self.like_factor_PQ.setText("%.4f" % self.P.like_factor[self.Q.id])
         self.like_factor_QP.setText("%.4f" % self.Q.like_factor[self.P.id])
+
+        self.balance_PQ.setText("%.4f" % float(self.P.balance[self.good_id][self.Q.id]))
+        self.balance_QP.setText("%.4f" % float(self.Q.balance[self.good_id][self.P.id]))
+
 
     def onSelected(self, text):
         id = text.strip('Good_')
