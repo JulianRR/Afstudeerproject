@@ -24,24 +24,67 @@ This is the abstract.
 \tableofcontents
 
 \chapter{Introduction}
-I will explain the purpose of this project.
+\textbf{Work in progress!}
+\\
+In today’s world money is the primary medium of exchange and is used to define the value of most economic transaction. Besides this well-known  economic system there is the economy of giving. The economy of giving is an economic  system without money as the medium of exchange. This system does not use a currency to express the value of a transaction. Instead the value of a transaction is based on a social credit. Goods can be given away or exchanged for other goods. Giving away a good is not perceived as a direct loss. Instead it is expected that something will be given in return in the future. Every individual keeps track of their own social credit balance with every other person and bases their perception of the value of a transaction on this balance. 
+
+The giving game is a macroeconomic theory about this economic system of giving and giving in real life. In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with someone else.  Under certain conditions people will assign a preference to a person or persons to who they will give to. When the transactions only take place in a certain group a community effect emerges. This has led to the following research question:
+\\
+\\
+\textit{Will the transactions eventually take place within a limited subgroup of the entire population?}
+\\
+\\
+If no community effect emerges the behaviour of the agents can still be meaningful. The transactions can fall into a repeating sequence of transactions. This has led to the second research question:
+\\
+\\
+\textit{Will we see a repeating sequence of transactions or will the transaction sequence look random?}
+
+\section{Related work}
+W.P. Weijland developed in his article ‘Mathematical Foundation for the Economy of Giving’ a mathematical model for economies which rely on a system of social credit. This model  explains how the value of a transactions changes under certain conditions and defines the relation between two or more agents in an economic environment without a currency as means of exchange. The mathematics behind this will be explained in the next chapter.
+
+A similar research is the article ‘Money Network in Kiyotaki-Wright Model’. In this article an environment with three agents and three goods is simulated. Each agent produces one good and consumes another good. The article explains the behaviour of the agents and how the goods are being traded. This research differs from the giving game, because the agents can consume goods and only trade their good for other goods they can consume or goods they can use to trade for the good they need to consume. This article is used to give insight in how the simulations for the giving game can be run.
+
+Other research to the specific economy of giving is lacking. Other articles are more psychological oriented like ‘TRUST’ and ‘Alturism’. The first article explains trust between people and the different type of trust. The second article explains that giving something for example to charity is not always completely alturistic. The warm glow is explained which is what people get when they give. They get a good feeling, which is the reason for giving.
+
+
+\section{Contribution}
+With money it is easy to determine the economic value of a transaction and makes it easy to find the optimum economic transactions in a certain trade environment. Calculating the optimum economic transactions in an environment of giving is lacking in today’s world which can be useful when investing.
+
+A giving game is a game that simulates giving in real life. The goal of this thesis is to design and implement a simulator that can simulate a giving game of N agents and M goods. The simulation should be able to simulate multiple scenario’s where the agents choose to who they give based on multiple parameters. The simulator can be used to analyse the behaviour of agents in different scenarios of giving.
+\\
+\\
+In chapter 2 the giving game is explained in detail with all the possible parameters. Chapter 2 also explains the mathematics behind the giving game. Chapter 3 will describe the scenarios which will be used to simulate. Chapter 4 will explain the design of the simulator and chapter 5 shows the implementation. Chapter 6 describes the experiments and gives an overview of the results. Chapter 7 discusses these results and answers the research questions.
+
 
 \chapter{Theoretical background}
-I will explain the concept of the giving game.
+A giving game is a game to simulate giving in real life. A giving game can be very versatile and a lot of variants are possible to simulate different real life economic environments. In this section the basic rules of the giving game are explained and the giving game used for this thesis is explained.
+The following rules show the basics of a giving game:
+
+The giving game above is a more game theory oriented giving game. For this thesis the giving game will be a more realistic representation of the real life economy of giving.
+
 
 \section{The rules of the game}
-The giving game can be used as a game theory so the rules of the game will be explained here.
+For this thesis the environment consists of a fixed amount of agent and a fixed amount of goods. For every simulation the number of agents and number of goods can be changed, but during the simulation no agents or goods are added or removed.  Every agents keeps track of their own account balance and transaction values in relation to every other agent. The agents don’t know anything about each other, they operate completely independent.
+
+There are two types of goods, ‘sustainable’ and ‘perishable’ goods. ‘Sustainable’ goods are goods that will exist for eternity. ‘Perishable’ goods are goods that perish after a certain amount of transactions. Every ‘perishable’ good has a producer. The producer is also an agent in the environment so the producer also participates in transactions of other goods. The producer reproduces its ‘perishable’ good after a certain amount of time the good has perished. The value of a good is valued differently by each agent, but this value does not change during the simulation. For the experiments in this thesis the agents are not able to hold on to a good for a certain amount of time. This is a variant which can be used in further research. Holding on to a good will be explained further in the last chapter. At the start of the giving game the goods can either be divided randomly over the agents or are divided by hand. The agents who start with the perishable goods are assigned to be the producers.
+
+The transactions can be executed in two different ways. The transactions can be executed one by one which is a more game theory based approach. A more realistic approach is that the transactions are executed simultaneously, this way agents don’t have to wait for each other before they can give away their good. Both types are used in the experiments.
+
+The emergence of a community effect is determined by the amount of transactions each agent is part of. When more than one good is used in the environment there can emerge multiple communities. That is why every good is looked at independently. Every agent keeps track of their own transactions and how much they have traded each good. If for example two agent hold 100 percent of the transactions of good A and two other agents hold 100% of the transactions of good B then two separate communities of size two have emerged. There can be concluded that the community effect exists for this scenario. If this time two agents hold 50 percent of the transactions of good A and good B and two other agents also hold 50 percent of the transactions of good A and good B than this means that one community has emerged with a size of four. There can also be concluded that a community effect exist in this scenario.  A community effect can exists as long as the size of the subgroup is smaller than the total amount of agents in the environment and 100 percent of the transactions of one or more goods takes place inside this subgroup. This means that even if an agents holds a smaller percentage of the transactions this agent can still be part of the community as long as the previous stated rules apply.
+
+The stabilization of the transactions in the environment can be determined by predicting future transactions. If multiple transactions in a row can be predicted or if a pattern is clearly visible than there can be concluded that the transactions have stabilized. The emergence of a community does not mean that the transactions are executed in a repeating sequence. Even in a community the transactions can be executed randomly.
+
 
 \section{Paramaters}
-Alot of factors/paramets play a part in the model of the giving game. This section and 'The rules of the game' might form one section together.
+The following parameters will be used in the environment of the giving game used for the experiments.
 
 \begin{description}
   \item[N:] The number of agents used in the simulation
   \item[M:] The number of goods used in the simulation
   \item[Perish period:] The perish period is the amount of transactions it takes before a good perishes. For sustainable goods the perish period is 0, because sustainable goods exist forever. For perishable goods the perish period is greater than 0. For example, when a good has a perish period of 3 then this good can be given away 3 times before it perishes.
   \item[Production delay:] The production delay is the time between the perish of a good and its reproduction. The time until the production is decreased by one after every iteration over all agents who are currently holding a good.
-  \item[Nominal value:] The nominal value is an indication of how much a good is worth. The nominal value does not change during the simulation.
-  \item[Like factor:] The like factor is a number between -1 and 0 which defines how much agent P likes agent Q. The higer the number the more P likes Q the more likely it is that P will give to Q if the like factor is used in the selection rule.
+  \item[Nominal value:] The nominal value is an indication of how much a good is worth. The nominal value does not change during the giving game.
+  \item[Like factor:] The like factor is a number between -1 and 0 which defines how much agent P likes agent Q. The higer the number the more P likes Q the more likely it is that P will give to Q if the like factor is used in the selection rule. The like factor does not change during the giving game.
   \item[Selection rule:] The selection rule is an algorithm that decides/calculates the next agent who should receive a good.
 
 \end{description}

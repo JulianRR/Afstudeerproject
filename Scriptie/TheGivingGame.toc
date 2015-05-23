@@ -1,7 +1,9 @@
 \contentsline {chapter}{\numberline {1}Introduction}{5}
+\contentsline {section}{\numberline {1.1}Related work}{5}
+\contentsline {section}{\numberline {1.2}Contribution}{6}
 \contentsline {chapter}{\numberline {2}Theoretical background}{7}
 \contentsline {section}{\numberline {2.1}The rules of the game}{7}
-\contentsline {section}{\numberline {2.2}Paramaters}{7}
+\contentsline {section}{\numberline {2.2}Paramaters}{8}
 \contentsline {chapter}{\numberline {3}Selection rules}{9}
 \contentsline {section}{\numberline {3.1}Random rule}{9}
 \contentsline {subsection}{\numberline {3.1.1}Hypothesis}{9}
