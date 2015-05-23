@@ -26,6 +26,8 @@ class Agent:
 		self.yield_values = []
 		# The balance between this agent and all the other agents, different for every good.
 		self.balance = []
+		# Nominal values
+		self.nominal_values = []
 		
 
 		self.grid_pos = [0, 0, 0]
@@ -43,7 +45,7 @@ class Agent:
 		# Yield calculations
 		self.balance[good.id][receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
 		receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
-		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + good.value
+		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + self.nominal_values[good.id]
 
 		#print('given yield:', self.yield_values[good.id][receiving_agent.id])
 
@@ -57,6 +59,6 @@ class Agent:
 
 		# Yield calculations
 		#self.balance[good.id][giving_agent.id] -= self.yield_values[good.id][giving_agent.id]
-		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + good.value
+		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + self.nominal_values[good.id]
 
 		#print('receive yield:', self.yield_values[good.id][giving_agent.id])

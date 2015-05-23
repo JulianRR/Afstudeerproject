@@ -4,6 +4,7 @@ import Simulate as sim
 #from GUI_Output import Output
 from GUI_Output2 import Output
 import ast
+from random import randint
 
 from openpyxl import load_workbook
 
@@ -103,6 +104,7 @@ class GUI(QtGui.QWidget):
         # xlsx variables
         self.like_factors = []
         self.balance = []
+        self.nominal_values = []
 
         self.initUI()
         
@@ -164,6 +166,15 @@ class GUI(QtGui.QWidget):
         self.load_nominalvalues = QtGui.QPushButton('Load nominal values')
         self.load_nominalvalues.clicked.connect(self.setNominalValues)
 
+        self.lbl_nominalvalues = QtGui.QLabel('')
+
+        self.remove_nominalvalues = QtGui.QPushButton('X')
+        self.remove_nominalvalues.clicked.connect(self.removeNominalValues)
+        self.remove_nominalvalues.setFixedSize(25,25)
+
+        hbox_nominalvalues = QtGui.QHBoxLayout()
+        hbox_nominalvalues.addWidget(self.lbl_nominalvalues)
+        hbox_nominalvalues.addWidget(self.remove_nominalvalues)
         # Selection rules
         self.lbl_selection_rule = QtGui.QLabel('Choose selection rule')
         self.selection_rules = QtGui.QComboBox() 
@@ -202,12 +213,13 @@ class GUI(QtGui.QWidget):
         self.layout.addLayout(hbox_likefactors, 7, 0) 
         self.layout.addWidget(self.load_balance, 8, 0) 
         self.layout.addLayout(hbox_balance, 9, 0) 
-        self.layout.addWidget(self.load_nominalvalues, 10, 0)  
-        self.layout.addWidget(self.lbl_selection_rule, 11, 0)
-        self.layout.addWidget(self.selection_rules, 12, 0)
-        self.layout.addWidget(self.lbl_simulation_type, 13, 0)
-        self.layout.addLayout(hbox, 14, 0)
-        self.layout.addWidget(self.start, 15, 0)
+        self.layout.addWidget(self.load_nominalvalues, 10, 0)
+        self.layout.addLayout(hbox_nominalvalues, 11, 0)   
+        self.layout.addWidget(self.lbl_selection_rule, 12, 0)
+        self.layout.addWidget(self.selection_rules, 13, 0)
+        self.layout.addWidget(self.lbl_simulation_type, 14, 0)
+        self.layout.addLayout(hbox, 15, 0)
+        self.layout.addWidget(self.start, 16, 0)
 
         self.setLayout(self.layout)
 
@@ -368,9 +380,34 @@ class GUI(QtGui.QWidget):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
         '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
 
+        self.nominal_values = []
+        if fname != '':
+            name = fname.split('/')
+            self.lbl_nominalvalues.setText(name[len(name) - 1])
+
+            wb2 = load_workbook(fname)
+            first_sheet = wb2.get_sheet_names()[0]
+            worksheet = wb2.get_sheet_by_name(first_sheet)
+            for row in worksheet.iter_rows():
+                print(row)
+                cells = []
+                for cell in row:
+                    print(cell.value)
+                    if cell.value:
+                        cells.append(float(cell.value))
+                    else:
+                        cells.append(randint(1, 5))
+                self.nominal_values.append(cells)
+            print(self.nominal_values)
+
+
+    def removeNominalValues(self):
+        self.lbl_nominalvalues.setText('')
+        self.nominal_values = []
+
     def startSimulation(self):
         self.setGoodsList()
-        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance)
+        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance, self.nominal_values)
         self.output = Output(env)
         env.output = self.output
         sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)

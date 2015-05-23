@@ -10,7 +10,7 @@ import Selection_rules as sl
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance):
+	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values):
 
 		# Total agents
 		self.N = N
@@ -42,6 +42,7 @@ class Enviroment:
 		# Excel input
 		self.balance = balance
 		self.like_factors = like_factors
+		self.nominal_values = nominal_values
 
 		# Transaction percentage list
 		# [[percentage], [percentage]]
@@ -109,6 +110,8 @@ class Enviroment:
 			#print('balance:', agent.balance)
 			if self.like_factors:
 				agent.like_factor = self.like_factors[agent.id]
+			if self.nominal_values:
+				agent.nominal_values = self.nominal_values[agent.id]
 		self.setYieldValues()
 
 	def setLikeFactors(self):
@@ -120,7 +123,7 @@ class Enviroment:
 	def setYieldValues(self):
 		for agent in self.agents_list:
 			for good in self.goods_list:
-				agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + good.value for x in range(self.N)])
+				agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + agent.nominal_values[good.id] for x in range(self.N)])
 
 
 	def update_balancematrix(self, P, Q):

@@ -928,16 +928,16 @@ class YieldCurve(QtGui.QDialog):
         self.figure.clf()
         # P
         P_likefactor = self.P.like_factor[self.Q.id]
-        P_min_x = good.value / P_likefactor
-        P_max_x = good.value / -P_likefactor
+        P_min_x = self.P.nominal_values[good.id] / P_likefactor
+        P_max_x = self.P.nominal_values[good.id] / -P_likefactor
         # Q
         Q_likefactor = self.Q.like_factor[self.P.id]
-        Q_min_x = good.value / Q_likefactor
-        Q_max_x = good.value / -Q_likefactor
+        Q_min_x = self.Q.nominal_values[good.id] / Q_likefactor
+        Q_max_x = self.Q.nominal_values[good.id] / -Q_likefactor
         print(P_likefactor, Q_likefactor)
         x = np.arange(min(P_min_x, Q_min_x), max(P_max_x, Q_max_x), 0.01)
-        P_y = P_likefactor * x + good.value
-        Q_y = -Q_likefactor * x + good.value
+        P_y = P_likefactor * x + self.P.nominal_values[good.id]
+        Q_y = -Q_likefactor * x + self.Q.nominal_values[good.id]
 
         ax = self.figure.add_subplot(111)
         
