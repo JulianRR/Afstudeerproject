@@ -415,15 +415,15 @@ class Tabs(QtGui.QTabWidget):
     def colorV(self):
         self.visualisation.updateColor()
 
-    def resetTransactions(self):
-        for agent in self.env.agents_list:
-            agent.nr_transactions = 0
-            count = 0
-            for good in agent.goods_transactions:
-                good[1] = 0
-                self.env.nr_good_transactions[count] = 0
+    # def resetTransactions(self):
+    #     for agent in self.env.agents_list:
+    #         agent.nr_transactions = 0
+    #         count = 0
+    #         for good in agent.goods_transactions:
+    #             good[1] = 0
+    #             self.env.nr_good_transactions[count] = 0
 
-        self.env.nr_transactions = 0
+    #     self.env.nr_transactions = 0
 
 
 class GeneralResults(QtGui.QWidget):
@@ -761,6 +761,7 @@ class Results(QtGui.QWidget):
             for good in agent.goods_transactions:
                 good[1] = 0
                 self.env.nr_good_transactions[count] = 0
+                count += 1
 
         self.env.nr_transactions = 0
 

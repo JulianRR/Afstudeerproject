@@ -43,9 +43,12 @@ class Agent:
 		self.goods_transactions[good.id][1] += 1
 
 		# Yield calculations
-		self.balance[good.id][receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
-		receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
-		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + self.nominal_values[good.id]
+		# self.balance[good.id][receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
+		self.balance[receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
+		# receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
+		receiving_agent.balance[self.id] -= self.yield_values[good.id][receiving_agent.id]
+		# self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + self.nominal_values[good.id]
+		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[receiving_agent.id] + self.nominal_values[good.id]
 
 		#print('given yield:', self.yield_values[good.id][receiving_agent.id])
 
@@ -59,6 +62,7 @@ class Agent:
 
 		# Yield calculations
 		#self.balance[good.id][giving_agent.id] -= self.yield_values[good.id][giving_agent.id]
-		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + self.nominal_values[good.id]
+		#self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + self.nominal_values[good.id]
+		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[giving_agent.id] + self.nominal_values[good.id]
 
 		#print('receive yield:', self.yield_values[good.id][giving_agent.id])

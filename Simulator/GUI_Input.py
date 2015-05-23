@@ -313,7 +313,7 @@ class GUI(QtGui.QWidget):
 
     def setLikeFactors(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
-        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator')
 
         self.like_factors = []
         if fname != '':
@@ -341,7 +341,7 @@ class GUI(QtGui.QWidget):
 
     def setBalance(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
-        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator')
 
         self.balance = []
         if fname != '':
@@ -378,7 +378,7 @@ class GUI(QtGui.QWidget):
 
     def setNominalValues(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
-        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator/results')
+        '/Users/julianruger/Informatica/Afstudeerproject/Afstudeerproject/Simulator')
 
         self.nominal_values = []
         if fname != '':

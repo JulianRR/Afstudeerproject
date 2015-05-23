@@ -102,10 +102,11 @@ class Enviroment:
 			for good in self.goods_list:
 				agent.goods_transactions.append([good, 0])
 				#agent.yield_values.append([good.value for x in range(self.N)])
-				if self.balance:
-					agent.balance.append(self.balance[agent.id])
-				else:
-					agent.balance.append([0.0 for x in range(self.N)])
+			if self.balance:
+				# agent.balance.append(self.balance[agent.id])
+				agent.balance = self.balance[agent.id]
+			else:
+				agent.balance.append([0.0 for x in range(self.N)])
 			#print('yield values:', agent.yield_values)
 			#print('balance:', agent.balance)
 			if self.like_factors:
@@ -123,7 +124,8 @@ class Enviroment:
 	def setYieldValues(self):
 		for agent in self.agents_list:
 			for good in self.goods_list:
-				agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + agent.nominal_values[good.id] for x in range(self.N)])
+				# agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + agent.nominal_values[good.id] for x in range(self.N)])
+				agent.yield_values.append([agent.like_factor[x] * agent.balance[x] + agent.nominal_values[good.id] for x in range(self.N)])
 
 
 	def update_balancematrix(self, P, Q):
@@ -233,14 +235,19 @@ class Enviroment:
 			for goods in agent.goods_transactions:
 				if goods_transactions[count] != 0:
 					percentages.append(goods[1] / (goods_transactions[count]*2))
+					print('goods_transactions:' + str(count), goods_transactions[count]*2)
+					print('goods[1]:', goods[1])
 				else:
 					percentages.append(0)
 				count += 1
 			community_effect.append(percentages)
 
+		#print('not sorted:', community_effect)
+
 		np_community_effect = np.array(community_effect)
 		np_community_effect = np.sort(np_community_effect.T)
 
+		#print('sorted:', np_community_effect)
 		sum = 0
 		for x in range(self.subgroup_size):
 			sum += np_community_effect[self.index][::-1][x]
