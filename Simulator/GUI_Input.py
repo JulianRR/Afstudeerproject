@@ -358,6 +358,8 @@ class GUI(QtGui.QWidget):
                     print(cell.value)
                     if cell.value:
                         cells.append(float(cell.value))
+                    elif cell.value == 0:
+                        cells.append(0.0)
                     else:
                         cells.append(None)
                 self.balance.append(cells)
@@ -365,10 +367,13 @@ class GUI(QtGui.QWidget):
 
             for i in range(len(self.balance)):
                 for j in range(len(self.balance[1])):
-                    if i != j:
-                        self.balance[j][i] = -self.balance[i][j]
+                    if i != j and self.balance[i][j] != None:
+                        if self.balance[i][j] != 0.0:
+                            self.balance[j][i] = -self.balance[i][j]
+                        elif self.balance[i][j] == 0.0:
+                            self.balance[j][i] = self.balance[i][j]
                     if i == j:
-                        self.balance[i][j] = 0
+                        self.balance[i][j] = 0.0
             print(self.balance)
 
     def removeBalance(self):

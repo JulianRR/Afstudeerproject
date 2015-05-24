@@ -106,13 +106,17 @@ class Enviroment:
 				# agent.balance.append(self.balance[agent.id])
 				agent.balance = self.balance[agent.id]
 			else:
-				agent.balance.append([0.0 for x in range(self.N)])
+				# agent.balance.append([0.0 for x in range(self.N)])
+				agent.balance = [0.0 for x in range(self.N)]
 			#print('yield values:', agent.yield_values)
 			#print('balance:', agent.balance)
 			if self.like_factors:
 				agent.like_factor = self.like_factors[agent.id]
+			
 			if self.nominal_values:
 				agent.nominal_values = self.nominal_values[agent.id]
+			# else:
+			# 	agent.nominal_values = []
 		self.setYieldValues()
 
 	def setLikeFactors(self):
@@ -125,6 +129,9 @@ class Enviroment:
 		for agent in self.agents_list:
 			for good in self.goods_list:
 				# agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + agent.nominal_values[good.id] for x in range(self.N)])
+				print(agent.like_factor[0])
+				print(agent.balance[0])
+				print(agent.nominal_values[good.id])
 				agent.yield_values.append([agent.like_factor[x] * agent.balance[x] + agent.nominal_values[good.id] for x in range(self.N)])
 
 
