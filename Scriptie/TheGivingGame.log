@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  23 MAY 2015 14:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  25 MAY 2015 13:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -391,9 +391,6 @@ Package pdftex.def Info: acroniemregel-eps-converted-to.pdf used on input line
 
 ]
 Chapter 1.
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
 
 Underfull \hbox (badness 10000) in paragraph at lines 31--41
 
@@ -409,12 +406,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--41
 
  []
 
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ˜ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
@@ -447,6 +438,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--57
 
 [6]
 Chapter 2.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 63.
+(c:/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
@@ -489,54 +486,77 @@ Missing character: There is no ™ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-[7
+ [7
 
-] [8]
+]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ˜ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ˜ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--108
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 109--113
+
+ []
+
+[9] [10
+
+]
 Chapter 3.
 Missing character: There is no â in font cmti10!
 Missing character: There is no € in font cmti10!
 Missing character: There is no “ in font cmti10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--113
+Underfull \hbox (badness 10000) in paragraph at lines 131--138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--113
+Underfull \hbox (badness 10000) in paragraph at lines 131--138
 
  []
 
-[9
-
-] [10]
+[11] [12]
 Chapter 4.
-[11
+[13
 
-] [12
+] [14
 
 ]
 Chapter 5.
-[13] [14]
+[15] [16]
 Chapter 6.
-[15
+[17
 
-] [16
+] [18
 
 ]
 Chapter 7.
-[17] [18
+[19] [20
 
 ]
 Chapter 8.
-[19] (./TheGivingGame.aux) ) 
+[21] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
- 4313 strings out of 493308
- 59729 string characters out of 6141368
- 149512 words of memory out of 5000000
- 7695 multiletter control sequences out of 15000+600000
+ 4330 strings out of 493308
+ 60015 string characters out of 6141368
+ 150512 words of memory out of 5000000
+ 7709 multiletter control sequences out of 15000+600000
  7468 words of font info for 27 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,5n,39p,1317b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,6n,39p,1317b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mcsc10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
@@ -547,10 +567,10 @@ t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti10.pfb>
-Output written on TheGivingGame.pdf (21 pages, 162173 bytes).
+Output written on TheGivingGame.pdf (23 pages, 168262 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
