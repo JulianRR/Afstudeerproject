@@ -12,27 +12,33 @@
 \contentsline {subsection}{\numberline {3.2.1}Hypothesis}{12}
 \contentsline {section}{\numberline {3.3}Goodwill rule}{12}
 \contentsline {subsection}{\numberline {3.3.1}Hypothesis}{12}
-\contentsline {chapter}{\numberline {4}Implementation}{13}
-\contentsline {section}{\numberline {4.1}Back-end}{13}
-\contentsline {section}{\numberline {4.2}Front-end}{13}
-\contentsline {chapter}{\numberline {5}Experiments}{15}
-\contentsline {section}{\numberline {5.1}Random rule}{15}
-\contentsline {subsection}{\numberline {5.1.1}Results}{15}
-\contentsline {subsubsection}{RR\_N1}{15}
-\contentsline {subsubsection}{RR\_N2}{15}
-\contentsline {subsubsection}{RR\_3S}{15}
-\contentsline {subsubsection}{RR\_3P}{15}
-\contentsline {section}{\numberline {5.2}Balance rule}{16}
-\contentsline {subsection}{\numberline {5.2.1}Results}{16}
-\contentsline {subsubsection}{BR\_N1}{16}
-\contentsline {subsubsection}{BR\_N2}{16}
-\contentsline {subsubsection}{BR\_3S}{16}
-\contentsline {section}{\numberline {5.3}Goodwill rule}{16}
-\contentsline {subsection}{\numberline {5.3.1}results}{16}
-\contentsline {subsubsection}{GR\_N1}{16}
-\contentsline {subsubsection}{GR\_N2}{16}
-\contentsline {chapter}{\numberline {6}Conclusions and Discussions}{17}
-\contentsline {chapter}{\numberline {7}Further research}{19}
-\contentsline {chapter}{\numberline {8}Appendix A}{21}
-\contentsline {section}{\numberline {8.1}Simulator manual}{21}
-\contentsline {section}{\numberline {8.2}Code Documentation}{21}
+\contentsline {chapter}{\numberline {4}Design}{13}
+\contentsline {section}{\numberline {4.1}The simulation model}{13}
+\contentsline {subsection}{\numberline {4.1.1}Input}{13}
+\contentsline {subsection}{\numberline {4.1.2}Output}{14}
+\contentsline {section}{\numberline {4.2}GUI}{14}
+\contentsline {chapter}{\numberline {5}Implementation}{15}
+\contentsline {section}{\numberline {5.1}Back-end}{15}
+\contentsline {subsubsection}{Python}{15}
+\contentsline {section}{\numberline {5.2}Front-end}{15}
+\contentsline {chapter}{\numberline {6}Experiments}{17}
+\contentsline {section}{\numberline {6.1}Random rule}{17}
+\contentsline {subsection}{\numberline {6.1.1}Results}{17}
+\contentsline {subsubsection}{RR\_N1}{17}
+\contentsline {subsubsection}{RR\_N2}{17}
+\contentsline {subsubsection}{RR\_3S}{17}
+\contentsline {subsubsection}{RR\_3P}{17}
+\contentsline {section}{\numberline {6.2}Balance rule}{18}
+\contentsline {subsection}{\numberline {6.2.1}Results}{18}
+\contentsline {subsubsection}{BR\_N1}{18}
+\contentsline {subsubsection}{BR\_N2}{18}
+\contentsline {subsubsection}{BR\_3S}{18}
+\contentsline {section}{\numberline {6.3}Goodwill rule}{18}
+\contentsline {subsection}{\numberline {6.3.1}results}{18}
+\contentsline {subsubsection}{GR\_N1}{18}
+\contentsline {subsubsection}{GR\_N2}{18}
+\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{19}
+\contentsline {chapter}{\numberline {8}Further research}{21}
+\contentsline {chapter}{\numberline {9}Appendix A}{23}
+\contentsline {section}{\numberline {9.1}Simulator manual}{23}
+\contentsline {section}{\numberline {9.2}Code Documentation}{23}

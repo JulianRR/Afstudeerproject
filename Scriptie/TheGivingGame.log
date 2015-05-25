@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  25 MAY 2015 13:08
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  25 MAY 2015 15:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -532,23 +532,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 131--138
 Chapter 4.
 [13
 
-] [14
-
-]
+] [14]
 Chapter 5.
-[15] [16]
-Chapter 6.
-[17
+[15
 
-] [18
+] [16
 
 ]
+Chapter 6.
+[17] [18]
 Chapter 7.
-[19] [20
+[19
+
+] [20
 
 ]
 Chapter 8.
-[21] (./TheGivingGame.aux) ) 
+[21] [22
+
+]
+Chapter 9.
+[23] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
  4330 strings out of 493308
  60015 string characters out of 6141368
@@ -567,10 +571,10 @@ t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti10.pfb>
-Output written on TheGivingGame.pdf (23 pages, 168262 bytes).
+Output written on TheGivingGame.pdf (25 pages, 172473 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 129 PDF objects out of 1000 (max. 8388607)
+ 89 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

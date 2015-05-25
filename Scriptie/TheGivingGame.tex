@@ -153,11 +153,65 @@ The steeper the slope for YP the less tolerant P is. In this case the balance is
 The expectations are that a community effect will arise. The size of the subgroup will depend on the like factors. The higher the like factor of an agent pair the more likely it is that this pair will join the subgroup. For example if every agent pair has a like factor of 0 then the yield value for every agent pair does not change and is the same for everyone so the receiving agents are chosen randomly. This would lead to a subgroup with a size equal to the number of agents, the same situation as the random rule. If every agent pair has a like factor of -1 then the yield for every agent pair will decrease rapidly. A subgroup with a size of two will most likely arise, because the yield between these two agents will shift between the same values after each transaction. An equilibrium will arise within the yield curve as pictured below. \\
 \textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis. two dots are shown where the equilibrium is positioned}
 
+
+\chapter{Design}
+\textbf{Work in progres!}
+\section{The simulation model}
+The simulator had to be able to execute multiple tasks. The simulator must be able to accept user input to simulate multiple scenarios. The simulator should provide a visualization module to visualize the data and to also visualize the course of the transactions. The following shows the simulation proces:
+
+In the following sections the design choices are explained to achieve the ...
+\subsection{Input}
+The user is able to input the following parameters:
+
+\begin{description}
+  \item[N:] 
+  \item[M:] 
+  \item[Perish period:] 
+  \item[Production delay:]
+ \item[Selection rule:] 
+  \item[Nominal value:] The user is able to choose if every agent perceives the value of a good differently or not. If the user wants to have a different value of the good for every agent the user can add a xslx file with the nominal values as follows:
+  \item[Like factor:] The user is able to choose between setting like factors by hand or to randomly create the like factors. If the user wants to add predefined likefactors the user can add a xslx file with the like factors as follows:
+ \item[Balance:] The use is able to set the balance at the start of the simulation at 0 or to add different balances for every agent.
+\end{description}
+During the simulation the user should be able to adjust the following variables:
+
+\begin{description}
+  \item[Subgroup size:] 
+  \item[Reset community percentage:] 
+
+\end{description}
+\subsection{Output}
+The output data is visualized so that the user is able to analyse and get results without doing any calculations. The simulator is able to do most of the work.
+
+The simulator is able to give the following output:
+\begin{itemize}
+  \item Show the amount of goods given and received for each agent in a bar plot.
+  \item Show the yield curve between every agent pair.
+  \item Show the amount of transactions
+  \item Show the visualization of the course of the transactions with a color indication for any emerging subgroups.
+  \item Show percentages of how many times a certain good has been traded by an agent.
+  \item Show every transaction, producting and delay in production.
+  \item Show the community percentage (How many transactions take place in a subgroup with the current set size.)
+\end{itemize}
+
+All the data can be saved and used in the future for another simulation.
+
+\section{GUI}
+
+
+
+For the explanation of the use of the interface the use should consult the user manual.
+
+
 \chapter{Implementation}
 
 \section{Back-end}
 
+\subsubsection{Python}
+
 \section{Front-end}
+The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation.
+
 
 \chapter{Experiments}
 \textbf{For now every results is from simulation type: one by one. Also these results assume that at the start of the simulation no agent start with more than 1 good.}
