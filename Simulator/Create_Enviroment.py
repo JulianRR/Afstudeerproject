@@ -102,6 +102,8 @@ class Enviroment:
 			for good in self.goods_list:
 				agent.goods_transactions.append([good, 0])
 				#agent.yield_values.append([good.value for x in range(self.N)])
+				if not self.nominal_values:
+					agent.nominal_values.append(good.value)
 			if self.balance:
 				# agent.balance.append(self.balance[agent.id])
 				agent.balance = self.balance[agent.id]
@@ -129,9 +131,9 @@ class Enviroment:
 		for agent in self.agents_list:
 			for good in self.goods_list:
 				# agent.yield_values.append([agent.like_factor[x] * agent.balance[good.id][x] + agent.nominal_values[good.id] for x in range(self.N)])
-				print(agent.like_factor[0])
-				print(agent.balance[0])
-				print(agent.nominal_values[good.id])
+				# print(agent.like_factor[0])
+				# print(agent.balance[0])
+				# print(agent.nominal_values[good.id])
 				agent.yield_values.append([agent.like_factor[x] * agent.balance[x] + agent.nominal_values[good.id] for x in range(self.N)])
 
 

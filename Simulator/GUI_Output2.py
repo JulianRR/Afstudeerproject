@@ -15,6 +15,8 @@ from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as Navigatio
 from Visualisation import Canvas
 import Simulate as sim
 
+from openpyxl import Workbook
+
 class Output(QtGui.QMainWindow):
     
     def __init__(self, env):
@@ -83,12 +85,24 @@ class Output(QtGui.QMainWindow):
             #     writer.writerows(self.env.goods_parameters)
 
     def save_balance(self, path):
-        fname = 'balance.csv'
-        with open(os.path.join(path, fname), 'w', newline='') as f:
-            writer = csv.writer(f, delimiter=',')
-            data = [['balance_matrix']]
-            writer.writerows(data)
-            writer.writerows(self.env.balance_matrix)
+        # fname = 'balance.csv'
+        # with open(os.path.join(path, fname), 'w', newline='') as f:
+        #     writer = csv.writer(f, delimiter=',')
+        #     data = [['balance_matrix']]
+        #     writer.writerows(data)
+        #     writer.writerows(self.env.balance_matrix)
+        fname = 'balance.xlsx'
+        wb = Workbook()
+        ws = wb.active
+
+        for i in range(1, self.env.N + 1):
+            for j in range(1, self.env.N + 1):
+                #ws.append([self.env.balance_matrix[i][j]])
+                ws.cell(row = i, column = j).value = self.env.balance_matrix[i-1][j-1]
+
+        print(ws.cell(row = 4, column = 2))
+        wb.save(filename = os.path.join(path, fname))
+
 
     def load_data(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Save file', 
