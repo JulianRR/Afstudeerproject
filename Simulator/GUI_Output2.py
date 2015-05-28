@@ -363,7 +363,7 @@ class Tabs(QtGui.QTabWidget):
 
             data = []
             for percentage in goods:
-                data.append(percentage)
+                data.append(percentage * 100)
             self.ax.bar(x+(width * count), data, width, color=(0, 1.0/(count+1), 1.0/(count+1)))
             count += 1
         self.ax.set_ylabel('Percentage')
@@ -980,23 +980,28 @@ class YieldCurve(QtGui.QDialog):
             self.combo_goods.addItem(name)
 
     def setValues(self):
-        self.yield_value_PQ.setText("%.4f" % self.P.yield_values[self.good_id][self.Q.id])
-        self.yield_value_QP.setText("%.4f" % self.Q.yield_values[self.good_id][self.P.id])
+        self.yield_value_PQ.setText("%.4f" % float(self.P.yield_values[self.good_id][self.Q.id]))
+        self.yield_value_QP.setText("%.4f" % float(self.Q.yield_values[self.good_id][self.P.id]))
         
-        self.like_factor_PQ.setText("%.4f" % self.P.like_factor[self.Q.id])
-        self.like_factor_QP.setText("%.4f" % self.Q.like_factor[self.P.id])
+        self.like_factor_PQ.setText("%.4f" % float(self.P.like_factor[self.Q.id]))
+        self.like_factor_QP.setText("%.4f" % float(self.Q.like_factor[self.P.id]))
 
-        self.balance_PQ.setText("%.4f" % float(self.P.balance[self.good_id][self.Q.id]))
-        self.balance_QP.setText("%.4f" % float(self.Q.balance[self.good_id][self.P.id]))
+        self.balance_PQ.setText("%.4f" % float(self.P.balance[self.Q.id]))
+        self.balance_QP.setText("%.4f" % float(self.Q.balance[self.P.id]))
+
 
 
     def onSelected(self, text):
         id = text.strip('Good_')
         for good in self.env.goods_list:
             if good.id == int(id):
-                #good.value += 1
                 self.plotYieldCurve2(good)
                 self.good_id = good.id
+                self.setValues()
+
+    def closeEvent(self,event):
+        plt.close()
+        event.accept()
 
 class Browser(QtGui.QWidget):
     def __init__(self):

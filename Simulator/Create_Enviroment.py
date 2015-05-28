@@ -206,12 +206,12 @@ class Enviroment:
 				next_agent_id = sl.goodwill_rule(current_agent, good, self.N)
 		return self.agents_list[next_agent_id]
 
-	def select_start_agents(self):
+	def select_start_agents(self, start_agents):
 		for good in self.goods_list:
 			index = randint(0, self.N-1)
-			self.current_agents.append((self.agents_list[index], good))
+			self.current_agents.append((self.agents_list[start_agents[good.id]], good))
 			if good.perish_period > 0:
-				self.producing_agents.append((self.agents_list[index], good))
+				self.producing_agents.append((self.agents_list[start_agents[good.id]], good))
 
 	def calculate_transaction_percentages(self, total_transactions):
 		self.transaction_percentages = []
@@ -244,8 +244,8 @@ class Enviroment:
 			for goods in agent.goods_transactions:
 				if goods_transactions[count] != 0:
 					percentages.append(goods[1] / (goods_transactions[count]*2))
-					print('goods_transactions:' + str(count), goods_transactions[count]*2)
-					print('goods[1]:', goods[1])
+					# print('goods_transactions:' + str(count), goods_transactions[count]*2)
+					# print('goods[1]:', goods[1])
 				else:
 					percentages.append(0)
 				count += 1
@@ -263,7 +263,7 @@ class Enviroment:
 
 			#print(x[::-1])
 			#print(sum)
-		return sum
+		return sum * 100
 
 
 

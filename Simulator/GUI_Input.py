@@ -1,5 +1,6 @@
 import sys, time
 from PyQt4 import QtGui
+from PyQt4.QtCore import Qt
 import Simulate as sim
 #from GUI_Output import Output
 from GUI_Output2 import Output
@@ -74,6 +75,16 @@ class Input(QtGui.QMainWindow):
                     y = int(y)
             self.gui.load_simulation(N, M, goods_list, 0, 0, 0, 1, parallel, selectionrule)
 
+    def closeEvent(self,event):
+        result = QtGui.QMessageBox.question(self,
+                      "Confirm Exit...",
+                      "Are you sure you want to exit ?",
+                      QtGui.QMessageBox.Yes| QtGui.QMessageBox.No)
+        event.ignore()
+
+        if result == QtGui.QMessageBox.Yes:
+            event.accept()
+
 
 class GUI(QtGui.QWidget):
     
@@ -100,6 +111,7 @@ class GUI(QtGui.QWidget):
 
         # [[perish_period, production_delay, nominal_value]]
         self.goods_list = []
+        self.start_agents = []
 
         # xlsx variables
         self.like_factors = []
@@ -268,7 +280,7 @@ class GUI(QtGui.QWidget):
         # Set number of rows
         self.input_table.setRowCount(M)
         # Set number of columns
-        self.input_table.setColumnCount(3)
+        self.input_table.setColumnCount(4)
         # Set column headers
         self.input_table.setHorizontalHeaderLabels(labels)
 
@@ -276,12 +288,27 @@ class GUI(QtGui.QWidget):
         for i in range(M):
             lbl = 'Good_' + str(i)
             goods_labels.append(lbl)
+
+            
+            
             # Set default perish period
-            self.input_table.setItem(i, 0, QtGui.QTableWidgetItem('0'))
+            item = QtGui.QTableWidgetItem()
+            item.setData(Qt.EditRole, 0)
+            self.input_table.setItem(i, 0, item)
             # Set default production delay
-            self.input_table.setItem(i, 1, QtGui.QTableWidgetItem('0'))
+            # self.input_table.setItem(i, 1, QtGui.QTableWidgetItem('0'))
+            item = QtGui.QTableWidgetItem()
+            item.setData(Qt.EditRole, 0)
+            self.input_table.setItem(i, 1, item)
             # Set default nominal value
-            self.input_table.setItem(i, 2, QtGui.QTableWidgetItem('1'))
+            item = QtGui.QTableWidgetItem()
+            item.setData(Qt.EditRole, 1)
+            self.input_table.setItem(i, 2, item)
+            # Set start agent
+            item = QtGui.QTableWidgetItem()
+            item.setData(Qt.EditRole, -1)
+            self.input_table.setItem(i, 3, item)
+
             self.goods_list.append([0, 0, 1])
 
         # Set row headers
@@ -307,9 +334,17 @@ class GUI(QtGui.QWidget):
     def setGoodsList(self):
         rows = self.input_table.rowCount()
         columns = self.input_table.columnCount()
+        self.start_agents = []
         for i in range(rows):
             for j in range(columns):
-                self.goods_list[i][j] = int(self.input_table.item(i, j).text())
+                if j == columns-1:
+                    if self.input_table.item(i, j).data(Qt.DisplayRole) < 0 or self.input_table.item(i, j).data(Qt.DisplayRole) > self.N-1:
+                        self.start_agents.append(randint(0, self.N-1))
+                    else:
+                        self.start_agents.append(self.input_table.item(i, j).data(Qt.DisplayRole))
+                    print(self.input_table.item(i, j).data(Qt.DisplayRole))
+                else:
+                    self.goods_list[i][j] = self.input_table.item(i, j).data(Qt.DisplayRole)
 
     def setLikeFactors(self):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
@@ -411,17 +446,40 @@ class GUI(QtGui.QWidget):
         self.nominal_values = []
 
     def startSimulation(self):
-        self.setGoodsList()
-        env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance, self.nominal_values)
-        self.output = Output(env)
-        env.output = self.output
-        sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)
+        if self.check_parameters():
+            self.setGoodsList()
+            env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance, self.nominal_values, self.start_agents)
+            self.output = Output(env)
+            env.output = self.output
+            sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)
 
     def load_simulation(self, N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selection_rule):
         env = sim.create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selection_rule)
         output = Output(env)
         env.output = output
         sim.start_simulation(N, M, goods_list, M_perishable, perish_period, production_delay, value, output, env, selection_rule)
+
+    def check_parameters(self):
+        correct = True
+
+        if self.N <= 0:
+            correct = False
+        if self.M <= 0:
+            correct = False
+        if self.like_factors and (len(self.like_factors) != self.N or len(self.like_factors[0]) != self.N):
+            correct = False
+        if self.balance and (len(self.balance) != self.N or len(self.balance[0]) != self.N):
+            correct = False
+        if self.nominal_values and (len(self.nominal_values) != self.N or len(self.nominal_values[0]) != self.M):
+            correct = False
+
+        if not correct:
+            result = QtGui.QMessageBox.warning(self,
+                      "Wrong parameter",
+                      "Wrong parameters!",
+                      QtGui.QMessageBox.Ok)
+
+        return correct
 
     def closeEvent(self,event):
         result = QtGui.QMessageBox.question(self,

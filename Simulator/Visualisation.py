@@ -129,7 +129,7 @@ class Canvas(app.Canvas):
 
     def createGrid(self):
         root = sqrt(self.N)
-        height = floor(root)
+        height = ceil(root)
         width = ceil(root)
         step_x = 2 / width
         step_y = 2 / height
