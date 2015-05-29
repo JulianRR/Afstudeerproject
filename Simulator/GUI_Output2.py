@@ -354,6 +354,7 @@ class Tabs(QtGui.QTabWidget):
         width = 0.25
         count = 0
         #plt.cla()
+        plt.close()
         self.figure.clf()
 
         self.ax = self.figure.add_subplot(111)

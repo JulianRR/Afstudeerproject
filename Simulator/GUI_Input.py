@@ -335,6 +335,7 @@ class GUI(QtGui.QWidget):
         rows = self.input_table.rowCount()
         columns = self.input_table.columnCount()
         self.start_agents = []
+        # random.seed()
         for i in range(rows):
             for j in range(columns):
                 if j == columns-1:
