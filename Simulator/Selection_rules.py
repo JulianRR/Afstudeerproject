@@ -34,5 +34,5 @@ def goodwill_rule(current_agent, good, N):
 				next_agents.append(x)
 	if len(next_agents) > 1:
 		return next_agents[random.randint(0, len(next_agents)-1)]
-	print(next_agents)
+	# print(next_agents)
 	return next_agents[0]

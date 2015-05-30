@@ -98,7 +98,7 @@ class Output(QtGui.QMainWindow):
         for i in range(1, self.env.N + 1):
             for j in range(1, self.env.N + 1):
                 #ws.append([self.env.balance_matrix[i][j]])
-                ws.cell(row = i, column = j).value = self.env.balance_matrix[i-1][j-1]
+                ws.cell(row = i, column = j).value = self.env.agents_list[i-1].balance[j-1]
 
         print(ws.cell(row = 4, column = 2))
         wb.save(filename = os.path.join(path, fname))
@@ -129,6 +129,7 @@ class Output(QtGui.QMainWindow):
 
         if result == QtGui.QMessageBox.Yes:
             self.env.stop = True
+            self.gui.tabs.close_plt()
             event.accept()
 
 class GUI(QtGui.QWidget):
@@ -429,6 +430,10 @@ class Tabs(QtGui.QTabWidget):
 
     def colorV(self):
         self.visualisation.updateColor()
+
+
+    def close_plt(self):
+        plt.close()
 
     # def resetTransactions(self):
     #     for agent in self.env.agents_list:
