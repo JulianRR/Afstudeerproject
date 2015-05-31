@@ -26,9 +26,76 @@ This is the abstract.
 \chapter{Introduction}
 \textbf{Work in progress!}
 \\
-In today's world money is the primary medium of exchange and is used to define the value of most economic transaction. Besides this well-known  economic system there is the economy of giving. The economy of giving is an economic  system without money as the medium of exchange. This system does not use a currency to express the value of a transaction. Instead the value of a transaction is based on a social credit. Goods can be given away or exchanged for other goods. Giving away a good is not perceived as a direct loss. Instead it is expected that something will be given in return in the future. Every individual keeps track of their own social credit balance with every other person and bases their perception of the value of a transaction on this balance. 
+In today’s world money is the primary medium of exchange. Money is used to express the value of a transaction and is the major source of wealth. It’s almost impossible to imagine an economy where no currency is used, even though it’s more common than one may think. In this world goods are given away without a currency to express its value. People often do not perceive giving as an economic transaction. On the contrary, giving is capable of establishing a whole independent economy. 
 
-The giving game is a macroeconomic theory about this economic system of giving and giving in real life. In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or persons to who they will give to. When the transactions only take place in a certain group a community effect emerges. The pruprose of this thesis is to research under what conditions a community effect will emerge using a giving game to simulate an economy of giving. This has led to the following research question:
+With today’s technology giving is becoming an even more common occurrence. The internet is an important environment for communities where money is not used as a medium of exchange. File sharing and the availability of open-source software is a great example of such a giving economy. On a more a more smaller scale giving is commonly used within communities of family and friends. Within these kind of communities giving away a good is not perceived as a direct loss, but instead it is expected that something will be given in return in the future. The value of transactions within such communities are determined by the relationship between the two participating parties of a transaction. People who have a better relationship with each other than with someone else value each other’s transactions more. 
+
+The purpose of this thesis is to research the behaviour of people within an economy of giving under certain conditions. For example In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or persons to who they will give to. 
+
+\section{Contribution}
+This thesis will research the behaviour of people within a giving economy from a more game theory oriented perspective. A giving game designed by P.W. Weijland will be used to simulate an economy of giving. The goal of this thesis is to create a simulation program that can simulate a giving game of N agents and M goods. 
+\\
+\\
+\textbf{chapters kloppen nog niet}
+In chapter 2 the giving game is explained in detail with all the possible parameters. Chapter 2 also explains the mathematics behind the giving game. Chapter 3 will describe the scenarios which will be used to simulate. Chapter 4 will explain the design of the simulator and chapter 5 shows the implementation. Chapter 6 describes the experiments and gives an overview of the results. Chapter 7 discusses these results and answers to the research questions.
+
+
+
+\chapter{Theoretical background}
+Giving is a more complex process than one may think. Firstly giving can be interpreted in multiple ways.
+\begin{itemize}
+  \item Giving can be giving something without getting something in return
+  \item Giving can be giving something and getting something in return in the future.
+  \item Giving can be a trade where something is giving and something is received.
+\end{itemize}
+When giving the value of the good is perceived by everyone differently. This means that when two goods are traded both goods do not necessarily need to be of the same value. To express the value of a transaction an economy of giving uses social credit. The social credit is an indication of the relationship between two people. Every individual keeps track of their own social credit balance with every other person and bases their perception of the value of a transaction on this credit balance.
+
+Based on this social credit people can have multiple reasons to give away something, but giving is almost always with the intention to get something in return. As shown in the article ‘Giving with Impure Altruism: Applications to Charity and Ricardian Equivalence’ even giving to charity is often not completely selfless. When giving out of kindness or the help someone else most people still get a good feeling when giving. The article calls this feeling the ‘warm glow’. This shows that giving can still be with the intention to get something in return even if it seems to be out of kindness. This also shows that what is given in return does not have to be of the same value and that some people value giving to charity more than others, because of their perception of what they get in return.
+
+In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or persons to who they will give to. When the transactions only take place in a certain group a community effect emerges.
+
+The behaviour of people in an economy of giving can be a lot more complex than in an economy where money is used as a medium of exchange. With money it is easy to express a value of a transaction and almost everyone perceives this value the same. With giving this value is based upon multiple factors and can be different for every person.
+
+
+
+\section{The economic model}
+In the article ‘Money Network in Kiyotaki-Wright Model’ an environment with three agents and three goods is simulated. Each agent produces one good and consumes another. This article shows the behaviour of the agents when they want to trade their good for the good they need to consume. This simulation used an economy environment without money, but only focused on scenarios where agents only give away their good if they get a good in return which they can use. 
+\\
+\\
+P.W. Weijland has created a similar model called ‘The Giving Game’, but instead focuses on more aspects of giving. A giving game is a game to simulate giving in real life. A giving game can be very versatile and a lot of variants are possible to simulate different real life economic environments. In this section the basic rules of a giving game are explained and the giving game used for this thesis is explained.
+The following rules show the basics of a giving game:
+\begin{itemize}
+  \item In an environment of N agents an agent is randomly chosen to start with a good.
+  \item Once an agent has the good the agent is meant to give it to someone else.
+  \item Each time an agent receives the good the agent receives a credit point.
+\end{itemize}
+
+This thesis uses a variant of this giving game to simulate the behaviour of giving in real life under certain conditions.
+
+\section{Yield curve}
+Every agent values the transaction of a certain good differently for each agent. This value of the transaction is called the yield. The yield is calculated using the account balance (social credit), the like factor and the nominal value of a good. The like factor is an indication of the relationship between two agents. The higher the value the better the relationship. The nominal value is perceived differently by every agent.
+The following function is used to calculate the yield:
+\\
+\\
+\textit{Y = a*x + b} \\
+\textit{-1 $\le$ a $\le$ 0} \\
+\textit{Y, b $\ge$ 0} \\
+Here is \textit{a} the like factor, \textit{X} is the account balance and \textit{b} is the nominal value of a good. With this function we can create a yield curve as follows.
+\\
+\textbf{Image of yield curve here}
+\\
+Every agent keeps track of their account balance in relation with the other agents. This means that agent P can have a different balance with Q than with R. The balance is an indication of how much an agent has given and received. From the yield curve it is clear that when the account balance of P with Q gets higher the yield gets lower. This can be interpreted as the more P gives to Q the higher the balance of P with Q thus the more P is ‘in the black’ with Q and the more Q is ‘in the red’ with P. This means that Q is in debt with P. The balance after a transaction is calculated by adding the yield of that transaction to the current balance. When the yield gets lower the balance increases less, so for the next transaction the yield will also decrease less. The yield will never reach zero.
+
+The yield will be important to determine who will receive a good next. If P would for example want to maximize its profit P would only want to give away a good to someone with who P has a high yield. Agents who are in debt with P and are not likely to pay of this debt would be worthless to P in this case. It would be a bad investment if P would give to these agents.
+\\
+\\
+The yield curve can either be used to predict the course of the transactions or to see an equilibrium arise. When an equilibrium arises the yield of a good between two agents switches between two values.  Both agents perceive the transactions with each other as the most valuable and will keep giving to each other. These agents have established a community with each other and this community will hold as long as the current condition do not change. 
+
+\textbf{Image of yield curve with equilibrium here}
+
+\section{Research questions}
+\textbf{WORK IN PROGRES!}
+As explained earlier, in real life people seem under certain conditions to prefer to give to 'friends' than to strangers. This has led to the following research question:
 \\
 \\
 \textit{Will the transactions eventually take place within a limited subgroup of the entire population?}
@@ -39,36 +106,9 @@ If no community effect emerges the transactions can still fall into a repeating 
 \\
 \textit{Will we see a repeating sequence of transactions or will the transaction sequence look random?}
 
-\section{Related work}
-W.P. Weijland developed in his article 'Mathematical Foundation for the Economy of Giving' a mathematical model for economies which rely on a system of social credit. This model  explains how the value of a transaction changes under certain conditions and defines the relation between two or more agents in an economic environment without a currency as means of exchange. The mathematics behind this will be explained in the next chapter.
 
-A similar research is the article ‘Money Network in Kiyotaki-Wright Model’. In this article an environment with three agents and three goods is simulated. Each agent produces one good and consumes another good. The article explains the behaviour of the agents and how the goods are traded. This research differs from the giving game, because the agents can consume goods and only trade their good for other goods they can consume or use to trade for the good they need to consume. 
-
-Other research to the specific economy of giving is lacking. Other articles are more psychological oriented like the article ‘A survey of trust and reputation systems for online sevice provision’ and ‘Giving with IMpure Altruism: Applications to Charity and Ricardian Equivalence’. The first article explains trust between people and the different type of trust. The second article explains that giving something for example to charity is not always completely alturistic. The 'warm glow' is explained which is what people get when they give. 
-
-
-\section{Contribution}
-With money it is easy to determine the economic value of a transaction and makes it easy to find the optimum economic transactions in a certain trade environment. Calculating the optimum economic transactions in an environment of giving is lacking in today’s world. Transactions without money as the medium of exchange happens more often than people think. Calculating the optimum economic transactions and simulating the behaviour of people can be extremely usefull in certain environments, for example with investing.
-
-The goal of this thesis is to design and implement a simulator that can simulate a giving game of N agents and M goods. The simulation should be able to simulate multiple scenario’s where the agents choose to who they give based on multiple parameters. The simulator can be used to analyse the behaviour of agents in different scenarios of giving.
-\\
-\\
-In chapter 2 the giving game is explained in detail with all the possible parameters. Chapter 2 also explains the mathematics behind the giving game. Chapter 3 will describe the scenarios which will be used to simulate. Chapter 4 will explain the design of the simulator and chapter 5 shows the implementation. Chapter 6 describes the experiments and gives an overview of the results. Chapter 7 discusses these results and answers the research questions.
-
-
-\chapter{Theoretical background}
-A giving game is a game to simulate giving in real life. A giving game can be very versatile and a lot of variants are possible to simulate different real life economic environments. In this section the basic rules of a giving game are explained and the giving game used for this thesis is explained.
-The following rules show the basics of a giving game:
-\begin{itemize}
-  \item In an environment of N agents an agent is randomly chosen to start with a good.
-  \item Once an agent has the good the agent is meant to give it to someone else.
-  \item Each time an agent receives the good the agent receives a credit point.
-\end{itemize}
-The giving game above is a more game theory oriented giving game. For this thesis the giving game will be a more realistic representation of the real life economy of giving.
-
-
-\section{The rules of the game}
-For this thesis the environment consists of a fixed amount of agent and a fixed amount of goods. For every simulation the number of agents and number of goods can be changed, but during the simulation no agents or goods are added or removed.  Every agents keeps track of their own account balance and transaction values in relation to every other agent. The agents don’t know anything about each other, they operate completely independent.
+\chapter{Design}
+For this thesis the giving environment consists of a fixed amount of agent and a fixed amount of goods. For every simulation the number of agents and number of goods can be changed, but during the simulation no agents or goods are added or removed.  Every agents keeps track of their own account balance and transaction values in relation to every other agent. The agents don’t know anything about each other, they operate completely independent.
 
 There are two types of goods, ‘sustainable’ and ‘perishable’ goods. ‘Sustainable’ goods are goods that will exist for eternity. ‘Perishable’ goods are goods that perish after a certain amount of transactions. Every ‘perishable’ good has a producer. The producer is also an agent in the environment so the producer also participates in transactions of other goods. The producer reproduces its ‘perishable’ good after a certain amount of time the good has perished. The value of a good is valued differently by each agent, but this value does not change during the simulation. For the experiments in this thesis the agents are not able to hold on to a good for a certain amount of time. This is a variant which can be used in further research. Holding on to a good will be explained further in the last chapter. At the start of the giving game the goods can either be divided randomly over the agents or are divided by hand. The agents who start with the perishable goods are assigned to be the producers.
 
@@ -93,41 +133,16 @@ The following parameters will be used in the environment of the giving game for 
 
 \end{description}
 
-\section{Yield curve}
-Every agent values the transaction of a certain good differently for each agent. This value of the transaction is called the yield. The yield is calculated using the account balance, the like factor and the nominal value of a good. The following function is used to calculate the yield:
-\\
-\\
-\textit{Y = a*x + b} \\
-\textit{-1 $\le$ a $\le$ 0} \\
-\textit{Y, b $\ge$ 0} \\
-Here is \textit{a} the like factor, \textit{X} is the account balance and \textit{b} is the nominal value of a good. With this function we can create a yield curve as follows.
-\\
-\textbf{Image of yield curve here}
-\\
-Every agent keeps track of their account balance in relation with the other agents. This means that agent P can have a different balance with Q than with R. The balance is an indication of how much an agent has given and received. From the yield curve it is clear that when the account balance of P with Q gets higher the yield gets lower. This can be interpreted as the more P gives to Q the higher the balance of P with Q thus the more P is ‘in the black’ with Q and the more Q is ‘in the red’ with P. This means that Q is in debt with P. The balance after a transaction is calculated by adding the yield of that transaction to the current balance. When the yield gets lower the balance increases less, so for the next transaction the yield will also decrease less. The yield will never reach zero.
-
-The yield will be important to determine who will receive a good next. If P would for example want to maximize its profit P would only want to give away a good to someone with who P has a high yield. Agents who are in debt with P and are not likely to pay of this debt would be worthless to P in this case. It would be a bad investment if P would give to these agents.
-\\
-\\
-The yield curve can either be used to predict the course of the transactions or to see an equilibrium arise. When an equilibrium arises the yield of a good between two agents switches between two values.  Both agents perceive the transactions with each other as the most valuable and will keep giving to each other. These agents have established a community with each other and this community will hold as long as the current condition do not change. 
-
-\textbf{Image of yield curve with equilibrium here}
-
-
-\chapter{Selection rules}
+\section{Selection rules}
 For every transaction the selection rule decides which agent will receive a good. This decision is based on different parameters of the giving game. These selection rules simulate  multiple real world scenarios for example: choosing the agent based on maximizing the profit (goodwill rule).
 
-\section{Random rule}
-The random rule is the most basic rule for the giving game. The agent who should receive the good during the transaction is chosen randomly. The random rule simulates an environment where the agents do not care about the value of the goods and do not care about who will receive the goods. The \textit{like factor} is therefore 0 for every agent pair. This leads to the following yield curve.
-\\
-\textbf{Yield curve of y = a * x + b where a = 0 and b $>$ 0}
-\\
-This rule is mostly used to see if the giving game enviroment behaves as it should.
+\subsection{Random rule}
+The random rule is the most basic rule for the giving game. The agent who should receive the good during the transaction is chosen randomly. The random rule simulates an environment where the agents do not care about the value of the goods and do not care about who will receive the goods. The \textit{like factor} is therefore 0 for every agent pair. This leads to the following yield curve. This rule is mostly used to see if the giving game enviroment behaves as it should.
 
-\subsection{Hypothesis}
+\subsubsection{Hypothesis}
 It is expected that there will be no community effect and that there will not be any visible stabilisation of the transactions even though a machine is pseudorandom. The transactions will eventually be more or less equally distributed over all the agents. It will be just like throwing a dice, the next transactions will not be predictable. 
 
-\section{Balance rule}
+\subsection{Balance rule}
 A more advanced selection rule is the balance rule. The agent who should receive the good during the transaction is chosen based on the balance between the giving agent P and the receiving agent Q. Agent P chooses agent Q if P has the highest balance with Q. If P has the same highest balance with multiple agents then the receiving agent is chosen randomly between these agents. The balance rule simulates an environment where each agent only gives to the agent from who they have received the most. Agent P tries to maximize the number of goods he receives. The balance in this case can be calculated as follows: 
 \\
 \\
@@ -136,25 +151,22 @@ The following rule applies:\\
 \textit{Balance of P with Q = - (balance of Q with P)}\\
 This calculations of the balance is different from the calculation of the balance for the yield curve.\\
 
-
-
-
-\subsection{Hypothesis}
+\subsubsection{Hypothesis}
 The expectations are that a community effect will arise with a subgroup consisting of a few agents. The size of this subgroup is based on the type of goods and the amount of goods. All sustainable goods will eventually be traded only between two agents, because these two agents have the highest balance with each other. Every perishable good has a producer, these producers will also be part of a subgroup. If these producers only give each other their goods then the subgroup size will be as large as the amount of producers. If the producers each give to another agent then multiple subgroups will arise with a size of two. It is expected that the maximum size of a subgroup will be the number of producers plus one non-producer who trades with the producers. It will be interesting to see how these subgroups will behave, if they will merge together or operate individually.
 
-\section{Goodwill rule}
+\subsection{Goodwill rule}
 The goodwill rule is a more realistic rule. The agent is chosen based on the value of the transaction (the yield) between P and Q perceived by P. Only the agent where the yield is the highest is chosen as the receiving agent. If multiple agent pairs have the same yield the receiving agent is chosen randomly between these agents. Every time P gives good G to Q the value of the transaction of good G (the yield) decreases. As long as Q does not give good G to P, P loses interest in giving good G to Q. Eventually P will stop giving to Q, because P does not expect that Q will ever pay of his debt. The like factor as explained earlier defines how many transactions P can tolerate without getting anything in return from Q. For the goodwill rule the like factor can be set by the user or can be created randomly. The goodwill rule simulates an environment where every agent tries to maximize its profit. Agents who are in debt will less likely receive a good, they are not worth investing in.
 This leads to yield curves that look like this: \\
 \textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis}\\
 The steeper the slope for YP the less tolerant P is. In this case the balance is calculated as explained before.
 
 
-\subsection{Hypothesis}
+\subsubsection{Hypothesis}
 The expectations are that a community effect will arise. The size of the subgroup will depend on the like factors. The higher the like factor of an agent pair the more likely it is that this pair will join the subgroup. For example if every agent pair has a like factor of 0 then the yield value for every agent pair does not change and is the same for everyone so the receiving agents are chosen randomly. This would lead to a subgroup with a size equal to the number of agents, the same situation as the random rule. If every agent pair has a like factor of -1 then the yield for every agent pair will decrease rapidly. A subgroup with a size of two will most likely arise, because the yield between these two agents will shift between the same values after each transaction. An equilibrium will arise within the yield curve as pictured below. \\
 \textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis. two dots are shown where the equilibrium is positioned}
 
 
-\chapter{Design}
+\chapter{Implementation}
 \textbf{Work in progres!}
 \section{The simulation model}
 The simulator had to be able to execute multiple tasks. The simulator must be able to accept user input to simulate multiple scenarios. The simulator should provide a visualization module to visualize the data and to also visualize the course of the transactions. The following shows the simulation proces:
