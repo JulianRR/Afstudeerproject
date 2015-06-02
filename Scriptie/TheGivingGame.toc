@@ -8,38 +8,61 @@
 \contentsline {section}{\numberline {3.1}Paramaters}{11}
 \contentsline {section}{\numberline {3.2}Selection rules}{12}
 \contentsline {subsection}{\numberline {3.2.1}Random rule}{12}
-\contentsline {subsubsection}{Hypothesis}{12}
 \contentsline {subsection}{\numberline {3.2.2}Balance rule}{12}
-\contentsline {subsubsection}{Hypothesis}{13}
-\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{13}
-\contentsline {subsubsection}{Hypothesis}{13}
+\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{12}
+\contentsline {section}{\numberline {3.3}Simulation model}{13}
 \contentsline {chapter}{\numberline {4}Implementation}{15}
 \contentsline {section}{\numberline {4.1}The simulation model}{15}
 \contentsline {subsection}{\numberline {4.1.1}Input}{15}
 \contentsline {subsection}{\numberline {4.1.2}Output}{16}
 \contentsline {section}{\numberline {4.2}GUI}{16}
-\contentsline {chapter}{\numberline {5}Implementation}{17}
-\contentsline {section}{\numberline {5.1}Back-end}{17}
-\contentsline {subsubsection}{Python}{17}
-\contentsline {section}{\numberline {5.2}Front-end}{17}
-\contentsline {chapter}{\numberline {6}Experiments}{19}
-\contentsline {section}{\numberline {6.1}Random rule}{19}
-\contentsline {subsection}{\numberline {6.1.1}Results}{19}
-\contentsline {subsubsection}{RR\_N1}{19}
-\contentsline {subsubsection}{RR\_N2}{19}
-\contentsline {subsubsection}{RR\_3S}{19}
-\contentsline {subsubsection}{RR\_3P}{19}
-\contentsline {section}{\numberline {6.2}Balance rule}{20}
-\contentsline {subsection}{\numberline {6.2.1}Results}{20}
-\contentsline {subsubsection}{BR\_N1}{20}
-\contentsline {subsubsection}{BR\_N2}{20}
-\contentsline {subsubsection}{BR\_3S}{20}
-\contentsline {section}{\numberline {6.3}Goodwill rule}{20}
-\contentsline {subsection}{\numberline {6.3.1}results}{20}
-\contentsline {subsubsection}{GR\_N1}{20}
-\contentsline {subsubsection}{GR\_N2}{20}
-\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{21}
-\contentsline {chapter}{\numberline {8}Further research}{23}
-\contentsline {chapter}{\numberline {9}Appendix A}{25}
-\contentsline {section}{\numberline {9.1}Simulator manual}{25}
-\contentsline {section}{\numberline {9.2}Code Documentation}{25}
+\contentsline {section}{\numberline {4.3}Back-end}{16}
+\contentsline {subsubsection}{Python}{16}
+\contentsline {section}{\numberline {4.4}Front-end}{16}
+\contentsline {chapter}{\numberline {5}Scenarios}{17}
+\contentsline {section}{\numberline {5.1}Basic Scenarios}{17}
+\contentsline {subsubsection}{Basic scenario 1, sustainable (BS\_S):}{17}
+\contentsline {subsubsection}{Basic scenario 2, perishable (BS\_P):}{17}
+\contentsline {section}{\numberline {5.2}Random rule}{17}
+\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{18}
+\contentsline {subsubsection}{Scenario 2, perishable (RR\_P):}{18}
+\contentsline {subsubsection}{Hypothesis}{18}
+\contentsline {section}{\numberline {5.3}Balance rule}{18}
+\contentsline {subsubsection}{Scenario 1, sustainable (BR\_S):}{18}
+\contentsline {subsubsection}{Scenario 2, perishable (BR\_P):}{18}
+\contentsline {subsubsection}{Hypothesis}{19}
+\contentsline {section}{\numberline {5.4}Goodwill rule}{19}
+\contentsline {subsubsection}{Like factors}{19}
+\contentsline {subsubsection}{Balances}{19}
+\contentsline {subsubsection}{Nominal values}{19}
+\contentsline {subsubsection}{Hypothesis}{20}
+\contentsline {chapter}{\numberline {6}Experiments}{21}
+\contentsline {section}{\numberline {6.1}Random rule}{21}
+\contentsline {subsection}{\numberline {6.1.1}Results}{21}
+\contentsline {subsubsection}{BS\_S}{21}
+\contentsline {subsubsection}{BS\_P}{21}
+\contentsline {subsubsection}{RR\_S}{21}
+\contentsline {subsubsection}{RR\_P}{21}
+\contentsline {section}{\numberline {6.2}Balance rule}{22}
+\contentsline {subsection}{\numberline {6.2.1}Results}{22}
+\contentsline {subsubsection}{BS\_S}{22}
+\contentsline {subsubsection}{BS\_P}{22}
+\contentsline {subsubsection}{BR\_S}{22}
+\contentsline {subsubsection}{BR\_P}{22}
+\contentsline {section}{\numberline {6.3}Goodwill rule}{22}
+\contentsline {subsection}{\numberline {6.3.1}Results}{22}
+\contentsline {subsubsection}{BS\_S}{22}
+\contentsline {subsubsection}{BS\_P}{23}
+\contentsline {subsubsection}{GR\_L1B1N1}{23}
+\contentsline {subsubsection}{GR\_L1B1N2}{23}
+\contentsline {subsubsection}{GR\_L2B1N1}{23}
+\contentsline {subsubsection}{GR\_L2B1N2}{23}
+\contentsline {subsubsection}{GR\_L1B2N1}{23}
+\contentsline {subsubsection}{GR\_L1B2N2}{23}
+\contentsline {subsubsection}{GR\_L2B2N1}{23}
+\contentsline {subsubsection}{GR\_L2B2N2}{23}
+\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{25}
+\contentsline {chapter}{\numberline {8}Further research}{27}
+\contentsline {chapter}{\numberline {9}Appendix A}{29}
+\contentsline {section}{\numberline {9.1}Simulator manual}{29}
+\contentsline {section}{\numberline {9.2}Code Documentation}{29}
