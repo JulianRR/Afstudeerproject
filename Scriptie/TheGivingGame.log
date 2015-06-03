@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  2 JUN 2015 13:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  3 JUN 2015 19:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -562,26 +562,138 @@ Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
  [19] [20]
 Chapter 6.
+<experiment_images/RR_P.png, id=86, 910.602pt x 440.847pt>
+File: experiment_images/RR_P.png Graphic file (type png)
+
+<use experiment_images/RR_P.png>
+Package pdftex.def Info: experiment_images/RR_P.png used on input line 331.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 329--332
+[] 
+ []
+
 [21
 
-] [22] [23] [24
+] <experiment_images/BR_BS_S.png, id=91, 910.602pt x 440.847pt>
+File: experiment_images/BR_BS_S.png Graphic file (type png)
+
+<use experiment_images/BR_BS_S.png>
+Package pdftex.def Info: experiment_images/BR_BS_S.png used on input line 339.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 338--340
+[] 
+ []
+
+<experiment_images/BR_BS_P.png, id=92, 910.602pt x 440.847pt>
+File: experiment_images/BR_BS_P.png Graphic file (type png)
+
+<use experiment_images/BR_BS_P.png>
+Package pdftex.def Info: experiment_images/BR_BS_P.png used on input line 343.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 342--344
+[] 
+ []
+
+[22 <./experiment_images/RR_P.png> <./experiment_images/BR_BS_S.png>]
+<experiment_images/BR_S.png, id=98, 910.602pt x 440.847pt>
+File: experiment_images/BR_S.png Graphic file (type png)
+
+<use experiment_images/BR_S.png>
+Package pdftex.def Info: experiment_images/BR_S.png used on input line 346.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 345--347
+[] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23 <./experiment_images/BR_BS_P.png>] [24 <./experiment_images/BR_S.png>]
+<GR_L1B2N1/1000transactions.png, id=108, 910.602pt x 440.847pt>
+File: GR_L1B2N1/1000transactions.png Graphic file (type png)
+
+<use GR_L1B2N1/1000transactions.png>
+Package pdftex.def Info: GR_L1B2N1/1000transactions.png used on input line 373.
+
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+<GR_L1B2N1/30000transaction2.png, id=109, 910.602pt x 440.847pt>
+File: GR_L1B2N1/30000transaction2.png Graphic file (type png)
+
+<use GR_L1B2N1/30000transaction2.png>
+Package pdftex.def Info: GR_L1B2N1/30000transaction2.png used on input line 375
+.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+<GR_L1B2N1/1000transactions1perishable1-1.png, id=110, 910.602pt x 440.847pt>
+File: GR_L1B2N1/1000transactions1perishable1-1.png Graphic file (type png)
+
+<use GR_L1B2N1/1000transactions1perishable1-1.png>
+Package pdftex.def Info: GR_L1B2N1/1000transactions1perishable1-1.png used on i
+nput line 380.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+<GR_L1B2N1/1000transactions5perishable.png, id=111, 910.602pt x 440.847pt>
+File: GR_L1B2N1/1000transactions5perishable.png Graphic file (type png)
+
+<use GR_L1B2N1/1000transactions5perishable.png>
+Package pdftex.def Info: GR_L1B2N1/1000transactions5perishable.png used on inpu
+t line 382.
+(pdftex.def)             Requested size: 455.29988pt x 220.42296pt.
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 372--384
+[]
+ []
+
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 372--384
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 372--384
+
+ []
+
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 372--384
+[]
+ []
+
+
+Overfull \hbox (37.0462pt too wide) in paragraph at lines 372--384
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25 <./GR_L1B2N1/1000transactions.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26 <./GR_L1B2N1/30000transaction2.png> <./GR_L1B2N1/1000transactions1perishab
+le1-1.png>] [27 <./GR_L1B2N1/1000transactions5perishable.png>] [28
 
 ]
 Chapter 7.
-[25] [26
+[29] [30
 
 ]
 Chapter 8.
-[27] [28
+[31] [32
 
 ]
 Chapter 9.
-[29] (./TheGivingGame.aux) ) 
+[33] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
- 4330 strings out of 493308
- 60015 string characters out of 6141368
+ 4372 strings out of 493308
+ 61363 string characters out of 6141368
  150512 words of memory out of 5000000
- 7709 multiletter control sequences out of 15000+600000
+ 7741 multiletter control sequences out of 15000+600000
  7468 words of font info for 27 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,5n,39p,1317b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -595,10 +707,10 @@ t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti10.pfb>
-Output written on TheGivingGame.pdf (31 pages, 183951 bytes).
+Output written on TheGivingGame.pdf (35 pages, 409242 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 178 PDF objects out of 1000 (max. 8388607)
+ 111 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
