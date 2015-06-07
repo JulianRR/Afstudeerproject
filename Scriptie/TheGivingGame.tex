@@ -50,7 +50,7 @@ When giving the value of the good is perceived by everyone differently. This mea
 
 Based on this social credit people can have multiple reasons to give away something, but giving is almost always with the intention to get something in return. As shown in the article ‘Giving with Impure Altruism: Applications to Charity and Ricardian Equivalence’ even giving to charity is often not completely selfless. When giving out of kindness or the help someone else most people still get a good feeling when giving. The article calls this feeling the ‘warm glow’. This shows that giving can still be with the intention to get something in return even if it seems to be out of kindness. This also shows that what is given in return does not have to be of the same value and that some people value giving to charity more than others, because of their perception of what they get in return.
 
-In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or persons to who they will give to. When the transactions only take place in a certain group a community effect emerges.
+In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or persons to who they will give to.
 
 The behaviour of people in an economy of giving can be a lot more complex than in an economy where money is used as a medium of exchange. With money it is easy to express a value of a transaction and almost everyone perceives this value the same. With giving this value is based upon multiple factors and can be different for every person.
 
@@ -70,21 +70,32 @@ The following rules show the basics of a giving game:
 
 This thesis uses a variant of this giving game to simulate the behaviour of giving in real life under certain conditions.
 
-\section{Yield curve}
-Every agent values the transaction of a certain good differently for each agent. This value of the transaction is called the yield. The yield is calculated using the account balance (social credit), the like factor and the nominal value of a good. The like factor is an indication of the relationship between two agents. The higher the value the better the relationship. The nominal value is perceived differently by every agent.
-The following function is used to calculate the yield:
+\section{Mathematical background}
+Every agent values the transaction of a certain good differently for each agent. This value of the transaction is called the yield. The value of a transaction is important for an agent to decide who to give to. For the calculations of the yield we first need to define some variables. Every agent has an account balance, the social credit, in relation to every other agent in the population. The account balance changes after every transactions based on the yield of the transactions. When a good is given away by P to Q the account balance is calculated as follows.\\
+\\
+\textit{new balance of P with Q = old balance of P with Q + yield} \\
+\textit{new balance of Q with P = old balance of Q with P - yield} \\
+\\
+When P gives more the account balance of P gets higher. This can be interpreted as the more P gives to Q the higher the balance of P with Q thus the more P is ‘in the black’ with Q and the more Q is ‘in the red’ with P. This means that Q is in debt with P. 
+For the account balance between P and Q the following rule applies if P and Q agree on their mutual account balance.
+\textit{Balance of P with Q = - (balance of Q with P)}
+\\
+\\
+Every good also has a value and can be perceived differently by every agent. This is the nominal value and can be interpreted as an indication of how much someone want this good. The nominal value of a good is set at the beginning of the giving game and does not change over time. The last variable we need to define is the like factor. The like factor is an indication of how much an agent likes another agent. The higher the like factor the more someone is liked.
+For the model that is used for this thesis, these variables lead to the following calculations of the yield.
 \\
 \\
 \textit{Y = a*x + b} \\
 \textit{-1 $\le$ a $\le$ 0} \\
 \textit{Y, b $\ge$ 0} \\
-Here is \textit{a} the like factor, \textit{X} is the account balance and \textit{b} is the nominal value of a good. With this function we can create a yield curve as follows.
+Here is \textit{a} the like factor, \textit{X} is the account balance and \textit{b} is the nominal value of a good. This function leads to the following graph called the yield curve.
 \\
 \textbf{Image of yield curve here}
 \\
-Every agent keeps track of their account balance in relation with the other agents. This means that agent P can have a different balance with Q than with R. The balance is an indication of how much an agent has given and received. From the yield curve it is clear that when the account balance of P with Q gets higher the yield gets lower. This can be interpreted as the more P gives to Q the higher the balance of P with Q thus the more P is ‘in the black’ with Q and the more Q is ‘in the red’ with P. This means that Q is in debt with P. The balance after a transaction is calculated by adding the yield of that transaction to the current balance. When the yield gets lower the balance increases less, so for the next transaction the yield will also decrease less. The yield will never reach zero.
+From this yield curve it is clear that when the account balance of P with Q gets higher the yield gets lower.  When the yield gets lower the balance increases less, so for the next transaction the yield will also decrease less, but the yield will never reach zero.
+The yield curve is not always a linear function. Different ways of calculating the yield can lead to different yield curves. This thesis makes use of a simplified version of the yield curve.
 
-The yield will be important to determine who will receive a good next. If P would for example want to maximize its profit P would only want to give away a good to someone with who P has a high yield. Agents who are in debt with P and are not likely to pay of this debt would be worthless to P in this case. It would be a bad investment if P would give to these agents.
+The yield will be important to determine who will receive a good next. If P would for example want to maximize its profit P would only want to give away a good to someone with who P has a high yield. Agents who are in debt with P and are not likely to pay of this debt would be worthless to P. It would be a bad investment if P would give to these agents.
 \\
 \\
 The yield curve can either be used to predict the course of the transactions or to see an equilibrium arise. When an equilibrium arises the yield of a good between two agents switches between two values.  Both agents perceive the transactions with each other as the most valuable and will keep giving to each other. These agents have established a community with each other and this community will hold as long as the current condition do not change. 
@@ -92,14 +103,13 @@ The yield curve can either be used to predict the course of the transactions or 
 \textbf{Image of yield curve with equilibrium here}
 
 \section{Research questions}
-\textbf{WORK IN PROGRES!}
-As explained earlier, in real life people seem under certain conditions to prefer to give to 'friends' than to strangers. This has led to the following research question:
+As explained earlier, in real life people seem to prefer under certain conditions to give to 'friends' than to strangers. When people only give to a certain amount of people the transactions will only take place within a small subgroup of the whole population. When this happens a community arises of people who prefer to give to each other. This is called the community effect. This has led to the following research question:
 \\
 \\
 \textit{Will the transactions eventually take place within a limited subgroup of the entire population?}
 \\
 \\
-If no community effect emerges the transactions can still fall into a repeating sequence of transactions. This has led to the second research question:
+Another possible behaviour that can be seen in an environment with an economy of giving is the stabilization of transactions. Even if no community effect emerges the transactions can still fall into a repeating sequence. The behaviour will be very predictable and the transactions are executed in a certain order. When the sequence of transactions is not random the transactions have stabilized. This has led to the second research question:
 \\
 \\
 \textit{Will we see a repeating sequence of transactions or will the transaction sequence look random?}
@@ -151,6 +161,9 @@ The goodwill rule is a more realistic rule. The agent is chosen based on the val
 This leads to yield curves that look like this: \\
 \textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis}\\
 The steeper the slope for YP the less tolerant P is. In this case the balance is calculated as explained before.
+\\
+\\
+When expecting something in return when giving it actually is an investment. This goodwill rule can be seen as a representation of an environment where people invest and all agents try to maximize the profits they can get from these investment. A bad investment is looked down upon and in th future an investment in the same person will most likely not happen.
 
 \section{Simulation model}
 For the previously explained giving game a simulator will be created that can simulate different scenarios using the parameters and selection rules. The following flow chart shows the actions that are executed to simulate the giving game.

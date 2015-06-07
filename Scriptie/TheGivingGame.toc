@@ -2,8 +2,8 @@
 \contentsline {section}{\numberline {1.1}Contribution}{5}
 \contentsline {chapter}{\numberline {2}Theoretical background}{7}
 \contentsline {section}{\numberline {2.1}The economic model}{7}
-\contentsline {section}{\numberline {2.2}Yield curve}{8}
-\contentsline {section}{\numberline {2.3}Research questions}{8}
+\contentsline {section}{\numberline {2.2}Mathematical background}{8}
+\contentsline {section}{\numberline {2.3}Research questions}{9}
 \contentsline {chapter}{\numberline {3}Design}{11}
 \contentsline {section}{\numberline {3.1}Paramaters}{11}
 \contentsline {section}{\numberline {3.2}Selection rules}{12}
