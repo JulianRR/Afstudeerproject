@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  8 JUN 2015 15:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  8 JUN 2015 17:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -463,6 +463,12 @@ Missing character: There is no ˜ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
+ <YieldCurves/yieldcurve_P.png, id=43, 907.89188pt x 528.47438pt>
+File: YieldCurves/yieldcurve_P.png Graphic file (type png)
+
+<use YieldCurves/yieldcurve_P.png>
+Package pdftex.def Info: YieldCurves/yieldcurve_P.png used on input line 93.
+(pdftex.def)             Requested size: 363.15031pt x 211.386pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 74--97
 
@@ -484,15 +490,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 74--97
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8]
 Underfull \hbox (badness 10000) in paragraph at lines 98--102
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 106--116
-
- []
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 106--116
 
@@ -503,7 +507,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 106--116
 
  []
 
-[9] [10
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--116
+
+ []
+
+[9 <./YieldCurves/yieldcurve_P.png>] [10
 
 ]
 Chapter 3.
@@ -558,19 +567,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--157
 
  []
 
+<YieldCurves/yieldcurve_PQ.png, id=58, 910.90312pt x 513.41812pt>
+File: YieldCurves/yieldcurve_PQ.png Graphic file (type png)
+
+<use YieldCurves/yieldcurve_PQ.png>
+Package pdftex.def Info: YieldCurves/yieldcurve_PQ.png used on input line 161.
+(pdftex.def)             Requested size: 364.3548pt x 205.3636pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 159--166
 
  []
 
-[12] [13] [14
+[12] <FlowChart/FlowChart.png, id=62, 433.62pt x 727.71875pt>
+File: FlowChart/FlowChart.png Graphic file (type png)
 
-]
+<use FlowChart/FlowChart.png>
+Package pdftex.def Info: FlowChart/FlowChart.png used on input line 170.
+(pdftex.def)             Requested size: 260.17401pt x 436.63461pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13 <./YieldCurves/yieldcurve_PQ.png>] [14 <./FlowChart/FlowChart.png>]
 Chapter 4.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [15]
+ [15
+
+]
 [16] [17] [18
 
 ]
@@ -581,93 +605,93 @@ Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
  [21] [22]
 Chapter 6.
-<experiment_images/RR_P.png, id=92, 910.602pt x 440.847pt>
+<experiment_images/RR_P.png, id=96, 910.602pt x 440.847pt>
 File: experiment_images/RR_P.png Graphic file (type png)
 
 <use experiment_images/RR_P.png>
-Package pdftex.def Info: experiment_images/RR_P.png used on input line 355.
+Package pdftex.def Info: experiment_images/RR_P.png used on input line 354.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [23
 
 ]
-<experiment_images/BR_BS_S.png, id=98, 910.602pt x 440.847pt>
+<experiment_images/BR_BS_S.png, id=101, 910.602pt x 440.847pt>
 File: experiment_images/BR_BS_S.png Graphic file (type png)
 
 <use experiment_images/BR_BS_S.png>
-Package pdftex.def Info: experiment_images/BR_BS_S.png used on input line 363.
+Package pdftex.def Info: experiment_images/BR_BS_S.png used on input line 362.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-<experiment_images/BR_BS_P.png, id=99, 910.602pt x 440.847pt>
+<experiment_images/BR_BS_P.png, id=102, 910.602pt x 440.847pt>
 File: experiment_images/BR_BS_P.png Graphic file (type png)
 
 <use experiment_images/BR_BS_P.png>
-Package pdftex.def Info: experiment_images/BR_BS_P.png used on input line 367.
+Package pdftex.def Info: experiment_images/BR_BS_P.png used on input line 366.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [24 <./experiment_images/RR_P.png> <./experiment_images/BR_BS_S.png>]
-<experiment_images/BR_S.png, id=105, 910.602pt x 440.847pt>
+<experiment_images/BR_S.png, id=108, 910.602pt x 440.847pt>
 File: experiment_images/BR_S.png Graphic file (type png)
 
 <use experiment_images/BR_S.png>
-Package pdftex.def Info: experiment_images/BR_S.png used on input line 370.
+Package pdftex.def Info: experiment_images/BR_S.png used on input line 369.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [25 <./experiment_images/BR_BS_P.png> <./experiment_images/BR_S.png>]
-<GR_BS_P/4000transactions.png, id=111, 910.602pt x 440.847pt>
+<GR_BS_P/4000transactions.png, id=114, 910.602pt x 440.847pt>
 File: GR_BS_P/4000transactions.png Graphic file (type png)
 
 <use GR_BS_P/4000transactions.png>
-Package pdftex.def Info: GR_BS_P/4000transactions.png used on input line 384.
+Package pdftex.def Info: GR_BS_P/4000transactions.png used on input line 383.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [26 <./GR_BS_P/4000transactions.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 395--402
+Underfull \hbox (badness 10000) in paragraph at lines 394--401
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--402
+Underfull \hbox (badness 10000) in paragraph at lines 394--401
 
  []
 
-<GR_L1B2N1/1000transactions.png, id=116, 910.602pt x 440.847pt>
+<GR_L1B2N1/1000transactions.png, id=119, 910.602pt x 440.847pt>
 File: GR_L1B2N1/1000transactions.png Graphic file (type png)
 
 <use GR_L1B2N1/1000transactions.png>
-Package pdftex.def Info: GR_L1B2N1/1000transactions.png used on input line 405.
+Package pdftex.def Info: GR_L1B2N1/1000transactions.png used on input line 404.
 
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-<GR_L1B2N1/3-5ktransactions1good.png, id=117, 910.602pt x 440.847pt>
+<GR_L1B2N1/3-5ktransactions1good.png, id=120, 910.602pt x 440.847pt>
 File: GR_L1B2N1/3-5ktransactions1good.png Graphic file (type png)
 
 <use GR_L1B2N1/3-5ktransactions1good.png>
 Package pdftex.def Info: GR_L1B2N1/3-5ktransactions1good.png used on input line
- 407.
+ 406.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-<GR_L1B2N1/30000transaction2.png, id=118, 910.602pt x 440.847pt>
+<GR_L1B2N1/30000transaction2.png, id=121, 910.602pt x 440.847pt>
 File: GR_L1B2N1/30000transaction2.png Graphic file (type png)
 
 <use GR_L1B2N1/30000transaction2.png>
-Package pdftex.def Info: GR_L1B2N1/30000transaction2.png used on input line 409
+Package pdftex.def Info: GR_L1B2N1/30000transaction2.png used on input line 408
 .
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-<GR_L1B2N1/1000transactions1perishable1-1.png, id=119, 910.602pt x 440.847pt>
+<GR_L1B2N1/1000transactions1perishable1-1.png, id=122, 910.602pt x 440.847pt>
 File: GR_L1B2N1/1000transactions1perishable1-1.png Graphic file (type png)
 
 <use GR_L1B2N1/1000transactions1perishable1-1.png>
 Package pdftex.def Info: GR_L1B2N1/1000transactions1perishable1-1.png used on i
-nput line 414.
+nput line 413.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-<GR_L1B2N1/1000transactions5perishable.png, id=120, 910.602pt x 440.847pt>
+<GR_L1B2N1/1000transactions5perishable.png, id=123, 910.602pt x 440.847pt>
 File: GR_L1B2N1/1000transactions5perishable.png Graphic file (type png)
 
 <use GR_L1B2N1/1000transactions5perishable.png>
 Package pdftex.def Info: GR_L1B2N1/1000transactions5perishable.png used on inpu
-t line 416.
+t line 415.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--418
+Underfull \hbox (badness 10000) in paragraph at lines 403--417
 
  []
 
@@ -676,21 +700,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 404--418
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [28 <./GR_L1B2N1/30000transaction2.png> <./GR_L1B2N1/1000transactions1perishab
-le1-1.png>] <GR_L1B2N2/15ktransactions2goods.png, id=131, 910.602pt x 440.847pt
+le1-1.png>] <GR_L1B2N2/15ktransactions2goods.png, id=134, 910.602pt x 440.847pt
 >
 File: GR_L1B2N2/15ktransactions2goods.png Graphic file (type png)
 
 <use GR_L1B2N2/15ktransactions2goods.png>
 Package pdftex.def Info: GR_L1B2N2/15ktransactions2goods.png used on input line
- 421.
+ 420.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--426
+Underfull \hbox (badness 10000) in paragraph at lines 419--425
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 429--433
+Underfull \hbox (badness 10000) in paragraph at lines 428--432
 
  []
 
@@ -709,27 +733,26 @@ Chapter 8.
 Chapter 9.
 [35] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
- 4389 strings out of 493308
- 61900 string characters out of 6141368
+ 4406 strings out of 493308
+ 62345 string characters out of 6141368
  152512 words of memory out of 5000000
- 7753 multiletter control sequences out of 15000+600000
+ 7765 multiletter control sequences out of 15000+600000
  7468 words of font info for 27 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,6n,39p,1317b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mcsc10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texl
-ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2013/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2013/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmti10.pfb>
-Output written on TheGivingGame.pdf (37 pages, 493251 bytes).
+mcsc10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2013/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmti10.pfb>
+Output written on TheGivingGame.pdf (37 pages, 577498 bytes).
 PDF statistics:
  193 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+ 115 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

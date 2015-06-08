@@ -88,9 +88,9 @@ For the model that is used for this thesis, these variables lead to the followin
 \textit{Y = a*x + b} \\
 \textit{-1 $\le$ a $\le$ 0} \\
 \textit{Y, b $\ge$ 0} \\
-Here is \textit{a} the like factor, \textit{X} is the account balance and \textit{b} is the nominal value of a good. This function leads to the following graph called the yield curve.
+Here is \textit{Y} the yield, \textit{a} the like factor, \textit{X} is the account balance and \textit{b} is the nominal value of a good. This function can be used to create a so called yield curve. Assuming we have a good \textit{G} that is given away by P to Q we get the following yield curve.
 \\
-\textbf{Image of yield curve here}
+\includegraphics[scale=0.4]{YieldCurves/yieldcurve_P}
 \\
 From this yield curve it is clear that when the account balance of P with Q gets higher the yield gets lower.  When the yield gets lower the balance increases less, so for the next transaction the yield will also decrease less, but the yield will never reach zero.
 The yield curve is not always a linear function. Different ways of calculating the yield can lead to different yield curves. This thesis makes use of a simplified version of the yield curve.
@@ -158,7 +158,7 @@ This calculation of the balance is different from the calculation of the balance
 \subsection{Goodwill rule}
 The goodwill rule is a more realistic rule. The agent is chosen based on the value of the transaction (the yield) between P and Q perceived by P. Only the agent where the yield is the highest is chosen as the receiving agent. If multiple agent pairs have the same yield the receiving agent is chosen randomly between these agents. Every time P gives good G to Q the value of the transaction of good G (the yield) decreases. As long as Q does not give good G to P, P loses interest in giving good G to Q. Eventually P will stop giving to Q, because P does not expect that Q will ever pay of his debt. The like factor as explained earlier defines how many transactions P can tolerate without getting anything in return from Q. For the goodwill rule the like factor can be set by the user or can be created randomly. The goodwill rule simulates an environment where every agent tries to maximize its profit. Agents who are in debt will less likely receive a good, they are not worth investing in.
 This leads to yield curves that look like this: \\
-\textbf{2 Yield curves of y = a * x + b where a $\le$ 0 and b $>$ 0, one yield curve is mirrored in the y-axis}\\
+\includegraphics[scale=0.4]{YieldCurves/yieldcurve_PQ} \\
 The steeper the slope for YP the less tolerant P is. In this case the balance is calculated as explained before.
 \\
 \\
@@ -167,7 +167,7 @@ When expecting something in return when giving it actually is an investment. Thi
 \section{Simulation model}
 For the previously explained giving game a simulator will be created that can simulate different scenarios using the parameters and selection rules. The following flow chart shows the actions that are executed to simulate the giving game.
 
-\textbf{Image of the flow chart here, similar to the flow chart from the design document}
+\includegraphics[scale=0.6]{FlowChart/FlowChart}
 
 The technical side of the simulator will be explained in the next chapter. 
 
@@ -328,10 +328,9 @@ After these scenarios B2 will be used for the balances.
 \item[GR\_L2B2N1], Goodwill rule using L1, B2 and N1 as input.
 \item[GR\_L2B2N2], Goodwill rule using L2, B2 and N2 as input.
 \end{description}
- Work in progress!
 
 \subsubsection{Hypothesis}
-
+Expectations are that for all scenarios a community effect will arise with one or more subgroups consisting of agent with a high like factor. 
 
 \chapter{Experiments}
 
