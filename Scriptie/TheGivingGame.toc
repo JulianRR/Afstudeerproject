@@ -46,21 +46,21 @@
 \contentsline {section}{\numberline {6.2}Balance rule}{22}
 \contentsline {subsection}{\numberline {6.2.1}Results}{22}
 \contentsline {subsubsection}{BS\_S}{22}
-\contentsline {subsubsection}{BS\_P}{23}
+\contentsline {subsubsection}{BS\_P}{22}
 \contentsline {subsubsection}{BR\_S}{23}
-\contentsline {subsubsection}{BR\_P}{24}
-\contentsline {section}{\numberline {6.3}Goodwill rule}{24}
+\contentsline {subsubsection}{BR\_P}{23}
+\contentsline {section}{\numberline {6.3}Goodwill rule}{23}
 \contentsline {subsection}{\numberline {6.3.1}Results}{24}
 \contentsline {subsubsection}{BS\_S}{24}
 \contentsline {subsubsection}{BS\_P}{24}
 \contentsline {subsubsection}{GR\_L1B1N1}{24}
-\contentsline {subsubsection}{GR\_L1B1N2}{25}
+\contentsline {subsubsection}{GR\_L1B1N2}{24}
 \contentsline {subsubsection}{GR\_L2B1N1}{25}
 \contentsline {subsubsection}{GR\_L2B1N2}{25}
 \contentsline {subsubsection}{GR\_L1B2N1}{25}
 \contentsline {subsubsection}{GR\_L1B2N2}{27}
 \contentsline {subsubsection}{GR\_L2B2N1}{27}
-\contentsline {subsubsection}{GR\_L2B2N2}{27}
+\contentsline {subsubsection}{GR\_L2B2N2}{28}
 \contentsline {chapter}{\numberline {7}Conclusions and Discussions}{29}
 \contentsline {chapter}{\numberline {8}Further research}{31}
 \contentsline {chapter}{\numberline {9}Appendix A}{33}
