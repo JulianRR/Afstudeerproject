@@ -31,7 +31,7 @@ With today’s technology giving is becoming an even more common occurrence. The
 The purpose of this thesis is to research the behaviour of people within an economy of giving under certain conditions. For example In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or persons to who they will give to. 
 
 \section{Contribution}
-This thesis will research the behaviour of people within a giving economy from a more game theory oriented perspective. A giving game designed by P.W. Weijland will be used to simulate an economy of giving. The goal of this thesis is to create a simulation program that can simulate a giving game of N agents and M goods. 
+This thesis will research the behaviour of people within a giving economy from a more game theory oriented perspective. A giving game designed by W.P. Weijland will be used to simulate an economy of giving. The goal of this thesis is to create a simulation program that can simulate a giving game of N agents and M goods. 
 \\
 \\
 Chapter 2 will show the theoretical background of giving and the giving game. At the end of chapter 2 the research questions will be explained. Chapter 3 will describe the giving game used for this thesis and will show the simulation model that will be used to simulate this giving game. Chapter 4 will show the implementation of the giving game. The technical side of the simulation will be explained. Chapter 5 will describe the scenarios that will be used for the simulation. Chapter 6 will show the results of the scenarios from chapter 5. Chapter 7 discusses these results and answers the research questions. Lastly chapter 8 will suggest further research that can be accomplished with this thesis and the created simulation model.
@@ -60,7 +60,7 @@ The behaviour of people in an economy of giving can be a lot more complex than i
 In the article ‘Money Network in Kiyotaki-Wright Model’ an environment with three agents and three goods is simulated. Each agent produces one good and consumes another. This article shows the behaviour of the agents when they want to trade their good for the good they need to consume. This simulation used an economy environment without money, but only focused on scenarios where agents only give away their good if they get a good in return which they can use. 
 \\
 \\
-P.W. Weijland has created a similar model called ‘The Giving Game’, but instead focuses on more aspects of giving. A giving game is a game to simulate giving in real life. A giving game can be very versatile and a lot of variants are possible to simulate different real life economic environments. In this section the basic rules of a giving game are explained and the giving game used for this thesis is explained.
+W.P. Weijland has created a similar model called ‘The Giving Game’, but instead focuses on more aspects of giving. A giving game is a game to simulate giving in real life. A giving game can be very versatile and a lot of variants are possible to simulate different real life economic environments. In this section the basic rules of a giving game are explained and the giving game used for this thesis is explained.
 The following rules show the basics of a giving game:
 \begin{itemize}
   \item In an environment of N agents an agent is randomly chosen to start with a good.
@@ -171,14 +171,37 @@ For the previously explained giving game a simulator will be created that can si
 
 The technical side of the simulator will be explained in the next chapter. 
 
-
 \chapter{Implementation}
 \textbf{Work in progres!}
-\section{The simulation model}
-The simulator had to be able to execute multiple tasks. The simulator must be able to accept user input to simulate multiple scenarios. The simulator should provide a visualization module to visualize the data and to also visualize the course of the transactions. The following shows the simulation proces:
+In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simualte multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with Python and uses multiple Python packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required Python packes and frameworks are installed. 
 
-In the following sections the design choices are explained to achieve the ...
-\subsection{Input}
+\section{Back-end}
+The back end consists multiple compononents which together create an environment that simulates an giving economy where agents give and receive goods. This section will explain these components briefly and how they work together. For a more detailed description of the back end the full documentation can be found in appendix A.
+
+\subsection{Agents}
+Every agent is defined by the \textit{Agent} class. Every agent can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. Every agent keeps track of their own account balance, yield values, like factors and nominal values. The \textit{Agent} class is able to hold this data in the form of a Python list. The ID of every agent is used for these data lists to find the corresponding information about that agent.
+
+\subsection{Goods}
+Every good is defined by the Good class.  Every good can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. This \textit{ID} can be used by the textit{Agent} class as an index for the python lists that hold information about this good.
+
+\subsection{Selection rules}
+
+\subsubsection{Random rule}
+
+\subsubsection{Balance rule}
+
+\subsubsection{Goodwill rule}
+
+\subsection{Environment}
+
+\subsection{Simulation}
+The simulation is run by first creating the environment. The environment is created by first creating the Agents and the Goods. After the goods have been created the agents are notified, their perception of the nominal values of these goods and the yield values for the first transactions are updated. The goods are either randomly assigned to the agents or chosen by the user.
+
+
+\section{Front-end}
+The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation. For the explanation of the use of the interface the use should consult the user manual which can be found in appendix B.
+
+\subsubsection{Input}
 The user is able to input the following parameters:
 
 \begin{description}
@@ -189,7 +212,7 @@ The user is able to input the following parameters:
  \item[Selection rule:] 
   \item[Nominal value:] The user is able to choose if every agent perceives the value of a good differently or not. If the user wants to have a different value of the good for every agent the user can add a xslx file with the nominal values as follows:
   \item[Like factor:] The user is able to choose between setting like factors by hand or to randomly create the like factors. If the user wants to add predefined likefactors the user can add a xslx file with the like factors as follows:
- \item[Balance:] The use is able to set the balance at the start of the simulation at 0 or to add different balances for every agent.
+ \item[Balance:] The user is able to set the balance at the start of the simulation at 0 or to add different balances for every agent.
 \end{description}
 During the simulation the user should be able to adjust the following variables:
 
@@ -198,7 +221,7 @@ During the simulation the user should be able to adjust the following variables:
   \item[Reset community percentage:] 
 
 \end{description}
-\subsection{Output}
+\subsubsection{Output}
 The output data is visualized so that the user is able to analyse and get results without doing any calculations. The simulator is able to do most of the work.
 
 The simulator is able to give the following output:
@@ -213,17 +236,6 @@ The simulator is able to give the following output:
 \end{itemize}
 
 All the data can be saved and used in the future for another simulation.
-
-\section{GUI}
-
-\section{Back-end}
-
-\subsubsection{Python}
-
-\section{Front-end}
-The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation.
-
-For the explanation of the use of the interface the use should consult the user manual.
 
 
 \chapter{Scenarios}
@@ -390,23 +402,23 @@ further experiments will use different account balances at the start of the simu
 
 \subsubsection{GR\_L1B2N1}
 The first thing that the experiments with sustainable goods show is that in the beginning the transactions are mostly divided over the agents with a likefactor of -1 and -0.5. After the first 1000 transactions the transaction percentage is as follows. \\
-\includegraphics[scale=0.4]{GR_L1B2N1/1000transactions}
+\includegraphics[scale=0.4]{GR_L1B2N1/1000transactions} \\
 After 3000 transactions the subgroup started to arise. The figure below shows that and also shows that the agents with a like factor of -0.1 also participate in some transactions. \\
-\includegraphics[scale=0.4]{GR_L1B2N1/3-5ktransactions1good}
+\includegraphics[scale=0.4]{GR_L1B2N1/3-5ktransactions1good} \\
  Every experiment with just one good led to a subgroup of agents with likefactor -0.5. With just one good the good was  only traded between 2 agents after 4000-5000 transactions. When more goods are used the results start to vary alot more. One of the results which differs from the others showed a distribution of the 2 goods used as follows. \\
-\includegraphics[scale=0.4]{GR_L1B2N1/30000transaction2}
+\includegraphics[scale=0.4]{GR_L1B2N1/30000transaction2} \\
 This was after 30000 transactions. In this case a community does arise with only agents who have a like factor of -1. Even though a like factor of -1 would mean a 'bad' relationship the slope of -1 for the yield curve is the highest which means a bigger change in the yield after every transaction. Receiving a good would mean a bigger debt and giving a good would mean a bigger loss.
 Other results showed a more equal distribution of the transactions or a distribution in favour of agents with a likefactor of -0.5 or -0.1. Most experiments led eventaully to communities of 2 agents and sometimes of 3 agents. These communities consisted mostly of agents with a like factor of -0.5. The more goods were used the longer it took for a community to arise. \\
 \\
 For the perishable goods the results are slightly different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of -0.1 and -0.5. Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer prefers therefore the agents with a like factor of -0.1 and -0.5 over -1. \\
-\includegraphics[scale=0.4]{GR_L1B2N1/1000transactions1perishable1-1}
+\includegraphics[scale=0.4]{GR_L1B2N1/1000transactions1perishable1-1} \\
 When the perish period is higher than 1 the goods behave more like a sustainable good. The higher the perish period and the more perishable goods are used the longer it takes before a community arises.\\
-\includegraphics[scale=0.4]{GR_L1B2N1/1000transactions5perishable}
+\includegraphics[scale=0.4]{GR_L1B2N1/1000transactions5perishable} \\
 The figure above shows the distribution of the transactions of 5 perishable goods where good\_0 has a perish period of 1 and a production delay of 1, good\_1 has a perish period of 2 and a production delay of 2 etc. These results are after 1000 transactions and show that when the perish period gets higher (the darker green colored bars) the behaviour is more like a sustainable good explained above.
 
 \subsubsection{GR\_L1B2N2}
 With these experiments the nominal values are perceived differently by some agents.For the sustainable goods the results show that a community arises more quickly in comparison with GR\_L1B2N1 where the nominal values are the same for every agent. Where it took GR\_L1B2N1 with one good 4000-5000 transactions before a community arose these experiments only took 2000 transactions for one good. The distribution of the transactions in the beginning of the simulation is the same as with GR\_L1B2N1. Another small difference with  GR\_L1B2N1 is that sometimes the communities consists of more than 2 agents. The following figure shows a different result of how the goods were eventually traded. \\
-\includegraphics[scale=0.4]{GR_L1B2N2/15ktransactions2goods}
+\includegraphics[scale=0.4]{GR_L1B2N2/15ktransactions2goods} \\
 Using more goods led to similar results, where subgroups just like in the figure above emerged or just subgroups constising of 2 or 3 agents.
 \\
 \\
