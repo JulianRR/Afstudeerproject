@@ -41,7 +41,7 @@
 \contentsline {subsubsection}{Balances}{21}
 \contentsline {subsubsection}{Nominal values}{21}
 \contentsline {subsubsection}{Hypothesis}{22}
-\contentsline {chapter}{\numberline {6}Experiments}{23}
+\contentsline {chapter}{\numberline {6}Results}{23}
 \contentsline {section}{\numberline {6.1}Random rule}{23}
 \contentsline {subsection}{\numberline {6.1.1}Results}{23}
 \contentsline {subsubsection}{BS\_S}{23}
@@ -59,7 +59,7 @@
 \contentsline {subsubsection}{BS\_S}{26}
 \contentsline {subsubsection}{BS\_P}{26}
 \contentsline {subsubsection}{GR\_L1B1N1}{26}
-\contentsline {subsubsection}{GR\_L1B1N2}{26}
+\contentsline {subsubsection}{GR\_L1B1N2}{27}
 \contentsline {subsubsection}{GR\_L2B1N1}{27}
 \contentsline {subsubsection}{GR\_L2B1N2}{27}
 \contentsline {subsubsection}{GR\_L1B2N1}{27}
@@ -67,8 +67,8 @@
 \contentsline {subsubsection}{GR\_L2B2N1}{30}
 \contentsline {subsubsection}{GR\_L2B2N2}{30}
 \contentsline {section}{\numberline {6.4}Reconsideration of the yield curve}{30}
-\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{33}
-\contentsline {chapter}{\numberline {8}Further research}{35}
-\contentsline {chapter}{\numberline {9}Appendix A}{37}
-\contentsline {section}{\numberline {9.1}Simulator manual}{37}
-\contentsline {section}{\numberline {9.2}Code Documentation}{37}
+\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{35}
+\contentsline {chapter}{\numberline {8}Further research}{37}
+\contentsline {chapter}{\numberline {9}Appendix A}{39}
+\contentsline {section}{\numberline {9.1}Simulator manual}{39}
+\contentsline {section}{\numberline {9.2}Code Documentation}{39}

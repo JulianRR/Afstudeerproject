@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  10 JUN 2015 17:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  11 JUN 2015 11:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -609,7 +609,7 @@ Chapter 6.
 File: experiment_images/RR_P.png Graphic file (type png)
 
 <use experiment_images/RR_P.png>
-Package pdftex.def Info: experiment_images/RR_P.png used on input line 354.
+Package pdftex.def Info: experiment_images/RR_P.png used on input line 353.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [23
 
@@ -618,36 +618,36 @@ Package pdftex.def Info: experiment_images/RR_P.png used on input line 354.
 File: experiment_images/BR_BS_S.png Graphic file (type png)
 
 <use experiment_images/BR_BS_S.png>
-Package pdftex.def Info: experiment_images/BR_BS_S.png used on input line 362.
+Package pdftex.def Info: experiment_images/BR_BS_S.png used on input line 361.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 <experiment_images/BR_BS_P.png, id=102, 910.602pt x 440.847pt>
 File: experiment_images/BR_BS_P.png Graphic file (type png)
 
 <use experiment_images/BR_BS_P.png>
-Package pdftex.def Info: experiment_images/BR_BS_P.png used on input line 366.
+Package pdftex.def Info: experiment_images/BR_BS_P.png used on input line 365.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [24 <./experiment_images/RR_P.png> <./experiment_images/BR_BS_S.png>]
 <experiment_images/BR_S.png, id=108, 910.602pt x 440.847pt>
 File: experiment_images/BR_S.png Graphic file (type png)
 
 <use experiment_images/BR_S.png>
-Package pdftex.def Info: experiment_images/BR_S.png used on input line 369.
+Package pdftex.def Info: experiment_images/BR_S.png used on input line 368.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [25 <./experiment_images/BR_BS_P.png> <./experiment_images/BR_S.png>]
 <GR_BS_P/4000transactions.png, id=114, 910.602pt x 440.847pt>
 File: GR_BS_P/4000transactions.png Graphic file (type png)
 
 <use GR_BS_P/4000transactions.png>
-Package pdftex.def Info: GR_BS_P/4000transactions.png used on input line 383.
+Package pdftex.def Info: GR_BS_P/4000transactions.png used on input line 382.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [26 <./GR_BS_P/4000transactions.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 396--403
+Underfull \hbox (badness 10000) in paragraph at lines 395--402
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--403
+Underfull \hbox (badness 10000) in paragraph at lines 395--402
 
  []
 
@@ -655,7 +655,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 396--403
 File: GR_L1B2N1/1000transactions.png Graphic file (type png)
 
 <use GR_L1B2N1/1000transactions.png>
-Package pdftex.def Info: GR_L1B2N1/1000transactions.png used on input line 406.
+Package pdftex.def Info: GR_L1B2N1/1000transactions.png used on input line 405.
 
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
@@ -664,7 +664,7 @@ File: GR_L1B2N1/3-5ktransactions1good.png Graphic file (type png)
 
 <use GR_L1B2N1/3-5ktransactions1good.png>
 Package pdftex.def Info: GR_L1B2N1/3-5ktransactions1good.png used on input line
- 408.
+ 407.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 <GR_L1B2N1/3-5k_2goods_largergroups.png, id=121, 910.602pt x 440.847pt>
@@ -672,7 +672,7 @@ File: GR_L1B2N1/3-5k_2goods_largergroups.png Graphic file (type png)
 
 <use GR_L1B2N1/3-5k_2goods_largergroups.png>
 Package pdftex.def Info: GR_L1B2N1/3-5k_2goods_largergroups.png used on input l
-ine 410.
+ine 409.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 <GR_L1B2N1/10k_2goods_2subgroups.png, id=122, 910.602pt x 440.847pt>
@@ -680,15 +680,15 @@ File: GR_L1B2N1/10k_2goods_2subgroups.png Graphic file (type png)
 
 <use GR_L1B2N1/10k_2goods_2subgroups.png>
 Package pdftex.def Info: GR_L1B2N1/10k_2goods_2subgroups.png used on input line
- 412.
+ 411.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-Overfull \hbox (2.36963pt too wide) in paragraph at lines 405--414
+Overfull \hbox (2.36963pt too wide) in paragraph at lines 404--413
 [] \OT1/cmr/m/n/10 The com-mu-
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1603) has occurred while \output is active []
 
  [27 <./GR_L1B2N1/1000transactions.png>]
 <GR_L1B2N1/1000transactions1perishable1-1.png, id=127, 910.602pt x 440.847pt>
@@ -696,7 +696,7 @@ File: GR_L1B2N1/1000transactions1perishable1-1.png Graphic file (type png)
 
 <use GR_L1B2N1/1000transactions1perishable1-1.png>
 Package pdftex.def Info: GR_L1B2N1/1000transactions1perishable1-1.png used on i
-nput line 416.
+nput line 415.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 <GR_L1B2N1/1000transactions5perishable.png, id=128, 910.602pt x 440.847pt>
@@ -704,14 +704,14 @@ File: GR_L1B2N1/1000transactions5perishable.png Graphic file (type png)
 
 <use GR_L1B2N1/1000transactions5perishable.png>
 Package pdftex.def Info: GR_L1B2N1/1000transactions5perishable.png used on inpu
-t line 418.
+t line 417.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 <GR_L1B2N1/2k_2perishable.png, id=129, 910.602pt x 440.847pt>
 File: GR_L1B2N1/2k_2perishable.png Graphic file (type png)
 
 <use GR_L1B2N1/2k_2perishable.png>
-Package pdftex.def Info: GR_L1B2N1/2k_2perishable.png used on input line 420.
+Package pdftex.def Info: GR_L1B2N1/2k_2perishable.png used on input line 419.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -722,33 +722,76 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [29 <./GR_L1B2N1/1000transactions1perishable1-1.png> <./GR_L1B2N1/1000transact
 ions5perishable.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 430--434
+Underfull \hbox (badness 10000) in paragraph at lines 429--433
 
  []
 
+<YieldCurves/yieldcurve_P_QR.png, id=142, 910.90312pt x 514.92375pt>
+File: YieldCurves/yieldcurve_P_QR.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 436--439
+<use YieldCurves/yieldcurve_P_QR.png>
+Package pdftex.def Info: YieldCurves/yieldcurve_P_QR.png used on input line 436
+.
+(pdftex.def)             Requested size: 364.3548pt x 205.96585pt.
+ [30 <./GR_L1B2N1/2k_2perishable.png>]
+<YieldCurves/yieldcurve_P_QR2.png, id=147, 903.375pt x 510.40688pt>
+File: YieldCurves/yieldcurve_P_QR2.png Graphic file (type png)
 
- []
+<use YieldCurves/yieldcurve_P_QR2.png>
+Package pdftex.def Info: YieldCurves/yieldcurve_P_QR2.png used on input line 44
+1.
+(pdftex.def)             Requested size: 361.3436pt x 204.15913pt.
 
-[30 <./GR_L1B2N1/2k_2perishable.png>] [31] [32]
-Chapter 7.
-[33
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [34
+ [31 <./YieldCurves/yieldcurve_P_QR.png> <./YieldCurves/yieldcurve_P_QR2.png>]
+<GR_L1B2N1/5k_1good_b1n1.png, id=152, 910.602pt x 440.847pt>
+File: GR_L1B2N1/5k_1good_b1n1.png Graphic file (type png)
+
+<use GR_L1B2N1/5k_1good_b1n1.png>
+Package pdftex.def Info: GR_L1B2N1/5k_1good_b1n1.png used on input line 456.
+(pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
+
+<GR_L1B2N2/3k_1good_b1n2.png, id=153, 910.602pt x 440.847pt>
+File: GR_L1B2N2/3k_1good_b1n2.png Graphic file (type png)
+
+<use GR_L1B2N2/3k_1good_b1n2.png>
+Package pdftex.def Info: GR_L1B2N2/3k_1good_b1n2.png used on input line 459.
+(pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
+
+<GR_L1B2N2/3k_1good_b1n3.png, id=154, 910.602pt x 440.847pt>
+File: GR_L1B2N2/3k_1good_b1n3.png Graphic file (type png)
+
+<use GR_L1B2N2/3k_1good_b1n3.png>
+Package pdftex.def Info: GR_L1B2N2/3k_1good_b1n3.png used on input line 462.
+(pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
+
+<GR_L1B2N2/5k_1good_b1n3subgroup.png, id=155, 910.602pt x 440.847pt>
+File: GR_L1B2N2/5k_1good_b1n3subgroup.png Graphic file (type png)
+
+<use GR_L1B2N2/5k_1good_b1n3subgroup.png>
+Package pdftex.def Info: GR_L1B2N2/5k_1good_b1n3subgroup.png used on input line
+ 464.
+(pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
+ [32 <./GR_L1B2N1/5k_1good_b1n1.png> <./GR_L1B2N2/3k_1good_b1n2.png>] [33 <./GR
+_L1B2N2/3k_1good_b1n3.png> <./GR_L1B2N2/5k_1good_b1n3subgroup.png>] [34
 
 ]
-Chapter 8.
+Chapter 7.
 [35] [36
 
 ]
+Chapter 8.
+[37] [38
+
+]
 Chapter 9.
-[37] (./TheGivingGame.aux) ) 
+[39] (./TheGivingGame.aux) ) 
 Here is how much of TeX's memory you used:
- 4410 strings out of 493308
- 62519 string characters out of 6141368
+ 4441 strings out of 493308
+ 63474 string characters out of 6141368
  152512 words of memory out of 5000000
- 7769 multiletter control sequences out of 15000+600000
+ 7793 multiletter control sequences out of 15000+600000
  7468 words of font info for 27 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,15n,39p,1317b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -762,10 +805,10 @@ t/fonts/type1/public/amsfonts/cm/cmss17.pfb><c:/texlive/2013/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti10.pfb>
-Output written on TheGivingGame.pdf (39 pages, 618651 bytes).
+Output written on TheGivingGame.pdf (41 pages, 818309 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
+ 221 PDF objects out of 1000 (max. 8388607)
+ 126 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
