@@ -5,11 +5,11 @@
 \contentsline {section}{\numberline {2.2}Mathematical background}{8}
 \contentsline {section}{\numberline {2.3}Research questions}{9}
 \contentsline {chapter}{\numberline {3}Design}{11}
-\contentsline {section}{\numberline {3.1}Paramaters}{11}
+\contentsline {section}{\numberline {3.1}Paramaters}{12}
 \contentsline {section}{\numberline {3.2}Selection rules}{12}
 \contentsline {subsection}{\numberline {3.2.1}Random rule}{12}
 \contentsline {subsection}{\numberline {3.2.2}Balance rule}{12}
-\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{12}
+\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{13}
 \contentsline {section}{\numberline {3.3}Simulation model}{13}
 \contentsline {chapter}{\numberline {4}Implementation}{15}
 \contentsline {section}{\numberline {4.1}Back-end}{15}
@@ -29,14 +29,14 @@
 \contentsline {subsubsection}{Basic scenario 1, sustainable (BS\_S):}{19}
 \contentsline {subsubsection}{Basic scenario 2, perishable (BS\_P):}{19}
 \contentsline {section}{\numberline {5.2}Random rule}{19}
-\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{20}
+\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{19}
 \contentsline {subsubsection}{Scenario 2, perishable (RR\_P):}{20}
 \contentsline {subsubsection}{Hypothesis}{20}
 \contentsline {section}{\numberline {5.3}Balance rule}{20}
 \contentsline {subsubsection}{Scenario 1, sustainable (BR\_S):}{20}
 \contentsline {subsubsection}{Scenario 2, perishable (BR\_P):}{20}
-\contentsline {subsubsection}{Hypothesis}{21}
-\contentsline {section}{\numberline {5.4}Goodwill rule}{21}
+\contentsline {subsubsection}{Hypothesis}{20}
+\contentsline {section}{\numberline {5.4}Goodwill rule}{20}
 \contentsline {subsubsection}{Like factors}{21}
 \contentsline {subsubsection}{Balances}{21}
 \contentsline {subsubsection}{Nominal values}{21}
@@ -67,8 +67,20 @@
 \contentsline {subsubsection}{GR\_L2B2N1}{30}
 \contentsline {subsubsection}{GR\_L2B2N2}{30}
 \contentsline {section}{\numberline {6.4}Reconsideration of the yield curve}{30}
-\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{35}
-\contentsline {chapter}{\numberline {8}Further research}{37}
-\contentsline {chapter}{\numberline {9}Appendix A}{39}
-\contentsline {section}{\numberline {9.1}Simulator manual}{39}
-\contentsline {section}{\numberline {9.2}Code Documentation}{39}
+\contentsline {section}{\numberline {6.5}Goodwill rule 2.0}{33}
+\contentsline {subsection}{\numberline {6.5.1}Results}{34}
+\contentsline {subsubsection}{BS\_S}{34}
+\contentsline {subsubsection}{BS\_P}{34}
+\contentsline {subsubsection}{GR\_L1B1N1}{34}
+\contentsline {subsubsection}{GR\_L1B1N2}{34}
+\contentsline {subsubsection}{GR\_L2B1N1}{35}
+\contentsline {subsubsection}{GR\_L2B1N2}{35}
+\contentsline {subsubsection}{GR\_L1B2N1}{35}
+\contentsline {subsubsection}{GR\_L1B2N2}{35}
+\contentsline {subsubsection}{GR\_L2B2N1}{35}
+\contentsline {subsubsection}{GR\_L2B2N2}{35}
+\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{37}
+\contentsline {section}{\numberline {7.1}Further research}{37}
+\contentsline {chapter}{\numberline {8}Appendix A}{39}
+\contentsline {section}{\numberline {8.1}Simulator manual}{39}
+\contentsline {section}{\numberline {8.2}Code Documentation}{39}

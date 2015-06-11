@@ -239,8 +239,7 @@ All the data can be saved and used in the future for another simulation.
 
 
 \chapter{Scenarios}
-For every selection rule multiple scenarios have been created that will represent a real life situation as much as possible or will make use of as much different variables.  This chapter will explain the scenarios used in the experiments. For every experiment the results are shown to show any additions to other experiments that derived from these results.
-For every experiment 99 agents will be used. 99 agents is large enough to have as much variety in the parameters as possible but is still be able to clearly see any changes in the visualisation. 99 agents is also a reasonable size that can be used in further research for example with real life behavioural experiments. Linkje naar artikel Another reason for 99 agents is that for the scenarios for goodwill rule the population will be split into 3 groups.
+For every selection rule multiple scenarios have been created. This chapter will explain the scenarios used in the experiments. For every scenario 99 agents will be used. 99 agents is large enough to have as much variety in the parameters as possible but is still be able to clearly see any changes in the visualisation.  
 
 \section{Basic Scenarios}
 For every selection rule the behaviour is tested in the most basic environment. These scenarios will be used to see if the simulation behaves as it should.
@@ -259,39 +258,39 @@ Parameters:
 In case of the goodwill rule where the like factor is used for the selection of an agent the like factor is set to -1 for every agent. In the most basic environment every agent is equal and has no specific relations with other agents.
 
 \section{Random rule}
-Because agents are chosen randomly the results will most likely not be very meaningful. The following scenarios are therefore used to see if the agents behave as predicted with the random rule.  Any irregularities in the behaviour will be analysed and can be used in decisions for further experiments.
+The following scenarios are  used to see if the agents behave as predicted with the random rule.  Any irregularities in the behaviour will be analysed and can be used in decisions for further experiments. The nominal value does not have to be set, because the nominal values of the goods are not used in the selection of an agent.
 \subsubsection{Scenario 1, sustainable (RR\_S):}
 Parameters:
 \begin{itemize}
-\item	100 agents
-\item	3 sustainable good with a nominal values of [1,2,3], perish time of 0, perish delay of 0
+\item	99 agents
+\item	3 sustainable goods
 \end{itemize}
 \subsubsection{Scenario 2, perishable (RR\_P):}
 Parameters:
 \begin{itemize}
-\item	100 agents
-\item	3 perishable goods with a nominal values of [1,2,3], perish time of [1,2,3], perish delay of [1,2,3]
+\item	99 agents
+\item	3 perishable goods with a perish time of [1,2,3], perish delay of [1,2,3]
 \end{itemize}
-The choices for the values of the goods are based on the idea of having a small, medium and large product even though the nominal value does not affect the selection of an agent. The amount of goods is not a fixed amount, during the experiments the amount of goods will differ to see if this affects the results.
+The number of goods is not a fixed number, during the experiments the number of goods will differ to see if this affects the results.
 
 \subsubsection{Hypothesis}
 It is expected that no community effect will arise, neither will the simulation stabilize even though a machine is pseudorandom. The transactions will eventually be equally distributed over all the agents. For perishable goods this distribution will be in favour of the producers, because they will be able to give away their good more than others.
 
 \section{Balance rule}
-The scenarios for the balance rule will be used to see how people will behave when they care about how many goods they give and receive but do not have any relationship with other agents.
+The scenarios for the balance rule will be used to see how people will behave when they care about how many goods they give and receive but do not have any relationship with other agents. The nominal value does not have to be set, because the nominal values of the goods are not used in the selection of an agent.
 \subsubsection{Scenario 1, sustainable (BR\_S):}
 Parameters:
 \begin{itemize}
 \item	100 agents
-\item	3 sustainable good with a nominal values of [1,2,3], perish time of 0, perish delay of 0
+\item	3 sustainable goods
 \end{itemize}
 \subsubsection{Scenario 2, perishable (BR\_P):}
 Parameters:
 \begin{itemize}
 \item	100 agents
-\item	3 perishable goods with a nominal values of [1,2,3], perish time of [1,2,3], perish delay of [1,2,3]
+\item	3 perishable goods with a perish time of [1,2,3], perish delay of [1,2,3]
 \end{itemize}
-The choices for these values of the goods are based on the idea of having a small, medium and large product. The amount of goods is not a fixed amount, during the experiments the amount of goods will differ to see if this affects the results.
+The amount of goods is not a fixed amount, during the experiments the amount of goods will differ to see if this affects the results.
 
 \subsubsection{Hypothesis}
 The expectations are that a community effect will arise with a subgroup consisting of a few agents. The size of this subgroup is based on the type of goods and the amount of goods. All sustainable goods will eventually be traded only between two agents, because these two agents have the highest balance with each other. Every perishable good has a producer, these producers will also be part of a subgroup. If these producers only give each other their goods then the subgroup size will be as large as the amount of producers. If the producers each give to another agent then multiple subgroups will arise with a size of two. It is expected that the maximum size of a subgroup will be the number of producers plus one non-producer who trades with the producers.
@@ -300,19 +299,19 @@ The expectations are that a community effect will arise with a subgroup consisti
 For the goodwill rule all parameters can affect the results. The following parameters define the scenarios.
 \subsubsection{Like factors}
 \begin{description}
-\item[L1]	1/3 of the population has a like factor of -1, 1/3 of the population has a like factor of -0.5 and 1/3 of the population has a like factor of -0.1. This means that every agent has a different relationship with every third of the population.
+\item[L1]	1/3 of the population has a like factor of -1, 1/3 of the population has a like factor of -0.5 and 1/3 of the population has a like factor of -0.1. This means that every agent has a different relationship with every third of the population. These three groups have been chosen in order to better observe the difference in behaviour.
 \item[L2]	47 agents have a like factor of -1, 47 agents has a like factor of -0.5 and 5 of the agents have a like factor of -0.1. This means that only a small group of agents is liked by all other agents.
 \end{description}
 \subsubsection{Balances}
 \begin{description}
 \item[B1]	At the start of the simulation all account balances are set to 0.
-\item[B2]	At the start of the simulation all account balances are randomly set. The account balance will vary between -9 and 9.
+\item[B2]	At the start of the simulation all account balances are randomly set. The account balance for every agent will be a real number between -1 and 1, because the minimal nominal value of a good will be 1. If the account balance would be less than -1 or greater than 1 then the yield could fall below 0, which should not be possible according to the defined yield curve for this thesis.
 \end{description}
 \subsubsection{Nominal values}
 \begin{description}
 \item[N1]	The nominal values of every good are the same for every agent.
-\item[N2]	Every third of the agents perceives the nominal values of all goods differently, with the values increasing. Just like the like factors, the population is divided into 3 groups, where every group perceives the value of the goods differently.
-\end{description}
+\item[N2]	Every third of the agents perceives the nominal values of all goods differently. Just like the like factors, the population is divided into 3 groups, where every group perceives the value of the goods differently. The first group perceives the nominal value of the good as 1, the second group as 2 and the third group as 3. For every additional good the nominal value of the next good is increased by 1. These values have been chosen to have three very different groups of agents and as much variety in nominal values. The difference between the nominal values is limited to prevent unrealistic high yield values.
+\end{description} 
 The combination of these parameters will form different scenarios. Every combination will be tested unless previous experiments show that one of the parameters does not affect the result. The scenarios are based on the idea of having a population where people have different relationships with each other and value goods differently. That’s why the population is split into 3 groups to have groups that are completely different from each other.The following scenarios will be used during the experiments.
 The first scenarios are scenarios where the balance is zero.
 \begin{description}
@@ -365,11 +364,12 @@ The producer participated in 50 percent of the transactions, because after each 
 \includegraphics[scale=0.4]{experiment_images/BR_BS_P}
 
 \subsubsection{BR\_S}
-As expected the results are similar to the results from BS\_S where the goods are returned to the giving agent after each transaction. The only difference is is that the agents who start with the goods at the start of the simulation participate in proportion more in transactions of each others goods than the other agents do. This happens because when both agents who start with the goods give to each other their good (they trade their good for the good of the other). When this happens they are able to give each others good to different agents. The following figure shows this situtuation. \\
+As expected the results are similar to the results from BS\_S where the goods are returned to the giving agent after each transaction. The only difference is is that the agents who start with the goods at the start of the simulation participate in proportion more in transactions of each others goods than the other agents do. This happens when two agents who start with the goods give to each other their good (they trade their good for the good of the other). When this happens they are able to give each others good to different agents. The following figure shows this situtuation. \\
 \includegraphics[scale=0.4]{experiment_images/BR_S}
 
 
 \subsubsection{BR\_P}
+
 
 \section{Goodwill rule}
 All the scenarios mentioned in the previous chapter have been tested. The scenarios for the goodwill rule are split into two parts. The first part uses an account balance for the agents that start at 0. The second part uses an account balance for the agents that is randomly chosen and different for some agents at the start of the simulation. For every scenario except for the basic scenarios multiple experiment have been performed using a different amount of goods. The amount of goods used for each scenario are 1, 2, 5, 20, 50, 99.
@@ -469,24 +469,79 @@ When B2 is used the results are simmilar to GR\_L1B1N2, but the distribution in 
 
 Just as the expactations were prior to the experiments, the agents prefer to give to agents who are liked and try to ignore the agents who are less liked.
 
+
+
+
+
+
+
+
+
+\section{Goodwill rule 2.0}
+All the scenarios mentioned in the previous chapter have been tested. The scenarios for the goodwill rule are split into two parts. The first part uses an account balance for the agents that start at 0. The second part uses an account balance for the agents that is randomly chosen and different for some agents at the start of the simulation. For every scenario except for the basic scenarios multiple experiment have been performed using a different amount of goods. The amount of goods used for each scenario are 1, 2, 5, 20, 50, 99.
+\subsection{Results}
+
+\subsubsection{BS\_S}
+Immidiatly at the start of the simulation a community effect arises with a subgroup of size two. The moment agent P gives to agent Q, Q is in debt with P. This means that Q values the next transaction more with P. So Q will give to P during the next transaction. Now P values the transaction with Q more than with any other agent, so P gives back to Q. An equilibrium has emerged where the yield of the transactions for P with Q an Q with P will switch between the same two values. The following yield curve shows what happens. 
+
+\subsubsection{BS\_P}
+The yield will approach zero, but it will never reach zero, because of the way the yield is calculated which is explained in chapter 2.2. No community effect arisis, but the transactions are partially stabilized. This is stabalization arises because the good perishes after the first time it is given by the producer. So all the agents will keep getting a good, but will never be able to give it away. Once an agent has received a good the yield for the producer with this agent is lower than the others. So the producer will randomly choose between the remaining agents who the producer has the same yield with. A same situation as with the BS\_P of the balance rule arisises where every 98 transactions are random and the 99th transaction is predictable.
+\includegraphics[scale=0.4]{Simulation_figures/GR_BS_P/Figure1_10k}
+
+\subsubsection{GR\_L1B1N1}
+When the good start at an agent with like factor -1 the good is gien away to a agent with like factor -0.1. Once the good is in possesion of an agent with like factor -0.1 a subgroup arises between two agents with a like factor -0.1. When the good start at an agent with like factor -0.5 the good is also given to an agent with like factor -0.1. This time a subgroup arisises between the agent with like factor -0.5 and the agent with like factor -0.1 who reived the good the first time. When more goods are used the results stay the same.
+
+When perishable goods are used with a perish period of 1 the same as behaviour is shows as with BS\_P. \textbf{MORE RESULTS HERE}
+
+
+\subsubsection{GR\_L1B1N2}
+When N2 is used where the nominal values are perceived higher by the agent with a -0.1 like factor than the agents with a -1 like factor then the results are similar the the results from GR\_L1B1N1. The only difference is that the subgroups only consist of agent with a like factor of -0.1.
+When more goods are used the results do not change.
+If N2 would be changed so that the agent with a -1 like factor perceive the nominal values of the goods higher than the agent with a -0.1 like factor then the results are as shown in figure .... When the good starts at an agent with a like factor of -0.1 a subgroup immediatly arises where the good is only traded between two agents with a like factor of -0.1.
+\includegraphics[scale=0.4]{Simulation_figures/GR_L1B1N2/321_1good}
+When more goods are used and some goods start at agents with like factors -1 or -0.5 and other goods start at agents with like factors -0.1 then a subgroup shown in figure ... arises. The spikes shown in this figure in the group with like factor -0.1 (agent\_66-agent\_98) switch between different agents over time.
+
+\subsubsection{GR\_L2B1N1}
+The results are the same as the results from GR\_L1B1N1. Changing the size of the group with a like factor of -0.1 did not change anything. 
+\subsubsection{GR\_L2B1N2}
+The results are the same as the results from GR\_L1B1N1. Changing the size of the group with a like factor of -0.1 did not change anything. 
+
+\subsubsection{GR\_L1B2N1}
+After approximatly 100 transactions a subgroup consisting of two agents with like factors -0.1 arises. As shown in figure ... some transactions in the beginning take place between agents with a lower like factor. When more goods are used more transactions take place before a subgroup arises. For two goods the subgroup arises after approximatly 1000 transactions. Eventaully every good is only traded between two agents with like factors -0.1
+
+
+\subsubsection{GR\_L1B2N2}
+
+\subsubsection{GR\_L2B2N1}
+
+\subsubsection{GR\_L2B2N2}
+
+
+
+\textbf{PERISHABLE GOODS TESTEN}
+
+
+
+
 \chapter{Conclusions and Discussions}
 The created simulation program provides a wide range of possible sccenarios to simulate the giving game designed for this thesis. With the provided visualization of the behaviour during the giving game the results are promosing. 
 
 The scenarios of the random rule and balance rule were very basic scenarios to test the implemented giving game. The behaviour of both the random rule and the balance rule was very predictable and showed a correct implementation of the giving game. The balance rule also confirmed a correct calculation of the community effect.
 
-The first experiments of the goodwill rule showed suprising results. These results have led to a reconsideration of the yield curve which caused an improvement in the simulation model for the giving game. The results from the additional experiments confirmed the hypothesis, but these results  are still difficult to clarify with a real life scenario. It can be concluded that in most cases people rather give to 'friends' than to strangers. Some experiments showed a distribution of the transactions in favour of the less liked agents or a community where also an agent who is less liked was part of. These experiments are easily understood from a mathematical perspective, because the calculation yield can lead to an equilibrium between two different agents. But from a more psychological perspective it is difficult to understand why someone would still want to trade with someone who is not liked.
-
+The first experiments of the goodwill rule showed suprising results. These results have led to a reconsideration of the yield curve which caused an improvement in the simulation model for the giving game. The results from the additional experiments confirmed the hypothesis, but these results  are still difficult to clarify with a real life scenario. It can be concluded that in most cases people rather give to 'friends' than to strangers. Some experiments showed a distribution of the transactions in favour of the less liked agents or a community where also an agent who is less liked was part of. These experiments are easily understood from a mathematical perspective, because the calculation yield can lead to an equilibrium between two different agents. But from a more psychological perspective it is difficult to understand why someone would still want to trade with someone who is not liked.\\
+\\
 Even though some of the experiments are difficult to explain with a real life scenario the research questions can still be answered.
-
-\textit{Will the transactions eventually take place within a limited subgroup of the entire population?} \\
-The answer to this question is simply, yes. All the experiments eventually led to subgroups of size 2 and when the nominal values were perceived differently by the agents the subgroups could consist of more than 2 agents.
-
-\textit{Will we see a repeating sequence of transactions or will the transaction sequence look random?} \\
+\\
+\\
+\textit{In a Giving Game simulation will transactions eventually take place within a limited subgroup of the entire population?} \\
+The answer to this question is simply, yes. All the experiments eventually led to subgroups of size 2 and when the nominal values were perceived differently by the agents the subgroups could consist of more than 2 agents. As expected in the first place the revised yield curve led to subgroups consisting mostly of agents who like each other.
+\\
+\\
+\textit{In a Giving Game simulation will we see a repeating sequence of transactions or will the transaction sequence look random?} \\
 The balance rule and the goodwill rule showed a partial stabilization of the transactions when a perishable good was used with a perish period of 1. All the other experiments did not lead to a repeating sequence of transactions. Even when communties larger than two agents arose the transactions within these communties were random.
 
 \section{Further research}
-
-
+Further experiments will allow the use of more variety in the parameters used for the goodwill rule. 
 
 A possible variant on the giving game used in this thesis is that agents are able to hold on to a good. This is leads to a similar simulation as used in the article 'Money Network in Kiyotaki-Wright Model'. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods (perishable goods) would not be able to be stored forever. The time an agent holds on to a good is also a parameter that can influence the choice for the transaction.
 
