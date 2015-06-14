@@ -20,9 +20,9 @@
 \contentsline {subsubsection}{Balance rule}{16}
 \contentsline {subsubsection}{Goodwill rule}{16}
 \contentsline {subsection}{\numberline {4.1.4}Environment}{16}
-\contentsline {subsection}{\numberline {4.1.5}Simulation}{16}
+\contentsline {subsection}{\numberline {4.1.5}The Simulation}{16}
 \contentsline {section}{\numberline {4.2}Front-end}{16}
-\contentsline {subsubsection}{Input}{16}
+\contentsline {subsubsection}{Input}{17}
 \contentsline {subsubsection}{Output}{17}
 \contentsline {chapter}{\numberline {5}Scenarios}{19}
 \contentsline {section}{\numberline {5.1}Basic Scenarios}{19}
@@ -40,7 +40,7 @@
 \contentsline {subsubsection}{Like factors}{21}
 \contentsline {subsubsection}{Balances}{21}
 \contentsline {subsubsection}{Nominal values}{21}
-\contentsline {subsubsection}{Hypothesis}{22}
+\contentsline {subsubsection}{Hypothesis}{21}
 \contentsline {chapter}{\numberline {6}Results}{23}
 \contentsline {section}{\numberline {6.1}Random rule}{23}
 \contentsline {subsection}{\numberline {6.1.1}Results}{23}
@@ -70,4 +70,3 @@
 \contentsline {section}{\numberline {7.1}Further research}{41}
 \contentsline {chapter}{\numberline {8}Appendix A}{43}
 \contentsline {section}{\numberline {8.1}Simulator manual}{43}
-\contentsline {section}{\numberline {8.2}Code Documentation}{43}

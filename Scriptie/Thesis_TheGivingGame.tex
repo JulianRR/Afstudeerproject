@@ -5,6 +5,8 @@
 \usepackage{url}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
 
 
 % Title Page
@@ -79,12 +81,12 @@ For the account balance between P and Q the following rule applies if P and Q ag
 \textit{Balance of P with Q = - (balance of Q with P)}
 \\
 \\
-Every good also has a value and can be perceived differently by every agent. This is the nominal value and can be interpreted as an indication of how much someone wants this good. The nominal value of a good is set at the beginning of the giving game and does not change over time. The last variable we need to define is the like factor. The like factor is an indication of how much an agent likes another agent. The higher the like factor the more someone is liked.
+Every good also has a value and can be perceived differently by every agent. This is the nominal value and can be interpreted as an indication of how much someone wants this good. The nominal value of a good is set at the beginning of the giving game and does not change over time. The last variable we need to define is the like factor. The like factor is an indication of how much an agent likes another agent. The lower the like factor the more someone is liked.
 For the model that is used for this thesis, these variables lead to the following calculations of the yield.
 \\
 \\
-\textit{Y = a*x + b} \\
-\textit{-1 $\le$ a $\le$ 0} \\
+\textit{Y = -a*x + b} \\
+\textit{0 $\le$ a $\le$ 1} \\
 \textit{Y, b $\ge$ 0} \\
 Here \textit{Y} is the yield, \textit{a} the like factor, \textit{X} is the account balance, and \textit{b} is the nominal value of a good. This function can be used to create a so called yield curve. Assuming we have a good \textit{G} that is given away by P to Q we get the yield curve shown in figure 2.1.
 \\
@@ -143,7 +145,7 @@ The following parameters will be used in the environment of the giving game for 
   \item[Perish period:] The perish period is the amount of transactions it takes before a good perishes. For sustainable goods the perish period is 0, because sustainable goods exist forever. For perishable goods the perish period is greater than 0. For example, when a good has a perish period of 3 then this good can be given away 3 times before it perishes. The perish period is a natural number greater than or equal to 0.
   \item[Production delay:] The production delay is the time between the perish of a good and its reproduction. The time until the production is decreased by one after every iteration over all agents who are currently holding a good. The production delay is a natural number greater than or equal to 0.
   \item[Nominal value:] The nominal value is an indication of how much a good is worth. The nominal value does not change during the giving game. Every agent perceives the nominal value of a good differently. Agent P could value good G more than agent Q for example. The nominal value is a natural number greater than or equal to 0.
-  \item[Like factor:] The like factor is a real number between -1 and 0 which defines how much agent P likes agent Q. The higer the number the more P likes Q and the more likely it is that P will give to Q. The like factor does not change during the giving game. 
+  \item[Like factor:] The like factor is a real number between 0 and 1 which defines how much agent P likes agent Q. The higer the number the more P likes Q and the more likely it is that P will give to Q. The like factor does not change during the giving game. 
   \item[Selection rule:] The selection rule is an algorithm that decides/calculates the next agent(s) to receive a good.
 
 \end{description}
@@ -187,7 +189,6 @@ For the previously explained giving game a simulator will be created that can si
 
 
 \chapter{Implementation}
-\textbf{Work in progres!}
 In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simualte multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with \textit{Python} and uses multiple \textit{Python}modules,  packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required \textit{Python} packes and frameworks are installed. 
 
 \section{Back-end}
@@ -218,50 +219,70 @@ The balance rule finds for P the agent who P has the highest balance with. When 
 The goodwill rule finds for P the agent who P has the highest yield with. When P has the same yield with multiple agents the goodwill rule randomly selects one of these agents.The result is the \textit{ID} for the agent who should receive the good. Once the agent has been selected the transaction can proceed. After every transaction the account balances are updated with the yield for every agent participated in the transaction. With the new account balance the yield is updated for the goods used in the transaction.
 
 \subsection{Environment}
-The environment holds N number of agents and M number of goods.
+Every simulation has an environment where eveything happens. The environment is defined bt the Environment class. The environment holds all the information for the simulation to run properly. The environment holds N number of agents and M number of goods and are stored in two \textit{Python} lists. The environment keeps track of all the input parameters and output data.
 
-\subsection{Simulation}
-The simulation is run by first creating the environment. The environment is created by first creating the Agents and the Goods. After the goods have been created the agents are notified, their perception of the nominal values of these goods and the yield values for the first transactions are updated. The goods are either randomly assigned to the agents or chosen by the user.
+\subsection{The Simulation}
+The simulation is run by first creating the environment. First the agents and the goods are created by calling their corresponding classes. After the goods have been created the agents are notified, their perception of the nominal values of these goods and the yield values for the first transactions are updated. The goods are either randomly assigned to the agents or chosen by the user. The agents who start with a perishable good are assigned to be the producer of this good. This means that when a good is reproduced by the environment the producer is the first one to get this good. This is not seen as a transaction, the producer acts as if he is the one creating the good. Once the whole environment is created a never ending loop (unless the user pauses or stops the simulation) is initiated and the appropriate actions are executed as shown in chapter 3.3.
 
 
 \section{Front-end}
-The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation. For the explanation of the use of the interface the use should consult the user manual which can be found in appendix B.
+The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation. For the explanation of the use of the interface the use should consult the user manual which can be found in appendix A.
 
 \subsubsection{Input}
 The user is able to input the following parameters:
 
 \begin{description}
-  \item[N:] 
-  \item[M:] 
-  \item[Perish period:] 
-  \item[Production delay:]
- \item[Selection rule:] 
-  \item[Nominal value:] The user is able to choose if every agent perceives the value of a good differently or not. If the user wants to have a different value of the good for every agent the user can add a xslx file with the nominal values as follows:
-  \item[Like factor:] The user is able to choose between setting like factors by hand or to randomly create the like factors. If the user wants to add predefined likefactors the user can add a xslx file with the like factors as follows:
- \item[Balance:] The user is able to set the balance at the start of the simulation at 0 or to add different balances for every agent.
+  \item[N:] An integer number that defines the number of agents.
+  \item[M:] An integer number that defines the number of goods.
+  \item[Perish period:] An integer number that can be set for every good.
+  \item[Production delay:] An integer number that can be set for every good.
+ \item[Selection rule:] The user can choose between the given selection rules (random rule, balance rule and goodwill rule). 
+  \item[Nominal value:] The user is able to choose if every agent perceives the value of a good differently or not. If the user wants to have a different value of the good for every agent the user can add a \textit{xls} or a\textit{xlsx} file with the nominal values as follows:
+  \item[Like factor:] The user is able to choose between setting like factors by hand or to randomly create the like factors. If the user wants to add predefined likefactors the user can add a \textit{xls} or a\textit{xlsx} file with the like factors as follows:
+ \item[Balance:] The user is able to set the balance at the start of the simulation at 0 or to set different balances for every agent pair by adding a  \textit{xls} or a\textit{xlsx} file as follows:
+
+Because of how the account balance is defined the user only has to fill half of a matrix.
 \end{description}
-During the simulation the user should be able to adjust the following variables:
+During the simulation the user is able to adjust the following variables:
 
 \begin{description}
-  \item[Subgroup size:] 
-  \item[Reset community percentage:] 
+  \item[Subgroup size:] The user is able to change the size of a subgroup to see how many agents hold 100 percent of the transactions. The default value is 2.
+  \item[Reset community percentage:] The user is able to reset the number transactions that has been executed and the number of times each agent has contributed to a transaction. This allows the user to see if from a certain point in the simulation the transactions only take palce within a subgroup.
+  \item[Delay:] The user is able to set a delay which increases the time between each transactions. The user can set a maximum delay of 1 second. 
+  \item[Pause:] The user is able to pause the simulation at any time. The simulation will continue once the user chooses so.
 
 \end{description}
 \subsubsection{Output}
-The output data is visualized so that the user is able to analyse and get results without doing any calculations. The simulator is able to do most of the work.
-
-The simulator is able to give the following output:
+The output data is visualized so that the user is able to analyse and get results without doing any calculations. The simulator is able to give the following output:
 \begin{itemize}
-  \item Show the amount of goods given and received for each agent in a bar plot.
+  \item Show the amount of goods given and received for each agent.
   \item Show the yield curve between every agent pair.
   \item Show the amount of transactions
-  \item Show the visualization of the course of the transactions with a color indication for any emerging subgroups.
-  \item Show percentages of how many times a certain good has been traded by an agent.
-  \item Show every transaction, producting and delay in production.
-  \item Show the community percentage (How many transactions take place in a subgroup with the current set size.)
+  \item Show percentages of how many times a certain good has been traded by an agent (Figure 4.1).
+  \item Show the visualization of the course of the transactions with a color indication that shows the percentage of transactions each agent participated in (Figure 4.2). 
+  \item Show every transaction, production and delay in production (Figure 4.3).
+  \item Show the community percentage, the percentage of transactions that take place in a subgroup with the set subgroup size.
 \end{itemize}
 
-All the data can be saved and used in the future for another simulation.
+The output is updated after every transaction. All the data can be saved and used in the future for another simulation.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Simulation2_figures/Distribution}
+  \caption{Transaction percentage of each good by each agent}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Simulation2_figures/Visualization}
+  \caption{Visualization of the course of the transactions}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Simulation2_figures/Transactions}
+  \caption{Eexecuted Transactions}
+\end{figure}
 
 
 \chapter{Scenarios}
@@ -281,7 +302,7 @@ Parameters:
 \item	99 agents
 \item	1 perishable good with a nominal value of 1, perish time of 1, perish delay of 1
 \end{itemize}
-In case of the goodwill rule where the like factor is used for the selection of an agent the like factor is set to -1 for every agent. In the most basic environment every agent is equal and has no specific relations with other agents.
+In case of the goodwill rule where the like factor is used for the selection of an agent the like factor is set to 0.5 for every agent. In the most basic environment every agent is equal and has no specific relations with other agents.
 
 \section{Random rule}
 The following scenarios are  used to see if the agents behave as predicted with the random rule.  Any irregularities in the behaviour will be analysed and can be used in decisions for further experiments. The nominal value does not have to be set, because the nominal values of the goods are not used in the selection of an agent.
@@ -325,8 +346,8 @@ The expectations are that a community effect will arise with a subgroup consisti
 For the goodwill rule all parameters can affect the results. The following parameters define the scenarios.
 \subsubsection{Like factors}
 \begin{description}
-\item[L1]	1/3 of the population has a like factor of -1, 1/3 of the population has a like factor of -0.5 and 1/3 of the population has a like factor of -0.1. This means that every agent has a different relationship with every third of the population. These three groups have been chosen in order to better observe the difference in behaviour.
-\item[L2]	47 agents have a like factor of -1, 47 agents has a like factor of -0.5 and 5 of the agents have a like factor of -0.1. This means that only a small group of agents is liked by all other agents.
+\item[L1]	1/3 of the population has a like factor of 1, 1/3 of the population has a like factor of 0.5 and 1/3 of the population has a like factor of 0.1. This means that every agent has a different relationship with every third of the population. These three groups have been chosen in order to better observe the difference in behaviour.
+\item[L2]	47 agents have a like factor of 1, 47 agents has a like factor of 0.5 and 5 of the agents have a like factor of 0.1. This means that only a small group of agents is liked by all other agents.
 \end{description}
 \subsubsection{Balances}
 \begin{description}
@@ -355,7 +376,7 @@ After these scenarios B2 will be used for the balances.
 \end{description}
 
 \subsubsection{Hypothesis}
-Expectations are that for all scenarios a community effect will arise with one or more subgroups consisting of agent with a high like factor. A high like factor would mean that the agent like each other, so it would be logically to asumme that these agent will trade more with each other than with agents who are not liked. When B2 is used instead of B1 or N2 instead of N1 the results will most likely vary alot more, because of the varying starting values. Assuming agents prefer agents with a high like factor using L2 will most likely lead to smaller communities or a longer time before a community arises.
+Expectations are that for all scenarios a community effect will arise with one or more subgroups consisting of agent with a low like factor. A low like factor would mean that the agent like each other, so it would be logically to asumme that these agent will trade more with each other than with agents who are not liked. When B2 is used instead of B1 or N2 instead of N1 the results will most likely vary alot more, because of the varying starting values. Assuming agents prefer agents with a low like factor using L2 will most likely lead to smaller communities or a longer time before a community arises.
 
 
 
@@ -439,44 +460,44 @@ No community effect and no repeating sequence of transactions arises. At the beg
 \end{figure}
 
 \subsubsection{GR\_L1B1N1}
-Because all the balances are zero at the start and the nominal values are the same for every agent the yield of the first transaction is the same for everyone. The agent who first starts with the good randomly gives the good to another agent. From this point on the subgroup has emerged and the good will only be traded between two agents. Good\_0 is from the beginning only traded within a subgroup of size 2.  When P gives to Q, Q is in debt with P and values giving to P more than giving to anyone else, the yield is the highest between Q and P. Q gives back to P and now the yield for P has become greater than the nominal value so P values the transaction with Q the most. An equilibrium just like with BS\_S has emerged. Changing the amount of goods did not change the results. Each good is only traded between 2 agents with a like factor of either -1, -0.5 or -0.1.
+Because all the balances are zero at the start and the nominal values are the same for every agent the yield of the first transaction is the same for everyone. The agent who first starts with the good randomly gives the good to another agent. From this point on the subgroup has emerged and the good will only be traded between two agents. Good\_0 is from the beginning only traded within a subgroup of size 2.  When P gives to Q, Q is in debt with P and values giving to P more than giving to anyone else, the yield is the highest between Q and P. Q gives back to P and now the yield for P has become greater than the nominal value so P values the transaction with Q the most. An equilibrium just like with BS\_S has emerged. Changing the amount of goods did not change the results. Each good is only traded between 2 agents with a like factor of either 1, 0.5 or 0.1.
 \\
 \\
-For the perishable goods the results are very different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of -0.1 and -0.5 as shown in figure 6.7 Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer therefore prefers the agents with a like factor of -0.1 and -0.5 over -1. \\
+For the perishable goods the results are very different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of 0.1 and 0.5 as shown in figure 6.7 Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer therefore prefers the agents with a like factor of 0.1 and 0.5 over 1. \\
 \begin{figure}[h!]
   \centering
    \includegraphics[scale=0.4]{Simulation_figures/GR_L1B1N1/1perishable_1-1_15k}
   \caption{Transaction percentage for GR\_L1B1N1 with 1 perishable good.}
 \end{figure}
 
-When an odd number is used for the perish period the results are similar to the results shown in figure 6.7 but instead the producer only gives to agents with like factors -0.1. When an even number is used for the perish period the goods act as if they are sustainable and immedialty are only traded within a subgroup of two agents with like factors of iether -1, -0.5 or -0.1. 
+When an odd number is used for the perish period the results are similar to the results shown in figure 6.7 but instead the producer only gives to agents with like factors 0.1. When an even number is used for the perish period the goods act as if they are sustainable and immedialty are only traded within a subgroup of two agents with like factors of iether 1, 0.5 or 0.1. 
 
 \subsubsection{GR\_L1B1N2}
-In the beginning some goods are traded between different agents. This happens because after some transactions the yield is the same value as the nominal value of the good. This means that the yield is the same for some agents. The agent who is giving the good will have to choose randomly between these agents, which can lead to a transaction with a different agent. This happens for example between agents where their nominal value is a multiple of the other and the like factors are -1 and -0.5. After a few transactions the calculation of the yield with these values results in the same value as the nominal value of the good, thus an agent needs to be randomly selected again. This is a rare occurance and eventually each good is only traded between two agents with either like factor of -1, -0.5 or -0.1, depending on which agent starts with the good. Changing the amount of goods did not affect the results.
+In the beginning some goods are traded between different agents. This happens because after some transactions the yield is the same value as the nominal value of the good. This means that the yield is the same for some agents. The agent who is giving the good will have to choose randomly between these agents, which can lead to a transaction with a different agent. This happens for example between agents where their nominal value is a multiple of the other and the like factors are 1 and 0.5. After a few transactions the calculation of the yield with these values results in the same value as the nominal value of the good, thus an agent needs to be randomly selected again. This is a rare occurance and eventually each good is only traded between two agents with either like factor of 1, 0.5 or 0.1, depending on which agent starts with the good. Changing the amount of goods did not affect the results.
 
 For the perishable goods the results are the same as the results from GR\_L1B1N1. Changing the nominal value does not seem to affect the behaviour of perishable goods.
 \subsubsection{GR\_L2B1N1}
-The results are the same as the results from GR\_L1B1N1. Changing the size of the group with a like factor of -0.1 did not change anything. 
+The results are the same as the results from GR\_L1B1N1. Changing the size of the group with a like factor of 0.1 did not change anything. 
 \subsubsection{GR\_L2B1N2}
-The results are similar to the results from GR\_L1B1N2.  Changing the size of the group with a like factor of -0.1 did not change anything. 
+The results are similar to the results from GR\_L1B1N2.  Changing the size of the group with a like factor of 0.1 did not change anything. 
 
 \clearpage
 \subsubsection{GR\_L1B2N1}
-Firstly the experiments with sustainable goods show in the beginning that the transactions are mostly divided over the agents with a likefactor of -1 and -0.5. After the first 1000 transactions the transaction percentage is as shown in figure 6.8. \\
+Firstly the experiments with sustainable goods show in the beginning that the transactions are mostly divided over the agents with a likefactor of 1 and 0.5. After the first 1000 transactions the transaction percentage is as shown in figure 6.8. \\
 \begin{figure}[h!]
   \centering
    \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1/Figure1_1good_1k}
   \caption{Transaction percentage for GR\_L1B2N1 with 1 sustainable good.}
 \end{figure}
  \\
-After 4000 transactions a subgroup started to arise. Figure 6.9 shows the emergence of this subgroup and show that the agents with a like factor of -0.1 eventually also participate in some transactions. \\
+After 4000 transactions a subgroup started to arise. Figure 6.9 shows the emergence of this subgroup and show that the agents with a like factor of 0.1 eventually also participate in some transactions. \\
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1/Figure2_1good_4k} 
   \caption{Transaction percentage for GR\_L1B2N1 with 1 sustainable good.}
 \end{figure}
 \\
- Every experiment with just one good led to a subgroup of agents with likefactor -0.5 or -1. With just one good the good was only traded between 2 agents after 4000-5000 transactions. When more goods are used the results start to vary alot more. Figure 6.10 shows what happens when more than one good is used. When more goods are used the goods sometimes fall into a subgroup for a short period of time. Eventually all goods are only traded between two agents. The goods are traded between multiple different subgroups untill the highest equilibrium arises where the yield switches between the two highest possible values. The communities that arise only consists of agents with a like factor of -0.5 or -1 as shown in figure 6.11. \\
+ Every experiment with just one good led to a subgroup of agents with likefactor 0.5 or 1. With just one good the good was only traded between 2 agents after 4000-5000 transactions. When more goods are used the results start to vary alot more. Figure 6.10 shows what happens when more than one good is used. When more goods are used the goods sometimes fall into a subgroup for a short period of time. Eventually all goods are only traded between two agents. The goods are traded between multiple different subgroups untill the highest equilibrium arises where the yield switches between the two highest possible values. The communities that arise only consists of agents with a like factor of 0.5 or 1 as shown in figure 6.11. \\
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1/Figure3_2goods_5k}
@@ -489,14 +510,14 @@ After 4000 transactions a subgroup started to arise. Figure 6.9 shows the emerge
   \caption{Transaction percentage for GR\_L1B2N1 with 2 sustainable goods after 10000 transactions.}
 \end{figure}
 
-For the perishable goods the results are slightly different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of -0.1 and -0.5. Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer therefore prefers the agents with a like factor of -0.1 and -0.5 over -1. \\
+For the perishable goods the results are slightly different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of 0.1 and 0.5. Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer therefore prefers the agents with a like factor of 0.1 and 0.5 over 1. \\
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1/Figure5_1perishable_4k}
   \caption{Transaction percentage for GR\_L1B2N1 with 1 perishable good after 4000 transactions.}
 \end{figure}
  \\
-When the perish period is higher than 1 the goods behave more like a sustainable good. The higher the perish period and the more perishable goods are used the longer it takes before a community arises. In most cases the equilibrium that arises leads to a subgroup of two agents with a like factor of -1 or -0.5 and an agent with a like factor of -0.1. In some cases the subgroup consists of 3 agents as shown in figure 6.13.\\
+When the perish period is higher than 1 the goods behave more like a sustainable good. The higher the perish period and the more perishable goods are used the longer it takes before a community arises. In most cases the equilibrium that arises leads to a subgroup of two agents with a like factor of 1 or 0.5 and an agent with a like factor of 0.1. In some cases the subgroup consists of 3 agents as shown in figure 6.13.\\
 \begin{figure}[h!]
   \centering
  \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1/Figure6_2perishable_5k} 
@@ -505,12 +526,12 @@ When the perish period is higher than 1 the goods behave more like a sustainable
 
 \clearpage
 \subsubsection{GR\_L1B2N2}
-For the sustainable goods the results show that a community arises more quickly in comparison with GR\_L1B2N1 where the nominal values are the same for every agent. Where it took GR\_L1B2N1 with one good 4000-5000 transactions before a community arose these experiments only took 2000 transactions for one good. The distribution of the transactions in the beginning of the simulation is the same as with GR\_L1B2N1. Using more goods led to the same results, where all goods were only traded between two agents. If N2 would be changed so that the -1 like factor group perceives the nominal values of the goods higher than the -0.1 group then nothing changes to the results.\\
+For the sustainable goods the results show that a community arises more quickly in comparison with GR\_L1B2N1 where the nominal values are the same for every agent. Where it took GR\_L1B2N1 with one good 4000-5000 transactions before a community arose these experiments only took 2000 transactions for one good. The distribution of the transactions in the beginning of the simulation is the same as with GR\_L1B2N1. Using more goods led to the same results, where all goods were only traded between two agents. If N2 would be changed so that the 1 like factor group perceives the nominal values of the goods higher than the 0.1 group then nothing changes to the results.\\
 \\
 For the perishable goods the results are the same as GR\_L1B2N1, but for this scenario the subgroups also arise more quickly.
 \\
 \\
-When N2 is changed so the agent with like factor -1 perceive the nominal values of the goods higher than the agent with a like factor -0.1 then the results are as shown in figure 6.14. In this case no equilibrium arises between two agents, but the transactions with agents with like factor -1 are still prefered over transactions with other agents. Thus the transactions only take place within the group of agents with like factors -1. When more goods are used the same behaviour occurs. \\
+When N2 is changed so the agent with like factor 1 perceive the nominal values of the goods higher than the agent with a like factor 0.1 then the results are as shown in figure 6.14. In this case no equilibrium arises between two agents, but the transactions with agents with like factor 1 are still prefered over transactions with other agents. Thus the transactions only take place within the group of agents with like factors 1. When more goods are used the same behaviour occurs. \\
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N2_321/Figure1_10k} 
@@ -519,12 +540,12 @@ When N2 is changed so the agent with like factor -1 perceive the nominal values 
 
 \clearpage
 \subsubsection{GR\_L2B2N1}
-With this scenario only 5 agents have a like factor of -0.1 and the other agents have either -1 or -0.5. The major difference between this scenario and GR\_L1B2N1 is that the agents with a like factor of -0.1 are ignored more. The reason for this is simply, because the group with a like factor of -0.1 is smaller.
+With this scenario only 5 agents have a like factor of 0.1 and the other agents have either 1 or 0.5. The major difference between this scenario and GR\_L1B2N1 is that the agents with a like factor of 0.1 are ignored more. The reason for this is simply, because the group with a like factor of 0.1 is smaller.
 \subsubsection{GR\_L2B2N2}
-The results are the same as GR\_L1B2N2. Changing the amount of agents with a like factor of -0.1 did not change anything.
+The results are the same as GR\_L1B2N2. Changing the amount of agents with a like factor of 0.1 did not change anything.
 \\
 \\
-The results of the goodwill scenarios show that what was expected did not happen. Instead of subgroups consisting of agents with a like factor of -0.1 the subgroups consist of agents with like factor -1 or -0.5 with sometimes agent with like factor -0.1. Instead of giving to agents who are liked more the agents in these scenarios prefer to give to agents who are not liked at all. On one hand this seems logical if you think about loans and in this case hostile loans where each time a good is given it leads to a high debt. With the yield curve used for this model receiving a good from someone who is not liked leads to a higher debt than receiving from someone who is liked, because the slope is heigher with a like factor of -1. On the other hand this seems illogical for a giving environment, where people rather give/pay of their debt with someone they like than with someone they don't like. This has led to a reconsideration of the yield curve used in this thesis.
+The results of the goodwill scenarios show that what was expected did not happen. Instead of subgroups consisting of agents with a like factor of 0.1 the subgroups consist of agents with like factor 1 or 0.5 with sometimes agent with like factor 0.1. Instead of giving to agents who are liked more the agents in these scenarios prefer to give to agents who are not liked at all. On one hand this seems logical if you think about loans and in this case hostile loans where each time a good is given it leads to a high debt. With the yield curve used for this model receiving a good from someone who is not liked leads to a higher debt than receiving from someone who is liked, because the slope is heigher with a like factor of 1. On the other hand this seems illogical for a giving environment, where people rather give/pay of their debt with someone they like than with someone they don't like. This has led to a reconsideration of the yield curve used in this thesis.
 
 
 
@@ -534,7 +555,7 @@ The results of the goodwill scenarios show that what was expected did not happen
 
 
 \section{Reconsideration of the yield curve}
-The results from the goodwill rule have revealed a problem. The problem is as follows: We have an agent P who is in possesion of a good and two other agents Q and R who P can give his good to. P has an account balance of 0 with both agents, P has a like factor of -0.1 with Q and a like factor of -1 with R. This would lead to the yield curve shown in figure 6.15. \\
+The results from the goodwill rule have revealed a problem. The problem is as follows: We have an agent P who is in possesion of a good and two other agents Q and R who P can give his good to. P has an account balance of 0 with both agents, P has a like factor of 0.1 with Q and a like factor of 1 with R. This would lead to the yield curve shown in figure 6.15. \\
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.4]{YieldCurves/yieldcurve_P_QR}
@@ -551,28 +572,28 @@ A solution to this problem would be to base the perception of the nominal value 
  \caption{Yield curve, yield perceived by P with Q and R.}
 \end{figure}
 
-The yield curve in figure 6.16 shows that with an account balance of 0 and a like factor of -1 the value of the transaction is lower than when the like factor would be -0.1. In this case P would choose Q over R, because a transaction with a 'friend' is worth more than with a stranger. This means that when the nominal value is defined as a constant than the intercept(\textit{b}) in \textit{$Y = aX + b$} should be a lower value when the like factor is also lower. To accomplish this we can assume that \textit{b} will scale equally with the like factor, thus \textit{$Y = aX + b(1 + a)$}.  The calculation of the yield needs to be rewritten as follows:
+The yield curve in figure 6.16 shows that with an account balance of 0 and a like factor of 1 the value of the transaction is lower than when the like factor would be 0.1. In this case P would choose Q over R, because a transaction with a 'friend' is worth more than with a stranger. This means that when the nominal value is defined as a constant than the intercept(\textit{b}) in \textit{$Y = aX + b$} should be a lower value when the like factor is higher. To accomplish this we can assume that \textit{b} will scale equally with the like factor, thus \textit{$Y = aX + b(1 + a)$}.  The calculation of the yield needs to be rewritten as follows:
 \begin{equation}
 \begin{split}
-  Y & = aX + b \\
-     & = aX + b(1 + a) \\
-     & = aX + b + ab \\
-     & = a(X + b) + b 
+  Y & = -aX + b \\
+     & = -aX + b(1 - a) \\
+     & = -aX + b - ab \\
+     & = -a(X + b) + b 
 \end{split}
 \end{equation}
 This new calculation of the yield leads to yield curves just like the one in figure 6.16 and solves the problem of choosing an agent when the balance is 0. To see what the effect is of these changes on the results of the goodwill scenarios additional experiments have been performed with the revised yield curve. The results of the experiments that show major differences in results are explained below.
 
 \begin{description}
-\item[GR\_L1B1N1] When the good starts at an agent with like factor -1 the good is given away to an agent with like factor -0.1. Once the good is in possesion of an agent with like factor -0.1 a subgroup arises between two agents with a like factor -0.1. When the good starts at an agent with like factor -0.5 the good is also given to an agent with like factor -0.1. This time a subgroup arisises between the agent with like factor -0.5 and the agent with like factor -0.1 who received the good the first time. These results are the same for evey additional good.
+\item[GR\_L1B1N1] When the good starts at an agent with like factor 1 the good is given away to an agent with like factor 0.1. Once the good is in possesion of an agent with like factor 0.1 a subgroup arises between two agents with a like factor 0.1. When the good starts at an agent with like factor 0.5 the good is also given to an agent with like factor 0.1. This time a subgroup arisises between the agent with like factor 0.5 and the agent with like factor 0.1 who received the good the first time. These results are the same for evey additional good.
 
-For the perishable goods the results are very different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of -0.1 and -0.5 as shown in figure 6.17 Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer therefore prefers the agents with a like factor of -0.1 and -0.5 over -1. \\
+For the perishable goods the results are very different. With one perishable good and a perish period of 1 all experiments led to a community of the producer and all the agents with a like factor of 0.1 and 0.5 as shown in figure 6.17 Because the good perishes after it has been given away by the producer the agents who receive the good stay in debt with the producer. The producer therefore prefers the agents with a like factor of 0.1 and 0.5 over 1. \\
 \begin{figure}[h!]
   \centering
    \includegraphics[scale=0.4]{Simulation_figures/GR_L1B1N1/1perishable_1-1_15k}
   \caption{Transaction percentage for GR\_L1B1N1 with 1 perishable good.}
 \end{figure}
 
-When an odd number is used for the perish period the results are similar to the results shown in figure 6.17 but instead the producer only gives to agents with like factors -0.1. When an even number is used for the perish period the goods are immediatly traded between two agents with a like factor of -0.1. If we would use a combination of perishable goods with odd perish periods and even perish periods the results would be a combination of the previous results. The perishable goods sometimes take place within a subgroup for a short period of time. When some agents reach the highest possible equilibrium with each other the transactions eventually led to subgroups as shown in figure 6.18 With other experiments this equilibrium was not reached and instead the subgroup consisted of the producers and the agents with like factors -0.1 as shown in figure 6.19 \\
+When an odd number is used for the perish period the results are similar to the results shown in figure 6.17 but instead the producer only gives to agents with like factors 0.1. When an even number is used for the perish period the goods are immediatly traded between two agents with a like factor of 0.1. If we would use a combination of perishable goods with odd perish periods and even perish periods the results would be a combination of the previous results. The perishable goods sometimes take place within a subgroup for a short period of time. When some agents reach the highest possible equilibrium with each other the transactions eventually led to subgroups as shown in figure 6.18 With other experiments this equilibrium was not reached and instead the subgroup consisted of the producers and the agents with like factors 0.1 as shown in figure 6.19 \\
 \begin{figure}[h!]
   \centering
 \includegraphics[scale=0.4]{Simulation_figures/GR_L1B1N1/2perishable_2233_100k}
@@ -585,11 +606,11 @@ When an odd number is used for the perish period the results are similar to the 
 \end{figure}
 
 \clearpage
-\item[GR\_L1B1N2] When N2 is used where the nominal values are perceived higher by the agent with like factor -0.1 than the agents with like factor -1 then the results are similar to the results from GR\_L1B1N1. The only difference is that the subgroups only consist of agent with a like factor of -0.1, because these agents perceive the nominal value of the good the highest. For every additional good used the results are the same.
+\item[GR\_L1B1N2] When N2 is used where the nominal values are perceived higher by the agent with like factor 0.1 than the agents with like factor 1 then the results are similar to the results from GR\_L1B1N1. The only difference is that the subgroups only consist of agent with a like factor of 0.1, because these agents perceive the nominal value of the good the highest. For every additional good used the results are the same.
 \\
 \\
-When N2 is changed so the agent with like factor -1 perceive the nominal values of the goods higher than the agent with a like factor -0.1 then the results are as shown in figure 6.20  The transactions within this subgroup do not stabilize, because the transactions are still random within this subgroup. This randomness occurs, because within these communities the yield sometimes reaches the same value for multiple agents. For example when an agent has to choose between two agents who have the same like factor and balance the choice will still be random.
-When the good starts at an agent with a like factor of -0.1 a subgroup immediatly arises where the good is traded between two agents with a like factor of -0.1.\\
+When N2 is changed so the agent with like factor 1 perceive the nominal values of the goods higher than the agent with a like factor 0.1 then the results are as shown in figure 6.20  The transactions within this subgroup do not stabilize, because the transactions are still random within this subgroup. This randomness occurs, because within these communities the yield sometimes reaches the same value for multiple agents. For example when an agent has to choose between two agents who have the same like factor and balance the choice will still be random.
+When the good starts at an agent with a like factor of 0.1 a subgroup immediatly arises where the good is traded between two agents with a like factor of 0.1.\\
 \begin{figure}[h!]
   \centering
 \includegraphics[scale=0.4]{Simulation_figures/GR_L1B1N2/321_1good} 
@@ -597,7 +618,7 @@ When the good starts at an agent with a like factor of -0.1 a subgroup immediatl
 \end{figure}
 
 
-When more goods are used and some goods start at agents with like factors -1 or -0.5 and other goods start at agents with like factors -0.1 then a subgroup shown in figure 6.21 arises where the transactions are not equally distributed over the agents. The transactions within this subgroup do not stabilize, because the distribution of the transactions changes as more transactions take place. The yield never reaches an equilibrium. \\
+When more goods are used and some goods start at agents with like factors 1 or 0.5 and other goods start at agents with like factors 0.1 then a subgroup shown in figure 6.21 arises where the transactions are not equally distributed over the agents. The transactions within this subgroup do not stabilize, because the distribution of the transactions changes as more transactions take place. The yield never reaches an equilibrium. \\
 \begin{figure}[h!]
   \centering
 \includegraphics[scale=0.4]{Simulation_figures/GR_L1B1N2/2goods_spikes}
@@ -606,7 +627,7 @@ When more goods are used and some goods start at agents with like factors -1 or 
 
 When perishable goods are used the results are equal to the results from GR\_L1B1N1.
 \clearpage
-\item[GR\_L1B2N1] For the first 1000-2000 transactions the transactions are in favour of the agents with a lower like factor as shown in figure 6.22. The debts are in the begenning higher, thus the yield for agents with a like factor of -1 is higher than for agents with like factor -0.1. Once these debts are payed the transactions start to lean more towards the agents with like factor -0.1 as shown in figure 6.23. Eventually after approximatly 6000 transactions a subgroup arises consisting of two agents with like factors -0.5 or -0.1.
+\item[GR\_L1B2N1] For the first 1000-2000 transactions the transactions are in favour of the agents with a higher like factor as shown in figure 6.22. The debts are in the begenning higher, thus the yield for agents with a like factor of 1 is higher than for agents with like factor 0.1. Once these debts are payed the transactions start to lean more towards the agents with like factor 0.1 as shown in figure 6.23. Eventually after approximatly 6000 transactions a subgroup arises consisting of two agents with like factors 0.5 or 0.1.
 \begin{figure}[h!]
   \centering
 \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1_1good_2k} 
@@ -622,9 +643,9 @@ When perishable goods are used the results are equal to the results from GR\_L1B
 
 When perishable goods are used the result is eventually the same as with GR\_L1B1N1 where the higher the perish period the more the goods behave like sustainable goods. The ony difference is the distribution of the transactions in the beginning of the simulation. With this scenario the goods are traded more between agents with different like factor before a community arises, because the account balance is not 0 in the beginning. 
 
-\item[GR\_L1B2N2] When N2 is used where the nominal values are perceived higher by the agent with a -0.1 like factor than the agents with a -1 like factor then the results are the same as the the results from GR\_L1B2N1. The only difference is that with different nominal values the subgroups arise more quickly. Where it took GR\_L1B2N1 approximatly 6000 transactions it took this scnario only approximatly 3000-4000 transactions. When more goods are used the resuls are not affected.
+\item[GR\_L1B2N2] When N2 is used where the nominal values are perceived higher by the agent with a 0.1 like factor than the agents with a 1 like factor then the results are the same as the the results from GR\_L1B2N1. The only difference is that with different nominal values the subgroups arise more quickly. Where it took GR\_L1B2N1 approximatly 6000 transactions it took this scnario only approximatly 3000-4000 transactions. When more goods are used the resuls are not affected.
 
-When N2 is changed so the agent with a -1 like factor perceive the nominal values of the goods higher than the agent with a -0.1 like factor then a subgroup arises with the agent who started with the goods and the agents with like factos -0.1. The distribution of the transactions in the beginning of the simulation are the same as show in figure 6.22 and 6.23, but eventually a community arises as shown in figure 6.24. The transactions within this community are not executed in a repeating sequence, because for some transactions the yield can be the same for multiple agents, thus an agent needs to randomly selected. Some experiments  led to an equilibrium  between two agents which led to a subgroup consting of only two agents with like factors -0.1.
+When N2 is changed so the agent with a 1 like factor perceive the nominal values of the goods higher than the agent with a 0.1 like factor then a subgroup arises with the agent who started with the goods and the agents with like factos 0.1. The distribution of the transactions in the beginning of the simulation are the same as show in figure 6.22 and 6.23, but eventually a community arises as shown in figure 6.24. The transactions within this community are not executed in a repeating sequence, because for some transactions the yield can be the same for multiple agents, thus an agent needs to randomly selected. Some experiments  led to an equilibrium  between two agents which led to a subgroup consting of only two agents with like factors 0.1.
 \begin{figure}[h!]
   \centering
 \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N2_321_4k} 
@@ -633,7 +654,7 @@ When N2 is changed so the agent with a -1 like factor perceive the nominal value
 
 \end{description}
 
-The major difference between the revised yield curve and the original one is that when B1 is used a community does not immediatly arise. The transactions are also more distributed in favour of the agents with a like factor of -0.1 as shown in figure  6.23. 
+The major difference between the revised yield curve and the original one is that when B1 is used a community does not immediatly arise. The transactions are also more distributed in favour of the agents with a like factor of 0.1 as shown in figure  6.23. 
 
 
 
@@ -670,8 +691,6 @@ Lastly, to the created simulation of the giving game used more selection rules c
 \chapter{Appendix A}
 
 \section{Simulator manual}
-
-\section{Code Documentation}
 
 
 
