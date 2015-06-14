@@ -188,26 +188,37 @@ For the previously explained giving game a simulator will be created that can si
 
 \chapter{Implementation}
 \textbf{Work in progres!}
-In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simualte multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with Python and uses multiple Python packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required Python packes and frameworks are installed. 
+In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simualte multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with \textit{Python} and uses multiple \textit{Python}modules,  packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required \textit{Python} packes and frameworks are installed. 
 
 \section{Back-end}
-The back end consists multiple compononents which together create an environment that simulates an giving economy where agents give and receive goods. This section will explain these components briefly and how they work together. For a more detailed description of the back end the full documentation can be found in appendix A.
+The back end consists of multiple compononents which together create an environment that simulates an giving economy where agents give and receive goods. This section will explain these components briefly and how they work together. 
 
 \subsection{Agents}
-Every agent is defined by the \textit{Agent} class. Every agent can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. Every agent keeps track of their own account balance, yield values, like factors and nominal values. The \textit{Agent} class is able to hold this data in the form of a Python list. The ID of every agent is used for these data lists to find the corresponding information about that agent.
+Every agent is defined by the \textit{Agent} class. Every agent can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. Every agent keeps track of their own account balance, yield values, like factors and nominal values. The \textit{Agent} class is able to hold this data in the form of a \textit{Python} lists. The ID of every agent is used for these data lists to find the corresponding information about that agent. The agents only know their own relations with the other agents and the goods, they don't know anything else about the environment. The following information is known by each agent:
+\begin{itemize}
+\item The amount of goods given and received to and from each agent.
+\item The amount of times each good has been given and received by the agent.
+\item The like factors in relation to the other agents.
+\item The account balance with the other agents.
+\item The nominal value of each good perceived by the agent.
+\end{itemize}
 
 \subsection{Goods}
-Every good is defined by the Good class.  Every good can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. This \textit{ID} can be used by the textit{Agent} class as an index for the python lists that hold information about this good.
+Every good is defined by the Good class.  Every good can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. This \textit{ID} can be used by the textit{Agent} class as an index for the python lists that hold information about this good. Goods have a 'life' which defines how many times this good can be traded. For every transaction of a good the life of that good is decreased by 1. Once the life of a good reaches 0 it is removed from the environment. A good is reproduced once the time until the production reaches zero. For every transaction in the environment the time until the production is decreased by 1.
 
 \subsection{Selection rules}
 
 \subsubsection{Random rule}
+A random natural number is generated with the \textit{random} module from \textit{Python} with a different seed everytime. The generated number is the \textit{ID} for the agent who should receive the good. Once the agent has been selected the transaction can proceed.
 
 \subsubsection{Balance rule}
+The balance rule finds for P the agent who P has the highest balance with. When P has the same balance with multiple agents the balance rule randomly selects one of these agents. The result is the \textit{ID} for the agent who should receive the good. Once the agent has been selected the transaction can proceed. After every transaction the account balance is updated for every agent who participated in the transaction.
 
 \subsubsection{Goodwill rule}
+The goodwill rule finds for P the agent who P has the highest yield with. When P has the same yield with multiple agents the goodwill rule randomly selects one of these agents.The result is the \textit{ID} for the agent who should receive the good. Once the agent has been selected the transaction can proceed. After every transaction the account balances are updated with the yield for every agent participated in the transaction. With the new account balance the yield is updated for the goods used in the transaction.
 
 \subsection{Environment}
+The environment holds N number of agents and M number of goods.
 
 \subsection{Simulation}
 The simulation is run by first creating the environment. The environment is created by first creating the Agents and the Goods. After the goods have been created the agents are notified, their perception of the nominal values of these goods and the yield values for the first transactions are updated. The goods are either randomly assigned to the agents or chosen by the user.
@@ -494,8 +505,8 @@ When the perish period is higher than 1 the goods behave more like a sustainable
 
 \clearpage
 \subsubsection{GR\_L1B2N2}
-For the sustainable goods the results show that a community arises more quickly in comparison with GR\_L1B2N1 where the nominal values are the same for every agent. Where it took GR\_L1B2N1 with one good 4000-5000 transactions before a community arose these experiments only took 2000 transactions for one good. The distribution of the transactions in the beginning of the simulation is the same as with GR\_L1B2N1. Using more goods led to the same results, where all goods were only traded between two agents. If N2 would be changed so that the -1 like factor group perceives the nominal values of the goods higher than the -0.1 group then nothing changes to the results.
-
+For the sustainable goods the results show that a community arises more quickly in comparison with GR\_L1B2N1 where the nominal values are the same for every agent. Where it took GR\_L1B2N1 with one good 4000-5000 transactions before a community arose these experiments only took 2000 transactions for one good. The distribution of the transactions in the beginning of the simulation is the same as with GR\_L1B2N1. Using more goods led to the same results, where all goods were only traded between two agents. If N2 would be changed so that the -1 like factor group perceives the nominal values of the goods higher than the -0.1 group then nothing changes to the results.\\
+\\
 For the perishable goods the results are the same as GR\_L1B2N1, but for this scenario the subgroups also arise more quickly.
 \\
 \\
@@ -634,12 +645,12 @@ The major difference between the revised yield curve and the original one is tha
 
 
 \chapter{Conclusions and Discussions}
-The created simulation program provides a wide range of possible sccenarios to simulate the giving game designed for this thesis. The scenarios of the random rule and balance rule were very basic scenarios to test the implemented giving game. The behaviour of both the random rule and the balance rule was very predictable and showed a correct implementation of the giving game. The balance rule also confirmed a correct calculation of the community effect to see where the subgroup emerged and how many agents were part of this subgroup.
+The created simulation program provides a wide range of possible sccenarios to simulate the giving game designed for this thesis. The scenarios of the random rule and balance rule were very basic scenarios to test the implemented giving game. The behaviour of both the random rule and the balance rule was very predictable and showed a correct implementation of the giving game. The balance rule also confirmed a correct calculation of the community effect to see where the subgroups emerged and how many agents were part of these subgroups.
 
 The first experiments of the goodwill rule showed suprising results. These results have led to a reconsideration of the yield curve which caused an improvement in the simulation model for the giving game. The results from the goodwill experiments confirmed the hypothesis and clearly show that in most cases agents rather give to 'friends' than to stranger. The results have led to the answer for the first research question. \\ 
 \\
 \textit{In a Giving Game simulation will transactions eventually take place within a limited subgroup of the entire population?} \\
-The answer to this question is simply, yes. All the experiments eventually led to subgroups. As expected in the first place the experiments led to subgroups consisting mostly of agents who like each other.
+The answer to this question is simply, yes. All the goodwill rule experiments eventually led to subgroups. As expected in the first place the experiments with the revised yield cuve led to subgroups consisting mostly of agents who like each other. 
 \\
 \\
 The results also show that the emergence of subgroups are mostly affected by the different nominal values and account balances. A higher perception of the nominal value of a good and a low balance means a higher possible yield. Some experiments therefore showed a distribution of the transactions in favour of the less liked agents or a community where also an agent who is less liked was part of. The emergnence of larger subgroups as the effect of different nominal values and different account balances has led to the asnwer for the second research question.
@@ -649,10 +660,12 @@ The results also show that the emergence of subgroups are mostly affected by the
 The balance rul showed a partial stabilization of the transactions when perishable goods were used with a perish period of 1. Experiments with the goodwill rule did not lead to a repeating sequence of transactions. Even when communties larger than two agents arose some transactions within these communties were still random, therefore no repeating sequence of transactions took place.
 
 \section{Further research}
-The experiments that showed subgroups where less liked agents were also part of are easily understood from a mathematical perspective, because the calculation of the yield can lead to an equilibrium between two or more different agents. A more real life explenation for these experiments is difficult. More research will need to be conducted for a more real life explenation. Further research could improve the created giving game by adding more parameters or further change the yield curve. To create a more realistic yield curve the yield curve could be changed to be less linear. A linear yield curve is a very simplified yield curve. 
+The experiments of the goodwill rule have showed a basic real life environment where people invest and all agents try to maximize profit by giving more to agents who are liked than to agents who are not liked. The giving game used for the experiments and the related results do not cover everthing of a economy of giving. Further research could use more varying input for the simulations or even add parameters to make the simulation more realistic so human behaviour can be simulated more precise. A possible variant on the giving game used in this thesis could for example be that agents are able to hold on to a good. This is leads to a similar simulation as used for the 'Kiyotaki-Wright Model' [REF]. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods, perishable goods for example, would not be able to be stored forever. The time an agent holds on to a good is also a parameter that can influence the choice for the transaction.
 \\
 \\
-Another possible variant on the giving game used in this thesis is that agents are able to hold on to a good. This is leads to a similar simulation as used for the 'Kiyotaki-Wright Model' [REF]. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods (perishable goods) would not be able to be stored forever. The time an agent holds on to a good is also a parameter that can influence the choice for the transaction.
+The already revised yield curve can also be further tested or improved. This thesis has used a simplified version of a yield curve. Different calculations of the yield could lead to non-linear yield curves. \\
+\\
+Lastly, to the created simulation of the giving game used more selection rules can be added that use more complex algorithms to select an agent. This can lead to a more real environment. Further information about extending the created simulation can be found in appendix A.
 
 \chapter{Appendix A}
 

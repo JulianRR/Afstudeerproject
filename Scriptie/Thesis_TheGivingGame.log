@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  14 JUN 2015 14:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.4.9)  14 JUN 2015 18:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -457,35 +457,35 @@ File: YieldCurves/yieldcurve_PQ_equilibrium.png Graphic file (type png)
 
 <use YieldCurves/yieldcurve_PQ_equilibrium.png>
 Package pdftex.def Info: YieldCurves/yieldcurve_PQ_equilibrium.png used on inpu
-t line 108.
+t line 107.
 (pdftex.def)             Requested size: 359.53688pt x 211.386pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--111
+Underfull \hbox (badness 10000) in paragraph at lines 72--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--111
+Underfull \hbox (badness 10000) in paragraph at lines 72--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--111
+Underfull \hbox (badness 10000) in paragraph at lines 72--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--111
+Underfull \hbox (badness 10000) in paragraph at lines 72--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--111
+Underfull \hbox (badness 10000) in paragraph at lines 72--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--111
+Underfull \hbox (badness 10000) in paragraph at lines 72--110
 
  []
 
@@ -494,17 +494,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8] [9 <./YieldCurves/yieldcurve_P.png> <./YieldCurves/yieldcurve_PQ_equilibriu
 m.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 114--124
+Underfull \hbox (badness 10000) in paragraph at lines 113--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--124
+Underfull \hbox (badness 10000) in paragraph at lines 113--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--124
+Underfull \hbox (badness 10000) in paragraph at lines 113--123
 
  []
 
@@ -561,7 +561,7 @@ Missing character: There is no â in font cmti10!
 Missing character: There is no € in font cmti10!
 Missing character: There is no “ in font cmti10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--165
+Underfull \hbox (badness 10000) in paragraph at lines 158--164
 
  []
 
@@ -569,10 +569,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 159--165
 File: YieldCurves/yieldcurve_PQ.png Graphic file (type png)
 
 <use YieldCurves/yieldcurve_PQ.png>
-Package pdftex.def Info: YieldCurves/yieldcurve_PQ.png used on input line 170.
+Package pdftex.def Info: YieldCurves/yieldcurve_PQ.png used on input line 169.
 (pdftex.def)             Requested size: 364.3548pt x 205.3636pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--178
+Underfull \hbox (badness 10000) in paragraph at lines 166--177
 
  []
 
@@ -580,7 +580,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--178
 File: FlowChart/FlowChart.png Graphic file (type png)
 
 <use FlowChart/FlowChart.png>
-Package pdftex.def Info: FlowChart/FlowChart.png used on input line 183.
+Package pdftex.def Info: FlowChart/FlowChart.png used on input line 182.
 (pdftex.def)             Requested size: 260.17401pt x 436.63461pt.
 
 
@@ -609,7 +609,7 @@ File: Simulation_figures/RR_P/Figure1_20k.png Graphic file (type png)
 
 <use Simulation_figures/RR_P/Figure1_20k.png>
 Package pdftex.def Info: Simulation_figures/RR_P/Figure1_20k.png used on input 
-line 371.
+line 370.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 
@@ -623,7 +623,7 @@ File: Simulation_figures/BR_BS_S/Figure1_10k.png Graphic file (type png)
 
 <use Simulation_figures/BR_BS_S/Figure1_10k.png>
 Package pdftex.def Info: Simulation_figures/BR_BS_S/Figure1_10k.png used on inp
-ut line 384.
+ut line 383.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 <Simulation_figures/BR_BS_P/Figure1_10k.png, id=103, 910.602pt x 440.847pt>
@@ -631,7 +631,7 @@ File: Simulation_figures/BR_BS_P/Figure1_10k.png Graphic file (type png)
 
 <use Simulation_figures/BR_BS_P/Figure1_10k.png>
 Package pdftex.def Info: Simulation_figures/BR_BS_P/Figure1_10k.png used on inp
-ut line 393.
+ut line 392.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [24 <./Simulation_figures/RR_P/Figure1_20k.png> <./Simulation_figures/BR_BS_S/
 Figure1_10k.png>]
@@ -640,7 +640,7 @@ File: Simulation_figures/BR_S/Figure1_30k.png Graphic file (type png)
 
 <use Simulation_figures/BR_S/Figure1_30k.png>
 Package pdftex.def Info: Simulation_figures/BR_S/Figure1_30k.png used on input 
-line 402.
+line 401.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
 
@@ -652,7 +652,7 @@ File: Simulation_figures/BR_P/Figure1_10k.png Graphic file (type png)
 
 <use Simulation_figures/BR_P/Figure1_10k.png>
 Package pdftex.def Info: Simulation_figures/BR_P/Figure1_10k.png used on input 
-line 412.
+line 411.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
  [26 <./Simulation_figures/BR_S/Figure1_30k.png> <./Simulation_figures/BR_P/Fig
 ure1_10k.png>]
@@ -767,7 +767,12 @@ Package pdftex.def Info: Simulation2_figures/GR_L1B2N2_321/Figure1_10k.png used
  on input line 505.
 (pdftex.def)             Requested size: 364.23434pt x 176.33566pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 499--508
+Underfull \hbox (badness 10000) in paragraph at lines 497--508
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--508
 
  []
 
@@ -901,7 +906,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 639--650
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 652--656
+Underfull \hbox (badness 10000) in paragraph at lines 652--658
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--658
 
  []
 
@@ -930,7 +940,7 @@ texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2
 ts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2013/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmti10.pfb>
-Output written on Thesis_TheGivingGame.pdf (45 pages, 1080111 bytes).
+Output written on Thesis_TheGivingGame.pdf (45 pages, 1080453 bytes).
 PDF statistics:
  245 PDF objects out of 1000 (max. 8388607)
  135 compressed objects within 2 object streams

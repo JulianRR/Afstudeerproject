@@ -55,7 +55,7 @@
 \contentsline {subsubsection}{BR\_S}{25}
 \contentsline {subsubsection}{BR\_P}{26}
 \contentsline {section}{\numberline {6.3}Goodwill rule}{26}
-\contentsline {subsubsection}{BS\_S}{26}
+\contentsline {subsubsection}{BS\_S}{27}
 \contentsline {subsubsection}{BS\_P}{27}
 \contentsline {subsubsection}{GR\_L1B1N1}{27}
 \contentsline {subsubsection}{GR\_L1B1N2}{28}
