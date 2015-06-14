@@ -2,14 +2,14 @@
 \contentsline {section}{\numberline {1.1}Contribution}{5}
 \contentsline {chapter}{\numberline {2}Theoretical background}{7}
 \contentsline {section}{\numberline {2.1}The economic model}{7}
-\contentsline {section}{\numberline {2.2}Mathematical background}{8}
-\contentsline {section}{\numberline {2.3}Research questions}{9}
+\contentsline {subsection}{\numberline {2.1.1}Mathematical background}{8}
+\contentsline {section}{\numberline {2.2}Research questions}{10}
 \contentsline {chapter}{\numberline {3}Design}{11}
-\contentsline {section}{\numberline {3.1}Paramaters}{11}
+\contentsline {section}{\numberline {3.1}Paramaters}{12}
 \contentsline {section}{\numberline {3.2}Selection rules}{12}
 \contentsline {subsection}{\numberline {3.2.1}Random rule}{12}
 \contentsline {subsection}{\numberline {3.2.2}Balance rule}{12}
-\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{12}
+\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{13}
 \contentsline {section}{\numberline {3.3}Simulation model}{13}
 \contentsline {chapter}{\numberline {4}Implementation}{15}
 \contentsline {section}{\numberline {4.1}Back-end}{15}
@@ -29,14 +29,14 @@
 \contentsline {subsubsection}{Basic scenario 1, sustainable (BS\_S):}{19}
 \contentsline {subsubsection}{Basic scenario 2, perishable (BS\_P):}{19}
 \contentsline {section}{\numberline {5.2}Random rule}{19}
-\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{20}
+\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{19}
 \contentsline {subsubsection}{Scenario 2, perishable (RR\_P):}{20}
 \contentsline {subsubsection}{Hypothesis}{20}
 \contentsline {section}{\numberline {5.3}Balance rule}{20}
 \contentsline {subsubsection}{Scenario 1, sustainable (BR\_S):}{20}
 \contentsline {subsubsection}{Scenario 2, perishable (BR\_P):}{20}
-\contentsline {subsubsection}{Hypothesis}{21}
-\contentsline {section}{\numberline {5.4}Goodwill rule}{21}
+\contentsline {subsubsection}{Hypothesis}{20}
+\contentsline {section}{\numberline {5.4}Goodwill rule}{20}
 \contentsline {subsubsection}{Like factors}{21}
 \contentsline {subsubsection}{Balances}{21}
 \contentsline {subsubsection}{Nominal values}{21}
@@ -51,24 +51,23 @@
 \contentsline {section}{\numberline {6.2}Balance rule}{24}
 \contentsline {subsection}{\numberline {6.2.1}Results}{24}
 \contentsline {subsubsection}{BS\_S}{24}
-\contentsline {subsubsection}{BS\_P}{24}
+\contentsline {subsubsection}{BS\_P}{25}
 \contentsline {subsubsection}{BR\_S}{25}
-\contentsline {subsubsection}{BR\_P}{25}
-\contentsline {section}{\numberline {6.3}Goodwill rule}{25}
-\contentsline {subsection}{\numberline {6.3.1}Results}{26}
+\contentsline {subsubsection}{BR\_P}{26}
+\contentsline {section}{\numberline {6.3}Goodwill rule}{26}
 \contentsline {subsubsection}{BS\_S}{26}
-\contentsline {subsubsection}{BS\_P}{26}
-\contentsline {subsubsection}{GR\_L1B1N1}{26}
-\contentsline {subsubsection}{GR\_L1B1N2}{27}
-\contentsline {subsubsection}{GR\_L2B1N1}{27}
-\contentsline {subsubsection}{GR\_L2B1N2}{27}
-\contentsline {subsubsection}{GR\_L1B2N1}{28}
-\contentsline {subsubsection}{GR\_L1B2N2}{30}
-\contentsline {subsubsection}{GR\_L2B2N1}{31}
-\contentsline {subsubsection}{GR\_L2B2N2}{31}
-\contentsline {section}{\numberline {6.4}Reconsideration of the yield curve}{31}
-\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{35}
-\contentsline {section}{\numberline {7.1}Further research}{35}
-\contentsline {chapter}{\numberline {8}Appendix A}{37}
-\contentsline {section}{\numberline {8.1}Simulator manual}{37}
-\contentsline {section}{\numberline {8.2}Code Documentation}{37}
+\contentsline {subsubsection}{BS\_P}{27}
+\contentsline {subsubsection}{GR\_L1B1N1}{27}
+\contentsline {subsubsection}{GR\_L1B1N2}{28}
+\contentsline {subsubsection}{GR\_L2B1N1}{28}
+\contentsline {subsubsection}{GR\_L2B1N2}{28}
+\contentsline {subsubsection}{GR\_L1B2N1}{29}
+\contentsline {subsubsection}{GR\_L1B2N2}{32}
+\contentsline {subsubsection}{GR\_L2B2N1}{33}
+\contentsline {subsubsection}{GR\_L2B2N2}{33}
+\contentsline {section}{\numberline {6.4}Reconsideration of the yield curve}{33}
+\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{41}
+\contentsline {section}{\numberline {7.1}Further research}{41}
+\contentsline {chapter}{\numberline {8}Appendix A}{43}
+\contentsline {section}{\numberline {8.1}Simulator manual}{43}
+\contentsline {section}{\numberline {8.2}Code Documentation}{43}
