@@ -7,12 +7,13 @@
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{cite}
 
 
 % Title Page
 \title{The Giving Game}
 \author{Julian Ruger}
-\supervisors{Peter Weijland (UvA)}
+\supervisors{W.P. Weijland (UvA)}
 \signedby{}
 
 
@@ -50,16 +51,16 @@ Giving occurs in multiple ways:
 \end{itemize}
 When giving the value of the good is perceived differently by everyone. This means that when two goods are traded both goods do not necessarily need to be of the same value. To express the value of a transaction one may assume the existence of social credit. Social credit is an indication of the relationship between two people. Every individual keeps track of their own social credit balance with every other person and values a transaction in the light of this credit balance.
 
-Based on this social credit people can have multiple reasons to give away something, but giving is almost always with the intention to get something in return. As shown in the article ‘Giving with Impure Altruism: Applications to Charity and Ricardian Equivalence’ even giving to charity is often not completely selfless. When giving out of kindness or to help someone else most people still get a good feeling. This feeling is called the ‘warm glow’. This shows that giving can still be with the intention to get something in return even if it seems to be out of kindness. This also shows that what is given in return does not have to be of the same value and that some people value giving to charity more than others, because of their perception of what they get in return.
+Based on this social credit people can have multiple reasons to give away something, but giving is almost always with the intention to get something in return. As shown in the article ‘Giving with Impure Altruism: Applications to Charity and Ricardian Equivalence’\cite{andreoni1989giving} even giving to charity is often not completely selfless. When giving out of kindness or to help someone else most people still get a good feeling. This feeling is called the ‘warm glow’\cite{andreoni1989giving}. This shows that giving can still be with the intention to get something in return even if it seems to be out of kindness. This also shows that what is given in return does not have to be of the same value and that some people value giving to charity more than others, because of their perception of what they get in return.
 
 In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or group of persons to who they will give to.
 
-The behaviour of people in an economy of giving can be a lot more complex than in an economy where money is used as a medium of exchange. With money it is easy to express a value of a transaction and almost everyone perceives this value the same. In fact, the use of a Money of Exchange [REF] guarantees that the social credit balance between any two participants in the transaction remains neutral. In a gift economy the transaction value is based upon multiple factors and can be diff erent for every person. And every transaction creates a shift in the mutual social credit balance between the two agents. This illustrates the increased complexity of a gift economy relative to the monetary economy as we know it.
+The behaviour of people in an economy of giving can be a lot more complex than in an economy where money is used as a medium of exchange. With money it is easy to express a value of a transaction and almost everyone perceives this value the same. In fact, the use of a Money of Exchange\cite{weijland2014mathematical} guarantees that the social credit balance between any two participants in the transaction remains neutral. In a gift economy the transaction value is based upon multiple factors and can be diff erent for every person. And every transaction creates a shift in the mutual social credit balance between the two agents. This illustrates the increased complexity of a gift economy relative to the monetary economy as we know it.
 
 
 
 \section{The economic model}
-In the ‘ Kiyotaki-Wright Model’ an environment with three agents and three goods is simulated. Each agent produces one good and consumes another. This article shows the behaviour of the agents when they want to trade their good for the good they need to consume. This simulation used an economic environment without money, but only focused on scenarios where agents give away their good if they get a good in return which they can use. 
+In the ‘ Kiyotaki-Wright Model’\cite{moranmoney} an environment with three agents and three goods is simulated. Each agent produces one good and consumes another. This article shows the behaviour of the agents when they want to trade their good for the good they need to consume. This simulation used an economic environment without money, but only focused on scenarios where agents give away their good if they get a good in return which they can use. 
 \\
 \\
 W.P. Weijland has created a similar model called ‘The Giving Game’, but instead focuses on more aspects of giving. A giving game is a game to simulate giving in real life. A giving game comes in many variants each of which aim to simulate certain aspects of real economic life. In this section the basic rules of a giving game are explained as well as the variant used for this thesis.
@@ -189,7 +190,7 @@ For the previously explained giving game a simulator will be created that can si
 
 
 \chapter{Implementation}
-In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simualte multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with \textit{Python} and uses multiple \textit{Python}modules,  packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required \textit{Python} packes and frameworks are installed. 
+In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simualte multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with \textit{Python} and uses multiple \textit{Python} modules,  packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required \textit{Python} packes and frameworks are installed. 
 
 \section{Back-end}
 The back end consists of multiple compononents which together create an environment that simulates an giving economy where agents give and receive goods. This section will explain these components briefly and how they work together. 
@@ -226,10 +227,10 @@ The simulation is run by first creating the environment. First the agents and th
 
 
 \section{Front-end}
-The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation. For the explanation of the use of the interface the use should consult the user manual which can be found in appendix A.
+The front end provides the interface between the user and the back end. With this interface the user is able to put data into the simulation to simulate different scenarios. The interface is able to visualize the responses of the back end to analyse the resulting data during the simulation. The front end is written in \textit{Python} using the \textit{PyQt4} framework. Graphs are drawn using \textit{matplotlib} and the visualization of the transactions as shown in figure 4.2 is written using the \textit{VisPy} framework. For the explanation of the use of the interface the use should consult the user manual which can be found in appendix A.
 
 \subsubsection{Input}
-The user is able to input the following parameters:
+The user is able to set the following parameters:
 
 \begin{description}
   \item[N:] An integer number that defines the number of agents.
@@ -237,12 +238,33 @@ The user is able to input the following parameters:
   \item[Perish period:] An integer number that can be set for every good.
   \item[Production delay:] An integer number that can be set for every good.
  \item[Selection rule:] The user can choose between the given selection rules (random rule, balance rule and goodwill rule). 
-  \item[Nominal value:] The user is able to choose if every agent perceives the value of a good differently or not. If the user wants to have a different value of the good for every agent the user can add a \textit{xls} or a\textit{xlsx} file with the nominal values as follows:
-  \item[Like factor:] The user is able to choose between setting like factors by hand or to randomly create the like factors. If the user wants to add predefined likefactors the user can add a \textit{xls} or a\textit{xlsx} file with the like factors as follows:
- \item[Balance:] The user is able to set the balance at the start of the simulation at 0 or to set different balances for every agent pair by adding a  \textit{xls} or a\textit{xlsx} file as follows:
-
-Because of how the account balance is defined the user only has to fill half of a matrix.
+  \item[Nominal value:] The user is able to choose if every agent perceives the value of a good differently or not. If the user wants to have a different value of the good for every agent the user can add a \textit{xls} or a\textit{xlsx} file with the nominal values as shown in figure 4.1.
+  \item[Like factor:] The user is able to choose between setting like factors by hand or to randomly create the like factors. If the user wants to add predefined likefactors the user can add a \textit{xls} or a\textit{xlsx} file with the like factors as shown in figure 4.2.
+ \item[Balance:] The user is able to set the balance at the start of the simulation at 0 or to set different balances for every agent pair by adding a  \textit{xls} or a\textit{xlsx} file as shown in figure 4.3. Because of how the account balance is defined the user only has to fill half of a matrix.
 \end{description}
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{Matrices/Nominal_values}
+  \captionof{figure}{Matrix format for the nominal values}
+\end{minipage}%
+\begin{minipage}{.6\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{Matrices/Like_factors}
+  \captionof{figure}{Matrix format for the like factors.}
+  \label{fig:test2}
+\end{minipage}
+\begin{minipage}{.6\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{Matrices/Account_balance}
+  \captionof{figure}{Matrix format for the account balances.}
+  \label{fig:test3}
+\end{minipage}
+\end{figure}
+
+
 During the simulation the user is able to adjust the following variables:
 
 \begin{description}
@@ -250,28 +272,29 @@ During the simulation the user is able to adjust the following variables:
   \item[Reset community percentage:] The user is able to reset the number transactions that has been executed and the number of times each agent has contributed to a transaction. This allows the user to see if from a certain point in the simulation the transactions only take palce within a subgroup.
   \item[Delay:] The user is able to set a delay which increases the time between each transactions. The user can set a maximum delay of 1 second. 
   \item[Pause:] The user is able to pause the simulation at any time. The simulation will continue once the user chooses so.
-
 \end{description}
+
+
 \subsubsection{Output}
 The output data is visualized so that the user is able to analyse and get results without doing any calculations. The simulator is able to give the following output:
 \begin{itemize}
   \item Show the amount of goods given and received for each agent.
   \item Show the yield curve between every agent pair.
   \item Show the amount of transactions
-  \item Show percentages of how many times a certain good has been traded by an agent (Figure 4.1).
-  \item Show the visualization of the course of the transactions with a color indication that shows the percentage of transactions each agent participated in (Figure 4.2). 
-  \item Show every transaction, production and delay in production (Figure 4.3).
+  \item Show percentages of how many times a certain good has been traded by an agent (Figure 4.4).
+  \item Show the visualization of the course of the transactions with a color indication that shows the percentage of transactions each agent participated in (Figure 4.5). 
+  \item Show every transaction, production and delay in production (Figure 4.6).
   \item Show the community percentage, the percentage of transactions that take place in a subgroup with the set subgroup size.
 \end{itemize}
 
 The output is updated after every transaction. All the data can be saved and used in the future for another simulation.
 
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{Simulation2_figures/Distribution}
   \caption{Transaction percentage of each good by each agent}
 \end{figure}
-
+\clearpage
 \begin{figure}
   \centering
   \includegraphics[scale=0.4]{Simulation2_figures/Visualization}
@@ -361,6 +384,7 @@ For the goodwill rule all parameters can affect the results. The following param
 \end{description} 
 The combination of these parameters will form different scenarios. Every combination will be tested unless previous experiments show that one of the parameters does not affect the result. The scenarios are based on the idea of having a population where people have different relationships with each other and value goods differently. That’s why the population is split into 3 groups to have groups that are completely different from each other.The following scenarios will be used during the experiments.
 The first scenarios are scenarios where the balance is zero.
+
 \begin{description}
 \item[GR\_L1B1N1], Goodwill rule using L1, B1 and N1 as input.
 \item[GR\_L1B1N2], Goodwill rule using L1, B1 and N2 as input.
@@ -681,17 +705,73 @@ The results also show that the emergence of subgroups are mostly affected by the
 The balance rul showed a partial stabilization of the transactions when perishable goods were used with a perish period of 1. Experiments with the goodwill rule did not lead to a repeating sequence of transactions. Even when communties larger than two agents arose some transactions within these communties were still random, therefore no repeating sequence of transactions took place.
 
 \section{Further research}
-The experiments of the goodwill rule have showed a basic real life environment where people invest and all agents try to maximize profit by giving more to agents who are liked than to agents who are not liked. The giving game used for the experiments and the related results do not cover everthing of a economy of giving. Further research could use more varying input for the simulations or even add parameters to make the simulation more realistic so human behaviour can be simulated more precise. A possible variant on the giving game used in this thesis could for example be that agents are able to hold on to a good. This is leads to a similar simulation as used for the 'Kiyotaki-Wright Model' [REF]. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods, perishable goods for example, would not be able to be stored forever. The time an agent holds on to a good is also a parameter that can influence the choice for the transaction.
+The experiments of the goodwill rule have showed a basic real life environment where people invest and all agents try to maximize profit by giving more to agents who are liked than to agents who are not liked. The giving game used for the experiments and the related results do not cover everthing of a economy of giving. Further research could use more varying input for the simulations or even add parameters to make the simulation more realistic so human behaviour can be simulated more precise. A possible variant on the giving game used in this thesis could for example be that agents are able to hold on to a good. This is leads to a similar simulation as used for the 'Kiyotaki-Wright Model'\cite{moranmoney}. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods, perishable goods for example, would not be able to be stored forever. The time an agent holds on to a good is also a parameter that can influence the choice for the transaction.
 \\
 \\
 The already revised yield curve can also be further tested or improved. This thesis has used a simplified version of a yield curve. Different calculations of the yield could lead to non-linear yield curves. \\
 \\
 Lastly, to the created simulation of the giving game used more selection rules can be added that use more complex algorithms to select an agent. This can lead to a more real environment. Further information about extending the created simulation can be found in appendix A.
 
-\chapter{Appendix A}
+\bibliography{references}
+\bibliographystyle{plain}
 
-\section{Simulator manual}
+
+\appendix
+\chapter{Simulator manual}
+In this appendix all information about running the simulator will be discussed.
+
+\section{Dpendencies}
+In order to run the simulator several dependecies have to be installed on the system. The following has to be installed:
+\begin{itemize}
+\item Python3.3+
+\item Numpy
+\item python-matplotlib
+\item python-openpyxl
+\item VisPy
+\item PyQt4
+\end{itemize}
+
+\section{Running the simulator}
+The simulator can be started by using the \textit{python giving\_game\_simulator.py} command from the \textit{Simulator} folder.
+
+\section{Usage}
+The input interface is as shown in figure A.1.
+\begin{enumerate}
+\item Choose the number of agents for the simulation
+\item Choose the number of goods for the simulation
+\item Choose between perishable goods or sustainable goods. Default values are 0, meaning the good is a sustainable good.
+\item Add/remove a xls or xlsx file for the like factors. Default like factors are -0.5.
+\item Add/remove a xls or xlsx file for the starting account balances. Default account balance is 0 for every agent.
+\item Add/remove a xls or xlsx file for the nominal values. Default nominal value is 1.
+\item Choose a selection rule. Default is the random rule.
+\item Choose between executing the transaction parallel or one by one.
+\item Start the simulation. Gives an error when parameters are missing or wrong parameters are given.
+\end{enumerate}
+
+The output interface is as shown in figure A.2.
+\begin{enumerate}
+\item Choose an agent. A window opens shows how much the chosen agent has given and received.
+\item Choose 2 agents. The yield curve is shown for between both agents.
+\item Choose the subgroup size with the slider. Choose a good to calculate what percentage of the total transaction of the selected good are within a subgroup of the set size. The 'reset percentage' button allows the user to reset the number of transactions that has been executed and the number of times each agent has contributed to a transaction. This allows the user to see if from a certain point in the simulation the transactions only take palce within a subgroup of the set size.
+\item Shows all the previous executed transactions.
+\item Total executed transactions are shown. The user can pause and start the simulation or set a delay between each transaction with the slider.
+\item Choose to show the visualization of the transactions or show the transaction percentage of each good for each agent.
+\item The window where the visualization of the transacitons or the \textit{community percentage} will be shown.
+\end{enumerate}
 
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{Manual/Input}
+  \caption{Input interface for the simulation program.}
+\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{Manual/Output}
+  \caption{Output interface for the simulation program.}
+\end{figure}
+
+\section{Extending the simulation program}
+Selection rules can be added by added a python functions for the selection rule to \textit{Selection\_rules.py} in the folder \textit{Simulator}. To allow the user to choose the added selection rule the interface of \textit{GUI\_Input.py} needs to be changed and the selection rule needs to be added to \textit{Environment.py}.
 
 \end{document}
