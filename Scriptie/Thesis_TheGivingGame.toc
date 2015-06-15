@@ -69,7 +69,7 @@
 \contentsline {chapter}{\numberline {7}Conclusions and Discussions}{43}
 \contentsline {section}{\numberline {7.1}Further research}{43}
 \contentsline {chapter}{\numberline {A}Simulator manual}{47}
-\contentsline {section}{\numberline {A.1}Dpendencies}{47}
+\contentsline {section}{\numberline {A.1}Dependencies}{47}
 \contentsline {section}{\numberline {A.2}Running the simulator}{47}
 \contentsline {section}{\numberline {A.3}Usage}{47}
 \contentsline {section}{\numberline {A.4}Extending the simulation program}{48}
