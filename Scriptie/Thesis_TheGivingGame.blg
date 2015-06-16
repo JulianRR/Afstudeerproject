@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/W32TeX)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Thesis_TheGivingGame.aux
+The style file: plain.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "ripeanu2006gifting"
+Warning--I didn't find a database entry for "poort2014baywatch"
+Warning--empty journal in moranmoney
+Warning--empty year in moranmoney
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            522 strings with 4608 characters,
+and the built_in function-call counts, 1251 in all, are:
+= -- 126
+> -- 45
+< -- 1
++ -- 19
+- -- 14
+* -- 77
+:= -- 209
+add.period$ -- 11
+call.type$ -- 4
+change.case$ -- 19
+chr.to.int$ -- 0
+cite$ -- 6
+duplicate$ -- 53
+empty$ -- 97
+format.name$ -- 14
+if$ -- 260
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 22
+num.names$ -- 8
+pop$ -- 21
+preamble$ -- 1
+purify$ -- 15
+quote$ -- 0
+skip$ -- 43
+stack$ -- 0
+substring$ -- 86
+swap$ -- 14
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 2
+while$ -- 13
+width$ -- 5
+write$ -- 41
+(There were 4 warnings)

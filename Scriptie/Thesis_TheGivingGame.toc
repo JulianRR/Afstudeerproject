@@ -1,75 +1,79 @@
 \contentsline {chapter}{\numberline {1}Introduction}{5}
 \contentsline {section}{\numberline {1.1}Contribution}{5}
 \contentsline {chapter}{\numberline {2}Theoretical background}{7}
-\contentsline {section}{\numberline {2.1}The economic model}{7}
+\contentsline {section}{\numberline {2.1}The economic model}{8}
 \contentsline {subsection}{\numberline {2.1.1}Mathematical background}{8}
-\contentsline {section}{\numberline {2.2}Research questions}{10}
-\contentsline {chapter}{\numberline {3}Design}{11}
-\contentsline {section}{\numberline {3.1}Paramaters}{12}
-\contentsline {section}{\numberline {3.2}Selection rules}{12}
-\contentsline {subsection}{\numberline {3.2.1}Random rule}{12}
-\contentsline {subsection}{\numberline {3.2.2}Balance rule}{12}
-\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{13}
-\contentsline {section}{\numberline {3.3}Simulation model}{13}
-\contentsline {chapter}{\numberline {4}Implementation}{15}
-\contentsline {section}{\numberline {4.1}Back-end}{15}
-\contentsline {subsection}{\numberline {4.1.1}Agents}{15}
-\contentsline {subsection}{\numberline {4.1.2}Goods}{15}
-\contentsline {subsection}{\numberline {4.1.3}Selection rules}{16}
-\contentsline {subsubsection}{Random rule}{16}
-\contentsline {subsubsection}{Balance rule}{16}
-\contentsline {subsubsection}{Goodwill rule}{16}
-\contentsline {subsection}{\numberline {4.1.4}Environment}{16}
-\contentsline {subsection}{\numberline {4.1.5}The Simulation}{16}
-\contentsline {section}{\numberline {4.2}Front-end}{16}
-\contentsline {subsubsection}{Input}{17}
-\contentsline {subsubsection}{Output}{18}
-\contentsline {chapter}{\numberline {5}Scenarios}{21}
-\contentsline {section}{\numberline {5.1}Basic Scenarios}{21}
-\contentsline {subsubsection}{Basic scenario 1, sustainable (BS\_S):}{21}
-\contentsline {subsubsection}{Basic scenario 2, perishable (BS\_P):}{21}
-\contentsline {section}{\numberline {5.2}Random rule}{21}
-\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{21}
-\contentsline {subsubsection}{Scenario 2, perishable (RR\_P):}{22}
-\contentsline {subsubsection}{Hypothesis}{22}
-\contentsline {section}{\numberline {5.3}Balance rule}{22}
-\contentsline {subsubsection}{Scenario 1, sustainable (BR\_S):}{22}
-\contentsline {subsubsection}{Scenario 2, perishable (BR\_P):}{22}
-\contentsline {subsubsection}{Hypothesis}{22}
-\contentsline {section}{\numberline {5.4}Goodwill rule}{22}
-\contentsline {subsubsection}{Like factors}{23}
-\contentsline {subsubsection}{Balances}{23}
-\contentsline {subsubsection}{Nominal values}{23}
-\contentsline {subsubsection}{Hypothesis}{23}
-\contentsline {chapter}{\numberline {6}Results}{25}
-\contentsline {section}{\numberline {6.1}Random rule}{25}
-\contentsline {subsection}{\numberline {6.1.1}Results}{25}
-\contentsline {subsubsection}{BS\_S}{25}
-\contentsline {subsubsection}{BS\_P}{25}
-\contentsline {subsubsection}{RR\_S}{25}
-\contentsline {subsubsection}{RR\_P}{25}
-\contentsline {section}{\numberline {6.2}Balance rule}{26}
-\contentsline {subsection}{\numberline {6.2.1}Results}{26}
-\contentsline {subsubsection}{BS\_S}{26}
+\contentsline {section}{\numberline {2.2}Research questions}{11}
+\contentsline {section}{\numberline {2.3}Method}{11}
+\contentsline {chapter}{\numberline {3}Design}{13}
+\contentsline {section}{\numberline {3.1}Paramaters}{14}
+\contentsline {section}{\numberline {3.2}Selection rules}{14}
+\contentsline {subsection}{\numberline {3.2.1}Random rule}{14}
+\contentsline {subsection}{\numberline {3.2.2}Balance rule}{14}
+\contentsline {subsection}{\numberline {3.2.3}Goodwill rule}{15}
+\contentsline {section}{\numberline {3.3}Simulation model}{15}
+\contentsline {chapter}{\numberline {4}Implementation}{17}
+\contentsline {section}{\numberline {4.1}Back-end}{17}
+\contentsline {subsection}{\numberline {4.1.1}Agents}{17}
+\contentsline {subsection}{\numberline {4.1.2}Goods}{17}
+\contentsline {subsection}{\numberline {4.1.3}Selection rules}{18}
+\contentsline {subsubsection}{Random rule}{18}
+\contentsline {subsubsection}{Balance rule}{18}
+\contentsline {subsubsection}{Goodwill rule}{18}
+\contentsline {subsection}{\numberline {4.1.4}Environment}{18}
+\contentsline {subsection}{\numberline {4.1.5}The Simulation}{18}
+\contentsline {section}{\numberline {4.2}Front-end}{18}
+\contentsline {subsubsection}{Input}{19}
+\contentsline {subsubsection}{Output}{20}
+\contentsline {chapter}{\numberline {5}Scenarios}{23}
+\contentsline {section}{\numberline {5.1}Basic Scenarios}{23}
+\contentsline {subsubsection}{Basic scenario 1, sustainable (BS\_S):}{23}
+\contentsline {subsubsection}{Basic scenario 2, perishable (BS\_P):}{23}
+\contentsline {section}{\numberline {5.2}Random rule}{23}
+\contentsline {subsubsection}{Scenario 1, sustainable (RR\_S):}{24}
+\contentsline {subsubsection}{Scenario 2, perishable (RR\_P):}{24}
+\contentsline {subsubsection}{Hypothesis}{24}
+\contentsline {section}{\numberline {5.3}Balance rule}{24}
+\contentsline {subsubsection}{Scenario 1, sustainable (BR\_S):}{24}
+\contentsline {subsubsection}{Scenario 2, perishable (BR\_P):}{24}
+\contentsline {subsubsection}{Hypothesis}{24}
+\contentsline {section}{\numberline {5.4}Goodwill rule}{25}
+\contentsline {subsubsection}{Like factors}{25}
+\contentsline {subsubsection}{Balances}{25}
+\contentsline {subsubsection}{Nominal values}{25}
+\contentsline {subsubsection}{Hypothesis}{26}
+\contentsline {chapter}{\numberline {6}Results}{27}
+\contentsline {section}{\numberline {6.1}Random rule}{27}
+\contentsline {subsection}{\numberline {6.1.1}Results}{27}
+\contentsline {subsubsection}{BS\_S}{27}
 \contentsline {subsubsection}{BS\_P}{27}
-\contentsline {subsubsection}{BR\_S}{27}
-\contentsline {subsubsection}{BR\_P}{28}
-\contentsline {section}{\numberline {6.3}Goodwill rule}{28}
-\contentsline {subsubsection}{BS\_S}{29}
+\contentsline {subsubsection}{RR\_S}{27}
+\contentsline {subsubsection}{RR\_P}{27}
+\contentsline {subsection}{\numberline {6.1.2}Recap}{28}
+\contentsline {section}{\numberline {6.2}Balance rule}{28}
+\contentsline {subsection}{\numberline {6.2.1}Results}{28}
+\contentsline {subsubsection}{BS\_S}{28}
 \contentsline {subsubsection}{BS\_P}{29}
-\contentsline {subsubsection}{GR\_L1B1N1}{29}
-\contentsline {subsubsection}{GR\_L1B1N2}{30}
-\contentsline {subsubsection}{GR\_L2B1N1}{30}
-\contentsline {subsubsection}{GR\_L2B1N2}{30}
-\contentsline {subsubsection}{GR\_L1B2N1}{31}
-\contentsline {subsubsection}{GR\_L1B2N2}{34}
-\contentsline {subsubsection}{GR\_L2B2N1}{35}
-\contentsline {subsubsection}{GR\_L2B2N2}{35}
-\contentsline {section}{\numberline {6.4}Reconsideration of the yield curve}{35}
-\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{43}
-\contentsline {section}{\numberline {7.1}Further research}{43}
-\contentsline {chapter}{\numberline {A}Simulator manual}{47}
-\contentsline {section}{\numberline {A.1}Dependencies}{47}
-\contentsline {section}{\numberline {A.2}Running the simulator}{47}
-\contentsline {section}{\numberline {A.3}Usage}{47}
-\contentsline {section}{\numberline {A.4}Extending the simulation program}{48}
+\contentsline {subsubsection}{BR\_S}{29}
+\contentsline {subsubsection}{BR\_P}{30}
+\contentsline {subsection}{\numberline {6.2.2}Recap}{30}
+\contentsline {section}{\numberline {6.3}Goodwill rule}{30}
+\contentsline {subsubsection}{BS\_S}{31}
+\contentsline {subsubsection}{BS\_P}{31}
+\contentsline {subsubsection}{GR\_L1B1N1}{31}
+\contentsline {subsubsection}{GR\_L1B1N2}{32}
+\contentsline {subsubsection}{GR\_L2B1N1}{32}
+\contentsline {subsubsection}{GR\_L2B1N2}{32}
+\contentsline {subsubsection}{GR\_L1B2N1}{33}
+\contentsline {subsubsection}{GR\_L1B2N2}{36}
+\contentsline {subsubsection}{GR\_L2B2N1}{37}
+\contentsline {subsubsection}{GR\_L2B2N2}{37}
+\contentsline {subsection}{\numberline {6.3.1}Recap}{37}
+\contentsline {section}{\numberline {6.4}Reconsideration of the yield curve}{37}
+\contentsline {chapter}{\numberline {7}Conclusions and Discussions}{45}
+\contentsline {section}{\numberline {7.1}Further research}{45}
+\contentsline {chapter}{\numberline {A}Simulator manual}{49}
+\contentsline {section}{\numberline {A.1}Dependencies}{49}
+\contentsline {section}{\numberline {A.2}Running the simulator}{49}
+\contentsline {section}{\numberline {A.3}Usage}{49}
+\contentsline {section}{\numberline {A.4}Extending the simulation program}{51}

@@ -19,7 +19,6 @@
 
 \begin{document}
 \maketitle
-
 \begin{abstract}
 This thesis shows a model used to simulate an economic environment where economic transactions are in the absence of a currency to express its value. Within this environment goods are given away with expectation of getting something in return in the future. The model used will provide results that show different behaviour of people within this environment under certain conditions.
 \end{abstract}
@@ -51,11 +50,11 @@ Giving occurs in multiple ways:
 \end{itemize}
 When giving the value of the good is perceived differently by everyone. This means that when two goods are traded both goods do not necessarily need to be of the same value. To express the value of a transaction one may assume the existence of social credit. Social credit is an indication of the relationship between two people. Every individual keeps track of their own social credit balance with every other person and values a transaction in the light of this credit balance.
 
-Based on this social credit people can have multiple reasons to give away something, but giving is almost always with the intention to get something in return. As shown in the article ‘Giving with Impure Altruism: Applications to Charity and Ricardian Equivalence’\cite{andreoni1989giving} even giving to charity is often not completely selfless. When giving out of kindness or to help someone else most people still get a good feeling. This feeling is called the ‘warm glow’\cite{andreoni1989giving}. This shows that giving can still be with the intention to get something in return even if it seems to be out of kindness. This also shows that what is given in return does not have to be of the same value and that some people value giving to charity more than others, because of their perception of what they get in return.
+Based on this social credit people can have multiple reasons to give away something, but giving is almost always with the intention to get something in return. As shown in the article ‘Giving with Impure Altruism: Applications to Charity and Ricardian Equivalence’\cite{andreoni1989giving} even giving to charity is often not completely selfless. When giving out of kindness or to help someone else most people still get a good feeling. This feeling is called the ‘warm glow’\cite{andreoni1989giving}. This shows that giving can still be with the intention to get something in return even if it seems to be out of kindness. This also shows that what is given in return does not have to be of the same value and that some people value giving to charity more than others, because of their perception of what they get in return. In the book 'Essai sur le don' by Marcel Mauss it is stated that many cultures and societies already use or have used giving and receiving as their main economic transactions. Giving is seen as a reinforcement for the social cohesion but also is rewarded with respect and prestige. This again shows that even within an economy of giving people still look for some kind of profit. In today's world economies of giving also come more naturally. File-sharing systems like BitTorrent are a great example for this. Rather than downloading (receiving) a file from a single source server BitTorrent allows user to while downloading the file also upload (giving) already downloaded pieces of this file. This moves the burden of the bandwith consumption from the original source to all the users who are downloading the file. This leads to a faster and easier acces to the original file.\cite{ripeanu2006gifting} Even though systems like this are illegal, preventing the use of these systems does not seem to decrease the gifting communities.\cite{poort2014baywatch}
 
-In real life people often seem to prefer to give to friends and family rather than to strangers. Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or group of persons to who they will give to.
+In real life people often seem to prefer to give to friends, family or someone who is trusted\cite{josang2007survey} rather than to strangers.Thus they value a transaction with them more than with others. Under certain conditions people will assign a preference to a person or group of persons to who they will give to. The behaviour of people in an economy of giving can be a lot more complex than in an economy where money is used as a medium of exchange. With money it is easy to express a value of a transaction and almost everyone perceives this value the same. In fact, the use of a Money of Exchange\cite{weijland2014mathematical} guarantees that the social credit balance between any two participants in the transaction remains neutral. In a gift economy the transaction value is based upon multiple factors and can be different for every person. And every transaction creates a shift in the mutual social credit balance between the two agents. This illustrates the increased complexity of a gift economy relative to the monetary economy as we know it.
 
-The behaviour of people in an economy of giving can be a lot more complex than in an economy where money is used as a medium of exchange. With money it is easy to express a value of a transaction and almost everyone perceives this value the same. In fact, the use of a Money of Exchange\cite{weijland2014mathematical} guarantees that the social credit balance between any two participants in the transaction remains neutral. In a gift economy the transaction value is based upon multiple factors and can be different for every person. And every transaction creates a shift in the mutual social credit balance between the two agents. This illustrates the increased complexity of a gift economy relative to the monetary economy as we know it.
+
 
 
 
@@ -97,7 +96,7 @@ Here \textit{Y} is the yield, \textit{a} the like factor, \textit{X} is the acco
 \caption{Yield curve, yield perceived by P.}
 \end{figure}
 \\
-From the yield curve shown in figure 2.1 it is clear that when the account balance of P with Q gets higher the yield gets lower, but will never fall below 0. Once a high enough account balance would be reached that would result in a negative yield, the yield is set to 0. The yield curve is not always a linear function. Different ways of calculating the yield can lead to different yield curves. This thesis makes use of a simplified version of the yield curve.
+From the yield curve shown in figure 2.1 it is clear that when the account balance of P with Q gets higher the yield gets lower, but will never fall below 0. Once a high enough account balance would be reached that would result in a negative yield, the yield is set to 0. The yield curve is not always a linear function. Different ways of calculating the yield can lead to different yield curves. This thesis makes use of a simplified version of the yield curve where a linear function is used.
 \\
 \\
 The yield will be important to determine who will receive a good next. If P would for example want to maximize its profit P would only want to give away a good to someone generating the highest yield. Agents who are in debt with P and are not likely to pay off their debt are of less value to P. It would be a bad investment if P would give to these agents.
@@ -123,13 +122,20 @@ Another possible behaviour that can be seen in an environment with an economy of
 \\
 \textit{In a Giving Game simulation will we see a repeating sequence of transactions or will the transaction sequence look random?}
 
+To be able to answer these research questions the method explained in the next section will be used.
+
+\section{Method}
+To research the behaviour of agents within an economy of giving a simulation program will be build to simulate this behaviour. The simulation program will use the giving game mentioned in the previous sections for the simulations. The giving game for the simulations is further explained in the next chapter. The simulator uses three different selection rules. For every transaction the selection rule decides which agent will receive a good. Multiple simulations will be run to examine the behaviour when these selection rules are used. Different scenarios will therefore be developed for each selection rule where each scenario uses different parameters, for example different goods or different account balances at the start of the simulation. To be certain that the simulation program runs properly very basic scenarios will be developed to test this. The developed scenarios are explained in chapter 5. 
+
+A simulation program has been chosen instead of a theoretical research, because it allows a better representation of a real life giving environment. With the simulation program multiple different scenarios can be tested more easily and eventually lead to a wide variety of results that can be used to understand and explain the behaviour of people within a giving environment.
+
 
 \chapter{Design}
 For this thesis the giving environment consists of a fixed amount of agents and a fixed amount of goods. For every simulation the number of agents and number of goods can be changed, but during the simulation no agents or goods are added or removed. Every agent keeps track of their own account balance and transaction values in relation to every other agent. The agents don’t know anything about each other, they operate completely independent.
 
 There are two types of goods, ‘sustainable’ and ‘perishable’ goods. ‘Sustainable’ goods are goods that will exist for eternity. ‘Perishable’ goods are goods that perish after a certain amount of transactions. Every ‘perishable’ good has a producer. The producer is also an agent in the environment so the producer also participates in transactions of other goods. The producer reproduces its ‘perishable’ good after a certain amount of time the good has perished. The value of a good is valued differently by each agent, but this value does not change during the simulation. For the experiments in this thesis the agents are not able to hold on to a good for a certain amount of time. This is a variant which can be used in further research. Holding on to a good will be explained further in the last chapter. At the start of the giving game the goods can either be divided randomly over the agents or are divided by hand. The agents who start with the perishable goods are assigned to be the producers.
 
-The transactions can be executed in two different ways. The transactions can be executed one by one which is a more game theory based approach. A more realistic approach is that the transactions are executed simultaneously, this way agents don’t have to wait for each other before they can give away their good. Both types are used in the experiments.
+The transactions can be executed in two different ways. The transactions can be executed one by one which is a more game theory based approach. A more realistic approach is that the transactions are executed simultaneously, this way agents don’t have to wait for each other before they can give away their good. 
 
 The emergence of a community effect is determined by the amount of transactions each agent is part of. When more than one good is used in the environment there can emerge multiple communities. That is why every good is looked at independently. Every agent keeps track of their own transactions and how much they have traded each good. If for example two agents hold 100 percent of the transactions of good A and two other agents hold 100 percent of the transactions of good B then two separate communities of size two have emerged. There can be concluded that the community effect exists for this scenario. If this time two agents hold 50 percent of the transactions of good A and good B and two other agents also hold 50 percent of the transactions of good A and good B than this means that one community has emerged with a size of four. There can also be concluded that a community effect exist in this scenario. A community effect can exists as long as the size of the subgroup is smaller than the total amount of agents in the environment and 100 percent of the transactions of one or more goods takes place inside this subgroup. This means that even if an agent holds a smaller percentage of the transactions this agent can still be part of the community as long as the previous stated rules apply.
 
@@ -189,13 +195,13 @@ For the previously explained giving game a simulator will be created that can si
 
 
 \chapter{Implementation}
-In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks. The simulation program is able to accept different user input to simulate multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole simulation program is created with \textit{Python} and uses multiple \textit{Python} modules, packages and frameworks. The simulation program can be run on a desktop with any operating system as long as the required \textit{Python} packages and frameworks are installed. 
+In this chapter the implementation of the simulator that will be used to simulate different scenarios for the giving game will be discussed. The simulation program is able to execute multiple tasks and accepts different user input to simulate multiple scenarios. The simulation program provides a visualization of the data that is produced during the simulation and a visualization of the course of the transactions. The whole program is created with \textit{Python} and uses multiple \textit{Python} modules, packages and frameworks. It can be run on a desktop with any operating system as long as the required \textit{Python} packages and frameworks are installed. 
 
 \section{Back-end}
-The back end consists of multiple components which together create an environment that simulates a giving economy where agents give and receive goods. This section will explain these components briefly and how they work together. 
+The back end consists of multiple components which together create an environment that simulates a giving economy where agents give and receive goods. This section will explain these components briefly and how they work together. The simulation program consists mostly of object oriented code, therefore classes are used to define some of the components.
 
 \subsection{Agents}
-Every agent is defined by the \textit{Agent} class. Every agent can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. Every agent keeps track of their own account balance, yield values, like factors and nominal values. The \textit{Agent} class is able to hold this data in the form of a \textit{Python} lists. The ID of every agent is used for these data lists to find the corresponding information about that agent. The agents only know their own relations with the other agents and the goods, they don't know anything else about the environment. The following information is known by each agent:
+Every agent is defined by the \textit{Agent} class. Every agent can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. Every agent keeps track of their own account balances, yield values, like factors and nominal values. The \textit{Agent} class is able to hold this data in the form of a \textit{Python} lists. The ID of every agent is used for these data lists to find the corresponding information about that agent. The agents only hold data of their own relations with the other agents and the goods, they don't hold data of anything else about the environment. The following information is stored in the memory of each agent:
 \begin{itemize}
 \item The amount of goods given and received to and from each agent.
 \item The amount of times each good has been given and received by the agent.
@@ -205,7 +211,7 @@ Every agent is defined by the \textit{Agent} class. Every agent can be identifie
 \end{itemize}
 
 \subsection{Goods}
-Every good is defined by the Good class. Every good can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. This \textit{ID} can be used by the textit{Agent} class as an index for the python lists that hold information about this good. Goods have a 'life' which defines how many times this good can be traded. For every transaction of a good the life of that good is decreased by 1. Once the life of a good reaches 0 it is removed from the environment. A good is reproduced once the time until the production reaches zero. For every transaction in the environment the time until the production is decreased by 1.
+Every good is defined by the Good class. Every good can be identified by an \textit{ID}. This \textit{ID} is an integer number greater than or equal to 0. This \textit{ID} can be used by the textit{Agent} class as an index for the python lists that hold information about this good. Goods have a 'life' which defines how many times this good can be traded. For every transaction of a good the life of that good is decreased by 1. Once the life of a good reaches 0 it is removed from the environment. Every good has a variable called the 'time\_until\_production' which defines the time until a good is reproduced. A good is reproduced and added back into the environment once the 'time\_until\_production' reaches zero. For every transaction in the environment the time until the production is decreased by 1.
 
 \subsection{Selection rules}
 
@@ -308,10 +314,11 @@ The output is updated after every transaction. All the data can be saved and use
 
 
 \chapter{Scenarios}
-For every selection rule multiple scenarios have been created. This chapter will explain the scenarios used in the experiments. For every scenario 99 agents will be used. 99 agents is large enough to have as much variety in the parameters as possible but is still be able to clearly see any changes in the visualisation. 
+For every selection rule multiple scenarios have been created where the scenarios define the starting parameters used for the simulations of the selection rules. This chapter will explain the scenarios used in the experiments. For every scenario 99 agents will be used. 99 agents is large enough to have as much variety in the parameters as possible but still be able to clearly see any changes in the visualisation. 
 
 \section{Basic Scenarios}
-For every selection rule the behaviour is tested in the most basic environment. These scenarios will be used to see if the simulation behaves as it should.
+For every selection rule the behaviour is tested in the most basic environment. These scenarios will be used to see if the selection rules are implemented correctly.
+
 \subsubsection{Basic scenario 1, sustainable (BS\_S):}
 Parameters:
 \begin{itemize}
@@ -369,7 +376,7 @@ For the goodwill rule all parameters can affect the results. The following param
 \subsubsection{Like factors}
 \begin{description}
 \item[L1] 1/3 of the population has a like factor of 1, 1/3 of the population has a like factor of 0.5 and 1/3 of the population has a like factor of 0.1. This means that every agent has a different relationship with every third of the population. These three groups have been chosen in order to better observe the difference in behaviour.
-\item[L2] 47 agents have a like factor of 1, 47 agents has a like factor of 0.5 and 5 of the agents have a like factor of 0.1. This means that only a small group of agents is liked by all other agents.
+\item[L2] 47 agents have a like factor of 1, 47 agents have a like factor of 0.5 and 5 of the agents have a like factor of 0.1. This means that only a small group of agents is liked by all other agents.
 \end{description}
 \subsubsection{Balances}
 \begin{description}
@@ -379,7 +386,7 @@ For the goodwill rule all parameters can affect the results. The following param
 \subsubsection{Nominal values}
 \begin{description}
 \item[N1] The nominal values of every good are the same for every agent.
-\item[N2] Every third of the agents perceives the nominal values of all goods differently. Just like the like factors, the population is divided into 3 groups, where every group perceives the value of the goods differently. The first group perceives the nominal value of the good as 1, the second group as 2 and the third group as 3. For every additional good the nominal value of the next good is increased by 1. These values have been chosen to have three very different groups of agents and as much variety in nominal values. The difference between the nominal values is limited to prevent unrealistic high yield values.
+\item[N2] Every third of the agents perceives the nominal values of all goods differently. Just like the like factors, the population is divided into 3 groups, where every group perceives the value of the goods differently. The first group perceives the nominal value of the good as 1, the second group as 2 and the third group as 3. For every additional good the nominal value of the next good is increased by 1. The groups are the same groups as with L1. These values have been chosen to have three very different groups of agents and as much variety in nominal values. The difference between the nominal values is limited to prevent unrealistic high yield values.
 \end{description} 
 The combination of these parameters will form different scenarios. Every combination will be tested unless previous experiments show that one of the parameters does not affect the result. The scenarios are based on the idea of having a population where people have different relationships with each other and value goods differently. That’s why the population is split into 3 groups to have groups that are completely different from each other. The following scenarios will be used during the experiments.
 The first scenarios are scenarios where the balance is zero.
@@ -404,9 +411,10 @@ Expectations are that for all scenarios a community effect will arise with one o
 
 
 \chapter{Results}
+The scenarios mentioned in the previous chapter are used in the simulator. For every scenario except for the basic scenarios multiple experiments have been performed using a different amount of goods. The amount of goods used for each scenario are 1, 2, 3, 5, 20, 50, and 99.
 
 \section{Random rule}
-The scenarios mentioned in the previous chapter are used in the simulator. To see if the number of goods used affects the results multiple experiments have been performed for every scenario, except for the basic scenarios, with a different amount of goods. Changing the amount of goods did not affect the results.
+
 \subsection{Results}
 
 \subsubsection{BS\_S}
@@ -426,9 +434,10 @@ The results are similar to the results from RR\_N2. No community arose, neither 
 \caption{Transaction percentages for RR\_P.}
 \end{figure}
 
+\subsection{Recap}
+The scenarios BS\_S and BS\_P have confirmed a correct implementation of the random rule, for every transaction the agents are randomly chosen. The scenarios RR\_S and RR\_P confirmed the hypothesis, no community effect and no repeating sequence of transactions has emerged. The simulation program can execute transactions correctly. More goods did not affect the results.
 
 \section{Balance rule}
-The scenarios mentioned in the previous chapter are used in the simulator. To see if the number of goods used affects the results multiple experiments have been performed for every scenario, except for the basic scenarios, with a different amount of goods. Changing the amount of goods did not affect the results.
 \subsection{Results}
 
 \subsubsection{BS\_S}
@@ -450,7 +459,7 @@ The producer participated in 100 percent of the transactions, because after each
 
 
 \subsubsection{BR\_S} 
-As expected the results are similar to the results from BS\_S where the goods are returned to the giving agent after each transaction. The only difference is that the agents who start with the goods at the start of the simulation participate in proportion more in transactions of each other’s goods than the other agents do. This happens when two agents who start with the goods give to each other their good and allow each other give each other’s good to different agents, figure 6.4 shows this. \\
+The results are similar to the results from BS\_S where the goods are returned to the giving agent after each transaction. The only difference is that the agents who start with the goods at the start of the simulation participate in proportion more in transactions of each other’s goods than the other agents do as shown in figure 6.4. This happens when two agents who each start with a good trade their good for the good of the other. Both agents are now in possestion of a different good and can now give this good to someone else. \\
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.4]{Simulation_figures/BR_S/Figure1_30k}
@@ -460,19 +469,21 @@ As expected the results are similar to the results from BS\_S where the goods ar
 
 
 \subsubsection{BR\_P}
-When the perish period of a good is an even number the behaviour is equal to the behaviour of a sustainable good shown in BR\_S. When the perish period of a good is an odd number the good is also more traded with the other producers than with other agents, but the transactions with the other agents show the same behaviour as BS\_P. When the perish period of a good is odd the producer gives this good more than he receives it, thus the yield will approach zero for agents who do not give a good in return.
+When the perish period of a good is an even number the behaviour is equal to the behaviour of a sustainable good shown in BR\_S. When the perish period of a good is an odd number the good is also more traded with the other producers than with other agents, but the transactions with the other agents show the same behaviour as BS\_P. 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.4]{Simulation_figures/BR_P/Figure1_10k}
 \caption{Transaction percentage for BR\_P.}
 \end{figure}
 
+\subsection{Recap}
+ The scenarios BR\_S and BR\_P show different behaviour than what was expected. No community effect arises, which in the end makes sense, because once a good is given it is immediatly returned. The same behaviour occured when more goods were used. The scenarios BS\_S and BS\_P have confirmed a correct implementation of the balance rule and show a correct calculation of the balances even though the expectations were different at first.
 
 
 \section{Goodwill rule}
-All the scenarios mentioned in the previous chapter have been tested. The scenarios for the goodwill rule are split into two parts. The first part uses an account balance for the agents that start at 0. The second part uses an account balance for the agents that is randomly chosen and different for some agents at the start of the simulation. For every scenario except for the basic scenarios multiple experiments have been performed using a different amount of goods. The amount of goods used for each scenario are 1, 2, 5, 20, 50, and 99.
+ The scenarios for the goodwill rule are split into two parts. The first part (B1) uses an account balance for the agents that start at 0. The second part (B2) uses an account balance for the agents that is randomly chosen and different for some agents at the start of the simulation. 
 \subsubsection{BS\_S}
-Immediately at the start of the simulation a community effect arises with a subgroup of size two. Where the subgroup arises depends on which agent starts with the good. If for example P would start with the good P would randomly choose an agent Q to give to, because at the start the yield is the same for everyone for this experiment. The moment agent P gives to agent Q, Q is in debt with P. This means that Q values the next transaction more with P. So Q will give to P during the next transaction. Now P values the transaction with Q more than with any other agent, so P gives back to Q. An equilibrium has emerged where the yield of the transactions for P with Q and Q with P will switch between the same two values. 
+Immediately at the start of the simulation a community effect arises with a subgroup of size two. Where the subgroup arises depends on which agent starts with the good. If for example P would start with the good P would randomly choose an agent Q to give to, because at the start the yield is the same for everyone for this experiment. The moment agent P gives to agent Q, Q is in debt with P. This means that Q values the next transaction more with P. So Q will give to P during the next transaction. Now P values the transaction with Q more than with any other agent, so P gives back to Q. An equilibrium has emerged where the yield of the transactions for P with Q and Q with P will switch between the same two values.  
 
 \subsubsection{BS\_P}
 No community effect and no repeating sequence of transactions arises. At the beginning the yield is the same for everyone so the producer randomly selects an agent. Once the good is given away the good perishes. In the beginning the yields between the producer and the agents differs, so some transactions will not be at random. Eventually the yield between the producer and the agents will become 0, because the agents cannot give anything in return. From this point on the transactions are random again.
@@ -554,12 +565,14 @@ For the sustainable goods the results show that a community arises more quickly 
 For the perishable goods the results are the same as GR\_L1B2N1, but for this scenario the subgroups also arise more quickly.
 \\
 \\
-When N2 is changed so the agent with like factor 1 perceive the nominal values of the goods higher than the agent with a like factor 0.1 then the results are as shown in figure 6.14. In this case no equilibrium arises between two agents, but the transactions with agents with like factor 1 are still preferred over transactions with other agents. Thus the transactions only take place within the group of agents with like factors 1. When more goods are used the same behaviour occurs. \\
+When N2 is changed such that the agent with like factor 1 perceives the nominal values of the goods higher than the agent with a like factor 0.1 then the results are as shown in figure 6.14. In this case no equilibrium seems to arise between two agents, but the transactions with agents with like factor 1 are still preferred over transactions with other agents. Thus the transactions only take place within the group of agents with like factors 1. When more goods are used the same behaviour occurs. \\
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N2_321/Figure1_10k} 
 \caption{Transaction percentage for GR\_L1B2N2 with 1 sustainable good after 10000 transactions.}
 \end{figure}
+
+The result shown in figure 6.14 could also be caused by the way the account balances are set in the beginning of the simulation. For the account balance at the start of the simulation natural number were randomly chosen between -9 and 9. This means that in the beginning some agents could have the same account balance, the same like factor an the same nominal value as other agents. This could explain why some agents within the community sometimes have the same yield and thus lead to selecting an agent randomly. We could use real numbers instead of natural numbers between -9 and 9 for the account balance at the start of the simulation to make sure that every account balance would be different. But this led to the same results. Even after 300000 transactions some agents were still randomly selected.
 
 \clearpage
 \subsubsection{GR\_L2B2N1}
@@ -568,7 +581,8 @@ With this scenario only 5 agents have a like factor of 0.1 and the other agents 
 The results are the same as GR\_L1B2N2. Changing the amount of agents with a like factor of 0.1 did not change anything.
 \\
 \\
-The results of the goodwill scenarios show that what was expected did not happen. Instead of subgroups consisting of agents with a like factor of 0.1 the subgroups consist of agents with like factor 1 or 0.5 with sometimes agent with like factor 0.1. Instead of giving to agents who are liked more the agents in these scenarios prefer to give to agents who are not liked at all. On one hand this seems logical if you think about loans and in this case hostile loans where each time a good is given it leads to a high debt. With the yield curve used for this model receiving a good from someone who is not liked leads to a higher debt than receiving from someone who is liked, because the slope is heigher with a like factor of 1. On the other hand this seems illogical for a giving environment, where people rather give/pay of their debt with someone they like than with someone they don't like. This has led to a reconsideration of the yield curve used in this thesis.
+\subsection{Recap}
+The scenarios BS\_S and BS\_P confirm a correct implementation of the goodwill rule and a correct calculation of the yield and account balance. The results of the other scenarios show however that what was expected did not happen. Instead of subgroups consisting of agents with a like factor of 0.1 the subgroups consist of agents with like factor 1 or 0.5 with sometimes agent with like factor 0.1. Instead of giving to agents who are liked more the agents in these scenarios prefer to give to agents who are not liked at all. On one hand this seems logical if you think about loans and in this case hostile loans where each time a good is given it leads to a high debt. With the yield curve used for this model receiving a good from someone who is not liked leads to a higher debt than receiving from someone who is liked, because the slope is heigher with a like factor of 1. On the other hand this seems illogical for a giving environment, where people rather give/pay of their debt with someone they like than with someone they don't like. This has led to a reconsideration of the yield curve used in this thesis.
 
 
 
@@ -585,7 +599,7 @@ The results from the goodwill rule have revealed a problem. The problem is as fo
 \caption{Yield curve, yield perceived by P with Q and R.}
 \end{figure}
 \\
-P now has to decide to who he will give the good. It would be logically to assume that because P likes Q more he will give to Q. The yield curve is currently defined as that the yield determines the choice to who the good will be given to. When the yield is the same for multiple agents an agent will be randomly selected. According to the yield it does not matter who is chosen, because all transactions are valued the same. So P will randomly choose between Q and R. Due to the results from the goodwill rule where the transactions are in favour of the lesser liked agents it has become clear that the way an agent is chosen when the yield is the same is not completely representative for a giving environment.
+P now has to decide to whom he will give the good. It would be logically to assume that because P likes Q more he will give to Q. The yield curve is currently defined as that the yield determines the choice to who the good will be given to. When the yield is the same for multiple agents an agent will be randomly selected. According to the yield it does not matter who is chosen, because all transactions are valued the same. So P will randomly choose between Q and R. Due to the results from the goodwill rule where the transactions are in favour of the lesser liked agents it has become clear that the way an agent is chosen when the yield is the same is not completely representative for a giving environment.
 
 A solution to this problem would be to base the perception of the nominal value of a good on the like factors between all agent pairs. This would mean that for every good a NxN matrix needs to be created where the perception of the nominal value is different for every agent pair. However this solution requires a lot of additional input data which would need to be created and stored by the user. A better solution would be to rewrite the calculation of the yield so that we get a yield curve shown in figure 6.16 even when only one good is used. \\
 \begin{figure}[h!]
@@ -594,11 +608,11 @@ A solution to this problem would be to base the perception of the nominal value 
 \caption{Yield curve, yield perceived by P with Q and R.}
 \end{figure}
 
-The yield curve in figure 6.16 shows that with an account balance of 0 and a like factor of 1 the value of the transaction is lower than when the like factor would be 0.1. In this case P would choose Q over R, because a transaction with a 'friend' is worth more than with a stranger. This means that when the nominal value is defined as a constant than the intercept(\textit{b}) in \textit{$Y = aX + b$} should be a lower value when the like factor is higher. To accomplish this we can assume that \textit{b} will scale equally with the like factor, thus \textit{$Y = aX + b(1 + a)$}. The calculation of the yield needs to be rewritten as follows:
+The yield curve in figure 6.16 shows that with an account balance of 0 and a like factor of 1 the value of the transaction is lower than when the like factor would be 0.1. In this case P would choose Q over R, because a transaction with a 'friend' is worth more than with a stranger. This means that when the nominal value is defined as a constant than the intercept(\textit{b}) in \textit{$Y = aX + b$} should be a lower value when the like factor is higher. To accomplish this we can assume that \textit{b} will scale equally with the like factor, thus \textit{$Y' = aX + b(1 - a)$}. The calculation of the yield needs to be rewritten as follows:
 \begin{equation}
 \begin{split}
 Y & = -aX + b \\
-& = -aX + b(1 - a) \\
+Y' & = -aX + b(1 - a) \\
 & = -aX + b - ab \\
 & = -a(X + b) + b 
 \end{split}
@@ -659,7 +673,7 @@ When perishable goods are used the results are equal to the results from GR\_L1B
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N1_1good_5k} 
-\caption{Transaction percentage for GR\_L1B1N2 with 1 good.}
+\caption{Transaction percentage for GR\_L1B2N1 with 1 good.}
 \end{figure}
 
 
@@ -673,6 +687,8 @@ When N2 is changed so the agent with a 1 like factor perceive the nominal values
 \includegraphics[scale=0.4]{Simulation2_figures/GR_L1B2N2_321_4k} 
 \caption{Transaction percentage for GR\_L1B2N2 with 1 good.}
 \end{figure}
+
+If we use real numbers instead of natural numbers between -9 and 9 for the account balance at the start of the simulation just like with the first GR\_L1B2N2 experiments the same results as in figure 6.24 occur. The agents within the community are still randomly selected.
 
 \end{description}
 
@@ -693,7 +709,7 @@ The created simulation program provides a wide range of possible scenarios to si
 The first experiments of the goodwill rule showed surprising results. These results have led to a reconsideration of the yield curve which caused an improvement in the simulation model for the giving game. The results from the goodwill experiments confirmed the hypothesis and clearly show that in most cases agents rather give to 'friends' than to stranger. The results have led to the answer for the first research question. \\ 
 \\
 \textit{In a Giving Game simulation will transactions eventually take place within a limited subgroup of the entire population?} \\
-The answer to this question is simply, yes. All the goodwill rule experiments eventually led to subgroups. As expected in the first place the experiments with the revised yield curve led to subgroups consisting mostly of agents who like each other. 
+The answer to this question is simply, yes. All the goodwill rule experiments eventually led to subgroups. As expected in the first place the experiments with the revised yield curve led to subgroups consisting mostly of agents who like each other. Most experiments led to subgroups consisting of two agents. Larger subgroups are an exception.
 \\
 \\
 The results also show that the emergence of subgroups are mostly affected by the different nominal values and account balances. A higher perception of the nominal value of a good and a low balance means a higher possible yield. Some experiments therefore showed a distribution of the transactions in favour of the less liked agents or a community where also an agent who is less liked was part of. The emergence of larger subgroups as the effect of different nominal values and different account balances has led to the answer for the second research question.
@@ -703,7 +719,9 @@ The results also show that the emergence of subgroups are mostly affected by the
 The balance rule showed a partial stabilization of the transactions when perishable goods were used with a perish period of 1. Experiments with the goodwill rule did not lead to a repeating sequence of transactions. Even when communities larger than two agents arose some transactions within these communities were still random, therefore no repeating sequence of transactions took place.
 
 \section{Further research}
-The experiments of the goodwill rule have showed a basic real life environment where people invest and all agents try to maximize profit by giving more to agents who are liked than to agents who are not liked. The giving game used for the experiments and the related results do not cover everything of an economy of giving. Further research could use more varying input for the simulations or even add parameters to make the simulation more realistic so human behaviour can be simulated more precise. A possible variant on the giving game used in this thesis could for example be that agents are able to hold on to a good. This is leads to a similar simulation as used for the 'Kiyotaki-Wright Model'\cite{moranmoney}. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods, perishable goods for example, would not be able to be stored forever. The time an agent holds on to a good is also a parameter that can influence the choice for the transaction.
+The scenarios used for the simulation have some restrictions. For the like factors the assumption was made that the like factors are constant over the whole population. In 'real life' these like factors could be different for everyone or even change over time. The nominal values were restricted to the same groups, but could also vary alot more for further research. The account balance at the beginning of the simulation could also be randomly generated with real numbers instead of natural numbers. Even though the scenario GR\_L1B2N2 of both yield curves did not show any different results, further research could prove otherwise.
+
+The experiments of the goodwill rule have showed a basic representation real life environment where people invest and all agents try to maximize profit by giving more to agents who are liked than to agents who are not liked. The giving game used for the experiments and the related results do not cover everything of an economy of giving. Further research could use more varying input for the simulations or even add parameters to make the simulation more realistic so human behaviour can be simulated more precise. A possible variant on the giving game used in this thesis could for example be that agents are able to hold on to a good. This is leads to a similar simulation as used for the 'Kiyotaki-Wright Model'\cite{moranmoney}. Holding on to a good is a more realistic approach, but comes with a few extra parameters. Realistically holding on to a good means that the good needs to be stored somewhere. In the real world this would mean that storage costs have to be paid and certain goods, perishable goods for example, would not be able to be stored forever. Holding on to a good could be a strategic choice by the agent.
 \\
 \\
 The already revised yield curve can also be further tested or improved. This thesis has used a simplified version of a yield curve. Different calculations of the yield could lead to non-linear yield curves. \\
@@ -771,5 +789,7 @@ The output interface is as shown in figure A.2.
 
 \section{Extending the simulation program}
 Selection rules can be added by added a python functions for the selection rule to \textit{Selection\_rules.py} in the folder \textit{Simulator}. To allow the user to choose the added selection rule the interface of \textit{GUI\_Input.py} needs to be changed and the selection rule needs to be added to \textit{Environment.py}.
+
+To further extend calculations, updating variables or the simulation model the files \textit{Simulate.py} and \textit{Environment.py} should be changed.
 
 \end{document}
