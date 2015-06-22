@@ -49,6 +49,7 @@ class Enviroment:
 		self.transaction_percentages = []
 		#[[good1 percentage, good2 percentage], [good1 percentage, good2 percentage]]
 		self.goods_transaction_percentages = []
+		#self.goods_count = [0 for ]
 		self.nr_transactions = 0
 		self.nr_good_transactions = [0 for i in range(M)]
 
@@ -106,7 +107,10 @@ class Enviroment:
 					agent.nominal_values.append(good.value)
 			if self.balance:
 				# agent.balance.append(self.balance[agent.id])
-				agent.balance = self.balance[agent.id]
+				agent.balance = [self.balance[agent.id][x] for x in range(self.N)]
+				#if agent.id == 19:
+					# print('self:', self.balance[19])
+					# print('balance:', agent.balance)
 			else:
 				# agent.balance.append([0.0 for x in range(self.N)])
 				agent.balance = [0.0 for x in range(self.N)]
@@ -134,13 +138,36 @@ class Enviroment:
 				# print(agent.like_factor[0])
 				# print(agent.balance[0])
 				# print(agent.nominal_values[good.id])
-				agent.yield_values.append([agent.like_factor[x] * agent.balance[x] + agent.nominal_values[good.id] for x in range(self.N)])
+				yields = []
+				for x in range(self.N):
+					yield_value = agent.like_factor[x] * (agent.balance[x] + agent.nominal_values[good.id]) + agent.nominal_values[good.id]
+					#yield_value = agent.like_factor[x] * agent.balance[x] + agent.nominal_values[good.id]
+					if yield_value < 0:
+						yield_value = 0
+					yields.append(yield_value)
+				#agent.yield_values.append([agent.like_factor[x] * (agent.balance[x] + agent.nominal_values[good.id]) + agent.nominal_values[good.id] for x in range(self.N)])
+				#agent.yield_values.append([agent.like_factor[x] * agent.balance[x] + agent.nominal_values[good.id] for x in range(self.N)])
+				agent.yield_values.append(yields)
+
 
 
 	def update_balancematrix(self, P, Q):
 		# Update the balance matrix after every transaction
 		self.balance_matrix[P.id][Q.id] = P.given_received[Q.id][1] - P.given_received[Q.id][0]
 		self.balance_matrix[Q.id][P.id] = Q.given_received[P.id][1] - Q.given_received[P.id][0]
+
+	def update_yieldvalues(self, P, Q, good):
+		#P.yield_values[good.id][Q.id] = P.like_factor[Q.id] * P.balance[Q.id] + P.nominal_values[good.id]
+		#Q.yield_values[good.id][P.id] = Q.like_factor[P.id] * Q.balance[P.id] + Q.nominal_values[good.id]
+
+		P.yield_values[good.id][Q.id] = P.like_factor[Q.id] * (P.balance[Q.id] + P.nominal_values[good.id]) + P.nominal_values[good.id]
+		if P.yield_values[good.id][Q.id] < 0:
+			P.yield_values[good.id][Q.id] = 0
+		Q.yield_values[good.id][P.id] = Q.like_factor[P.id] * (Q.balance[P.id] + Q.nominal_values[good.id]) + Q.nominal_values[good.id]
+		if Q.yield_values[good.id][P.id] < 0:
+			Q.yield_values[good.id][P.id] = 0
+		# print('balance P', P.balance)
+		# print('yield P:', P.yield_values[good.id][Q.id])
 
 	def notify_producer(self, good):
 		for producer in self.producing_agents:
@@ -168,7 +195,7 @@ class Enviroment:
 				good.time_until_production = good.production_delay
 				good.life = good.perish_period
 				# output.gui.tabs.print_production(good)
-				output.gui.results.print_production(good)
+				#output.gui.results.print_production(good)
 				output.gui.tabs.colorV()
 				output.gui.tabs.moveV(agent, self.goods_list[good.id])
 				#print(agent.grid_pos)
@@ -179,12 +206,18 @@ class Enviroment:
 			elif good.life == 0:
 				good.time_until_production -= 1
 				#output.gui.tabs.print_time_until_production(good)
-				output.gui.results.print_time_until_production(good)
+				#output.gui.results.print_time_until_production(good)
 				#output.gui.tabs.colorV()
 
 			
 
 	def transaction(self, P, Q, good):
+		# if self.parallel:
+		# 	# P gives good to Q
+		# 	self.agents_list[P.id].give(Q, good)
+		# 	# Q recieves good from P
+		# 	self.agents_list[Q.id].receive(P, good)
+		# else:
 		# P gives good to Q
 		self.agents_list[P.id].give(Q, good)
 		# Q recieves good from P
@@ -228,11 +261,13 @@ class Enviroment:
 		self.goods_transaction_percentages = []
 		for agent in self.agents_list:
 			percentages = []
+			count = 0
 			for goods in agent.goods_transactions:
-				if total_transactions != 0:
-					percentages.append(goods[1] / (total_transactions*2))
+				if self.nr_good_transactions[count] != 0:
+					percentages.append(goods[1] / (self.nr_good_transactions[count] ))
 				else:
 					percentages.append(0)
+				count += 1
 			self.goods_transaction_percentages.append(percentages)
 
 	def calculate_communityeffect(self, goods_transactions):

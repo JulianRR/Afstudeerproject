@@ -112,8 +112,8 @@ class Canvas(app.Canvas):
     def on_draw(self, event):
         gloo.clear()
         self.program.draw('points')
-        for t in self.text:
-            t.draw(self.tr_sys)
+        # for t in self.text:
+        #     t.draw(self.tr_sys)
 
     def on_mouse_press(self, event):
         #self.createGrid()
@@ -181,7 +181,10 @@ class Canvas(app.Canvas):
 
     def updateColor(self):
         for x in range(self.N):
-            P_percentage = self.env.agents_list[x].nr_transactions / self.env.nr_transactions
+            if self.env.nr_transactions != 0:
+                P_percentage = self.env.agents_list[x].nr_transactions / self.env.nr_transactions
+            else:
+                P_percentage = 0
             #Q_percentage = self.env.agents_list[Q.id].nr_transactions / self.env.nr_transactions
             self.agents['color'][x] = P_percentage, 0, 1 - P_percentage, 1
             #self.agents['color'][Q.id] = Q_percentage, 0, 1 - Q_percentage, 1

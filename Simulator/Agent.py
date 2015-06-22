@@ -21,7 +21,7 @@ class Agent:
 		self.goods_transactions = []
 
 		# Yield curve variables
-		self.like_factor = [random.uniform(-1.0, 0.0) for i in range(N)]
+		self.like_factor = [-0.5 for i in range(N)]
 		# The value of the next transaction, different for every agent pair and every good
 		self.yield_values = []
 		# The balance between this agent and all the other agents, different for every good.
@@ -47,8 +47,12 @@ class Agent:
 		self.balance[receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
 		# receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
 		receiving_agent.balance[self.id] -= self.yield_values[good.id][receiving_agent.id]
+		# print(str(self.id) + '-->' + str(receiving_agent.id))
+		print(self.balance[receiving_agent.id])
+		print(receiving_agent.balance[self.id])
 		# self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + self.nominal_values[good.id]
-		self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[receiving_agent.id] + self.nominal_values[good.id]
+		# self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * (self.balance[receiving_agent.id] + self.nominal_values[good.id]) + self.nominal_values[good.id]
+		#self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[receiving_agent.id] + self.nominal_values[good.id]
 
 		#print('given yield:', self.yield_values[good.id][receiving_agent.id])
 
@@ -63,6 +67,21 @@ class Agent:
 		# Yield calculations
 		#self.balance[good.id][giving_agent.id] -= self.yield_values[good.id][giving_agent.id]
 		#self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[good.id][giving_agent.id] + self.nominal_values[good.id]
-		self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[giving_agent.id] + self.nominal_values[good.id]
+		#self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * self.balance[giving_agent.id] + self.nominal_values[good.id]
+		#self.yield_values[good.id][giving_agent.id] = self.like_factor[giving_agent.id] * (self.balance[giving_agent.id] + self.nominal_values[good.id]) + self.nominal_values[good.id]
 
 		#print('receive yield:', self.yield_values[good.id][giving_agent.id])
+
+	def give_parallel(self, receiving_agent, good):
+		self.given_received[receiving_agent.id][0] += 1
+		self.nr_transactions += 1
+		self.goods_transactions[good.id][1] += 1
+
+		self.balance[receiving_agent.id] += self.yield_values[good.id][receiving_agent.id]
+
+		receiving_agent.balance[self.id] -= self.yield_values[good.id][receiving_agent.id]
+
+	def receive_parallel(self, giving_agent, good):
+		self.given_received[giving_agent.id][1] += 1
+		self.nr_transactions += 1
+		self.goods_transactions[good.id][1] += 1

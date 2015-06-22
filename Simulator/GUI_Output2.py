@@ -45,7 +45,7 @@ class Output(QtGui.QMainWindow):
         
         # Window size
         screen = QtGui.QDesktopWidget().availableGeometry()
-        width = screen.width() - 300
+        width = screen.width() - 200
         height = screen.height()
         #print('width:', width)
         #print('height:', height)
@@ -130,6 +130,7 @@ class Output(QtGui.QMainWindow):
         if result == QtGui.QMessageBox.Yes:
             self.env.stop = True
             self.gui.tabs.close_plt()
+            plt.close("all")
             event.accept()
 
 class GUI(QtGui.QWidget):
@@ -232,11 +233,11 @@ class Tabs(QtGui.QTabWidget):
         self.bar_plot = FigureCanvas(self.figure) 
         self.plot(self.figure, self.bar_plot)
 
-        self.figure2 = plt.figure()
-        self.balance_plot = FigureCanvas(self.figure2) 
+        # self.figure2 = plt.figure()
+        # self.balance_plot = FigureCanvas(self.figure2) 
         self.toolbar = NavigationToolbar(self.bar_plot, self)
         #self.plot(self.figure, self.bar_plot)
-        self.plot_balance()
+        #self.plot_balance()
 
         self.figure3 = plt.figure(figsize=(3,8))
         self.color_bar = FigureCanvas(self.figure3)
@@ -268,7 +269,7 @@ class Tabs(QtGui.QTabWidget):
         self.layout_tab2.addWidget(self.bar_plot)
         self.layout_tab2.addWidget(self.toolbar)
         self.layout_tab3.addWidget(self.textBox)
-        self.layout_tab4.addWidget(self.balance_plot)
+        # self.layout_tab4.addWidget(self.balance_plot)
 
 
         
@@ -291,7 +292,7 @@ class Tabs(QtGui.QTabWidget):
         # following gives a basic continuous colorbar with ticks
         # and labels.
         cmap = mpl.colors.ListedColormap([[0.0, 0.0, 1.], [0.1, 0., 0.9], [0.2, 0.0, 0.8], [0.3, 0.0, 0.7], [0.4, 0.0, 0.6], [0.5, 0.0, 0.5], [0.6, 0.0, 0.4], [0.7, 0.0, 0.3], [0.8, 0.0, 0.2], [0.9, 0.0, 0.1]])
-        bounds = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        bounds = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
         norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
 
 
@@ -358,29 +359,36 @@ class Tabs(QtGui.QTabWidget):
         plt.close()
         self.figure.clf()
 
+
         self.ax = self.figure.add_subplot(111)
 
         goods_transaction_percentages = np.array(self.env.goods_transaction_percentages)
+        handles = []
+        names = []
         for goods in goods_transaction_percentages.T:
 
             data = []
             for percentage in goods:
                 data.append(percentage * 100)
-            self.ax.bar(x+(width * count), data, width, color=(0, 1.0/(count+1), 1.0/(count+1)))
+            handles.append(self.ax.bar(x+(width * count), data, width, color=(0, 1.0/(count+1), 1.0/(count+1))))
+            name = 'Good_' + str(count)
+            names.append(name)
             count += 1
         self.ax.set_ylabel('Percentage')
-        self.ax.set_title('transaction percentage of each good for each agent')
+        self.ax.set_title('Participation percentage for each agent in the transactions of each good')
 
         #self.ax.set_xlim(-width,len(x)+width)
         xTickMarks = ['Agent'+str(i) for i in range(len(x))]
         self.ax.set_xticks(x+width)
         xtickNames = self.ax.set_xticklabels( xTickMarks )
-        plt.setp(xtickNames, rotation=45, fontsize=10)
+        plt.setp(xtickNames, rotation=90, fontsize=10)
+        self.ax.legend(handles, names)
         self.ax.hold(True)
 
         # Design
         #self.figure.tight_layout()
         self.figure.set_facecolor('white')
+        self.figure.tight_layout()
 
         self.bar_plot.draw()
 
@@ -434,6 +442,8 @@ class Tabs(QtGui.QTabWidget):
 
     def close_plt(self):
         plt.close()
+        self.figure.clf()
+        self.figure3.clf()
 
     # def resetTransactions(self):
     #     for agent in self.env.agents_list:
@@ -969,7 +979,9 @@ class YieldCurve(QtGui.QDialog):
         ax.spines['right'].set_color('none')
         ax.spines['top'].set_color('none')
         ax.yaxis.set_ticks_position('left')
-        xTickMarks = ['Low Balance P/High Balance Q', 'Low Balance Q/High Balance P']
+        lbl_left = 'Low Balance Agent_' + str(self.P.id) + '/\nHigh Balance Agent_' + str(self.Q.id) 
+        lbl_right = 'Low Balance Agent_' + str(self.Q.id) + '/\nHigh Balance Agent_' + str(self.P.id) 
+        xTickMarks = [lbl_left, lbl_right]
         ax.set_xticklabels( xTickMarks )
         ax.set_xticks([min(P_min_x, Q_min_x), max(P_max_x, Q_max_x)])
         ax.set_ylim(ymin=0)

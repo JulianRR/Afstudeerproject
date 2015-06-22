@@ -360,16 +360,16 @@ class GUI(QtGui.QWidget):
             first_sheet = wb2.get_sheet_names()[0]
             worksheet = wb2.get_sheet_by_name(first_sheet)
             for row in worksheet.iter_rows():
-                print(row)
+                #print(row)
                 cells = []
                 for cell in row:
-                    print(cell.value)
+                    #print(cell.value)
                     if cell.value:
                         cells.append(float(cell.value))
                     else:
                         cells.append(-1.0)
                 self.like_factors.append(cells)
-            print(self.like_factors)
+            #print(self.like_factors)
 
     def removeLikeFactors(self):
         self.lbl_likefactors.setText('')
@@ -391,7 +391,7 @@ class GUI(QtGui.QWidget):
                 print(row)
                 cells = []
                 for cell in row:
-                    print(cell.value)
+                    #print(cell.value)
                     if cell.value:
                         cells.append(float(cell.value))
                     elif cell.value == 0:
@@ -399,7 +399,7 @@ class GUI(QtGui.QWidget):
                     else:
                         cells.append(None)
                 self.balance.append(cells)
-            print(self.balance)
+            #print(self.balance)
 
             for i in range(len(self.balance)):
                 for j in range(len(self.balance[1])):
@@ -410,7 +410,7 @@ class GUI(QtGui.QWidget):
                             self.balance[j][i] = self.balance[i][j]
                     if i == j:
                         self.balance[i][j] = 0.0
-            print(self.balance)
+            #print(self.balance[19])
 
     def removeBalance(self):
         self.lbl_balance.setText('')
@@ -430,16 +430,16 @@ class GUI(QtGui.QWidget):
             first_sheet = wb2.get_sheet_names()[0]
             worksheet = wb2.get_sheet_by_name(first_sheet)
             for row in worksheet.iter_rows():
-                print(row)
+                #print(row)
                 cells = []
                 for cell in row:
-                    print(cell.value)
+                    #print(cell.value)
                     if cell.value:
                         cells.append(float(cell.value))
                     else:
                         cells.append(randint(1, 5))
                 self.nominal_values.append(cells)
-            print(self.nominal_values)
+            #print(self.nominal_values)
 
 
     def removeNominalValues(self):

@@ -72,6 +72,8 @@ def onebyone(env, selectionrule, output, total_transactions):
 
 			#env.calculate_transaction_percentages(env.nr_transactions)
 			env.calculate_good_transaction_percentages(env.nr_transactions)
+			for g in env.goods_list:
+				env.update_yieldvalues(current_agent, next_agent, g)
 
 			#output.showPlot()
 			#output.gui.tabs.showPlot()
@@ -81,7 +83,8 @@ def onebyone(env, selectionrule, output, total_transactions):
 
 			# exit = output.print_transaction(current_agent, next_agent, good)
 			#output.gui.tabs.print_transaction(current_agent, next_agent, good)
-			output.gui.results.print_transaction(current_agent, next_agent, good)
+			
+			#output.gui.results.print_transaction(current_agent, next_agent, good)
 			QtGui.qApp.processEvents()
 			# output.gui.tabs.updateV()
 			# if exit:
@@ -170,6 +173,14 @@ def parallel(env, selectionrule, output, total_transactions):
 				env.notify_producer(good)
 				#env.current_agents.remove(agent)
 				#env.goods_list.remove(good)
+		for t in transactions[:]:
+			current_agent 	= t[0]
+			next_agent 		= t[1]
+			good 			= t[2]
+			for g in env.goods_list:
+					env.update_yieldvalues(current_agent, next_agent, g)
+
+		# 	env.update_yieldvalues(current_agent, next_agent, good)
 
 		#output.gui.tabs.plotGoodTransactionPercentages()
 		env.produce_goods(selectionrule, output)
