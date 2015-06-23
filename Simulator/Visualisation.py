@@ -112,8 +112,9 @@ class Canvas(app.Canvas):
     def on_draw(self, event):
         gloo.clear()
         self.program.draw('points')
-        # for t in self.text:
-        #     t.draw(self.tr_sys)
+        if not self.env.optimize:
+            for t in self.text:
+                t.draw(self.tr_sys)
 
     def on_mouse_press(self, event):
         #self.createGrid()

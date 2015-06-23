@@ -48,8 +48,8 @@ class Agent:
 		# receiving_agent.balance[good.id][self.id] -= self.yield_values[good.id][receiving_agent.id]
 		receiving_agent.balance[self.id] -= self.yield_values[good.id][receiving_agent.id]
 		# print(str(self.id) + '-->' + str(receiving_agent.id))
-		print(self.balance[receiving_agent.id])
-		print(receiving_agent.balance[self.id])
+		#print(self.balance[receiving_agent.id])
+		#print(receiving_agent.balance[self.id])
 		# self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[good.id][receiving_agent.id] + self.nominal_values[good.id]
 		# self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * (self.balance[receiving_agent.id] + self.nominal_values[good.id]) + self.nominal_values[good.id]
 		#self.yield_values[good.id][receiving_agent.id] = self.like_factor[receiving_agent.id] * self.balance[receiving_agent.id] + self.nominal_values[good.id]

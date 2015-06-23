@@ -108,6 +108,7 @@ class GUI(QtGui.QWidget):
         self.selection_rule = 0
 
         self.parallel = False
+        self.optimize = False
 
         # [[perish_period, production_delay, nominal_value]]
         self.goods_list = []
@@ -124,6 +125,7 @@ class GUI(QtGui.QWidget):
     def initUI(self):
 
         hbox = QtGui.QHBoxLayout()
+        hbox2 = QtGui.QHBoxLayout()
 
         screen = QtGui.QDesktopWidget().availableGeometry()
         #print('window size:', screen)
@@ -206,9 +208,13 @@ class GUI(QtGui.QWidget):
         self.parallel.toggled.connect(self.setParallel)
         self.onebyone.toggled.connect(self.setOnebyOne)
 
+        self.opt = QtGui.QCheckBox('Optimize')
+        self.opt.stateChanged.connect(self.setOptimize)
+
 
         hbox.addWidget(self.parallel)
         hbox.addWidget(self.onebyone)
+        hbox2.addWidget(self.opt)
 
         # Start button
         self.start = QtGui.QPushButton('Simulate')
@@ -231,7 +237,8 @@ class GUI(QtGui.QWidget):
         self.layout.addWidget(self.selection_rules, 13, 0)
         self.layout.addWidget(self.lbl_simulation_type, 14, 0)
         self.layout.addLayout(hbox, 15, 0)
-        self.layout.addWidget(self.start, 16, 0)
+        self.layout.addLayout(hbox2, 16, 0)
+        self.layout.addWidget(self.start, 17, 0)
 
         self.setLayout(self.layout)
 
@@ -327,6 +334,10 @@ class GUI(QtGui.QWidget):
 
     def setOnebyOne(self):
         self.parallel = False
+
+    def setOptimize(self):
+        self.optimize = True
+
     # @cellItemChanged(int, int)
     # def cellItemChanged(self, row, column):
     #     print(self.input_table.item(row, column))
@@ -449,7 +460,7 @@ class GUI(QtGui.QWidget):
     def startSimulation(self):
         if self.check_parameters():
             self.setGoodsList()
-            env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance, self.nominal_values, self.start_agents)
+            env = sim.create_enviroment(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.parallel, self.selection_rule, self.like_factors, self.balance, self.nominal_values, self.start_agents, self.optimize)
             self.output = Output(env)
             env.output = self.output
             sim.start_simulation(self.N, self.M, self.goods_list, self.M_perishable, self.perish_period, self.production_delay, self.value, self.output, env, self.selection_rule)

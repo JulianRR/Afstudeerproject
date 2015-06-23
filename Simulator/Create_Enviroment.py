@@ -10,7 +10,7 @@ import Selection_rules as sl
 #import Selectionrules
 
 class Enviroment:
-	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values):
+	def __init__(self, N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values, optimize):
 
 		# Total agents
 		self.N = N
@@ -66,6 +66,7 @@ class Enviroment:
 		self.running = False
 		self.delay = 0
 		self.parallel = parallel
+		self.optimize = optimize
 
 	def create_agents(self):
 		# Create N agents by calling the __init__() from the Agents Class
@@ -195,7 +196,7 @@ class Enviroment:
 				good.time_until_production = good.production_delay
 				good.life = good.perish_period
 				# output.gui.tabs.print_production(good)
-				#output.gui.results.print_production(good)
+				output.gui.results.print_production(good)
 				output.gui.tabs.colorV()
 				output.gui.tabs.moveV(agent, self.goods_list[good.id])
 				#print(agent.grid_pos)
@@ -206,7 +207,7 @@ class Enviroment:
 			elif good.life == 0:
 				good.time_until_production -= 1
 				#output.gui.tabs.print_time_until_production(good)
-				#output.gui.results.print_time_until_production(good)
+				output.gui.results.print_time_until_production(good)
 				#output.gui.tabs.colorV()
 
 			

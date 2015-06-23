@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import random
 import numpy as np
-from prettyplotlib import brewer2mpl
-import prettyplotlib as ppl
 import string
 import csv
 
@@ -32,10 +30,10 @@ class Output(QtGui.QMainWindow):
         self.menubar = QtGui.QMenuBar()
         
         fileMenu = self.menubar.addMenu('&File')
-        fileMenu.addAction('Save', lambda: self.saveData('untitled.txt'))
-        fileMenu.addAction('Save As', lambda: self.showDialog())
-        fileMenu.addAction('CSV test', lambda: self.save_data())
-        fileMenu.addAction('Load', lambda: self.load_data())
+        #fileMenu.addAction('Save', lambda: self.saveData('untitled.txt'))
+        #fileMenu.addAction('Save As', lambda: self.showDialog())
+        fileMenu.addAction('Save', lambda: self.save_data())
+        #fileMenu.addAction('Load', lambda: self.load_data())
 
         self.setMenuBar(self.menubar)
 
@@ -45,7 +43,7 @@ class Output(QtGui.QMainWindow):
         
         # Window size
         screen = QtGui.QDesktopWidget().availableGeometry()
-        width = screen.width() - 200
+        width = screen.width() 
         height = screen.height()
         #print('width:', width)
         #print('height:', height)
@@ -100,7 +98,7 @@ class Output(QtGui.QMainWindow):
                 #ws.append([self.env.balance_matrix[i][j]])
                 ws.cell(row = i, column = j).value = self.env.agents_list[i-1].balance[j-1]
 
-        print(ws.cell(row = 4, column = 2))
+        #print(ws.cell(row = 4, column = 2))
         wb.save(filename = os.path.join(path, fname))
 
 
@@ -726,7 +724,7 @@ class Results(QtGui.QWidget):
         for agent in self.env.agents_list:
             if agent.id == int(id):
                 dialog = AgentInfo(agent)
-                print('found:', agent.id)
+                #print('found:', agent.id)
 
     def createYieldCurve(self, P, Q):
         P_id = P.strip('Agent_')
@@ -965,7 +963,7 @@ class YieldCurve(QtGui.QDialog):
         Q_likefactor = self.Q.like_factor[self.P.id]
         Q_min_x = self.Q.nominal_values[good.id] / Q_likefactor
         Q_max_x = self.Q.nominal_values[good.id] / -Q_likefactor
-        print(P_likefactor, Q_likefactor)
+        #print(P_likefactor, Q_likefactor)
         x = np.arange(min(P_min_x, Q_min_x), max(P_max_x, Q_max_x), 0.01)
         P_y = P_likefactor * x + self.P.nominal_values[good.id]
         Q_y = -Q_likefactor * x + self.Q.nominal_values[good.id]

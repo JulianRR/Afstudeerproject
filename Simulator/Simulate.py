@@ -16,9 +16,9 @@ def start_simulation(N, M, goods_list, M_perishable, perish_period, production_d
 	simulate(100, env, selectionrule, output)
 	#print(env.agents_list[0].given_received)
 
-def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values, start_agents):
+def create_enviroment(N, M, goods_list, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values, start_agents, optimize):
 
-	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values)
+	enviroment = Enviroment(N, M, M_perishable, perish_period, production_delay, value, parallel, selectionrule, like_factors, balance, nominal_values, optimize)
 
 	# Create the agents
 	enviroment.create_agents()
@@ -84,7 +84,7 @@ def onebyone(env, selectionrule, output, total_transactions):
 			# exit = output.print_transaction(current_agent, next_agent, good)
 			#output.gui.tabs.print_transaction(current_agent, next_agent, good)
 			
-			#output.gui.results.print_transaction(current_agent, next_agent, good)
+			output.gui.results.print_transaction(current_agent, next_agent, good)
 			QtGui.qApp.processEvents()
 			# output.gui.tabs.updateV()
 			# if exit:
